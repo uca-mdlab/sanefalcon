@@ -32,7 +32,7 @@ startColumn = args.colpos
 
 # Prepare the list of chromosomes
 chromosomes = dict()
-for chromosome in range(1,23):
+for chromosome in range(1, 23):
     chromosomes[str(chromosome)] = [0]
 chromosomes['X'] = [0]
 chromosomes['Y'] = [0]
