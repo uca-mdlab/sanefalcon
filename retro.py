@@ -48,7 +48,7 @@ def flush(readBuff):
 	stairSize = len(readBuff)
 	if stairSize <= threshold or threshold < 0:	
 		for line in fullBuff:
-			print line.strip()
+			print (line.strip())
 				
 						
 prevWords = ['0'] * 10
