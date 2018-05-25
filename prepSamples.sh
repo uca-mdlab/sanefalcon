@@ -2,11 +2,12 @@ INDIR=$1
 OUTDIR=$2
 mkdir $OUTDIR
 
-export DIR_FETALFRAC=~/fetalfrac
-export SCRIPT_RETRO=$DIR_FETALFRAC/retro.py
+export DIR_FETALFRAC=/home/marco/fetalfrac
+#export SCRIPT_RETRO=$DIR_FETALFRAC/retro.py
 
-export DIR_SCRIPTS=/illumina/diagnostics/bin
-export SCRIPT_PYTHON=/illumina/diagnostics/bin/Python-2.7.3/bin/python
+export DIR_SCRIPTS=$DIR_FETALFRAC
+#export DIR_SCRIPTS=/illumina/diagnostics/bin
+#export SCRIPT_PYTHON=/illumina/diagnostics/bin/Python-2.7.3/bin/python
 export SCRIPT_SAMTOOLS=$DIR_SCRIPTS/samtools-0.1.19/samtools
 
 for SAMPLE in `find $INDIR -name "*.bam"`
@@ -20,17 +21,18 @@ do
 			$SCRIPT_SAMTOOLS view \
 			$SAMPLE \
 			chr$ARG_TASKID \
-			-F 20 -q 1 | \
-			$SCRIPT_PYTHON $SCRIPT_RETRO | \
-					awk '{print $4}' \
-					    > $OUTFILE.$ARG_TASKID.start.fwd &
-
-			$SCRIPT_SAMTOOLS view \
-			$SAMPLE \
-			chr$ARG_TASKID \
-			-f 16 -F 4 -q 1 | \
-			$SCRIPT_PYTHON $SCRIPT_RETRO | \
-					awk '{print ($4 + length($10) - 1)}' \
-					    > $OUTFILE.$ARG_TASKID.start.rev
+			-F 20 -q 1
+#			| \
+#			$SCRIPT_PYTHON $SCRIPT_RETRO | \
+#				awk '{print $4}' \
+#					    > $OUTFILE.$ARG_TASKID.start.fwd &
+#
+#			$SCRIPT_SAMTOOLS view \
+#			$SAMPLE \
+#			chr$ARG_TASKID \
+#			-f 16 -F 4 -q 1 | \
+#			$SCRIPT_PYTHON $SCRIPT_RETRO | \
+#					awk '{print ($4 + length($10) - 1)}' \
+#					    > $OUTFILE.$ARG_TASKID.start.rev
 		done
 done
