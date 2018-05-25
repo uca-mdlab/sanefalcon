@@ -21,14 +21,22 @@ for root, subdir, files in os.walk(bamdir):
     for f in files:
         files_to_link.append(os.path.join(root, f))
 
-print(files_to_link)
-
 try:
     lst = sorted(os.listdir(traindir))[-1]
 except IndexError:
     lst = None
 
 if not lst:
-    os.mkdir(os.path.join(traindir, 'a'))
+    workingdir = os.path.join(traindir, 'a')
 else:
-    os.mkdir(os.path.join(traindir, letters[letters.index(lst) + 1 % len(letters)]))
+    workingdir = os.path.join(traindir, letters[letters.index(lst) + 1 % len(letters)])
+
+os.mkdir(workingdir)
+print('Training subfolder created')
+
+for fname in files_to_link:
+    run = fname.split(bamdir)[1].split('/')[1]
+    runpath = os.path.join(workingdir, run)
+    if not os.path.isdir(runpath):
+        os.mkdir(runpath)
+    os.symlink(fname, os.path.join(runpath, fname.split('/')[-1]))
