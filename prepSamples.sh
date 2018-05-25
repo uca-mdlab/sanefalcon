@@ -3,7 +3,7 @@ OUTDIR=$2
 mkdir $OUTDIR
 
 DIR_FETALFRAC=/home/marco/fetalfrac
-export SCRIPT_RETRO=./retro.py
+SCRIPT_RETRO=./retro.py
 
 DIR_SCRIPTS=$DIR_FETALFRAC
 #export DIR_SCRIPTS=/illumina/diagnostics/bin
