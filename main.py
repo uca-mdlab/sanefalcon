@@ -32,7 +32,7 @@ else:
     workingdir = os.path.join(traindir, letters[letters.index(lst) + 1 % len(letters)])
 
 os.mkdir(workingdir)
-print('Training subfolder created')
+# print('Training subfolder created')
 
 for fname in files_to_link:
     run = fname.split(bamdir)[1].split('/')[1]
@@ -40,3 +40,5 @@ for fname in files_to_link:
     if not os.path.isdir(runpath):
         os.mkdir(runpath)
     os.symlink(fname, os.path.join(runpath, fname.split('/')[-1]))
+
+print(runpath)
