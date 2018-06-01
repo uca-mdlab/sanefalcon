@@ -2,7 +2,7 @@
 BAMFOLDER=/home/marco/temp/sanefalcon_bam  # will be /results/analysis/output/Home
 BAMLINKFOLDER_BASE=/home/marco/temp/train
 
-TRAINFOLDER=$(/usr/bin/python3 ./main.py $BAMFOLDER $BAMLINKFOLDER_BASE)
+TRAINFOLDER=$(/usr/bin/python3 ./prepare_folders.py $BAMFOLDER $BAMLINKFOLDER_BASE)
 
 
 
