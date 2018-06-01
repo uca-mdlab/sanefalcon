@@ -34,6 +34,7 @@ else:
 os.mkdir(workingdir)
 # print('Training subfolder created')
 
+runpath = ''
 for fname in files_to_link:
     run = fname.split(bamdir)[1].split('/')[1]
     runpath = os.path.join(workingdir, run)
