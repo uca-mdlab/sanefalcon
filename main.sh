@@ -4,7 +4,10 @@ BAMLINKFOLDER_BASE=/home/marco/temp/train
 
 TRAINFOLDER=$(/usr/bin/python3 ./prepare_folders.py $BAMFOLDER $BAMLINKFOLDER_BASE)
 
-
+if [[ -z $TRAINFOLDER ]]; then
+    echo "No trainfolder found. Aborting"
+    exit 1
+fi
 
 function prepSamples(){
     ./prepSamples.sh $BAMFOLDER $TRAINFOLDER
