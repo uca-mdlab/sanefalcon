@@ -24,7 +24,12 @@ function mergeSamples(){
     done
 }
 
+function mergeSubs(){
+    ./mergeSubs.sh $BAMLINKFOLDER_BASE
+}
+
 # all logic steps go there
 prepSamples
 mergeSamples
+mergeSubs
 echo "Done"
