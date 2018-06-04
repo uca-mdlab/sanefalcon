@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 INDIR=$1
 OUTDIR=$2
-mkdir $OUTDIR
+# mkdir $OUTDIR
 
 DIR_FETALFRAC=/home/davidpratella/fetalfrac
 SCRIPT_RETRO=./retro.py
