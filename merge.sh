@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 INDIR=`greadlink -f $1`
 
 for i in $(seq 1 22)
