@@ -14,7 +14,7 @@ parser = argparse.ArgumentParser(description='Prepare the environment and start 
                                  formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
 parser.add_argument('bamdir', type=str, default="/results/analysis/output/Home", help='path of the manipulation')
-parser.add_argument('traindir', type=str, default="/tmp", help='path of the train subtree')
+parser.add_argument('traindir', type=str, default="/tmp/sanefalcontrain", help='path of the train subtree')
 
 args = parser.parse_args()
 bamdir = args.bamdir
@@ -45,17 +45,27 @@ def list_files_to_use(bamdir):
                 del subdir[:]
 
     # print(len(files_to_link))
-    for i in files_to_link:
-        print(i)
+    # for i in files_to_link:
+    #     print(i)
 
     manip_list = list(set([f.split('/')[-2] for f in files_to_link]))  # list of manip with .bam files
-    # print(manip_list)
     return files_to_link, manip_list
+
+
+def prepare_batch_folders(manip_list):
+    """Yield successive 5-sized chunks from manip_list."""
+    for i in range(0, len(manip_list), 5):
+        yield manip_list[i:i + 5]
 
 
 files_to_link, manip_list = list_files_to_use(bamdir)
 
 print("{} bam files in {} manips".format(len(files_to_link), len(manip_list)))
+
+for batch in prepare_batch_folders(manip_list):
+    print('batch')
+    print(batch)
+
 try:
     lst = sorted(os.listdir(traindir))[-1]
 except IndexError:
