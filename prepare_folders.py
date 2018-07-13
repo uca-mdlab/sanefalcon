@@ -62,7 +62,7 @@ files_to_link, manip_list = list_files_to_use(bamdir)
 
 print("{} bam files in {} manips".format(len(files_to_link), len(manip_list)))
 
-for batch in list(prepare_batch_folders(manip_list)):
+for batch in prepare_batch_folders(manip_list):
     print('batch')
     print(batch)
 
