@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
 
-#set -x
+set -x
 
-BAMFOLDER=/home/marco/temp/sanefalcon_bam  # will be /results/analysis/output/Home
-BAMLINKFOLDER_BASE=/home/marco/temp/train
+BAMFOLDER=/results/analysis/output/Home
+BAMLINKFOLDER_BASE=/tmp/sanefalcontrain
 
 # preparation step
-#TRAINFOLDER=$(/usr/bin/python3 ./prepare_folders.py $BAMFOLDER $BAMLINKFOLDER_BASE)
+TRAINFOLDER=$(/usr/bin/python3 ./prepare_folders.py $BAMFOLDER $BAMLINKFOLDER_BASE)
 
-#if [[ -z $TRAINFOLDER ]]; then
-#    echo "No trainfolder found. Aborting"
-#    exit 1
-#fi
-
+if [[ -z $TRAINFOLDER ]]; then
+    echo "No trainfolder found. Aborting"
+    exit 1
+fi
+exit 0
 
 # function definitions: 1 function per step
 #function prepSamples(){
