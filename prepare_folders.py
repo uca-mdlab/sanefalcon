@@ -10,17 +10,16 @@ import random
 
 letters = list(string.ascii_lowercase)
 
-# parser = argparse.ArgumentParser(description='Prepare the environment and start the plugin',
-#                                  formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-#
-# parser.add_argument('bamdir', type=str, default="/results/analysis/output/Home", help='path of the manipulation')
-# parser.add_argument('traindir', type=str, default="/tmp", help='path of the train subtree')
-#
-# args = parser.parse_args()
-# bamdir = args.bamdir
-# traindir = args.traindir
-bamdir = "/home/marco/temp/sanefalcon_bam"
-traindir = "/home/marco/temp/train"
+parser = argparse.ArgumentParser(description='Prepare the environment and start the plugin',
+                                 formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+
+parser.add_argument('bamdir', type=str, default="/results/analysis/output/Home", help='path of the manipulation')
+parser.add_argument('traindir', type=str, default="/tmp", help='path of the train subtree')
+
+args = parser.parse_args()
+bamdir = args.bamdir
+traindir = args.traindir
+
 
 
 def list_files_to_use(bamdir):
