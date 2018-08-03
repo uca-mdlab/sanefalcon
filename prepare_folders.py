@@ -33,7 +33,7 @@ def list_files_to_use(bamdir):
     for root, subdir, files in os.walk(bamdir):
         subdir[:] = set(subdir) - exclude
         for f in files:
-            if f.endswith(".bam"):
+            if f.endswith(".bam") or f.endswith(".bai"):
                 files_to_link.append(os.path.join(root, f))
             if root.count(os.sep) >= 1:  # stop at first level
                 del subdir[:]
