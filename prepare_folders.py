@@ -90,6 +90,8 @@ if __name__ == '__main__':
     bamdir = args.bamdir
     traindir = args.traindir
 
-    main(bamdir, traindir)
+    # UNCOMMENT for complete run
+    # main(bamdir, traindir)
+    logger.warning("Skipping prepare_folder.py")
     print(traindir)
 
