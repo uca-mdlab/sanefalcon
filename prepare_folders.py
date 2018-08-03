@@ -43,7 +43,7 @@ def list_files_to_use(bamdir):
     return files_to_link, manip_list
 
 
-def prepare_batch_folders(manip_list):
+def prepare_batches(manip_list):
     """Yield successive 5-sized chunks from manip_list."""
     for i in range(0, len(manip_list), 5):
         yield manip_list[i:i + 5]
@@ -53,7 +53,7 @@ def main(bamdir, traindir):
     files_to_link, manip_list = list_files_to_use(bamdir)
 
     batches = {}
-    for num_batch, batch in enumerate(prepare_batch_folders(manip_list)):
+    for num_batch, batch in enumerate(prepare_batches(manip_list)):
         batches[letters[num_batch]] = batch
         logger.debug("Batch {}: {}".format(letters[num_batch], batch))
 
