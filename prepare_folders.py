@@ -49,7 +49,7 @@ def prepare_batches(manip_list):
         yield manip_list[i:i + 5]
 
 
-def main(bamdir, traindir):
+def prepare_train_folder(bamdir, traindir):
     files_to_link, manip_list = list_files_to_use(bamdir)
 
     batches = {}
@@ -91,7 +91,7 @@ if __name__ == '__main__':
     traindir = args.traindir
 
     # UNCOMMENT for complete run
-    # main(bamdir, traindir)
+    # prepare_train_folder(bamdir, traindir)
     logger.warning("Skipping prepare_folder.py")
     print(traindir)
 
