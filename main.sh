@@ -12,12 +12,13 @@ if [[ -z $TRAINFOLDER ]]; then
     echo "No trainfolder found. Aborting"
     exit 1
 fi
-exit 0
 
 # function definitions: 1 function per step
-#function prepSamples(){
-#    ./prepSamples.sh $BAMFOLDER $TRAINFOLDER
-#}
+function prepSamples(){
+    for subdir in `find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`; do
+        ./prepSamples.sh $subdir $subdir
+    done
+}
 
 function mergeSamples(){
     for subdir in `find $BAMLINKFOLDER_BASE -maxdepth 1 -mindepth 1 -type d`; do
@@ -40,8 +41,8 @@ function mergeAntiSubs(){
 }
 
 # all logic steps go there
-#prepSamples && echo "passed prepSamples"
-mergeSamples && echo "passed mergeSamples"
-mergeSubs && echo "passed mergeSubs"
-mergeAntiSubs && echo "passed mergeAntiSubs"
+prepSamples && echo "passed prepSamples"
+#mergeSamples && echo "passed mergeSamples"
+#mergeSubs && echo "passed mergeSubs"
+#mergeAntiSubs && echo "passed mergeAntiSubs"
 echo "Done"
