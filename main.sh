@@ -3,8 +3,12 @@
 set -x
 
 BAMFOLDER=/results/analysis/output/Home
-BAMLINKFOLDER_BASE=/tmp/sanefalcontrain
+BAMLINKFOLDER_BASE=/tmp/sanefalcontrain2
 
+
+/usr/bin/python3 ./main.py $BAMFOLDER $BAMLINKFOLDER_BASE
+
+exit 0
 # preparation step
 TRAINFOLDER=$(/usr/bin/python3 ./prepare_folders.py $BAMFOLDER $BAMLINKFOLDER_BASE)
 

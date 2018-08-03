@@ -13,8 +13,6 @@ logging.basicConfig(format='%(asctime)s - %(levelname)s: %(message)s',
 
 logger = logging.getLogger(__name__)
 
-letters = list(string.ascii_lowercase)
-
 
 def list_files_to_use(bamdir):
     """
@@ -50,6 +48,7 @@ def prepare_batches(manip_list):
 
 
 def prepare_train_folder(bamdir, traindir):
+    letters = list(string.ascii_lowercase)
     files_to_link, manip_list = list_files_to_use(bamdir)
 
     batches = {}
@@ -90,8 +89,6 @@ if __name__ == '__main__':
     bamdir = args.bamdir
     traindir = args.traindir
 
-    # UNCOMMENT for complete run
-    # prepare_train_folder(bamdir, traindir)
-    logger.warning("Skipping prepare_folder.py")
+    prepare_train_folder(bamdir, traindir)
     print(traindir)
 
