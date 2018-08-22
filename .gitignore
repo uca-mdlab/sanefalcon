@@ -1,3 +1,6 @@
 .git/
 .idea/
 .idea/*
+.nohup.out
+.__pycache__/
+.sanefalcon.log
