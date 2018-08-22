@@ -1,0 +1,1990 @@
++ BAMFOLDER=/results/analysis/output/Home
++ BAMLINKFOLDER_BASE=/home/ionadmin/tmp_david/sanefalcontrain
+++ /usr/bin/python3 ./prepare_folders.py /results/analysis/output/Home /home/ionadmin/tmp_david/sanefalcontrain
++ TRAINFOLDER=/home/ionadmin/tmp_david/sanefalcontrain
++ echo /home/ionadmin/tmp_david/sanefalcontrain
+/home/ionadmin/tmp_david/sanefalcontrain
++ [[ -z /home/ionadmin/tmp_david/sanefalcontrain ]]
++ prepSamples
+++ find /home/ionadmin/tmp_david/sanefalcontrain -maxdepth 2 -mindepth 2 -type d
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-146-DPNI_180917_chip2_211_349 /home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-146-DPNI_180917_chip2_211_349
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-126-DPNI_230517_Chip2_188_309 /home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-126-DPNI_230517_Chip2_188_309
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-158-DPNI_160818_Chip2_300_379 /home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-158-DPNI_160818_Chip2_300_379
++ ./prepSamples.sh /home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-122-DPNI_200417_Chip2_20pM_184_298 /home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-122-DPNI_200417_Chip2_20pM_184_298
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-145-DPNI_180917_chip1_210_347 /home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-145-DPNI_180917_chip1_210_347
++ ./prepSamples.sh /home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-148-DPNI_140518_Chip2_281_359 /home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-148-DPNI_140518_Chip2_281_359
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-157-DPNI_160818_Chip1_299_377 /home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-157-DPNI_160818_Chip1_299_377
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-71-DPNI_250716_Chip2_Library_builder_131_189 /home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-71-DPNI_250716_Chip2_Library_builder_131_189
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-34-DPNI14_Chip1_35pM_94_112 /home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-34-DPNI14_Chip1_35pM_94_112
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-143-DPNI_300817_Chip1_208_343 /home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-143-DPNI_300817_Chip1_208_343
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-117-DPNI_220317_Chip1_179_288 /home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-117-DPNI_220317_Chip1_179_288
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-139-DPNI_070817_chip1_204_335 /home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-139-DPNI_070817_chip1_204_335
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-136-DPNI_050717_chip2_199_329 /home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-136-DPNI_050717_chip2_199_329
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-135-DPNI_050717_chip1_198_327 /home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-135-DPNI_050717_chip1_198_327
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-115-DPNI_140317_Chip1_177_284 /home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-115-DPNI_140317_Chip1_177_284
++ ./prepSamples.sh /home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-142-DPNI_100817_chip2_207_341 /home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-142-DPNI_100817_chip2_207_341
++ ./prepSamples.sh /home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-150-DPNI_040618_Chip2_285_363 /home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-150-DPNI_040618_Chip2_285_363
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-137-DPNI_110717_Chip1_200_331 /home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-137-DPNI_110717_Chip1_200_331
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-140-DPNI_070817_chip2_205_337 /home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-140-DPNI_070817_chip2_205_337
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-118-DPNI_220317_Chip2_180_290 /home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-118-DPNI_220317_Chip2_180_290
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /home/ionadmin/tmp_david/sanefalcontrain/i/Auto_user_PROTON-134-DPNI_280617_CHIP2_197_325 /home/ionadmin/tmp_david/sanefalcontrain/i/Auto_user_PROTON-134-DPNI_280617_CHIP2_197_325
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /home/ionadmin/tmp_david/sanefalcontrain/i/Auto_user_PROTON-153-DPNI_020718_Chip1_293_369 /home/ionadmin/tmp_david/sanefalcontrain/i/Auto_user_PROTON-153-DPNI_020718_Chip1_293_369
++ ./prepSamples.sh /home/ionadmin/tmp_david/sanefalcontrain/i/Auto_user_PROTON-144-DPNI_300817_Chip2_209_345 /home/ionadmin/tmp_david/sanefalcontrain/i/Auto_user_PROTON-144-DPNI_300817_Chip2_209_345
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-119-DPNI_100417_Chip1_181_292 /home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-119-DPNI_100417_Chip1_181_292
++ ./prepSamples.sh /home/ionadmin/tmp_david/sanefalcontrain/i/Auto_user_PROTON-154-DPNI_020718_Chip2_294_371 /home/ionadmin/tmp_david/sanefalcontrain/i/Auto_user_PROTON-154-DPNI_020718_Chip2_294_371
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-125-DPNI_230517_Chip1_187_307 /home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-125-DPNI_230517_Chip1_187_307
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-149-DPNI_040618_Chip1_284_361 /home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-149-DPNI_040618_Chip1_284_361
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-33-DPNI13_Chip2_93_108 /home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-33-DPNI13_Chip2_93_108
++ ./prepSamples.sh /home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-35-DPNI14_Chip2_35pM_95_114 /home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-35-DPNI14_Chip2_35pM_95_114
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-127-DPNI_060617_chip1_189_311 /home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-127-DPNI_060617_chip1_189_311
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-128-DPNI_060617_chip2_190_313 /home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-128-DPNI_060617_chip2_190_313
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-156-DPNI_300718_chip2_298_375 /home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-156-DPNI_300718_chip2_298_375
++ ./prepSamples.sh /home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-61-DPNI_190516_Chip2_121_169 /home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-61-DPNI_190516_Chip2_121_169
++ ./prepSamples.sh /home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-155-DPNI_300718_chip1_297_373 /home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-155-DPNI_300718_chip1_297_373
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-138-DPNI_110717_Chip2_201_333 /home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-138-DPNI_110717_Chip2_201_333
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-152-DPNI_110618_Chip2_287_367 /home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-152-DPNI_110618_Chip2_287_367
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-123-DPNI_100517_Chip1_185_303 /home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-123-DPNI_100517_Chip1_185_303
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-124-DPNI_100517_Chip2_186_305 /home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-124-DPNI_100517_Chip2_186_305
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-121-DPNI_200417_Chip1_20pM_183_296 /home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-121-DPNI_200417_Chip1_20pM_183_296
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-133-DPNI_280617_CHIP1_196_323 /home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-133-DPNI_280617_CHIP1_196_323
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-141-DPNI_100817_chip1_206_339 /home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-141-DPNI_100817_chip1_206_339
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ echo 'passed prepSamples'
+passed prepSamples
++ echo Done
+Done
++ ./prepSamples.sh /home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-120-DPNI_100417_Chip2_182_294 /home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-120-DPNI_100417_Chip2_182_294
++ ./prepSamples.sh /home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-151-DPNI_110618_Chip1_286_365 /home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-151-DPNI_110618_Chip1_286_365
+IN:/home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-148-DPNI_140518_Chip2_281_359/IonXpress_066_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-148-DPNI_140518_Chip2_281_359/IonXpress_066_rawlib.bam
++ ./prepSamples.sh /home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-147-DPNI_140518_Chip1_280_357 /home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-147-DPNI_140518_Chip1_280_357
+IN:/home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-158-DPNI_160818_Chip2_300_379/IonXpress_084_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-158-DPNI_160818_Chip2_300_379/IonXpress_084_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-71-DPNI_250716_Chip2_Library_builder_131_189/IonXpress_088_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-71-DPNI_250716_Chip2_Library_builder_131_189/IonXpress_088_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-135-DPNI_050717_chip1_198_327/IonXpress_077_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-135-DPNI_050717_chip1_198_327/IonXpress_077_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-126-DPNI_230517_Chip2_188_309/IonXpress_096_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-126-DPNI_230517_Chip2_188_309/IonXpress_096_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-143-DPNI_300817_Chip1_208_343/IonXpress_077_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-143-DPNI_300817_Chip1_208_343/IonXpress_077_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-117-DPNI_220317_Chip1_179_288/IonXpress_065_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-117-DPNI_220317_Chip1_179_288/IonXpress_065_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-145-DPNI_180917_chip1_210_347/IonXpress_088_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-145-DPNI_180917_chip1_210_347/IonXpress_088_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-34-DPNI14_Chip1_35pM_94_112/IonXpress_003_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-34-DPNI14_Chip1_35pM_94_112/IonXpress_003_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-157-DPNI_160818_Chip1_299_377/IonXpress_079_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-157-DPNI_160818_Chip1_299_377/IonXpress_079_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-139-DPNI_070817_chip1_204_335/IonXpress_068_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-139-DPNI_070817_chip1_204_335/IonXpress_068_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-115-DPNI_140317_Chip1_177_284/IonXpress_066_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-115-DPNI_140317_Chip1_177_284/IonXpress_066_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-140-DPNI_070817_chip2_205_337/IonXpress_073_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-140-DPNI_070817_chip2_205_337/IonXpress_073_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-119-DPNI_100417_Chip1_181_292/IonXpress_084_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-119-DPNI_100417_Chip1_181_292/IonXpress_084_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-142-DPNI_100817_chip2_207_341/IonXpress_066_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-142-DPNI_100817_chip2_207_341/IonXpress_066_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-127-DPNI_060617_chip1_189_311/IonXpress_084_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-127-DPNI_060617_chip1_189_311/IonXpress_084_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-149-DPNI_040618_Chip1_284_361/IonXpress_079_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-149-DPNI_040618_Chip1_284_361/IonXpress_079_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-118-DPNI_220317_Chip2_180_290/IonXpress_074_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-118-DPNI_220317_Chip2_180_290/IonXpress_074_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/i/Auto_user_PROTON-134-DPNI_280617_CHIP2_197_325/IonXpress_073_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/i/Auto_user_PROTON-134-DPNI_280617_CHIP2_197_325/IonXpress_073_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-122-DPNI_200417_Chip2_20pM_184_298/IonXpress_093_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-122-DPNI_200417_Chip2_20pM_184_298/IonXpress_093_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-150-DPNI_040618_Chip2_285_363/IonXpress_089_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-150-DPNI_040618_Chip2_285_363/IonXpress_089_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-123-DPNI_100517_Chip1_185_303/IonXpress_084_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-123-DPNI_100517_Chip1_185_303/IonXpress_084_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-155-DPNI_300718_chip1_297_373/IonXpress_068_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-155-DPNI_300718_chip1_297_373/IonXpress_068_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-156-DPNI_300718_chip2_298_375/IonXpress_074_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-156-DPNI_300718_chip2_298_375/IonXpress_074_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-136-DPNI_050717_chip2_199_329/IonXpress_079_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-136-DPNI_050717_chip2_199_329/IonXpress_079_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-137-DPNI_110717_Chip1_200_331/IonXpress_087_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-137-DPNI_110717_Chip1_200_331/IonXpress_087_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-146-DPNI_180917_chip2_211_349/IonXpress_091_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-146-DPNI_180917_chip2_211_349/IonXpress_091_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-61-DPNI_190516_Chip2_121_169/IonXpress_084_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-61-DPNI_190516_Chip2_121_169/IonXpress_084_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/i/Auto_user_PROTON-153-DPNI_020718_Chip1_293_369/IonXpress_068_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/i/Auto_user_PROTON-153-DPNI_020718_Chip1_293_369/IonXpress_068_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-152-DPNI_110618_Chip2_287_367/IonXpress_066_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-152-DPNI_110618_Chip2_287_367/IonXpress_066_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-128-DPNI_060617_chip2_190_313/IonXpress_088_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-128-DPNI_060617_chip2_190_313/IonXpress_088_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-151-DPNI_110618_Chip1_286_365/IonXpress_088_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-151-DPNI_110618_Chip1_286_365/IonXpress_088_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-138-DPNI_110717_Chip2_201_333/IonXpress_088_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-138-DPNI_110717_Chip2_201_333/IonXpress_088_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/i/Auto_user_PROTON-144-DPNI_300817_Chip2_209_345/IonXpress_079_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/i/Auto_user_PROTON-144-DPNI_300817_Chip2_209_345/IonXpress_079_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-33-DPNI13_Chip2_93_108/IonXpress_007_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-33-DPNI13_Chip2_93_108/IonXpress_007_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-35-DPNI14_Chip2_35pM_95_114/IonXpress_003_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-35-DPNI14_Chip2_35pM_95_114/IonXpress_003_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/i/Auto_user_PROTON-154-DPNI_020718_Chip2_294_371/IonXpress_074_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/i/Auto_user_PROTON-154-DPNI_020718_Chip2_294_371/IonXpress_074_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-133-DPNI_280617_CHIP1_196_323/IonXpress_066_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-133-DPNI_280617_CHIP1_196_323/IonXpress_066_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-120-DPNI_100417_Chip2_182_294/IonXpress_088_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-120-DPNI_100417_Chip2_182_294/IonXpress_088_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-121-DPNI_200417_Chip1_20pM_183_296/IonXpress_091_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-121-DPNI_200417_Chip1_20pM_183_296/IonXpress_091_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-125-DPNI_230517_Chip1_187_307/IonXpress_081_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-125-DPNI_230517_Chip1_187_307/IonXpress_081_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-124-DPNI_100517_Chip2_186_305/IonXpress_088_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-124-DPNI_100517_Chip2_186_305/IonXpress_088_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-141-DPNI_100817_chip1_206_339/IonXpress_091_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-141-DPNI_100817_chip1_206_339/IonXpress_091_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-147-DPNI_140518_Chip1_280_357/IonXpress_091_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-147-DPNI_140518_Chip1_280_357/IonXpress_091_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-135-DPNI_050717_chip1_198_327/IonXpress_074_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-135-DPNI_050717_chip1_198_327/IonXpress_074_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-117-DPNI_220317_Chip1_179_288/IonXpress_071_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-117-DPNI_220317_Chip1_179_288/IonXpress_071_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-33-DPNI13_Chip2_93_108/IonXpress_002_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-33-DPNI13_Chip2_93_108/IonXpress_002_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/i/Auto_user_PROTON-134-DPNI_280617_CHIP2_197_325/IonXpress_071_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/i/Auto_user_PROTON-134-DPNI_280617_CHIP2_197_325/IonXpress_071_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-126-DPNI_230517_Chip2_188_309/IonXpress_095_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-126-DPNI_230517_Chip2_188_309/IonXpress_095_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-137-DPNI_110717_Chip1_200_331/IonXpress_085_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-137-DPNI_110717_Chip1_200_331/IonXpress_085_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-71-DPNI_250716_Chip2_Library_builder_131_189/IonXpress_089_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-71-DPNI_250716_Chip2_Library_builder_131_189/IonXpress_089_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-61-DPNI_190516_Chip2_121_169/IonXpress_087_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-61-DPNI_190516_Chip2_121_169/IonXpress_087_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-124-DPNI_100517_Chip2_186_305/IonXpress_089_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-124-DPNI_100517_Chip2_186_305/IonXpress_089_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-147-DPNI_140518_Chip1_280_357/IonXpress_093_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-147-DPNI_140518_Chip1_280_357/IonXpress_093_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/i/Auto_user_PROTON-153-DPNI_020718_Chip1_293_369/IonXpress_071_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/i/Auto_user_PROTON-153-DPNI_020718_Chip1_293_369/IonXpress_071_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-140-DPNI_070817_chip2_205_337/IonXpress_071_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-140-DPNI_070817_chip2_205_337/IonXpress_071_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-118-DPNI_220317_Chip2_180_290/IonXpress_073_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-118-DPNI_220317_Chip2_180_290/IonXpress_073_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-158-DPNI_160818_Chip2_300_379/IonXpress_065_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-158-DPNI_160818_Chip2_300_379/IonXpress_065_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-119-DPNI_100417_Chip1_181_292/IonXpress_065_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-119-DPNI_100417_Chip1_181_292/IonXpress_065_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-35-DPNI14_Chip2_35pM_95_114/IonXpress_007_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-35-DPNI14_Chip2_35pM_95_114/IonXpress_007_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-138-DPNI_110717_Chip2_201_333/IonXpress_089_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-138-DPNI_110717_Chip2_201_333/IonXpress_089_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-157-DPNI_160818_Chip1_299_377/IonXpress_078_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-157-DPNI_160818_Chip1_299_377/IonXpress_078_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-143-DPNI_300817_Chip1_208_343/IonXpress_074_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-143-DPNI_300817_Chip1_208_343/IonXpress_074_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-34-DPNI14_Chip1_35pM_94_112/IonXpress_007_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-34-DPNI14_Chip1_35pM_94_112/IonXpress_007_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-151-DPNI_110618_Chip1_286_365/IonXpress_091_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-151-DPNI_110618_Chip1_286_365/IonXpress_091_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-115-DPNI_140317_Chip1_177_284/IonXpress_068_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-115-DPNI_140317_Chip1_177_284/IonXpress_068_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-139-DPNI_070817_chip1_204_335/IonXpress_065_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-139-DPNI_070817_chip1_204_335/IonXpress_065_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-128-DPNI_060617_chip2_190_313/IonXpress_089_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-128-DPNI_060617_chip2_190_313/IonXpress_089_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-146-DPNI_180917_chip2_211_349/IonXpress_089_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-146-DPNI_180917_chip2_211_349/IonXpress_089_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-122-DPNI_200417_Chip2_20pM_184_298/IonXpress_095_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-122-DPNI_200417_Chip2_20pM_184_298/IonXpress_095_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-136-DPNI_050717_chip2_199_329/IonXpress_078_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-136-DPNI_050717_chip2_199_329/IonXpress_078_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-127-DPNI_060617_chip1_189_311/IonXpress_065_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-127-DPNI_060617_chip1_189_311/IonXpress_065_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-121-DPNI_200417_Chip1_20pM_183_296/IonXpress_089_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-121-DPNI_200417_Chip1_20pM_183_296/IonXpress_089_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-135-DPNI_050717_chip1_198_327/IonXpress_065_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-135-DPNI_050717_chip1_198_327/IonXpress_065_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/i/Auto_user_PROTON-144-DPNI_300817_Chip2_209_345/IonXpress_078_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/i/Auto_user_PROTON-144-DPNI_300817_Chip2_209_345/IonXpress_078_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/i/Auto_user_PROTON-134-DPNI_280617_CHIP2_197_325/IonXpress_080_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/i/Auto_user_PROTON-134-DPNI_280617_CHIP2_197_325/IonXpress_080_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-155-DPNI_300718_chip1_297_373/IonXpress_069_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-155-DPNI_300718_chip1_297_373/IonXpress_069_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-152-DPNI_110618_Chip2_287_367/IonXpress_093_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-152-DPNI_110618_Chip2_287_367/IonXpress_093_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/i/Auto_user_PROTON-154-DPNI_020718_Chip2_294_371/IonXpress_073_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/i/Auto_user_PROTON-154-DPNI_020718_Chip2_294_371/IonXpress_073_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-125-DPNI_230517_Chip1_187_307/IonXpress_091_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-125-DPNI_230517_Chip1_187_307/IonXpress_091_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-150-DPNI_040618_Chip2_285_363/IonXpress_065_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-150-DPNI_040618_Chip2_285_363/IonXpress_065_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-149-DPNI_040618_Chip1_284_361/IonXpress_084_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-149-DPNI_040618_Chip1_284_361/IonXpress_084_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-141-DPNI_100817_chip1_206_339/IonXpress_090_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-141-DPNI_100817_chip1_206_339/IonXpress_090_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-145-DPNI_180917_chip1_210_347/IonXpress_084_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-145-DPNI_180917_chip1_210_347/IonXpress_084_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-120-DPNI_100417_Chip2_182_294/IonXpress_077_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-120-DPNI_100417_Chip2_182_294/IonXpress_077_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-117-DPNI_220317_Chip1_179_288/IonXpress_069_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-117-DPNI_220317_Chip1_179_288/IonXpress_069_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-142-DPNI_100817_chip2_207_341/IonXpress_073_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-142-DPNI_100817_chip2_207_341/IonXpress_073_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-148-DPNI_140518_Chip2_281_359/IonXpress_068_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-148-DPNI_140518_Chip2_281_359/IonXpress_068_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-33-DPNI13_Chip2_93_108/IonXpress_004_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-33-DPNI13_Chip2_93_108/IonXpress_004_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-156-DPNI_300718_chip2_298_375/IonXpress_073_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-156-DPNI_300718_chip2_298_375/IonXpress_073_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-133-DPNI_280617_CHIP1_196_323/IonXpress_068_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-133-DPNI_280617_CHIP1_196_323/IonXpress_068_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-137-DPNI_110717_Chip1_200_331/IonXpress_080_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-137-DPNI_110717_Chip1_200_331/IonXpress_080_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-123-DPNI_100517_Chip1_185_303/IonXpress_065_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-123-DPNI_100517_Chip1_185_303/IonXpress_065_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-126-DPNI_230517_Chip2_188_309/IonXpress_080_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-126-DPNI_230517_Chip2_188_309/IonXpress_080_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-34-DPNI14_Chip1_35pM_94_112/IonXpress_004_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-34-DPNI14_Chip1_35pM_94_112/IonXpress_004_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-140-DPNI_070817_chip2_205_337/IonXpress_085_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-140-DPNI_070817_chip2_205_337/IonXpress_085_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-33-DPNI13_Chip2_93_108/IonXpress_026_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-33-DPNI13_Chip2_93_108/IonXpress_026_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-157-DPNI_160818_Chip1_299_377/IonXpress_077_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-157-DPNI_160818_Chip1_299_377/IonXpress_077_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/i/Auto_user_PROTON-134-DPNI_280617_CHIP2_197_325/IonXpress_070_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/i/Auto_user_PROTON-134-DPNI_280617_CHIP2_197_325/IonXpress_070_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-61-DPNI_190516_Chip2_121_169/IonXpress_083_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-61-DPNI_190516_Chip2_121_169/IonXpress_083_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/i/Auto_user_PROTON-153-DPNI_020718_Chip1_293_369/IonXpress_069_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/i/Auto_user_PROTON-153-DPNI_020718_Chip1_293_369/IonXpress_069_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-124-DPNI_100517_Chip2_186_305/IonXpress_090_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-124-DPNI_100517_Chip2_186_305/IonXpress_090_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-135-DPNI_050717_chip1_198_327/IonXpress_075_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-135-DPNI_050717_chip1_198_327/IonXpress_075_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-118-DPNI_220317_Chip2_180_290/IonXpress_075_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-118-DPNI_220317_Chip2_180_290/IonXpress_075_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-136-DPNI_050717_chip2_199_329/IonXpress_084_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-136-DPNI_050717_chip2_199_329/IonXpress_084_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-115-DPNI_140317_Chip1_177_284/IonXpress_065_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-115-DPNI_140317_Chip1_177_284/IonXpress_065_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-143-DPNI_300817_Chip1_208_343/IonXpress_065_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-143-DPNI_300817_Chip1_208_343/IonXpress_065_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-122-DPNI_200417_Chip2_20pM_184_298/IonXpress_080_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-122-DPNI_200417_Chip2_20pM_184_298/IonXpress_080_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-119-DPNI_100417_Chip1_181_292/IonXpress_083_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-119-DPNI_100417_Chip1_181_292/IonXpress_083_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-138-DPNI_110717_Chip2_201_333/IonXpress_087_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-138-DPNI_110717_Chip2_201_333/IonXpress_087_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-35-DPNI14_Chip2_35pM_95_114/IonXpress_004_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-35-DPNI14_Chip2_35pM_95_114/IonXpress_004_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-151-DPNI_110618_Chip1_286_365/IonXpress_090_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-151-DPNI_110618_Chip1_286_365/IonXpress_090_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-117-DPNI_220317_Chip1_179_288/IonXpress_070_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-117-DPNI_220317_Chip1_179_288/IonXpress_070_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/i/Auto_user_PROTON-144-DPNI_300817_Chip2_209_345/IonXpress_083_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/i/Auto_user_PROTON-144-DPNI_300817_Chip2_209_345/IonXpress_083_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-128-DPNI_060617_chip2_190_313/IonXpress_090_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-128-DPNI_060617_chip2_190_313/IonXpress_090_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-120-DPNI_100417_Chip2_182_294/IonXpress_087_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-120-DPNI_100417_Chip2_182_294/IonXpress_087_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-123-DPNI_100517_Chip1_185_303/IonXpress_083_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-123-DPNI_100517_Chip1_185_303/IonXpress_083_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-158-DPNI_160818_Chip2_300_379/IonXpress_083_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-158-DPNI_160818_Chip2_300_379/IonXpress_083_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-149-DPNI_040618_Chip1_284_361/IonXpress_083_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-149-DPNI_040618_Chip1_284_361/IonXpress_083_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-141-DPNI_100817_chip1_206_339/IonXpress_093_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-141-DPNI_100817_chip1_206_339/IonXpress_093_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-133-DPNI_280617_CHIP1_196_323/IonXpress_065_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-133-DPNI_280617_CHIP1_196_323/IonXpress_065_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-125-DPNI_230517_Chip1_187_307/IonXpress_093_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-125-DPNI_230517_Chip1_187_307/IonXpress_093_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/i/Auto_user_PROTON-154-DPNI_020718_Chip2_294_371/IonXpress_075_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/i/Auto_user_PROTON-154-DPNI_020718_Chip2_294_371/IonXpress_075_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-146-DPNI_180917_chip2_211_349/IonXpress_090_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-146-DPNI_180917_chip2_211_349/IonXpress_090_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-142-DPNI_100817_chip2_207_341/IonXpress_095_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-142-DPNI_100817_chip2_207_341/IonXpress_095_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/i/Auto_user_PROTON-134-DPNI_280617_CHIP2_197_325/IonXpress_072_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/i/Auto_user_PROTON-134-DPNI_280617_CHIP2_197_325/IonXpress_072_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-34-DPNI14_Chip1_35pM_94_112/IonXpress_026_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-34-DPNI14_Chip1_35pM_94_112/IonXpress_026_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-139-DPNI_070817_chip1_204_335/IonXpress_069_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-139-DPNI_070817_chip1_204_335/IonXpress_069_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-148-DPNI_140518_Chip2_281_359/IonXpress_069_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-148-DPNI_140518_Chip2_281_359/IonXpress_069_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-152-DPNI_110618_Chip2_287_367/IonXpress_095_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-152-DPNI_110618_Chip2_287_367/IonXpress_095_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-135-DPNI_050717_chip1_198_327/IonXpress_076_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-135-DPNI_050717_chip1_198_327/IonXpress_076_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-121-DPNI_200417_Chip1_20pM_183_296/IonXpress_090_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-121-DPNI_200417_Chip1_20pM_183_296/IonXpress_090_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-150-DPNI_040618_Chip2_285_363/IonXpress_087_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-150-DPNI_040618_Chip2_285_363/IonXpress_087_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-155-DPNI_300718_chip1_297_373/IonXpress_080_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-155-DPNI_300718_chip1_297_373/IonXpress_080_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-145-DPNI_180917_chip1_210_347/IonXpress_087_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-145-DPNI_180917_chip1_210_347/IonXpress_087_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-35-DPNI14_Chip2_35pM_95_114/IonXpress_026_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-35-DPNI14_Chip2_35pM_95_114/IonXpress_026_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-147-DPNI_140518_Chip1_280_357/IonXpress_092_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-147-DPNI_140518_Chip1_280_357/IonXpress_092_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-71-DPNI_250716_Chip2_Library_builder_131_189/IonXpress_090_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-71-DPNI_250716_Chip2_Library_builder_131_189/IonXpress_090_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-126-DPNI_230517_Chip2_188_309/IonXpress_094_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-126-DPNI_230517_Chip2_188_309/IonXpress_094_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-137-DPNI_110717_Chip1_200_331/IonXpress_086_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-137-DPNI_110717_Chip1_200_331/IonXpress_086_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-115-DPNI_140317_Chip1_177_284/IonXpress_087_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-115-DPNI_140317_Chip1_177_284/IonXpress_087_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-61-DPNI_190516_Chip2_121_169/IonXpress_085_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-61-DPNI_190516_Chip2_121_169/IonXpress_085_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-140-DPNI_070817_chip2_205_337/IonXpress_080_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-140-DPNI_070817_chip2_205_337/IonXpress_080_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-33-DPNI13_Chip2_93_108/IonXpress_009_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-33-DPNI13_Chip2_93_108/IonXpress_009_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-124-DPNI_100517_Chip2_186_305/IonXpress_087_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-124-DPNI_100517_Chip2_186_305/IonXpress_087_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-157-DPNI_160818_Chip1_299_377/IonXpress_080_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-157-DPNI_160818_Chip1_299_377/IonXpress_080_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-118-DPNI_220317_Chip2_180_290/IonXpress_080_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-118-DPNI_220317_Chip2_180_290/IonXpress_080_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/i/Auto_user_PROTON-153-DPNI_020718_Chip1_293_369/IonXpress_080_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/i/Auto_user_PROTON-153-DPNI_020718_Chip1_293_369/IonXpress_080_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-117-DPNI_220317_Chip1_179_288/IonXpress_072_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-117-DPNI_220317_Chip1_179_288/IonXpress_072_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-119-DPNI_100417_Chip1_181_292/IonXpress_085_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-119-DPNI_100417_Chip1_181_292/IonXpress_085_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-120-DPNI_100417_Chip2_182_294/IonXpress_080_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-120-DPNI_100417_Chip2_182_294/IonXpress_080_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-127-DPNI_060617_chip1_189_311/IonXpress_083_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-127-DPNI_060617_chip1_189_311/IonXpress_083_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-156-DPNI_300718_chip2_298_375/IonXpress_071_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-156-DPNI_300718_chip2_298_375/IonXpress_071_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-136-DPNI_050717_chip2_199_329/IonXpress_083_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-136-DPNI_050717_chip2_199_329/IonXpress_083_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-151-DPNI_110618_Chip1_286_365/IonXpress_092_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-151-DPNI_110618_Chip1_286_365/IonXpress_092_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/i/Auto_user_PROTON-144-DPNI_300817_Chip2_209_345/IonXpress_080_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/i/Auto_user_PROTON-144-DPNI_300817_Chip2_209_345/IonXpress_080_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-122-DPNI_200417_Chip2_20pM_184_298/IonXpress_094_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-122-DPNI_200417_Chip2_20pM_184_298/IonXpress_094_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-128-DPNI_060617_chip2_190_313/IonXpress_087_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-128-DPNI_060617_chip2_190_313/IonXpress_087_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-141-DPNI_100817_chip1_206_339/IonXpress_065_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-141-DPNI_100817_chip1_206_339/IonXpress_065_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-138-DPNI_110717_Chip2_201_333/IonXpress_080_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-138-DPNI_110717_Chip2_201_333/IonXpress_080_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-158-DPNI_160818_Chip2_300_379/IonXpress_085_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-158-DPNI_160818_Chip2_300_379/IonXpress_085_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-149-DPNI_040618_Chip1_284_361/IonXpress_080_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-149-DPNI_040618_Chip1_284_361/IonXpress_080_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-123-DPNI_100517_Chip1_185_303/IonXpress_085_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-123-DPNI_100517_Chip1_185_303/IonXpress_085_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-146-DPNI_180917_chip2_211_349/IonXpress_065_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-146-DPNI_180917_chip2_211_349/IonXpress_065_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-142-DPNI_100817_chip2_207_341/IonXpress_080_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-142-DPNI_100817_chip2_207_341/IonXpress_080_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-71-DPNI_250716_Chip2_Library_builder_131_189/IonXpress_087_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-71-DPNI_250716_Chip2_Library_builder_131_189/IonXpress_087_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-126-DPNI_230517_Chip2_188_309/IonXpress_082_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-126-DPNI_230517_Chip2_188_309/IonXpress_082_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-150-DPNI_040618_Chip2_285_363/IonXpress_085_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-150-DPNI_040618_Chip2_285_363/IonXpress_085_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-143-DPNI_300817_Chip1_208_343/IonXpress_075_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-143-DPNI_300817_Chip1_208_343/IonXpress_075_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-133-DPNI_280617_CHIP1_196_323/IonXpress_069_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-133-DPNI_280617_CHIP1_196_323/IonXpress_069_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-139-DPNI_070817_chip1_204_335/IonXpress_070_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-139-DPNI_070817_chip1_204_335/IonXpress_070_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-125-DPNI_230517_Chip1_187_307/IonXpress_065_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-125-DPNI_230517_Chip1_187_307/IonXpress_065_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/i/Auto_user_PROTON-154-DPNI_020718_Chip2_294_371/IonXpress_076_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/i/Auto_user_PROTON-154-DPNI_020718_Chip2_294_371/IonXpress_076_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-148-DPNI_140518_Chip2_281_359/IonXpress_095_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-148-DPNI_140518_Chip2_281_359/IonXpress_095_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-145-DPNI_180917_chip1_210_347/IonXpress_085_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-145-DPNI_180917_chip1_210_347/IonXpress_085_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-152-DPNI_110618_Chip2_287_367/IonXpress_067_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-152-DPNI_110618_Chip2_287_367/IonXpress_067_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-61-DPNI_190516_Chip2_121_169/IonXpress_086_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-61-DPNI_190516_Chip2_121_169/IonXpress_086_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-115-DPNI_140317_Chip1_177_284/IonXpress_067_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-115-DPNI_140317_Chip1_177_284/IonXpress_067_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-147-DPNI_140518_Chip1_280_357/IonXpress_080_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-147-DPNI_140518_Chip1_280_357/IonXpress_080_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-35-DPNI14_Chip2_35pM_95_114/IonXpress_009_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-35-DPNI14_Chip2_35pM_95_114/IonXpress_009_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-124-DPNI_100517_Chip2_186_305/IonXpress_080_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-124-DPNI_100517_Chip2_186_305/IonXpress_080_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-121-DPNI_200417_Chip1_20pM_183_296/IonXpress_065_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-121-DPNI_200417_Chip1_20pM_183_296/IonXpress_065_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-118-DPNI_220317_Chip2_180_290/IonXpress_076_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-118-DPNI_220317_Chip2_180_290/IonXpress_076_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-34-DPNI14_Chip1_35pM_94_112/IonXpress_009_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/c/Auto_user_PROTON-34-DPNI14_Chip1_35pM_94_112/IonXpress_009_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-140-DPNI_070817_chip2_205_337/IonXpress_072_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/h/Auto_user_PROTON-140-DPNI_070817_chip2_205_337/IonXpress_072_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-120-DPNI_100417_Chip2_182_294/IonXpress_086_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-120-DPNI_100417_Chip2_182_294/IonXpress_086_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-155-DPNI_300718_chip1_297_373/IonXpress_070_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-155-DPNI_300718_chip1_297_373/IonXpress_070_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-119-DPNI_100417_Chip1_181_292/IonXpress_082_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-119-DPNI_100417_Chip1_181_292/IonXpress_082_rawlib.bam
+IN:/home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-156-DPNI_300718_chip2_298_375/IonXpress_075_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-156-DPNI_300718_chip2_298_375/IonXpress_075_rawlib.bam
+awk: cmd. line:1: (FILENAME=- FNR=39069) fatal: print to "standard output" failed (No space left on device)
+awk: cmd. line:1: (FILENAME=- FNR=247918) fatal: awk: print to "standard output" failed (No space left on device)cmd. line:
+1: (FILENAME=- FNR=76634) fatal: print to "standard output" failed (No space left on device)
+awk: cmd. line:1: (FILENAME=- FNR=92843) fatal: print to "standard output" failed (No space left on device)
+awk: cmd. line:1: (FILENAME=- FNR=188151) fatal: print to "standard output" failed (No space left on device)
+awk: cmd. line:1: (FILENAME=- FNR=91534) fatal: print to "standard output" failed (No space left on device)
+awk: cmd. line:awk: 1: cmd. line:(1: FILENAME=- (FNR=108911) FILENAME=- fatal: FNR=308801) print to "standard output" failed (No space left on device)fatal: 
+awk: print to "standard output" failed (No space left on device)cmd. line:
+1: (FILENAME=- FNR=314146) fatal: print to "standard output" failed (No space left on device)
+awk: cmd. line:1: (FILENAME=- FNR=106412) fatal: print to "standard output" failed (No space left on device)
+awk: cmd. line:1: (awk: awk: FILENAME=- awk: cmd. line:cmd. line:awk: cmd. line:1: cmd. line:awk: FNR=318373) 1: 1: 1: fatal: ((cmd. line:print to "standard output" failed (No space left on device)FILENAME=- FILENAME=- (
+(FNR=57272) 1: FILENAME=- FNR=97149) FILENAME=- FNR=258427) fatal: FNR=79488) fatal: (print to "standard output" failed (No space left on device)fatal: FILENAME=- fatal: print to "standard output" failed (No space left on device)print to "standard output" failed (No space left on device)
+print to "standard output" failed (No space left on device)
+FNR=142905) 
+fatal: 
+print to "standard output" failed (No space left on device)awk: 
+cmd. line:1: (FILENAME=- FNR=172537) fatal: print to "standard output" failed (No space left on device)
+awk: cmd. line:1: (FILENAME=- FNR=296266) fatal: print to "standard output" failed (No space left on device)
+awk: cmd. line:1: (FILENAME=- FNR=35840) fatal: print to "standard output" failed (No space left on device)
+awk: cmd. line:1: (FILENAME=- FNR=263632) fatal: print to "standard output" failed (No space left on device)
+awk: cmd. line:1: (FILENAME=- FNR=371035) fatal: print to "standard output" failed (No space left on device)
+awk: cmd. line:1: (FILENAME=- FNR=161690) fatal: print to "standard output" failed (No space left on device)
+awk: cmd. line:1: (FILENAME=- FNR=39433) fatal: print to "standard output" failed (No space left on device)
+awk: cmd. line:1: (FILENAME=- FNR=75915) fatal: print to "standard output" failed (No space left on device)
+awk: awk: cmd. line:cmd. line:1: awk: awk: 1: (cmd. line:(FILENAME=- cmd. line:1: awk: FNR=104670) FILENAME=- cmd. line:1: fatal: FNR=324735) (1: (print to "standard output" failed (No space left on device)(fatal: FILENAME=- FILENAME=- FILENAME=- print to "standard output" failed (No space left on device)
+FNR=4741) FNR=136079) 
+FNR=48566) fatal: fatal: fatal: print to "standard output" failed (No space left on device)print to "standard output" failed (No space left on device)print to "standard output" failed (No space left on device)
+
+
+awk: cmd. line:1: (FILENAME=- FNR=97394) fatal: print to "standard output" failed (No space left on device)
+awk: cmd. line:1: (FILENAME=- FNR=60472) fatal: print to "standard output" failed (No space left on device)
+awk: cmd. line:1: (FILENAME=- FNR=82295) fatal: print to "standard output" failed (No space left on device)
+awk: cmd. line:awk: awk: cmd. line:awk: cmd. line:1: 1: 1: cmd. line:((1: FILENAME=- (FILENAME=- FNR=41892) (FILENAME=- fatal: FILENAME=- FNR=102094) FNR=21047) FNR=Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Exception ignored in: <_io.TextIOWrapper name='<stdout>' mode='w' encoding='UTF-8'>
+BrokenPipeError: [Errno 32] Broken pipe
+awk: cmd. line:1: (FILENAME=- FNR=586) fatal: print to "standard output" failed (No space left on device)
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+awk: cmd. line:1: (FILENAME=- FNR=596) fatal: print to "standard output" failed (No space left on device)
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+awk: cmd. line:1: (FILENAME=- FNR=597) fatal: print to "standard output" failed (No space left on device)
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+awk: cmd. line:1: (FILENAME=- FNR=589) fatal: print to "standard output" failed (No space left on device)
+awk: cmd. line:1: (FILENAME=- FNR=456) fatal: print to "standard output" failed (No space left on device)
+awk: cmd. line:1: (FILENAME=- FNR=587) fatal: print to "standard output" failed (No space left on device)
+awk: cmd. line:1: (FILENAME=- FNR=586) fatal: print to "standard output" failed (No space left on device)
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Exception ignored in: <_io.TextIOWrapper name='<stdout>' mode='w' encoding='UTF-8'>
+BrokenPipeError: [Errno 32] Broken pipe
+awk: cmd. line:1: (FILENAME=- FNR=586) fatal: print to "standard output" failed (No space left on device)
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 3Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>awk: cmd. line:1: (FILENAME=- FNR=911) fatal: print to "standard output" failed (No space left on device)
+awk: cmd. line:1: (FILENAME=- FNR=456) fatal: print to "standard output" failed (No space left on device)
+awk: cmd. line:1: (FILENAME=- FNR=598) fatal: print to "standard output" failed (No space left on device)
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+awk: cmd. line:1: awk: (FILENAME=- FNR=603) fatal: cmd. line:print to "standard output" failed (No space left on device)1: 
+(FILENAME=- awk: FNR=456) fatal: Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+print to "standard output" failed (No space left on device)
+cmd. line:1: (FILENAME=- FNR=598) fatal: print to "standard output" failed (No space left on device)
+awk: cmd. line:1: (FILENAME=- FNR=1191) fatal: print to "standard output" failed (No space left on device)
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+awk: cmd. line:1: (FILENAME=- FNR=603) fatal: print to "standard output" failed (No space left on device)
+awk: cmd. line:1: (FILENAME=- FNR=611) fatal: print to "standard output" failed (No space left on device)
+awk: awk: cmd. line:awk: 1: cmd. line:(1: (FILENAME=- FILENAME=- FNR=586) cmd. line:fatal: FNR=661) 1: print to "standard output" failed (No space left on device)fatal: (
+print to "standard output" failed (No space left on device)FILENAME=- 
+FNR=596) fatal: print to "standard output" failed (No space left on device)
+./prepSamples.sh: line 31: /home/ionadmin/tmp_david/sanefalcontrain/e/Auto_user_PROTON-120-DPNI_100417_Chip2_182_294/IonXpress_086_rawlib.bam.10.start.fwd: No space left on device
+awk: cmd. line:1: (FILENAME=- FNR=593) fatal: print to "standard output" failed (No space left on device)
+awk: cmd. line:1: (FILENAME=- FNR=1186) fatal: print to "standard output" failed (No space left on device)
+awk: cmd. line:1: (FILENAME=- FNR=456) fatal: print to "standard output" failed (No space left on device)
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+awk: cmd. line:1: (FILENAME=- FNR=1178) fatal: print to "standard output" failed (No space left on device)
+awk: awk: cmd. line:1: (FILENAME=- FNR=593) fatal: print to "standard output" failed (No space left on device)
+cmd. line:1: (FILENAME=- FNR=1179) fatal: print to "standard output" failed (No space left on deTraceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+IN:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-149-DPNI_040618_Chip1_284_361/IonXpress_082_rawlib.bam, OUT:/home/ionadmin/tmp_david/sanefalcontrain/g/Auto_user_PROTON-149-DPNI_040618_Chip1_284_361/IonXpress_082_rawlib.bam
+./prepSamples.sh: line 39: /home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-150-DPNI_040618_Chip2_285_363/IonXpress_086_rawlib.bam.6.start.rev: No space left on device
+awk: awk: cmd. line:cmd. line:1: 1: ((FILENAME=- FILENAME=- FNR=618) FNR=615) fatal: fatal: print to "standard output" failed (No space left on device)print to "standard output" failed (No space left on device)
+
+./prepSamples.sh: line 31: /home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-150-DPNI_040618_Chip2_285_363/IonXpress_086_rawlib.bam.6.start.fwd: No space left on device
+./prepSamples.sh: line 39: /home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-143-DPNI_300817_Chip1_208_343/IonXpress_076_rawlib.bam.2.start.rev: No space left on device
+./prepSamples.sh: line 31: /home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-143-DPNI_300817_Chip1_208_343/IonXpress_076_rawlib.bam.2.start.fwd: No space left on device
+./prepSamples.sh: line 31: /home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-139-DPNI_070817_chip1_204_335/IonXpress_070_rawlib.bam.22.start.fwd: No space left on device
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+ Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+./prepSamples.sh: line 39: /home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-158-DPNI_160818_Chip2_300_379/IonXpress_082_rawlib.bam.21.start.rev: No space left on device
+./prepSamples.sh: line 39: /home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-146-DPNI_180917_chip2_211_349/IonXpress_092_rawlib.bam.10.start.rev: No space left on device
+./prepSamples.sh: line 39: /home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-147-DPNI_140518_Chip1_280_357/IonXpress_094_rawlib.bam.9.start.rev: No space left on device
+./prepSamples.sh: line 39: /home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-139-DPNI_070817_chip1_204_335/IonXpress_067_rawlib.bam.12.start.rev: No space left on device
+./prepSamples.sh: line 31: /home/ionadmin/tmp_david/sanefalcontrain/b/Auto_user_PROTON-139-DPNI_070817_chip1_204_335/IonXpress_067_rawlib.bam.12.start.fwd: No space left on device
+./prepSamples.sh: line 31: /home/ionadmin/tmp_david/sanefalcontrain/a/Auto_user_PROTON-147-DPNI_140518_Chip1_280_357/IonXpress_094_rawlib.bam.9.start.fwd: No space left on device
+./prepSamples.sh: line 31: /home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-146-DPNI_180917_chip2_211_349/IonXpress_092_rawlib.bam.10.start.fwd: No space left on device
+awk: cmd. line:1: (FILENAME=- FNR=456) fatal: print to "standard output" failed (No space left on device)
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+awk: cmd. line:1: (FILENAME=- FNR=513) fatal: print to "standard output" failed (No space left on device)
+awk: cmd. line:1: (FILENAME=- FNR=592) fatal: print to "standard output" failed (No space left on device)
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+awk: cmd. line:1: (FILENAME=- FNR=1366) fatal: print to "standard output" failed (No space left on device)
+awk: cmd. line:1: (FILENAME=- FNR=456) fatal: print to "standard output" failed (No space left on device)
+./prepSamples.sh: line 31: /home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-145-DPNI_180917_chip1_210_347/IonXpress_086_rawlib.bam.11.start.fwd: No space left on device
+awk: cmd. line:1: (FILENAME=- FNR=456) fatal: print to "standard output" failed (No space left on device)
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+awk: cmd. line:1: (FILENAME=- FNR=911) fatal: print to "standard output" failed (No space left on device)
+./prepSamples.sh: line 39: /home/ionadmin/tmp_david/sanefalcontrain/d/Auto_user_PROTON-145-DPNI_180917_chip1_210_347/IonXpress_086_rawlib.bam.11.start.rev: No space left on device
+awTraceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+awk: cmd. line:1: (FILENAME=- FNR=911) fatal: print to "standard output" failed (No space left on device)
+awk: cmd. line:1: (FILENAME=- FNR=2276) fatal: print to "standard output" failed (No space left on device)
+awk: cmd. line:1: (FILENAME=- FNR=2276) fatal: print to "standard output" failed (No space left on device)
+awk: cmd. line:1: (FILENAME=- FNR=1366) fatal: print to "standard output" failed (No space left on device)
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "./retro.py", line 59, in <module>
+    flush(readBuff)
+  File "./retro.py", line 48, in flush
+    print (line.strip())
+BrokenPipeError: [Errno 32] Broken pipe
++ BAMFOLDER=/results/analysis/output/Home
++ BAMLINKFOLDER_BASE=/home/ionadmin/tmp_david/sanefalcontrain
+++ /usr/bin/python3 ./prepare_folders.py /results/analysis/output/Home /home/ionadmin/tmp_david/sanefalcontrain
+Traceback (most recent call last):
+  File "./prepare_folders.py", line 92, in <module>
+    prepare_train_folder(bamdir, traindir)
+  File "./prepare_folders.py", line 77, in prepare_train_folder
+    os.symlink(fname, os.path.join(runpath, fname.split('/')[-1]))
+FileExistsError: [Errno 17] File exists: '/results/analysis/output/Home/Auto_user_PROTON-61-DPNI_190516_Chip2_121_169/IonXpress_087_rawlib.bam.bai' -> '/home/ionadmin/tmp_david/sanefalcontrain/f/Auto_user_PROTON-61-DPNI_190516_Chip2_121_169/IonXpress_087_rawlib.bam.bai'
++ TRAINFOLDER=
++ echo
+
++ [[ -z '' ]]
++ echo 'No trainfolder found. Aborting'
+No trainfolder found. Aborting
++ exit 1
++ BAMFOLDER=/results/analysis/output/Home
++ BAMLINKFOLDER_BASE=/results/plugins/sanefalcon/sanefalcontrain
+++ /usr/bin/python3 ./prepare_folders.py /results/analysis/output/Home /results/plugins/sanefalcon/sanefalcontrain
+Traceback (most recent call last):
+  File "./prepare_folders.py", line 92, in <module>
+    prepare_train_folder(bamdir, traindir)
+  File "./prepare_folders.py", line 77, in prepare_train_folder
+    os.symlink(fname, os.path.join(runpath, fname.split('/')[-1]))
+FileExistsError: [Errno 17] File exists: '/results/analysis/output/Home/Auto_user_PROTON-123-DPNI_100517_Chip1_185_303/IonXpress_065_rawlib.bam.bai' -> '/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-123-DPNI_100517_Chip1_185_303/IonXpress_065_rawlib.bam.bai'
++ TRAINFOLDER=
++ echo
+
++ [[ -z '' ]]
++ echo 'No trainfolder found. Aborting'
+No trainfolder found. Aborting
++ exit 1
++ BAMFOLDER=/results/analysis/output/Home
++ BAMLINKFOLDER_BASE=/results/plugins/sanefalcon/sanefalcontrain
+++ /usr/bin/python3 ./prepare_folders.py /results/analysis/output/Home /results/plugins/sanefalcon/sanefalcontrain
++ TRAINFOLDER=/results/plugins/sanefalcon/sanefalcontrain
++ echo /results/plugins/sanefalcon/sanefalcontrain
+/results/plugins/sanefalcon/sanefalcontrain
++ [[ -z /results/plugins/sanefalcon/sanefalcontrain ]]
++ prepSamples
+++ find /results/plugins/sanefalcon/sanefalcontrain -maxdepth 2 -mindepth 2 -type d
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-115-DPNI_140317_Chip1_177_284 /results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-115-DPNI_140317_Chip1_177_284
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-127-DPNI_060617_chip1_189_311 /results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-127-DPNI_060617_chip1_189_311
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-119-DPNI_100417_Chip1_181_292 /results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-119-DPNI_100417_Chip1_181_292
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-149-DPNI_040618_Chip1_284_361 /results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-149-DPNI_040618_Chip1_284_361
++ ./prepSamples.sh /results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-153-DPNI_020718_Chip1_293_369 /results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-153-DPNI_020718_Chip1_293_369
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-128-DPNI_060617_chip2_190_313 /results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-128-DPNI_060617_chip2_190_313
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-146-DPNI_180917_chip2_211_349 /results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-146-DPNI_180917_chip2_211_349
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-141-DPNI_100817_chip1_206_339 /results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-141-DPNI_100817_chip1_206_339
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-147-DPNI_140518_Chip1_280_357 /results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-147-DPNI_140518_Chip1_280_357
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-33-DPNI13_Chip2_93_108 /results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-33-DPNI13_Chip2_93_108
++ ./prepSamples.sh /results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-136-DPNI_050717_chip2_199_329 /results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-136-DPNI_050717_chip2_199_329
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-150-DPNI_040618_Chip2_285_363 /results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-150-DPNI_040618_Chip2_285_363
++ ./prepSamples.sh /results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-124-DPNI_100517_Chip2_186_305 /results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-124-DPNI_100517_Chip2_186_305
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-34-DPNI14_Chip1_35pM_94_112 /results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-34-DPNI14_Chip1_35pM_94_112
++ ./prepSamples.sh /results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-138-DPNI_110717_Chip2_201_333 /results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-138-DPNI_110717_Chip2_201_333
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-120-DPNI_100417_Chip2_182_294 /results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-120-DPNI_100417_Chip2_182_294
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-121-DPNI_200417_Chip1_20pM_183_296 /results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-121-DPNI_200417_Chip1_20pM_183_296
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-158-DPNI_160818_Chip2_300_379 /results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-158-DPNI_160818_Chip2_300_379
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-144-DPNI_300817_Chip2_209_345 /results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-144-DPNI_300817_Chip2_209_345
++ ./prepSamples.sh /results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-134-DPNI_280617_CHIP2_197_325 /results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-134-DPNI_280617_CHIP2_197_325
++ ./prepSamples.sh /results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-133-DPNI_280617_CHIP1_196_323 /results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-133-DPNI_280617_CHIP1_196_323
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-135-DPNI_050717_chip1_198_327 /results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-135-DPNI_050717_chip1_198_327
++ ./prepSamples.sh /results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-123-DPNI_100517_Chip1_185_303 /results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-123-DPNI_100517_Chip1_185_303
++ ./prepSamples.sh /results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-126-DPNI_230517_Chip2_188_309 /results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-126-DPNI_230517_Chip2_188_309
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-148-DPNI_140518_Chip2_281_359 /results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-148-DPNI_140518_Chip2_281_359
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-71-DPNI_250716_Chip2_Library_builder_131_189 /results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-71-DPNI_250716_Chip2_Library_builder_131_189
++ ./prepSamples.sh /results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-155-DPNI_300718_chip1_297_373 /results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-155-DPNI_300718_chip1_297_373
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-157-DPNI_160818_Chip1_299_377 /results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-157-DPNI_160818_Chip1_299_377
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-117-DPNI_220317_Chip1_179_288 /results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-117-DPNI_220317_Chip1_179_288
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-118-DPNI_220317_Chip2_180_290 /results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-118-DPNI_220317_Chip2_180_290
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-61-DPNI_190516_Chip2_121_169 /results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-61-DPNI_190516_Chip2_121_169
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-156-DPNI_300718_chip2_298_375 /results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-156-DPNI_300718_chip2_298_375
++ ./prepSamples.sh /results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-152-DPNI_110618_Chip2_287_367 /results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-152-DPNI_110618_Chip2_287_367
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-142-DPNI_100817_chip2_207_341 /results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-142-DPNI_100817_chip2_207_341
++ ./prepSamples.sh /results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-140-DPNI_070817_chip2_205_337 /results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-140-DPNI_070817_chip2_205_337
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-35-DPNI14_Chip2_35pM_95_114 /results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-35-DPNI14_Chip2_35pM_95_114
++ ./prepSamples.sh /results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-154-DPNI_020718_Chip2_294_371 /results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-154-DPNI_020718_Chip2_294_371
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-122-DPNI_200417_Chip2_20pM_184_298 /results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-122-DPNI_200417_Chip2_20pM_184_298
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ ./prepSamples.sh /results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-145-DPNI_180917_chip1_210_347 /results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-145-DPNI_180917_chip1_210_347
++ ./prepSamples.sh /results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-139-DPNI_070817_chip1_204_335 /results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-139-DPNI_070817_chip1_204_335
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`'
++ echo 'passed prepSamples'
+passed prepSamples
++ echo Done
++ ./prepSamples.sh /results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-143-DPNI_300817_Chip1_208_343 /results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-143-DPNI_300817_Chip1_208_343
+Done
++ ./prepSamples.sh /results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-125-DPNI_230517_Chip1_187_307 /results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-125-DPNI_230517_Chip1_187_307
++ ./prepSamples.sh /results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-137-DPNI_110717_Chip1_200_331 /results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-137-DPNI_110717_Chip1_200_331
+IN:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-127-DPNI_060617_chip1_189_311/IonXpress_086_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-127-DPNI_060617_chip1_189_311/IonXpress_086_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-115-DPNI_140317_Chip1_177_284/IonXpress_067_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-115-DPNI_140317_Chip1_177_284/IonXpress_067_rawlib.bam
++ ./prepSamples.sh /results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-151-DPNI_110618_Chip1_286_365 /results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-151-DPNI_110618_Chip1_286_365
+IN:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-147-DPNI_140518_Chip1_280_357/IonXpress_091_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-147-DPNI_140518_Chip1_280_357/IonXpress_091_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-119-DPNI_100417_Chip1_181_292/IonXpress_084_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-119-DPNI_100417_Chip1_181_292/IonXpress_084_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-136-DPNI_050717_chip2_199_329/IonXpress_079_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-136-DPNI_050717_chip2_199_329/IonXpress_079_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-146-DPNI_180917_chip2_211_349/IonXpress_091_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-146-DPNI_180917_chip2_211_349/IonXpress_091_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-158-DPNI_160818_Chip2_300_379/IonXpress_084_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-158-DPNI_160818_Chip2_300_379/IonXpress_084_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-33-DPNI13_Chip2_93_108/IonXpress_009_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-33-DPNI13_Chip2_93_108/IonXpress_009_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-123-DPNI_100517_Chip1_185_303/IonXpress_086_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-123-DPNI_100517_Chip1_185_303/IonXpress_086_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-120-DPNI_100417_Chip2_182_294/IonXpress_087_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-120-DPNI_100417_Chip2_182_294/IonXpress_087_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-150-DPNI_040618_Chip2_285_363/IonXpress_087_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-150-DPNI_040618_Chip2_285_363/IonXpress_087_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-153-DPNI_020718_Chip1_293_369/IonXpress_071_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-153-DPNI_020718_Chip1_293_369/IonXpress_071_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-138-DPNI_110717_Chip2_201_333/IonXpress_087_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-138-DPNI_110717_Chip2_201_333/IonXpress_087_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-149-DPNI_040618_Chip1_284_361/IonXpress_079_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-149-DPNI_040618_Chip1_284_361/IonXpress_079_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-141-DPNI_100817_chip1_206_339/IonXpress_091_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-141-DPNI_100817_chip1_206_339/IonXpress_091_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-118-DPNI_220317_Chip2_180_290/IonXpress_076_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-118-DPNI_220317_Chip2_180_290/IonXpress_076_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-34-DPNI14_Chip1_35pM_94_112/IonXpress_009_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-34-DPNI14_Chip1_35pM_94_112/IonXpress_009_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-133-DPNI_280617_CHIP1_196_323/IonXpress_067_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-133-DPNI_280617_CHIP1_196_323/IonXpress_067_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-134-DPNI_280617_CHIP2_197_325/IonXpress_071_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-134-DPNI_280617_CHIP2_197_325/IonXpress_071_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-124-DPNI_100517_Chip2_186_305/IonXpress_087_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-124-DPNI_100517_Chip2_186_305/IonXpress_087_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-144-DPNI_300817_Chip2_209_345/IonXpress_079_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-144-DPNI_300817_Chip2_209_345/IonXpress_079_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-128-DPNI_060617_chip2_190_313/IonXpress_087_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-128-DPNI_060617_chip2_190_313/IonXpress_087_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-121-DPNI_200417_Chip1_20pM_183_296/IonXpress_091_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-121-DPNI_200417_Chip1_20pM_183_296/IonXpress_091_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-157-DPNI_160818_Chip1_299_377/IonXpress_076_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-157-DPNI_160818_Chip1_299_377/IonXpress_076_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-139-DPNI_070817_chip1_204_335/IonXpress_067_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-139-DPNI_070817_chip1_204_335/IonXpress_067_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-71-DPNI_250716_Chip2_Library_builder_131_189/IonXpress_087_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-71-DPNI_250716_Chip2_Library_builder_131_189/IonXpress_087_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-142-DPNI_100817_chip2_207_341/IonXpress_066_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-142-DPNI_100817_chip2_207_341/IonXpress_066_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-117-DPNI_220317_Chip1_179_288/IonXpress_071_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-117-DPNI_220317_Chip1_179_288/IonXpress_071_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-135-DPNI_050717_chip1_198_327/IonXpress_076_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-135-DPNI_050717_chip1_198_327/IonXpress_076_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-156-DPNI_300718_chip2_298_375/IonXpress_075_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-156-DPNI_300718_chip2_298_375/IonXpress_075_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-140-DPNI_070817_chip2_205_337/IonXpress_071_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-140-DPNI_070817_chip2_205_337/IonXpress_071_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-143-DPNI_300817_Chip1_208_343/IonXpress_076_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-143-DPNI_300817_Chip1_208_343/IonXpress_076_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-154-DPNI_020718_Chip2_294_371/IonXpress_076_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-154-DPNI_020718_Chip2_294_371/IonXpress_076_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-145-DPNI_180917_chip1_210_347/IonXpress_087_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-145-DPNI_180917_chip1_210_347/IonXpress_087_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-122-DPNI_200417_Chip2_20pM_184_298/IonXpress_095_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-122-DPNI_200417_Chip2_20pM_184_298/IonXpress_095_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-148-DPNI_140518_Chip2_281_359/IonXpress_067_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-148-DPNI_140518_Chip2_281_359/IonXpress_067_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-35-DPNI14_Chip2_35pM_95_114/IonXpress_009_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-35-DPNI14_Chip2_35pM_95_114/IonXpress_009_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-61-DPNI_190516_Chip2_121_169/IonXpress_087_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-61-DPNI_190516_Chip2_121_169/IonXpress_087_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-125-DPNI_230517_Chip1_187_307/IonXpress_081_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-125-DPNI_230517_Chip1_187_307/IonXpress_081_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-126-DPNI_230517_Chip2_188_309/IonXpress_096_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-126-DPNI_230517_Chip2_188_309/IonXpress_096_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-155-DPNI_300718_chip1_297_373/IonXpress_067_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-155-DPNI_300718_chip1_297_373/IonXpress_067_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-137-DPNI_110717_Chip1_200_331/IonXpress_087_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-137-DPNI_110717_Chip1_200_331/IonXpress_087_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-152-DPNI_110618_Chip2_287_367/IonXpress_067_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-152-DPNI_110618_Chip2_287_367/IonXpress_067_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-151-DPNI_110618_Chip1_286_365/IonXpress_091_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-151-DPNI_110618_Chip1_286_365/IonXpress_091_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-135-DPNI_050717_chip1_198_327/IonXpress_075_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-135-DPNI_050717_chip1_198_327/IonXpress_075_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-134-DPNI_280617_CHIP2_197_325/IonXpress_080_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-134-DPNI_280617_CHIP2_197_325/IonXpress_080_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-34-DPNI14_Chip1_35pM_94_112/IonXpress_026_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-34-DPNI14_Chip1_35pM_94_112/IonXpress_026_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-33-DPNI13_Chip2_93_108/IonXpress_026_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-33-DPNI13_Chip2_93_108/IonXpress_026_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-118-DPNI_220317_Chip2_180_290/IonXpress_075_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-118-DPNI_220317_Chip2_180_290/IonXpress_075_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-126-DPNI_230517_Chip2_188_309/IonXpress_095_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-126-DPNI_230517_Chip2_188_309/IonXpress_095_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-117-DPNI_220317_Chip1_179_288/IonXpress_069_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-117-DPNI_220317_Chip1_179_288/IonXpress_069_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-120-DPNI_100417_Chip2_182_294/IonXpress_086_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-120-DPNI_100417_Chip2_182_294/IonXpress_086_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-133-DPNI_280617_CHIP1_196_323/IonXpress_066_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-133-DPNI_280617_CHIP1_196_323/IonXpress_066_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-140-DPNI_070817_chip2_205_337/IonXpress_080_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-140-DPNI_070817_chip2_205_337/IonXpress_080_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-137-DPNI_110717_Chip1_200_331/IonXpress_086_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-137-DPNI_110717_Chip1_200_331/IonXpress_086_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-35-DPNI14_Chip2_35pM_95_114/IonXpress_026_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-35-DPNI14_Chip2_35pM_95_114/IonXpress_026_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-150-DPNI_040618_Chip2_285_363/IonXpress_089_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-150-DPNI_040618_Chip2_285_363/IonXpress_089_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-147-DPNI_140518_Chip1_280_357/IonXpress_092_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-147-DPNI_140518_Chip1_280_357/IonXpress_092_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-119-DPNI_100417_Chip1_181_292/IonXpress_085_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-119-DPNI_100417_Chip1_181_292/IonXpress_085_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-153-DPNI_020718_Chip1_293_369/IonXpress_068_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-153-DPNI_020718_Chip1_293_369/IonXpress_068_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-61-DPNI_190516_Chip2_121_169/IonXpress_086_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-61-DPNI_190516_Chip2_121_169/IonXpress_086_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-122-DPNI_200417_Chip2_20pM_184_298/IonXpress_080_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-122-DPNI_200417_Chip2_20pM_184_298/IonXpress_080_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-158-DPNI_160818_Chip2_300_379/IonXpress_085_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-158-DPNI_160818_Chip2_300_379/IonXpress_085_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-124-DPNI_100517_Chip2_186_305/IonXpress_089_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-124-DPNI_100517_Chip2_186_305/IonXpress_089_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-139-DPNI_070817_chip1_204_335/IonXpress_068_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-139-DPNI_070817_chip1_204_335/IonXpress_068_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-123-DPNI_100517_Chip1_185_303/IonXpress_084_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-123-DPNI_100517_Chip1_185_303/IonXpress_084_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-135-DPNI_050717_chip1_198_327/IonXpress_077_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-135-DPNI_050717_chip1_198_327/IonXpress_077_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-136-DPNI_050717_chip2_199_329/IonXpress_084_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-136-DPNI_050717_chip2_199_329/IonXpress_084_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-151-DPNI_110618_Chip1_286_365/IonXpress_092_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-151-DPNI_110618_Chip1_286_365/IonXpress_092_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-148-DPNI_140518_Chip2_281_359/IonXpress_066_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-148-DPNI_140518_Chip2_281_359/IonXpress_066_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-146-DPNI_180917_chip2_211_349/IonXpress_089_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-146-DPNI_180917_chip2_211_349/IonXpress_089_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-115-DPNI_140317_Chip1_177_284/IonXpress_066_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-115-DPNI_140317_Chip1_177_284/IonXpress_066_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-121-DPNI_200417_Chip1_20pM_183_296/IonXpress_089_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-121-DPNI_200417_Chip1_20pM_183_296/IonXpress_089_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-145-DPNI_180917_chip1_210_347/IonXpress_086_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-145-DPNI_180917_chip1_210_347/IonXpress_086_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-128-DPNI_060617_chip2_190_313/IonXpress_089_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-128-DPNI_060617_chip2_190_313/IonXpress_089_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-152-DPNI_110618_Chip2_287_367/IonXpress_066_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-152-DPNI_110618_Chip2_287_367/IonXpress_066_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-144-DPNI_300817_Chip2_209_345/IonXpress_080_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-144-DPNI_300817_Chip2_209_345/IonXpress_080_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-157-DPNI_160818_Chip1_299_377/IonXpress_077_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-157-DPNI_160818_Chip1_299_377/IonXpress_077_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-143-DPNI_300817_Chip1_208_343/IonXpress_075_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-143-DPNI_300817_Chip1_208_343/IonXpress_075_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-127-DPNI_060617_chip1_189_311/IonXpress_084_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-127-DPNI_060617_chip1_189_311/IonXpress_084_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-149-DPNI_040618_Chip1_284_361/IonXpress_084_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-149-DPNI_040618_Chip1_284_361/IonXpress_084_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-138-DPNI_110717_Chip2_201_333/IonXpress_089_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-138-DPNI_110717_Chip2_201_333/IonXpress_089_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-125-DPNI_230517_Chip1_187_307/IonXpress_091_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-125-DPNI_230517_Chip1_187_307/IonXpress_091_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-134-DPNI_280617_CHIP2_197_325/IonXpress_070_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-134-DPNI_280617_CHIP2_197_325/IonXpress_070_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-141-DPNI_100817_chip1_206_339/IonXpress_092_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-141-DPNI_100817_chip1_206_339/IonXpress_092_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-71-DPNI_250716_Chip2_Library_builder_131_189/IonXpress_089_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-71-DPNI_250716_Chip2_Library_builder_131_189/IonXpress_089_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-154-DPNI_020718_Chip2_294_371/IonXpress_075_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-154-DPNI_020718_Chip2_294_371/IonXpress_075_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-142-DPNI_100817_chip2_207_341/IonXpress_095_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-142-DPNI_100817_chip2_207_341/IonXpress_095_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-155-DPNI_300718_chip1_297_373/IonXpress_068_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-155-DPNI_300718_chip1_297_373/IonXpress_068_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-126-DPNI_230517_Chip2_188_309/IonXpress_080_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-126-DPNI_230517_Chip2_188_309/IonXpress_080_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-117-DPNI_220317_Chip1_179_288/IonXpress_070_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-117-DPNI_220317_Chip1_179_288/IonXpress_070_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-118-DPNI_220317_Chip2_180_290/IonXpress_080_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-118-DPNI_220317_Chip2_180_290/IonXpress_080_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-33-DPNI13_Chip2_93_108/IonXpress_007_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-33-DPNI13_Chip2_93_108/IonXpress_007_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-135-DPNI_050717_chip1_198_327/IonXpress_065_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-135-DPNI_050717_chip1_198_327/IonXpress_065_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-120-DPNI_100417_Chip2_182_294/IonXpress_077_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-120-DPNI_100417_Chip2_182_294/IonXpress_077_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-156-DPNI_300718_chip2_298_375/IonXpress_071_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-156-DPNI_300718_chip2_298_375/IonXpress_071_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-137-DPNI_110717_Chip1_200_331/IonXpress_080_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-137-DPNI_110717_Chip1_200_331/IonXpress_080_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-134-DPNI_280617_CHIP2_197_325/IonXpress_072_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-134-DPNI_280617_CHIP2_197_325/IonXpress_072_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-61-DPNI_190516_Chip2_121_169/IonXpress_084_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-61-DPNI_190516_Chip2_121_169/IonXpress_084_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-153-DPNI_020718_Chip1_293_369/IonXpress_069_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-153-DPNI_020718_Chip1_293_369/IonXpress_069_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-35-DPNI14_Chip2_35pM_95_114/IonXpress_003_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-35-DPNI14_Chip2_35pM_95_114/IonXpress_003_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-124-DPNI_100517_Chip2_186_305/IonXpress_080_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-124-DPNI_100517_Chip2_186_305/IonXpress_080_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-119-DPNI_100417_Chip1_181_292/IonXpress_082_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-119-DPNI_100417_Chip1_181_292/IonXpress_082_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-158-DPNI_160818_Chip2_300_379/IonXpress_082_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-158-DPNI_160818_Chip2_300_379/IonXpress_082_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-139-DPNI_070817_chip1_204_335/IonXpress_069_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-139-DPNI_070817_chip1_204_335/IonXpress_069_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-147-DPNI_140518_Chip1_280_357/IonXpress_080_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-147-DPNI_140518_Chip1_280_357/IonXpress_080_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-140-DPNI_070817_chip2_205_337/IonXpress_085_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-140-DPNI_070817_chip2_205_337/IonXpress_085_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-150-DPNI_040618_Chip2_285_363/IonXpress_086_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-150-DPNI_040618_Chip2_285_363/IonXpress_086_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-115-DPNI_140317_Chip1_177_284/IonXpress_068_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-115-DPNI_140317_Chip1_177_284/IonXpress_068_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-157-DPNI_160818_Chip1_299_377/IonXpress_079_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-157-DPNI_160818_Chip1_299_377/IonXpress_079_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-136-DPNI_050717_chip2_199_329/IonXpress_082_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-136-DPNI_050717_chip2_199_329/IonXpress_082_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-122-DPNI_200417_Chip2_20pM_184_298/IonXpress_094_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-122-DPNI_200417_Chip2_20pM_184_298/IonXpress_094_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-33-DPNI13_Chip2_93_108/IonXpress_002_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-33-DPNI13_Chip2_93_108/IonXpress_002_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-133-DPNI_280617_CHIP1_196_323/IonXpress_068_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-133-DPNI_280617_CHIP1_196_323/IonXpress_068_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-34-DPNI14_Chip1_35pM_94_112/IonXpress_003_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-34-DPNI14_Chip1_35pM_94_112/IonXpress_003_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-151-DPNI_110618_Chip1_286_365/IonXpress_080_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-151-DPNI_110618_Chip1_286_365/IonXpress_080_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-149-DPNI_040618_Chip1_284_361/IonXpress_080_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-149-DPNI_040618_Chip1_284_361/IonXpress_080_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-138-DPNI_110717_Chip2_201_333/IonXpress_080_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-138-DPNI_110717_Chip2_201_333/IonXpress_080_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-134-DPNI_280617_CHIP2_197_325/IonXpress_073_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-134-DPNI_280617_CHIP2_197_325/IonXpress_073_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-128-DPNI_060617_chip2_190_313/IonXpress_080_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-128-DPNI_060617_chip2_190_313/IonXpress_080_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-152-DPNI_110618_Chip2_287_367/IonXpress_095_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-152-DPNI_110618_Chip2_287_367/IonXpress_095_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-125-DPNI_230517_Chip1_187_307/IonXpress_092_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-125-DPNI_230517_Chip1_187_307/IonXpress_092_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-143-DPNI_300817_Chip1_208_343/IonXpress_077_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-143-DPNI_300817_Chip1_208_343/IonXpress_077_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-117-DPNI_220317_Chip1_179_288/IonXpress_072_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-117-DPNI_220317_Chip1_179_288/IonXpress_072_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-141-DPNI_100817_chip1_206_339/IonXpress_090_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-141-DPNI_100817_chip1_206_339/IonXpress_090_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-127-DPNI_060617_chip1_189_311/IonXpress_085_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-127-DPNI_060617_chip1_189_311/IonXpress_085_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-135-DPNI_050717_chip1_198_327/IonXpress_074_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-135-DPNI_050717_chip1_198_327/IonXpress_074_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-146-DPNI_180917_chip2_211_349/IonXpress_092_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-146-DPNI_180917_chip2_211_349/IonXpress_092_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-142-DPNI_100817_chip2_207_341/IonXpress_080_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-142-DPNI_100817_chip2_207_341/IonXpress_080_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-148-DPNI_140518_Chip2_281_359/IonXpress_068_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-148-DPNI_140518_Chip2_281_359/IonXpress_068_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-120-DPNI_100417_Chip2_182_294/IonXpress_080_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-120-DPNI_100417_Chip2_182_294/IonXpress_080_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-145-DPNI_180917_chip1_210_347/IonXpress_084_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-145-DPNI_180917_chip1_210_347/IonXpress_084_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-123-DPNI_100517_Chip1_185_303/IonXpress_085_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-123-DPNI_100517_Chip1_185_303/IonXpress_085_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-121-DPNI_200417_Chip1_20pM_183_296/IonXpress_092_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-121-DPNI_200417_Chip1_20pM_183_296/IonXpress_092_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-154-DPNI_020718_Chip2_294_371/IonXpress_072_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-154-DPNI_020718_Chip2_294_371/IonXpress_072_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-118-DPNI_220317_Chip2_180_290/IonXpress_073_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-118-DPNI_220317_Chip2_180_290/IonXpress_073_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-155-DPNI_300718_chip1_297_373/IonXpress_069_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-155-DPNI_300718_chip1_297_373/IonXpress_069_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-61-DPNI_190516_Chip2_121_169/IonXpress_085_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-61-DPNI_190516_Chip2_121_169/IonXpress_085_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-126-DPNI_230517_Chip2_188_309/IonXpress_094_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-126-DPNI_230517_Chip2_188_309/IonXpress_094_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-153-DPNI_020718_Chip1_293_369/IonXpress_080_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-153-DPNI_020718_Chip1_293_369/IonXpress_080_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-137-DPNI_110717_Chip1_200_331/IonXpress_085_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-137-DPNI_110717_Chip1_200_331/IonXpress_085_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-33-DPNI13_Chip2_93_108/IonXpress_004_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-33-DPNI13_Chip2_93_108/IonXpress_004_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-35-DPNI14_Chip2_35pM_95_114/IonXpress_007_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-35-DPNI14_Chip2_35pM_95_114/IonXpress_007_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-156-DPNI_300718_chip2_298_375/IonXpress_072_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-156-DPNI_300718_chip2_298_375/IonXpress_072_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-140-DPNI_070817_chip2_205_337/IonXpress_072_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-140-DPNI_070817_chip2_205_337/IonXpress_072_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-158-DPNI_160818_Chip2_300_379/IonXpress_083_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-158-DPNI_160818_Chip2_300_379/IonXpress_083_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-144-DPNI_300817_Chip2_209_345/IonXpress_082_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-144-DPNI_300817_Chip2_209_345/IonXpress_082_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-133-DPNI_280617_CHIP1_196_323/IonXpress_069_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-133-DPNI_280617_CHIP1_196_323/IonXpress_069_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-115-DPNI_140317_Chip1_177_284/IonXpress_087_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-115-DPNI_140317_Chip1_177_284/IonXpress_087_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-157-DPNI_160818_Chip1_299_377/IonXpress_080_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-157-DPNI_160818_Chip1_299_377/IonXpress_080_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-150-DPNI_040618_Chip2_285_363/IonXpress_085_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-150-DPNI_040618_Chip2_285_363/IonXpress_085_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-139-DPNI_070817_chip1_204_335/IonXpress_070_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-139-DPNI_070817_chip1_204_335/IonXpress_070_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-71-DPNI_250716_Chip2_Library_builder_131_189/IonXpress_086_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-71-DPNI_250716_Chip2_Library_builder_131_189/IonXpress_086_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-122-DPNI_200417_Chip2_20pM_184_298/IonXpress_082_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-122-DPNI_200417_Chip2_20pM_184_298/IonXpress_082_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-117-DPNI_220317_Chip1_179_288/IonXpress_065_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-117-DPNI_220317_Chip1_179_288/IonXpress_065_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-136-DPNI_050717_chip2_199_329/IonXpress_083_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-136-DPNI_050717_chip2_199_329/IonXpress_083_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-34-DPNI14_Chip1_35pM_94_112/IonXpress_007_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-34-DPNI14_Chip1_35pM_94_112/IonXpress_007_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-119-DPNI_100417_Chip1_181_292/IonXpress_083_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-119-DPNI_100417_Chip1_181_292/IonXpress_083_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-124-DPNI_100517_Chip2_186_305/IonXpress_090_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-124-DPNI_100517_Chip2_186_305/IonXpress_090_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-127-DPNI_060617_chip1_189_311/IonXpress_083_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-127-DPNI_060617_chip1_189_311/IonXpress_083_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-147-DPNI_140518_Chip1_280_357/IonXpress_094_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-147-DPNI_140518_Chip1_280_357/IonXpress_094_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-143-DPNI_300817_Chip1_208_343/IonXpress_065_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-143-DPNI_300817_Chip1_208_343/IonXpress_065_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-141-DPNI_100817_chip1_206_339/IonXpress_093_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-141-DPNI_100817_chip1_206_339/IonXpress_093_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-120-DPNI_100417_Chip2_182_294/IonXpress_088_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-120-DPNI_100417_Chip2_182_294/IonXpress_088_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-126-DPNI_230517_Chip2_188_309/IonXpress_082_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-126-DPNI_230517_Chip2_188_309/IonXpress_082_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-151-DPNI_110618_Chip1_286_365/IonXpress_090_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-151-DPNI_110618_Chip1_286_365/IonXpress_090_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-123-DPNI_100517_Chip1_185_303/IonXpress_083_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-123-DPNI_100517_Chip1_185_303/IonXpress_083_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-121-DPNI_200417_Chip1_20pM_183_296/IonXpress_090_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-121-DPNI_200417_Chip1_20pM_183_296/IonXpress_090_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-152-DPNI_110618_Chip2_287_367/IonXpress_094_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-152-DPNI_110618_Chip2_287_367/IonXpress_094_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-148-DPNI_140518_Chip2_281_359/IonXpress_095_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-148-DPNI_140518_Chip2_281_359/IonXpress_095_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-146-DPNI_180917_chip2_211_349/IonXpress_090_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-146-DPNI_180917_chip2_211_349/IonXpress_090_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-154-DPNI_020718_Chip2_294_371/IonXpress_073_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-154-DPNI_020718_Chip2_294_371/IonXpress_073_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-118-DPNI_220317_Chip2_180_290/IonXpress_074_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-118-DPNI_220317_Chip2_180_290/IonXpress_074_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-149-DPNI_040618_Chip1_284_361/IonXpress_082_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-149-DPNI_040618_Chip1_284_361/IonXpress_082_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-61-DPNI_190516_Chip2_121_169/IonXpress_083_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-61-DPNI_190516_Chip2_121_169/IonXpress_083_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-125-DPNI_230517_Chip1_187_307/IonXpress_093_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-125-DPNI_230517_Chip1_187_307/IonXpress_093_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-145-DPNI_180917_chip1_210_347/IonXpress_085_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-145-DPNI_180917_chip1_210_347/IonXpress_085_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-34-DPNI14_Chip1_35pM_94_112/IonXpress_004_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-34-DPNI14_Chip1_35pM_94_112/IonXpress_004_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-140-DPNI_070817_chip2_205_337/IonXpress_073_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-140-DPNI_070817_chip2_205_337/IonXpress_073_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-142-DPNI_100817_chip2_207_341/IonXpress_094_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-142-DPNI_100817_chip2_207_341/IonXpress_094_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-155-DPNI_300718_chip1_297_373/IonXpress_080_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-155-DPNI_300718_chip1_297_373/IonXpress_080_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-133-DPNI_280617_CHIP1_196_323/IonXpress_065_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-133-DPNI_280617_CHIP1_196_323/IonXpress_065_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-115-DPNI_140317_Chip1_177_284/IonXpress_065_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-115-DPNI_140317_Chip1_177_284/IonXpress_065_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-150-DPNI_040618_Chip2_285_363/IonXpress_065_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-150-DPNI_040618_Chip2_285_363/IonXpress_065_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-158-DPNI_160818_Chip2_300_379/IonXpress_065_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-158-DPNI_160818_Chip2_300_379/IonXpress_065_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-35-DPNI14_Chip2_35pM_95_114/IonXpress_004_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-35-DPNI14_Chip2_35pM_95_114/IonXpress_004_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-122-DPNI_200417_Chip2_20pM_184_298/IonXpress_093_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-122-DPNI_200417_Chip2_20pM_184_298/IonXpress_093_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-124-DPNI_100517_Chip2_186_305/IonXpress_088_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-124-DPNI_100517_Chip2_186_305/IonXpress_088_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-144-DPNI_300817_Chip2_209_345/IonXpress_083_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-144-DPNI_300817_Chip2_209_345/IonXpress_083_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-119-DPNI_100417_Chip1_181_292/IonXpress_065_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-119-DPNI_100417_Chip1_181_292/IonXpress_065_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-138-DPNI_110717_Chip2_201_333/IonXpress_088_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-138-DPNI_110717_Chip2_201_333/IonXpress_088_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-153-DPNI_020718_Chip1_293_369/IonXpress_070_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-153-DPNI_020718_Chip1_293_369/IonXpress_070_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-136-DPNI_050717_chip2_199_329/IonXpress_078_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/f/Auto_user_PROTON-136-DPNI_050717_chip2_199_329/IonXpress_078_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-71-DPNI_250716_Chip2_Library_builder_131_189/IonXpress_090_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-71-DPNI_250716_Chip2_Library_builder_131_189/IonXpress_090_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-139-DPNI_070817_chip1_204_335/IonXpress_065_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-139-DPNI_070817_chip1_204_335/IonXpress_065_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-141-DPNI_100817_chip1_206_339/IonXpress_065_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-141-DPNI_100817_chip1_206_339/IonXpress_065_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-156-DPNI_300718_chip2_298_375/IonXpress_073_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-156-DPNI_300718_chip2_298_375/IonXpress_073_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-128-DPNI_060617_chip2_190_313/IonXpress_090_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-128-DPNI_060617_chip2_190_313/IonXpress_090_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-151-DPNI_110618_Chip1_286_365/IonXpress_088_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-151-DPNI_110618_Chip1_286_365/IonXpress_088_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-147-DPNI_140518_Chip1_280_357/IonXpress_093_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-147-DPNI_140518_Chip1_280_357/IonXpress_093_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-123-DPNI_100517_Chip1_185_303/IonXpress_065_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-123-DPNI_100517_Chip1_185_303/IonXpress_065_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-127-DPNI_060617_chip1_189_311/IonXpress_065_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-127-DPNI_060617_chip1_189_311/IonXpress_065_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-146-DPNI_180917_chip2_211_349/IonXpress_065_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-146-DPNI_180917_chip2_211_349/IonXpress_065_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-152-DPNI_110618_Chip2_287_367/IonXpress_093_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-152-DPNI_110618_Chip2_287_367/IonXpress_093_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-148-DPNI_140518_Chip2_281_359/IonXpress_069_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-148-DPNI_140518_Chip2_281_359/IonXpress_069_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-157-DPNI_160818_Chip1_299_377/IonXpress_078_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-157-DPNI_160818_Chip1_299_377/IonXpress_078_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-154-DPNI_020718_Chip2_294_371/IonXpress_074_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-154-DPNI_020718_Chip2_294_371/IonXpress_074_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-149-DPNI_040618_Chip1_284_361/IonXpress_083_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/h/Auto_user_PROTON-149-DPNI_040618_Chip1_284_361/IonXpress_083_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-143-DPNI_300817_Chip1_208_343/IonXpress_074_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-143-DPNI_300817_Chip1_208_343/IonXpress_074_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-121-DPNI_200417_Chip1_20pM_183_296/IonXpress_065_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-121-DPNI_200417_Chip1_20pM_183_296/IonXpress_065_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-142-DPNI_100817_chip2_207_341/IonXpress_073_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-142-DPNI_100817_chip2_207_341/IonXpress_073_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-125-DPNI_230517_Chip1_187_307/IonXpress_065_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/a/Auto_user_PROTON-125-DPNI_230517_Chip1_187_307/IonXpress_065_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-145-DPNI_180917_chip1_210_347/IonXpress_088_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/c/Auto_user_PROTON-145-DPNI_180917_chip1_210_347/IonXpress_088_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-144-DPNI_300817_Chip2_209_345/IonXpress_078_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/g/Auto_user_PROTON-144-DPNI_300817_Chip2_209_345/IonXpress_078_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-71-DPNI_250716_Chip2_Library_builder_131_189/IonXpress_088_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/e/Auto_user_PROTON-71-DPNI_250716_Chip2_Library_builder_131_189/IonXpress_088_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-128-DPNI_060617_chip2_190_313/IonXpress_088_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/d/Auto_user_PROTON-128-DPNI_060617_chip2_190_313/IonXpress_088_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-155-DPNI_300718_chip1_297_373/IonXpress_070_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/b/Auto_user_PROTON-155-DPNI_300718_chip1_297_373/IonXpress_070_rawlib.bam
+IN:/results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-156-DPNI_300718_chip2_298_375/IonXpress_074_rawlib.bam, OUT:/results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-156-DPNI_300718_chip2_298_375/IonXpress_074_rawlib.bam
++ BAMFOLDER=/results/analysis/output/Home
++ BAMLINKFOLDER_BASE=/results/plugins/sanefalcon/sanefalcontrain
+++ /usr/bin/python3 ./prepare_folders.py /results/analysis/output/Home /results/plugins/sanefalcon/sanefalcontrain
+Traceback (most recent call last):
+  File "./prepare_folders.py", line 92, in <module>
+    prepare_train_folder(bamdir, traindir)
+  File "./prepare_folders.py", line 77, in prepare_train_folder
+    os.symlink(fname, os.path.join(runpath, fname.split('/')[-1]))
+FileExistsError: [Errno 17] File exists: '/results/analysis/output/Home/Auto_user_PROTON-117-DPNI_220317_Chip1_179_288/IonXpress_071_rawlib.bam' -> '/results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-117-DPNI_220317_Chip1_179_288/IonXpress_071_rawlib.bam'
++ TRAINFOLDER=
++ echo
+
++ [[ -z '' ]]
++ echo 'No trainfolder found. Aborting'
+No trainfolder found. Aborting
++ mergeSamples
+++ find /results/plugins/sanefalcon/sanefalcontrain -maxdepth 1 -mindepth 1 -type d
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 1 -mindepth 1 -type d`'
++ '[' -d /results/plugins/sanefalcon/sanefalcontrain/h ']'
++ ./merge.sh /results/plugins/sanefalcon/sanefalcontrain/h
+./merge.sh: line 2: greadlink: command not found
+Working on Chr: 1
+./merge.sh: line 8: /merge.1: Permission denied
+Working on Chr: 2
+./merge.sh: line 8: /merge.2: Permission denied
+Working on Chr: 3
+./merge.sh: line 8: /merge.3: Permission denied
+Working on Chr: 4
+./merge.sh: line 8: /merge.4: Permission denied
+Working on Chr: 5
+./merge.sh: line 8: /merge.5: Permission denied
+Working on Chr: 6
+./merge.sh: line 8: /merge.6: Permission denied
+Working on Chr: 7
+./merge.sh: line 8: /merge.7: Permission denied
+Working on Chr: 8
+./merge.sh: line 8: /merge.8: Permission denied
+Working on Chr: 9
+./merge.sh: line 8: /merge.9: Permission denied
+Working on Chr: 10
+./merge.sh: line 8: /merge.10: Permission denied
+Working on Chr: 11
+./merge.sh: line 8: /merge.11: Permission denied
+Working on Chr: 12
+./merge.sh: line 8: /merge.12: Permission denied
+Working on Chr: 13
+./merge.sh: line 8: /merge.13: Permission denied
+Working on Chr: 14
+./merge.sh: line 8: /merge.14: Permission denied
+Working on Chr: 15
+./merge.sh: line 8: /merge.15: Permission denied
+Working on Chr: 16
+./merge.sh: line 8: /merge.16: Permission denied
+Working on Chr: 17
+./merge.sh: line 8: /merge.17: Permission denied
+Working on Chr: 18
+./merge.sh: line 8: /merge.18: Permission denied
+Working on Chr: 19
+./merge.sh: line 8: /merge.19: Permission denied
+Working on Chr: 20
+./merge.sh: line 8: /merge.20: Permission denied
+Working on Chr: 21
+./merge.sh: line 8: /merge.21: Permission denied
+Working on Chr: 22
+./merge.sh: line 8: /merge.22: Permission denied
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 1 -mindepth 1 -type d`'
++ '[' -d /results/plugins/sanefalcon/sanefalcontrain/d ']'
++ ./merge.sh /results/plugins/sanefalcon/sanefalcontrain/d
+./merge.sh: line 2: greadlink: command not found
+Working on Chr: 1
+./merge.sh: line 8: /merge.1: Permission denied
+Working on Chr: 2
+./merge.sh: line 8: /merge.2: Permission denied
+Working on Chr: 3
+./merge.sh: line 8: /merge.3: Permission denied
+Working on Chr: 4
+./merge.sh: line 8: /merge.4: Permission denied
+Working on Chr: 5
+./merge.sh: line 8: /merge.5: Permission denied
+Working on Chr: 6
+./merge.sh: line 8: /merge.6: Permission denied
+Working on Chr: 7
+./merge.sh: line 8: /merge.7: Permission denied
+Working on Chr: 8
+./merge.sh: line 8: /merge.8: Permission denied
+Working on Chr: 9
+./merge.sh: line 8: /merge.9: Permission denied
+Working on Chr: 10
+./merge.sh: line 8: /merge.10: Permission denied
+Working on Chr: 11
+./merge.sh: line 8: /merge.11: Permission denied
+Working on Chr: 12
+./merge.sh: line 8: /merge.12: Permission denied
+Working on Chr: 13
+./merge.sh: line 8: /merge.13: Permission denied
+Working on Chr: 14
+./merge.sh: line 8: /merge.14: Permission denied
+Working on Chr: 15
+./merge.sh: line 8: /merge.15: Permission denied
+Working on Chr: 16
+./merge.sh: line 8: /merge.16: Permission denied
+Working on Chr: 17
+./merge.sh: line 8: /merge.17: Permission denied
+Working on Chr: 18
+./merge.sh: line 8: /merge.18: Permission denied
+Working on Chr: 19
+./merge.sh: line 8: /merge.19: Permission denied
+Working on Chr: 20
+./merge.sh: line 8: /merge.20: Permission denied
+Working on Chr: 21
+./merge.sh: line 8: /merge.21: Permission denied
+Working on Chr: 22
+./merge.sh: line 8: /merge.22: Permission denied
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 1 -mindepth 1 -type d`'
++ '[' -d /results/plugins/sanefalcon/sanefalcontrain/f ']'
++ ./merge.sh /results/plugins/sanefalcon/sanefalcontrain/f
+./merge.sh: line 2: greadlink: command not found
+Working on Chr: 1
+./merge.sh: line 8: /merge.1: Permission denied
+Working on Chr: 2
+./merge.sh: line 8: /merge.2: Permission denied
+Working on Chr: 3
+./merge.sh: line 8: /merge.3: Permission denied
+Working on Chr: 4
+./merge.sh: line 8: /merge.4: Permission denied
+Working on Chr: 5
+./merge.sh: line 8: /merge.5: Permission denied
+Working on Chr: 6
+./merge.sh: line 8: /merge.6: Permission denied
+Working on Chr: 7
+./merge.sh: line 8: /merge.7: Permission denied
+Working on Chr: 8
+./merge.sh: line 8: /merge.8: Permission denied
+Working on Chr: 9
+./merge.sh: line 8: /merge.9: Permission denied
+Working on Chr: 10
+./merge.sh: line 8: /merge.10: Permission denied
+Working on Chr: 11
+./merge.sh: line 8: /merge.11: Permission denied
+Working on Chr: 12
+./merge.sh: line 8: /merge.12: Permission denied
+Working on Chr: 13
+./merge.sh: line 8: /merge.13: Permission denied
+Working on Chr: 14
+./merge.sh: line 8: /merge.14: Permission denied
+Working on Chr: 15
+./merge.sh: line 8: /merge.15: Permission denied
+Working on Chr: 16
+./merge.sh: line 8: /merge.16: Permission denied
+Working on Chr: 17
+./merge.sh: line 8: /merge.17: Permission denied
+Working on Chr: 18
+./merge.sh: line 8: /merge.18: Permission denied
+Working on Chr: 19
+./merge.sh: line 8: /merge.19: Permission denied
+Working on Chr: 20
+./merge.sh: line 8: /merge.20: Permission denied
+Working on Chr: 21
+./merge.sh: line 8: /merge.21: Permission denied
+Working on Chr: 22
+./merge.sh: line 8: /merge.22: Permission denied
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 1 -mindepth 1 -type d`'
++ '[' -d /results/plugins/sanefalcon/sanefalcontrain/g ']'
++ ./merge.sh /results/plugins/sanefalcon/sanefalcontrain/g
+./merge.sh: line 2: greadlink: command not found
+Working on Chr: 1
+./merge.sh: line 8: /merge.1: Permission denied
+Working on Chr: 2
+./merge.sh: line 8: /merge.2: Permission denied
+Working on Chr: 3
+./merge.sh: line 8: /merge.3: Permission denied
+Working on Chr: 4
+./merge.sh: line 8: /merge.4: Permission denied
+Working on Chr: 5
+./merge.sh: line 8: /merge.5: Permission denied
+Working on Chr: 6
+./merge.sh: line 8: /merge.6: Permission denied
+Working on Chr: 7
+./merge.sh: line 8: /merge.7: Permission denied
+Working on Chr: 8
+./merge.sh: line 8: /merge.8: Permission denied
+Working on Chr: 9
+./merge.sh: line 8: /merge.9: Permission denied
+Working on Chr: 10
+./merge.sh: line 8: /merge.10: Permission denied
+Working on Chr: 11
+./merge.sh: line 8: /merge.11: Permission denied
+Working on Chr: 12
+./merge.sh: line 8: /merge.12: Permission denied
+Working on Chr: 13
+./merge.sh: line 8: /merge.13: Permission denied
+Working on Chr: 14
+./merge.sh: line 8: /merge.14: Permission denied
+Working on Chr: 15
+./merge.sh: line 8: /merge.15: Permission denied
+Working on Chr: 16
+./merge.sh: line 8: /merge.16: Permission denied
+Working on Chr: 17
+./merge.sh: line 8: /merge.17: Permission denied
+Working on Chr: 18
+./merge.sh: line 8: /merge.18: Permission denied
+Working on Chr: 19
+./merge.sh: line 8: /merge.19: Permission denied
+Working on Chr: 20
+./merge.sh: line 8: /merge.20: Permission denied
+Working on Chr: 21
+./merge.sh: line 8: /merge.21: Permission denied
+Working on Chr: 22
+./merge.sh: line 8: /merge.22: Permission denied
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 1 -mindepth 1 -type d`'
++ '[' -d /results/plugins/sanefalcon/sanefalcontrain/e ']'
++ ./merge.sh /results/plugins/sanefalcon/sanefalcontrain/e
+./merge.sh: line 2: greadlink: command not found
+Working on Chr: 1
+./merge.sh: line 8: /merge.1: Permission denied
+Working on Chr: 2
+./merge.sh: line 8: /merge.2: Permission denied
+Working on Chr: 3
+./merge.sh: line 8: /merge.3: Permission denied
+Working on Chr: 4
+./merge.sh: line 8: /merge.4: Permission denied
+Working on Chr: 5
+./merge.sh: line 8: /merge.5: Permission denied
+Working on Chr: 6
+./merge.sh: line 8: /merge.6: Permission denied
+Working on Chr: 7
+./merge.sh: line 8: /merge.7: Permission denied
+Working on Chr: 8
+./merge.sh: line 8: /merge.8: Permission denied
+Working on Chr: 9
+./merge.sh: line 8: /merge.9: Permission denied
+Working on Chr: 10
+./merge.sh: line 8: /merge.10: Permission denied
+Working on Chr: 11
+./merge.sh: line 8: /merge.11: Permission denied
+Working on Chr: 12
+./merge.sh: line 8: /merge.12: Permission denied
+Working on Chr: 13
+./merge.sh: line 8: /merge.13: Permission denied
+Working on Chr: 14
+./merge.sh: line 8: /merge.14: Permission denied
+Working on Chr: 15
+./merge.sh: line 8: /merge.15: Permission denied
+Working on Chr: 16
+./merge.sh: line 8: /merge.16: Permission denied
+Working on Chr: 17
+./merge.sh: line 8: /merge.17: Permission denied
+Working on Chr: 18
+./merge.sh: line 8: /merge.18: Permission denied
+Working on Chr: 19
+./merge.sh: line 8: /merge.19: Permission denied
+Working on Chr: 20
+./merge.sh: line 8: /merge.20: Permission denied
+Working on Chr: 21
+./merge.sh: line 8: /merge.21: Permission denied
+Working on Chr: 22
+./merge.sh: line 8: /merge.22: Permission denied
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 1 -mindepth 1 -type d`'
++ '[' -d /results/plugins/sanefalcon/sanefalcontrain/i ']'
++ ./merge.sh /results/plugins/sanefalcon/sanefalcontrain/i
+./merge.sh: line 2: greadlink: command not found
+Working on Chr: 1
+./merge.sh: line 8: /merge.1: Permission denied
+Working on Chr: 2
+./merge.sh: line 8: /merge.2: Permission denied
+Working on Chr: 3
+./merge.sh: line 8: /merge.3: Permission denied
+Working on Chr: 4
+./merge.sh: line 8: /merge.4: Permission denied
+Working on Chr: 5
+./merge.sh: line 8: /merge.5: Permission denied
+Working on Chr: 6
+./merge.sh: line 8: /merge.6: Permission denied
+Working on Chr: 7
+./merge.sh: line 8: /merge.7: Permission denied
+Working on Chr: 8
+./merge.sh: line 8: /merge.8: Permission denied
+Working on Chr: 9
+./merge.sh: line 8: /merge.9: Permission denied
+Working on Chr: 10
+./merge.sh: line 8: /merge.10: Permission denied
+Working on Chr: 11
+./merge.sh: line 8: /merge.11: Permission denied
+Working on Chr: 12
+./merge.sh: line 8: /merge.12: Permission denied
+Working on Chr: 13
+./merge.sh: line 8: /merge.13: Permission denied
+Working on Chr: 14
+./merge.sh: line 8: /merge.14: Permission denied
+Working on Chr: 15
+./merge.sh: line 8: /merge.15: Permission denied
+Working on Chr: 16
+./merge.sh: line 8: /merge.16: Permission denied
+Working on Chr: 17
+./merge.sh: line 8: /merge.17: Permission denied
+Working on Chr: 18
+./merge.sh: line 8: /merge.18: Permission denied
+Working on Chr: 19
+./merge.sh: line 8: /merge.19: Permission denied
+Working on Chr: 20
+./merge.sh: line 8: /merge.20: Permission denied
+Working on Chr: 21
+./merge.sh: line 8: /merge.21: Permission denied
+Working on Chr: 22
+./merge.sh: line 8: /merge.22: Permission denied
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 1 -mindepth 1 -type d`'
++ '[' -d /results/plugins/sanefalcon/sanefalcontrain/b ']'
++ ./merge.sh /results/plugins/sanefalcon/sanefalcontrain/b
+./merge.sh: line 2: greadlink: command not found
+Working on Chr: 1
+./merge.sh: line 8: /merge.1: Permission denied
+Working on Chr: 2
+./merge.sh: line 8: /merge.2: Permission denied
+Working on Chr: 3
+./merge.sh: line 8: /merge.3: Permission denied
+Working on Chr: 4
+./merge.sh: line 8: /merge.4: Permission denied
+Working on Chr: 5
+./merge.sh: line 8: /merge.5: Permission denied
+Working on Chr: 6
+./merge.sh: line 8: /merge.6: Permission denied
+Working on Chr: 7
+./merge.sh: line 8: /merge.7: Permission denied
+Working on Chr: 8
+./merge.sh: line 8: /merge.8: Permission denied
+Working on Chr: 9
+./merge.sh: line 8: /merge.9: Permission denied
+Working on Chr: 10
+./merge.sh: line 8: /merge.10: Permission denied
+Working on Chr: 11
+./merge.sh: line 8: /merge.11: Permission denied
+Working on Chr: 12
+./merge.sh: line 8: /merge.12: Permission denied
+Working on Chr: 13
+./merge.sh: line 8: /merge.13: Permission denied
+Working on Chr: 14
+./merge.sh: line 8: /merge.14: Permission denied
+Working on Chr: 15
+./merge.sh: line 8: /merge.15: Permission denied
+Working on Chr: 16
+./merge.sh: line 8: /merge.16: Permission denied
+Working on Chr: 17
+./merge.sh: line 8: /merge.17: Permission denied
+Working on Chr: 18
+./merge.sh: line 8: /merge.18: Permission denied
+Working on Chr: 19
+./merge.sh: line 8: /merge.19: Permission denied
+Working on Chr: 20
+./merge.sh: line 8: /merge.20: Permission denied
+Working on Chr: 21
+./merge.sh: line 8: /merge.21: Permission denied
+Working on Chr: 22
+./merge.sh: line 8: /merge.22: Permission denied
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 1 -mindepth 1 -type d`'
++ '[' -d /results/plugins/sanefalcon/sanefalcontrain/c ']'
++ ./merge.sh /results/plugins/sanefalcon/sanefalcontrain/c
+./merge.sh: line 2: greadlink: command not found
+Working on Chr: 1
+./merge.sh: line 8: /merge.1: Permission denied
+Working on Chr: 2
+./merge.sh: line 8: /merge.2: Permission denied
+Working on Chr: 3
+./merge.sh: line 8: /merge.3: Permission denied
+Working on Chr: 4
+./merge.sh: line 8: /merge.4: Permission denied
+Working on Chr: 5
+./merge.sh: line 8: /merge.5: Permission denied
+Working on Chr: 6
+./merge.sh: line 8: /merge.6: Permission denied
+Working on Chr: 7
+./merge.sh: line 8: /merge.7: Permission denied
+Working on Chr: 8
+./merge.sh: line 8: /merge.8: Permission denied
+Working on Chr: 9
+./merge.sh: line 8: /merge.9: Permission denied
+Working on Chr: 10
+./merge.sh: line 8: /merge.10: Permission denied
+Working on Chr: 11
+./merge.sh: line 8: /merge.11: Permission denied
+Working on Chr: 12
+./merge.sh: line 8: /merge.12: Permission denied
+Working on Chr: 13
+./merge.sh: line 8: /merge.13: Permission denied
+Working on Chr: 14
+./merge.sh: line 8: /merge.14: Permission denied
+Working on Chr: 15
+./merge.sh: line 8: /merge.15: Permission denied
+Working on Chr: 16
+./merge.sh: line 8: /merge.16: Permission denied
+Working on Chr: 17
+./merge.sh: line 8: /merge.17: Permission denied
+Working on Chr: 18
+./merge.sh: line 8: /merge.18: Permission denied
+Working on Chr: 19
+./merge.sh: line 8: /merge.19: Permission denied
+Working on Chr: 20
+./merge.sh: line 8: /merge.20: Permission denied
+Working on Chr: 21
+./merge.sh: line 8: /merge.21: Permission denied
+Working on Chr: 22
+./merge.sh: line 8: /merge.22: Permission denied
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 1 -mindepth 1 -type d`'
++ '[' -d /results/plugins/sanefalcon/sanefalcontrain/a ']'
++ ./merge.sh /results/plugins/sanefalcon/sanefalcontrain/a
+./merge.sh: line 2: greadlink: command not found
+Working on Chr: 1
+./merge.sh: line 8: /merge.1: Permission denied
+Working on Chr: 2
+./merge.sh: line 8: /merge.2: Permission denied
+Working on Chr: 3
+./merge.sh: line 8: /merge.3: Permission denied
+Working on Chr: 4
+./merge.sh: line 8: /merge.4: Permission denied
+Working on Chr: 5
+./merge.sh: line 8: /merge.5: Permission denied
+Working on Chr: 6
+./merge.sh: line 8: /merge.6: Permission denied
+Working on Chr: 7
+./merge.sh: line 8: /merge.7: Permission denied
+Working on Chr: 8
+./merge.sh: line 8: /merge.8: Permission denied
+Working on Chr: 9
+./merge.sh: line 8: /merge.9: Permission denied
+Working on Chr: 10
+./merge.sh: line 8: /merge.10: Permission denied
+Working on Chr: 11
+./merge.sh: line 8: /merge.11: Permission denied
+Working on Chr: 12
+./merge.sh: line 8: /merge.12: Permission denied
+Working on Chr: 13
+./merge.sh: line 8: /merge.13: Permission denied
+Working on Chr: 14
+./merge.sh: line 8: /merge.14: Permission denied
+Working on Chr: 15
+./merge.sh: line 8: /merge.15: Permission denied
+Working on Chr: 16
+./merge.sh: line 8: /merge.16: Permission denied
+Working on Chr: 17
+./merge.sh: line 8: /merge.17: Permission denied
+Working on Chr: 18
+./merge.sh: line 8: /merge.18: Permission denied
+Working on Chr: 19
+./merge.sh: line 8: /merge.19: Permission denied
+Working on Chr: 20
+./merge.sh: line 8: /merge.20: Permission denied
+Working on Chr: 21
+./merge.sh: line 8: /merge.21: Permission denied
+Working on Chr: 22
+./merge.sh: line 8: /merge.22: Permission denied
++ echo Done
+Done
++ BAMFOLDER=/results/analysis/output/Home
++ BAMLINKFOLDER_BASE=/results/plugins/sanefalcon/sanefalcontrain
+++ /usr/bin/python3 ./prepare_folders.py /results/analysis/output/Home /results/plugins/sanefalcon/sanefalcontrain
+Traceback (most recent call last):
+  File "./prepare_folders.py", line 92, in <module>
+    prepare_train_folder(bamdir, traindir)
+  File "./prepare_folders.py", line 77, in prepare_train_folder
+    os.symlink(fname, os.path.join(runpath, fname.split('/')[-1]))
+FileExistsError: [Errno 17] File exists: '/results/analysis/output/Home/Auto_user_PROTON-156-DPNI_300718_chip2_298_375/IonXpress_075_rawlib.bam' -> '/results/plugins/sanefalcon/sanefalcontrain/i/Auto_user_PROTON-156-DPNI_300718_chip2_298_375/IonXpress_075_rawlib.bam'
++ TRAINFOLDER=
++ echo
+
++ [[ -z '' ]]
++ echo 'No trainfolder found. Aborting'
+No trainfolder found. Aborting
++ mergeSamples
+++ find /results/plugins/sanefalcon/sanefalcontrain -maxdepth 1 -mindepth 1 -type d
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 1 -mindepth 1 -type d`'
++ '[' -d /results/plugins/sanefalcon/sanefalcontrain/h ']'
++ ./merge.sh /results/plugins/sanefalcon/sanefalcontrain/h
+Working on Chr: 1
+Working on Chr: 2
+Working on Chr: 3
+Working on Chr: 4
+Working on Chr: 5
+Working on Chr: 6
+Working on Chr: 7
+Working on Chr: 8
+Working on Chr: 9
+Working on Chr: 10
+Working on Chr: 11
+Working on Chr: 12
+Working on Chr: 13
+Working on Chr: 14
+Working on Chr: 15
+Working on Chr: 16
+Working on Chr: 17
+Working on Chr: 18
+Working on Chr: 19
+Working on Chr: 20
+Working on Chr: 21
+Working on Chr: 22
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 1 -mindepth 1 -type d`'
++ '[' -d /results/plugins/sanefalcon/sanefalcontrain/d ']'
++ ./merge.sh /results/plugins/sanefalcon/sanefalcontrain/d
+Working on Chr: 1
+Working on Chr: 2
+Working on Chr: 3
+Working on Chr: 4
+Working on Chr: 5
+Working on Chr: 6
+Working on Chr: 7
+Working on Chr: 8
+Working on Chr: 9
+Working on Chr: 10
+Working on Chr: 11
+Working on Chr: 12
+Working on Chr: 13
+Working on Chr: 14
+Working on Chr: 15
+Working on Chr: 16
+Working on Chr: 17
+Working on Chr: 18
+Working on Chr: 19
+Working on Chr: 20
+Working on Chr: 21
+Working on Chr: 22
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 1 -mindepth 1 -type d`'
++ '[' -d /results/plugins/sanefalcon/sanefalcontrain/f ']'
++ ./merge.sh /results/plugins/sanefalcon/sanefalcontrain/f
+Working on Chr: 1
+Working on Chr: 2
+Working on Chr: 3
+Working on Chr: 4
+Working on Chr: 5
+Working on Chr: 6
+Working on Chr: 7
+Working on Chr: 8
+Working on Chr: 9
+Working on Chr: 10
+Working on Chr: 11
+Working on Chr: 12
+Working on Chr: 13
+Working on Chr: 14
+Working on Chr: 15
+Working on Chr: 16
+Working on Chr: 17
+Working on Chr: 18
+Working on Chr: 19
+Working on Chr: 20
+Working on Chr: 21
+Working on Chr: 22
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 1 -mindepth 1 -type d`'
++ '[' -d /results/plugins/sanefalcon/sanefalcontrain/g ']'
++ ./merge.sh /results/plugins/sanefalcon/sanefalcontrain/g
+Working on Chr: 1
+Working on Chr: 2
+Working on Chr: 3
+Working on Chr: 4
+Working on Chr: 5
+Working on Chr: 6
+Working on Chr: 7
+Working on Chr: 8
+Working on Chr: 9
+Working on Chr: 10
+Working on Chr: 11
+Working on Chr: 12
+Working on Chr: 13
+Working on Chr: 14
+Working on Chr: 15
+Working on Chr: 16
+Working on Chr: 17
+Working on Chr: 18
+Working on Chr: 19
+Working on Chr: 20
+Working on Chr: 21
+Working on Chr: 22
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 1 -mindepth 1 -type d`'
++ '[' -d /results/plugins/sanefalcon/sanefalcontrain/e ']'
++ ./merge.sh /results/plugins/sanefalcon/sanefalcontrain/e
+Working on Chr: 1
+Working on Chr: 2
+Working on Chr: 3
+Working on Chr: 4
+Working on Chr: 5
+Working on Chr: 6
+Working on Chr: 7
+Working on Chr: 8
+Working on Chr: 9
+Working on Chr: 10
+Working on Chr: 11
+Working on Chr: 12
+Working on Chr: 13
+Working on Chr: 14
+Working on Chr: 15
+Working on Chr: 16
+Working on Chr: 17
+Working on Chr: 18
+Working on Chr: 19
+Working on Chr: 20
+Working on Chr: 21
+Working on Chr: 22
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 1 -mindepth 1 -type d`'
++ '[' -d /results/plugins/sanefalcon/sanefalcontrain/i ']'
++ ./merge.sh /results/plugins/sanefalcon/sanefalcontrain/i
+Working on Chr: 1
+Working on Chr: 2
+Working on Chr: 3
+Working on Chr: 4
+Working on Chr: 5
+Working on Chr: 6
+Working on Chr: 7
+Working on Chr: 8
+Working on Chr: 9
+Working on Chr: 10
+Working on Chr: 11
+Working on Chr: 12
+Working on Chr: 13
+Working on Chr: 14
+Working on Chr: 15
+Working on Chr: 16
+Working on Chr: 17
+Working on Chr: 18
+Working on Chr: 19
+Working on Chr: 20
+Working on Chr: 21
+Working on Chr: 22
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 1 -mindepth 1 -type d`'
++ '[' -d /results/plugins/sanefalcon/sanefalcontrain/b ']'
++ ./merge.sh /results/plugins/sanefalcon/sanefalcontrain/b
+Working on Chr: 1
+Working on Chr: 2
+Working on Chr: 3
+Working on Chr: 4
+Working on Chr: 5
+Working on Chr: 6
+Working on Chr: 7
+Working on Chr: 8
+Working on Chr: 9
+Working on Chr: 10
+Working on Chr: 11
+Working on Chr: 12
+Working on Chr: 13
+Working on Chr: 14
+Working on Chr: 15
+Working on Chr: 16
+Working on Chr: 17
+Working on Chr: 18
+Working on Chr: 19
+Working on Chr: 20
+Working on Chr: 21
+Working on Chr: 22
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 1 -mindepth 1 -type d`'
++ '[' -d /results/plugins/sanefalcon/sanefalcontrain/c ']'
++ ./merge.sh /results/plugins/sanefalcon/sanefalcontrain/c
+Working on Chr: 1
+Working on Chr: 2
+Working on Chr: 3
+Working on Chr: 4
+Working on Chr: 5
+Working on Chr: 6
+Working on Chr: 7
+Working on Chr: 8
+Working on Chr: 9
+Working on Chr: 10
+Working on Chr: 11
+Working on Chr: 12
+Working on Chr: 13
+Working on Chr: 14
+Working on Chr: 15
+Working on Chr: 16
+Working on Chr: 17
+Working on Chr: 18
+Working on Chr: 19
+Working on Chr: 20
+Working on Chr: 21
+Working on Chr: 22
++ for subdir in '`find $BAMLINKFOLDER_BASE -maxdepth 1 -mindepth 1 -type d`'
++ '[' -d /results/plugins/sanefalcon/sanefalcontrain/a ']'
++ ./merge.sh /results/plugins/sanefalcon/sanefalcontrain/a
+Working on Chr: 1
+Working on Chr: 2
+Working on Chr: 3
+Working on Chr: 4
+Working on Chr: 5
+Working on Chr: 6
+Working on Chr: 7
+Working on Chr: 8
+Working on Chr: 9
+Working on Chr: 10
+Working on Chr: 11
+Working on Chr: 12
+Working on Chr: 13
+Working on Chr: 14
+Working on Chr: 15
+Working on Chr: 16
+Working on Chr: 17
+Working on Chr: 18
+Working on Chr: 19
+Working on Chr: 20
+Working on Chr: 21
+Working on Chr: 22
++ echo 'passed mergeSamples'
+passed mergeSamples
++ echo Done
+Done
