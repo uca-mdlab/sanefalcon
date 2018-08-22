@@ -3,20 +3,21 @@
 set -x
 
 BAMFOLDER=/results/analysis/output/Home
-BAMLINKFOLDER_BASE=/tmp/sanefalcontrain
+#BAMLINKFOLDER_BASE=/tmp/sanefalcontrain
+BAMLINKFOLDER_BASE=/results/plugins/sanefalcon/sanefalcontrain
 
 # preparation step
 TRAINFOLDER=$(/usr/bin/python3 ./prepare_folders.py $BAMFOLDER $BAMLINKFOLDER_BASE)
 
 if [[ -z $TRAINFOLDER ]]; then
     echo "No trainfolder found. Aborting"
-    exit 1
+    #exit 1
 fi
 
 # function definitions: 1 function per step
 function prepSamples(){
     for subdir in `find $BAMLINKFOLDER_BASE -maxdepth 2 -mindepth 2 -type d`; do
-        ./prepSamples.sh $subdir $subdir
+        ./prepSamples.sh $subdir $subdir & #add '&' to continue
     done
 }
 
@@ -41,8 +42,8 @@ function mergeAntiSubs(){
 }
 
 # all logic steps go there
-prepSamples && echo "passed prepSamples"
+#prepSamples && echo "passed prepSamples"
 #mergeSamples && echo "passed mergeSamples"
 #mergeSubs && echo "passed mergeSubs"
-#mergeAntiSubs && echo "passed mergeAntiSubs"
+mergeAntiSubs && echo "passed mergeAntiSubs"
 echo "Done"
