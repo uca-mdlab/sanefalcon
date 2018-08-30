@@ -5,6 +5,7 @@ set -x
 BAMFOLDER=/results/analysis/output/Home
 #BAMLINKFOLDER_BASE=/tmp/sanefalcontrain
 BAMLINKFOLDER_BASE=/results/plugins/sanefalcon/sanefalcontrain
+OUTPUT_FOLDER=/home/ionadmin/tmp_david/sanefalcon/getprofile_nucleosome1
 
 # preparation step
 TRAINFOLDER=$(/usr/bin/python3 ./prepare_folders.py $BAMFOLDER $BAMLINKFOLDER_BASE)
@@ -41,9 +42,34 @@ function mergeAntiSubs(){
     done
 }
 
+function nuclDetectorAnti(){
+    for subdir in `find $BAMLINKFOLDER_BASE -maxdepth 1 -mindepth 1 -type d`; do
+        if [ -d ${subdir} ]; then
+            ./nuclDetectorAnti.sh $subdir   # a b c d ...
+        fi
+    done
+}
+
+function getProfile(){
+    for subdir in `find $BAMLINKFOLDER_BASE -maxdepth 1 -mindepth 1 -type d`; do
+        if [ -d ${subdir} ]; then
+            ./nuclDetectorAnti.sh $subdir   # a b c d ...
+        fi
+    done
+}
+
+#./getProfile.sh $BAMLINKFOLDER_BASE $subdir /home/ionadmin/tmp_david/sanefalcon/getprofile_nucleosome1
+
+
+
 # all logic steps go there
-#prepSamples && echo "passed prepSamples"
-#mergeSamples && echo "passed mergeSamples"
-#mergeSubs && echo "passed mergeSubs"
+prepSamples && echo "passed prepSamples"
+wait
+mergeSamples && echo "passed mergeSamples"
+wait
+mergeSubs && echo "passed mergeSubs"
+wait
 mergeAntiSubs && echo "passed mergeAntiSubs"
+wait
+nuclDetectorAnti && echo "passed mergeAntiSubs"
 echo "Done"

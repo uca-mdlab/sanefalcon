@@ -59,6 +59,7 @@ def prepare_train_folder(bamdir, traindir):
 
     for batch_name, batch_list in batches.items():
         workingdir = os.path.join(traindir, batch_name)
+        print(workingdir, "workingdir")
         try:
             os.mkdir(workingdir)
             logger.debug("Created folder: {}".format(workingdir))
@@ -75,7 +76,7 @@ def prepare_train_folder(bamdir, traindir):
                 runpath = os.path.join(workingdir, run)
                 if not os.path.isdir(runpath):
                     os.mkdir(runpath)
-                os.symlink(fname, os.path.join(runpath, fname.split('/')[-1]))
+                os.symlink(fname, os.path.join(runpath,fname.split('/')[-2]+'_'+ fname.split('/')[-1]))
         logger.info("Batches created with symlinks")
 
 
@@ -91,7 +92,7 @@ if __name__ == '__main__':
     traindir = args.traindir
 
     # UNCOMMENT for complete run
-    # prepare_train_folder(bamdir, traindir)
+    prepare_train_folder(bamdir, traindir)
     logger.warning("Skipping prepare_folder.py")
     print(traindir)
 
