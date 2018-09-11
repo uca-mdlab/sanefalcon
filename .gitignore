@@ -4,3 +4,6 @@
 .nohup.out
 .__pycache__/
 sanefalcon.log
+.temporary/
+.temporary*/
+.exportToHTML/

@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 export SCRIPT_NUCDEC=~/sanefalcon/nuclDetector.py
 
 export SCRIPT_PYTHON=/illumina/diagnostics/bin/Python-2.7.3/bin/python
