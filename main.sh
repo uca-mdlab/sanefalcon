@@ -8,7 +8,7 @@ BAMLINKFOLDER_BASE=/results/plugins/sanefalcon/sanefalcontrain
 OUTPUT_FOLDER=/home/ionadmin/tmp_david/sanefalcon/getprofile_nucleosome1
 
 # preparation step
-TRAINFOLDER=$(/usr/bin/python3 ./prepare_folders.py $BAMFOLDER $BAMLINKFOLDER_BASE)
+#TRAINFOLDER=$(/usr/bin/python3 ./prepare_folders.py $BAMFOLDER $BAMLINKFOLDER_BASE)
 
 if [[ -z $TRAINFOLDER ]]; then
     echo "No trainfolder found. Aborting"
@@ -53,7 +53,7 @@ function nuclDetectorAnti(){
 function getProfile(){
     for subdir in `find $BAMLINKFOLDER_BASE -maxdepth 1 -mindepth 1 -type d`; do
         if [ -d ${subdir} ]; then
-            ./nuclDetectorAnti.sh $subdir   # a b c d ...
+            ./getProfile.sh $BAMLINKFOLDER_BASE $subdir /home/ionadmin/tmp_david/sanefalcon/getprofile_nucleosome1  # a b c d ...
         fi
     done
 }
@@ -63,13 +63,14 @@ function getProfile(){
 
 
 # all logic steps go there
-prepSamples && echo "passed prepSamples"
-wait
-mergeSamples && echo "passed mergeSamples"
-wait
-mergeSubs && echo "passed mergeSubs"
-wait
-mergeAntiSubs && echo "passed mergeAntiSubs"
-wait
-nuclDetectorAnti && echo "passed mergeAntiSubs"
+#prepSamples && echo "passed prepSamples"
+#wait
+#mergeSamples && echo "passed mergeSamples"
+#wait
+#mergeSubs && echo "passed mergeSubs"
+#wait
+#mergeAntiSubs && echo "passed mergeAntiSubs"
+#wait
+#nuclDetectorAnti && echo "passed mergeAntiSubs"
+getProfile && echo "passed getProfile"
 echo "Done"

@@ -16,7 +16,8 @@ for SAMPLE in `find $INDIR -name "*.1.start.fwd"`
 do
 	export SIMPLE=${SAMPLE//.1.start.fwd/}
 	export SIMPLER=`echo $SIMPLE | rev | cut -d"/" -f1 | rev`
-	
+	#echo $SIMPLE "THIS IS SIMPLE"
+        #echo $SIMPLER "THIS IS SIMPLER"
 	# qsub -t 1-22:1 -V $SCRIPT_GETPROSUB # original command, not working on this server...
 	for CHROM in $(seq 1 22)
 	do
