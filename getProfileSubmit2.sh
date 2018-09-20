@@ -2,8 +2,8 @@
 
 #echo $CHROM
 
-NUCLDIR=
-OUTDIR=
+#NUCLDIR=
+#OUTDIR=
 
 
 for CHROM in $(seq 1 22)
