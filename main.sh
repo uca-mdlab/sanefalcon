@@ -50,15 +50,15 @@ function nuclDetectorAnti(){
     done
 }
 
-function getProfile(){
-    for subdir in `find $BAMLINKFOLDER_BASE -maxdepth 1 -mindepth 1 -type d`; do
-        if [ -d ${subdir} ]; then
-            ./nuclDetectorAnti.sh $subdir   # a b c d ...
-        fi
-    done
-}
+#function getProfile(){
+#    for subdir in `find $BAMLINKFOLDER_BASE -maxdepth 1 -mindepth 1 -type d`; do
+#        if [ -d ${subdir} ]; then
+#            ./nuclDetectorAnti.sh $subdir   # a b c d ...
+#        fi
+#    done
+#}
 
-#./getProfile.sh $BAMLINKFOLDER_BASE $subdir /home/ionadmin/tmp_david/sanefalcon/getprofile_nucleosome1
+
 
 
 
@@ -71,5 +71,9 @@ mergeSubs && echo "passed mergeSubs"
 wait
 mergeAntiSubs && echo "passed mergeAntiSubs"
 wait
-nuclDetectorAnti && echo "passed mergeAntiSubs"
+nuclDetectorAnti && echo "passed nuclDetectorAnti"
+wait
+#./getProfile.sh $BAMLINKFOLDER_BASE $subdir /home/ionadmin/tmp_david/sanefalcon/getprofile_nucleosome1
+#./getProfile.sh /results/plugins/sanefalcon/sanefalcontrain /results/plugins/sanefalcon/sanefalcontrain/a /home/ionadmin/tmp_david/sanefalcon/getprofile_nucleosome2
+/results/plugins/sanefalcon/sanefalcontrain/a
 echo "Done"
