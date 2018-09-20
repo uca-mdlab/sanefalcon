@@ -50,6 +50,7 @@ function nuclDetectorAnti(){
     done
 }
 
+<<<<<<< HEAD
 function getProfile(){
     for subdir in `find $BAMLINKFOLDER_BASE -maxdepth 1 -mindepth 1 -type d`; do
         if [ -d ${subdir} ]; then
@@ -57,12 +58,22 @@ function getProfile(){
         fi
     done
 }
+=======
+#function getProfile(){
+#    for subdir in `find $BAMLINKFOLDER_BASE -maxdepth 1 -mindepth 1 -type d`; do
+#        if [ -d ${subdir} ]; then
+#            ./nuclDetectorAnti.sh $subdir   # a b c d ...
+#        fi
+#    done
+#}
 
-#./getProfile.sh $BAMLINKFOLDER_BASE $subdir /home/ionadmin/tmp_david/sanefalcon/getprofile_nucleosome1
+>>>>>>> d728833fdcec39de42c1ae6e74b2778ed4005065
+
 
 
 
 # all logic steps go there
+<<<<<<< HEAD
 #prepSamples && echo "passed prepSamples"
 #wait
 #mergeSamples && echo "passed mergeSamples"
@@ -73,4 +84,19 @@ function getProfile(){
 #wait
 #nuclDetectorAnti && echo "passed mergeAntiSubs"
 getProfile && echo "passed getProfile"
+=======
+prepSamples && echo "passed prepSamples"
+wait
+mergeSamples && echo "passed mergeSamples"
+wait
+mergeSubs && echo "passed mergeSubs"
+wait
+mergeAntiSubs && echo "passed mergeAntiSubs"
+wait
+nuclDetectorAnti && echo "passed nuclDetectorAnti"
+wait
+#./getProfile.sh $BAMLINKFOLDER_BASE $subdir /home/ionadmin/tmp_david/sanefalcon/getprofile_nucleosome1
+#./getProfile.sh /results/plugins/sanefalcon/sanefalcontrain /results/plugins/sanefalcon/sanefalcontrain/a /home/ionadmin/tmp_david/sanefalcon/getprofile_nucleosome2
+/results/plugins/sanefalcon/sanefalcontrain/a
+>>>>>>> d728833fdcec39de42c1ae6e74b2778ed4005065
 echo "Done"

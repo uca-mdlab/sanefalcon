@@ -1,6 +1,6 @@
 #$ -S /bin/bash
 export SCRIPT_GETPRO=getProfile.py
-export SCRIPT_GETPROSUB=/home/ionadmin/sanefalcon/getProfileSubmit.sh
+export SCRIPT_GETPROSUB=/home/ionadmin/sanefalcon/getProfileSubmit2.sh
 
 export SCRIPT_PYTHON=python
 
