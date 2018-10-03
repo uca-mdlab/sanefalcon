@@ -241,4 +241,5 @@ if __name__ == "__main__":
 
     num_cores = mp.cpu_count()
     with mp.Pool(num_cores) as pool:
-        print(pool.map(_process, input_list))
+        finished = pool.map(_process, input_list)
+        print(len(finished) == 22)
