@@ -169,6 +169,7 @@ def run_forward(chrom, outdir, fwd_file, nucl_ex_file):
     sumPeakRev = process_reverse(peaks, reads, ifwd_out)  # -> .ifwd
     return len(sumPeakFwd), len(sumPeakRev)
 
+
 def run_reverse(chrom, outdir, rev_file, nucl_ex_file):
     output_stubname = os.path.join(outdir, os.path.basename(rev_file) + '.{}'.format(chrom))
     lines, peaks, reads = load_data(nucl_ex_file, rev_file)
@@ -214,9 +215,16 @@ def process(chrom, dic, outdir):
     #     run_reverse(chrom, outdir, f, nucl_ex_file)
 
     logger.debug('Finished processing chrom {}'.format(chrom))
+    return chrom
+
+
+def _process(tup):
+    return process(*tup)
 
 
 if __name__ == "__main__":
+    import multiprocessing as mp
+
     train_folder = sys.argv[1]
     outfolder = sys.argv[2]
     logger.info('Starting on {}'.format(train_folder))
@@ -226,5 +234,11 @@ if __name__ == "__main__":
         logger.info('Created out folder {}'.format(outfolder))
     data = get_data(train_folder, outfolder)  # all the available data
 
-    for chrom, dic in data.items():
-        process(chrom, dic, outfolder)
+    # for chrom, dic in data.items():
+    #     process(chrom, dic, outfolder)
+
+    input_list = [(chrom, dic, outfolder) for chrom, dic in data.items()]
+
+    num_cores = mp.cpu_count()
+    with mp.Pool(num_cores) as pool:
+        print(pool.map(_process, input_list))
