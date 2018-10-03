@@ -220,6 +220,10 @@ if __name__ == "__main__":
     train_folder = sys.argv[1]
     outfolder = sys.argv[2]
     logger.info('Starting on {}'.format(train_folder))
+
+    if not os.path.isdir(outfolder):
+        os.makedirs(outfolder)
+        logger.info('Created out folder {}'.format(outfolder))
     data = get_data(train_folder, outfolder)  # all the available data
 
     for chrom, dic in data.items():
