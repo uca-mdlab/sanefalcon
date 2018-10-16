@@ -67,7 +67,7 @@ def process_forward(peaks, reads, outfile):
         thisPeak = [0. for x in range(maxDist)]
         while read <= peak:
             if read > peak - maxDist:
-                thisPeak[peak - read] += 1
+                thisPeak[peak - read] += 1   # FIXME I think it's here
             j += 1
             if j >= len(reads):
                 break
@@ -163,20 +163,37 @@ def get_data(train_folder, outfolder):
 def run_forward(chrom, outdir, fwd_file, nucl_ex_file):
     output_stubname = os.path.join(outdir, os.path.basename(fwd_file) + '.{}'.format(chrom))
     lines, peaks, reads = load_data(nucl_ex_file, fwd_file)
+    sumPeakFwd = []
+    sumPeakRev = []
     fwd_out = output_stubname + ".fwd"
-    sumPeakFwd = process_forward(peaks, reads, fwd_out)  # -> .fwd
+    try:
+        sumPeakFwd = process_forward(peaks, reads, fwd_out)  # -> .fwd
+    except IndexError:
+        logger.error("IndexError: .fwd: peaks {}, reads {}".format(len(peaks), len(reads)))
     ifwd_out = output_stubname + ".ifwd"
-    sumPeakRev = process_reverse(peaks, reads, ifwd_out)  # -> .ifwd
+    try:
+        sumPeakRev = process_reverse(peaks, reads, ifwd_out)  # -> .ifwd
+    except IndexError:
+        logger.error("IndexError: .ifwd: peaks {}, reads {}".format(len(peaks), len(reads)))
+
     return len(sumPeakFwd), len(sumPeakRev)
 
 
 def run_reverse(chrom, outdir, rev_file, nucl_ex_file):
     output_stubname = os.path.join(outdir, os.path.basename(rev_file) + '.{}'.format(chrom))
     lines, peaks, reads = load_data(nucl_ex_file, rev_file)
+    sumPeakFwd = []
+    sumPeakRev = []
     irev_out = output_stubname + ".irev"
-    sumPeakFwd = process_forward(peaks, reads, irev_out)  # -> .irev
+    try:
+        sumPeakFwd = process_forward(peaks, reads, irev_out)  # -> .irev
+    except IndexError:
+        logger.error("IndexError: .irev: peaks {}, reads {}".format(len(peaks), len(reads)))
     rev_out = output_stubname + ".rev"
-    sumPeakRev = process_reverse(peaks, reads, rev_out)  # -> .rev
+    try:
+        sumPeakRev = process_reverse(peaks, reads, rev_out)  # -> .rev
+    except IndexError:
+        logger.error("IndexError: .rev: peaks {}, reads {}".format(len(peaks), len(reads)))
     return len(sumPeakFwd), len(sumPeakRev)
 
 
