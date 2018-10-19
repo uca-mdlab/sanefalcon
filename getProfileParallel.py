@@ -133,7 +133,7 @@ def get_data(train_folder, outfolder):
     :return: a dictionary with all the data packed and organized for processing
     """
     nucl_files = [os.path.join(train_folder, f) for f in os.listdir(train_folder)
-                  if os.path.isfile(os.path.join(train_folder, f))]
+                  if os.path.isfile(os.path.join(train_folder, f)) and f.startswith("nucl_ex3")]
     logger.debug('Found {} nucl_files'.format(len(nucl_files)))
     if not os.path.isdir(outfolder):
         os.makedirs(outfolder)
@@ -257,6 +257,7 @@ if __name__ == "__main__":
     input_list = [(chrom, dic, outfolder) for chrom, dic in data.items()]
 
     num_cores = mp.cpu_count()
+    #num_cores = 2
     with mp.Pool(num_cores) as pool:
         finished = pool.map(_process, input_list)
         print(len(finished) == 22)
