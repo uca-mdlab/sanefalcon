@@ -3,7 +3,7 @@ import sys
 import logging
 import re
 import concurrent.futures
-
+import threading
 
 logger = logging.getLogger('getProfileParallel')
 logging.basicConfig(format='%(asctime)s - %(levelname)s:%(message)s',
@@ -54,7 +54,10 @@ def load_data(nucl_ex_file, fwd_rev_file):
 
 
 def process_forward(peaks, reads, outfile):
+    thread_name = threading.current_thread().name
+    before = len(peaks)  # just to be sure
     peaks.append([-1, 0])
+    logger.debug('{} (fwd append) id: {} (len += {})'.format(thread_name, id(peaks), len(peaks) - before))
 
     maxDist = 147
     sumPeak = [0. for _ in range(maxDist)]
@@ -62,6 +65,8 @@ def process_forward(peaks, reads, outfile):
     j = 0
     nuclHit = []
     for i, peakPair in enumerate(peaks):
+        if i == 0 or i == len(peaks) - 1:
+            logger.debug('{} (fwd enumerate id: {}) i: {} peakPair {}'.format(thread_name, id(peaks), i, peakPair))
         peak = peakPair[0]
         peakWeight = peakPair[1]
         thisPeak = [0. for x in range(maxDist)]
@@ -88,9 +93,12 @@ def process_forward(peaks, reads, outfile):
 
 
 def process_reverse(peaks, reads, outfile):
+    thread_name = threading.current_thread().name
     peaks.reverse()
     reads.reverse()
+    before = len(peaks)  # just to be sure
     peaks.append([-1, 0])
+    logger.debug('{} (rev append) id: {} (len += {})'.format(thread_name, id(peaks), len(peaks) - before))
 
     maxDist = 147
     sumPeak = [0. for _ in range(maxDist)]
@@ -99,6 +107,8 @@ def process_reverse(peaks, reads, outfile):
     nuclHit = []
 
     for i, peakPair in enumerate(peaks):
+        if i == 0 or i == len(peaks):
+            logger.debug('{} (rev enumerate id: {}) i: {} peakPair {}'.format(thread_name, id(peaks), i, peakPair))
         peak = peakPair[0]
         peakWeight = peakPair[1]
         thisPeak = [0. for x in range(maxDist)]
@@ -163,6 +173,7 @@ def get_data(train_folder, outfolder):
 def run_forward(chrom, outdir, fwd_file, nucl_ex_file):
     output_stubname = os.path.join(outdir, os.path.basename(fwd_file) + '.{}'.format(chrom))
     lines, peaks, reads = load_data(nucl_ex_file, fwd_file)
+    logger.debug('run_forward chrom {}-{}. {}/{}'.format(nucl_ex_file.split('.')[-1], os.path.basename(fwd_file), peaks[0], peaks[-1]))
     sumPeakFwd = []
     sumPeakRev = []
     fwd_out = output_stubname + ".fwd"
@@ -182,6 +193,7 @@ def run_forward(chrom, outdir, fwd_file, nucl_ex_file):
 def run_reverse(chrom, outdir, rev_file, nucl_ex_file):
     output_stubname = os.path.join(outdir, os.path.basename(rev_file) + '.{}'.format(chrom))
     lines, peaks, reads = load_data(nucl_ex_file, rev_file)
+    logger.debug('run_reverse chrom {}-{}. {}/{}'.format(nucl_ex_file.split('.')[-1], os.path.basename(rev_file), peaks[0], peaks[-1]))
     sumPeakFwd = []
     sumPeakRev = []
     irev_out = output_stubname + ".irev"
@@ -202,7 +214,7 @@ def process(chrom, dic, outdir):
     fwd_files = dic['fwd']
     rev_files = dic['rev']
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=5, thread_name_prefix='fwd') as executor:
         futures_run = {executor.submit(run_forward, chrom, outdir, f, nucl_ex_file): f for f in fwd_files}
         for future in concurrent.futures.as_completed(futures_run):
             lengths = futures_run[future]
@@ -213,7 +225,7 @@ def process(chrom, dic, outdir):
             else:
                 logger.info('[fwd] Got future: {}'.format(l_tup))
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=5, thread_name_prefix='rev') as executor:
         futures_run = {executor.submit(run_reverse, chrom, outdir, f, nucl_ex_file): f for f in rev_files}
         for future in concurrent.futures.as_completed(futures_run):
             lengths = futures_run[future]
@@ -223,13 +235,6 @@ def process(chrom, dic, outdir):
                 logger.error('[rev] Exception in {} - {}'.format(lengths, ex))
             else:
                 logger.info('[rev] Got future: {}'.format(l_tup))
-    # # process forward files
-    # for f in fwd_files:
-    #     run_forward(chrom, outdir, f, nucl_ex_file)
-    #
-    # # process reverse files
-    # for f in rev_files:
-    #     run_reverse(chrom, outdir, f, nucl_ex_file)
 
     logger.debug('Finished processing chrom {}'.format(chrom))
     return chrom
