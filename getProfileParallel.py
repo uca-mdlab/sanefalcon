@@ -134,7 +134,7 @@ def process_reverse(peaks, reads, outfile):
     return sumPeak
 
 
-def get_data(train_folder, outfolder):
+def get_data(train_folder, outfolder, nucl_stub):
     """
     Avoid calling multiple times the getProfileSubmit.sh script, as it loads all the data in memory.
 
@@ -143,7 +143,7 @@ def get_data(train_folder, outfolder):
     :return: a dictionary with all the data packed and organized for processing
     """
     nucl_files = [os.path.join(train_folder, f) for f in os.listdir(train_folder)
-                  if os.path.isfile(os.path.join(train_folder, f)) and f.startswith("nucl_ex3")]
+                  if os.path.isfile(os.path.join(train_folder, f)) and f.startswith(nucl_stub)]
     logger.debug('Found {} nucl_files'.format(len(nucl_files)))
     if not os.path.isdir(outfolder):
         os.makedirs(outfolder)
@@ -173,7 +173,7 @@ def get_data(train_folder, outfolder):
 def run_forward(chrom, outdir, fwd_file, nucl_ex_file):
     output_stubname = os.path.join(outdir, os.path.basename(fwd_file) + '.{}'.format(chrom))
     lines, peaks, reads = load_data(nucl_ex_file, fwd_file)
-    logger.debug('run_forward chrom {}-{}. {}/{}'.format(nucl_ex_file.split('.')[-1], os.path.basename(fwd_file), peaks[0], peaks[-1]))
+    logger.debug('run_forward chrom {}-{}. peaks id {}'.format(nucl_ex_file.split('.')[-1], os.path.basename(fwd_file), id(peaks)))
     sumPeakFwd = []
     sumPeakRev = []
     fwd_out = output_stubname + ".fwd"
@@ -193,7 +193,7 @@ def run_forward(chrom, outdir, fwd_file, nucl_ex_file):
 def run_reverse(chrom, outdir, rev_file, nucl_ex_file):
     output_stubname = os.path.join(outdir, os.path.basename(rev_file) + '.{}'.format(chrom))
     lines, peaks, reads = load_data(nucl_ex_file, rev_file)
-    logger.debug('run_reverse chrom {}-{}. {}/{}'.format(nucl_ex_file.split('.')[-1], os.path.basename(rev_file), peaks[0], peaks[-1]))
+    logger.debug('run_reverse chrom {}-{}. peaks id {}'.format(nucl_ex_file.split('.')[-1], os.path.basename(rev_file), id(peaks)))
     sumPeakFwd = []
     sumPeakRev = []
     irev_out = output_stubname + ".irev"
@@ -254,7 +254,9 @@ if __name__ == "__main__":
     if not os.path.isdir(outfolder):
         os.makedirs(outfolder)
         logger.info('Created out folder {}'.format(outfolder))
-    data = get_data(train_folder, outfolder)  # all the available data
+
+    nucl_stub = 'nucl_ex5' # HORRIBLE
+    data = get_data(train_folder, outfolder, nucl_stub)  # all the available data
 
     # for chrom, dic in data.items():
     #     process(chrom, dic, outfolder)
