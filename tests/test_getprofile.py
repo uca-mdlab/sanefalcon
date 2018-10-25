@@ -1,7 +1,5 @@
 import unittest
-import getProfileParallel
 import os
-import sys
 
 
 class TestGetProfile(unittest.TestCase):
