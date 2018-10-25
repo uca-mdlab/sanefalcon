@@ -46,8 +46,9 @@ peaks = [loadNucl(line.split()) for line in open(sys.argv[1]) if nuclFilt([int(x
 #peaks = [[int(line.split()[0]),1] for line in open(sys.argv[1]) if float(line.split()[1])>1.5]
 reads = [int(line) for line in open(sys.argv[2])]
 shift = int(sys.argv[3])
-print(len(peaks), filtOut)
 
+#print(len(peaks), filtOut)
+res = (len(peaks), filtOut)
 
 rev = False
 if shift != 0:
