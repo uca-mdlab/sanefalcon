@@ -116,7 +116,7 @@ else:
         sumPeak=[sumPeak[x]+thisPeak[x] for x in range(len(thisPeak))]
 
 
-with open(sys.argv[4]+".np",'w') as outPeaks:
+with open(sys.argv[4], 'w') as outPeaks:
     outPeaks.write(",".join([str(x) for x in sumPeak]))
 
 exit()
