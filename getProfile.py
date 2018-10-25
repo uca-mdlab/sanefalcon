@@ -49,9 +49,9 @@ shift = int(sys.argv[3])
 print(len(peaks), filtOut)
 
 
-rev=False
+rev = False
 if shift != 0:
-    rev=True
+    rev = True
     peaks.reverse()
     reads.reverse()
     # firx for 100bp pe data
@@ -66,22 +66,22 @@ maxDist=147
 sumPeak=[0. for x in range(maxDist)]
 read = reads[0]#+shift
 j=0
-nuclHit=[]
+nuclHit = []
 
 #print peaks[:10],reads[:10]
 
 if rev:
-    for i,peakPair in enumerate(peaks):
-        peak=peakPair[0]
+    for i, peakPair in enumerate(peaks):
+        peak = peakPair[0]
         peakWeight = peakPair[1]
         thisPeak = [0. for x in range(maxDist)]
         while read >= peak:
             if read < peak+maxDist:
-                thisPeak[read-peak] += 1
+                thisPeak[read - peak] += 1
             j+=1
             if j >= len(reads):
                 break
-            read=reads[j]   #+shift
+            read=reads[j]   #  +shift
         thisSum=float(sum(thisPeak))
         if thisSum == 0:
             continue
