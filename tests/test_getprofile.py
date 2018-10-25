@@ -27,7 +27,39 @@ class TestGetProfile(unittest.TestCase):
 
         self.assertEqual(arr[0].strip(), '270.0')
         self.assertEqual(arr[-1].strip(), '297.0')
-        # now check that the script's output is what you expect
+
+    def test_fwd1(self):
+        outfile = self.configurations['fwd1']['outfile']
+        rev = self.configurations['fwd1']['rev']
+        result = os.system("python3 {} {} {} {} {}".format(self.scriptname, self.nuclfile, self.chromfilefwd, rev, outfile))
+        self.assertEqual(result, 0)
+        with open(outfile, 'r') as resfile:
+            arr = resfile.readlines()[0].split(',')
+
+        self.assertEqual(arr[0].strip(), '270.0')
+        self.assertEqual(arr[-1].strip(), '363.0')
+
+    def test_rev0(self):
+        outfile = self.configurations['rev0']['outfile']
+        rev = self.configurations['rev0']['rev']
+        result = os.system("python3 {} {} {} {} {}".format(self.scriptname, self.nuclfile, self.chromfilefwd, rev, outfile))
+        self.assertEqual(result, 0)
+        with open(outfile, 'r') as resfile:
+            arr = resfile.readlines()[0].split(',')
+
+        self.assertEqual(arr[0].strip(), '270.0')
+        self.assertEqual(arr[-1].strip(), '297.0')
+
+    def test_rev1(self):
+        outfile = self.configurations['rev1']['outfile']
+        rev = self.configurations['rev1']['rev']
+        result = os.system("python3 {} {} {} {} {}".format(self.scriptname, self.nuclfile, self.chromfilefwd, rev, outfile))
+        self.assertEqual(result, 0)
+        with open(outfile, 'r') as resfile:
+            arr = resfile.readlines()[0].split(',')
+
+        self.assertEqual(arr[0].strip(), '270.0')
+        self.assertEqual(arr[-1].strip(), '363.0')
 
     def tearDown(self):
         pass
