@@ -15,10 +15,6 @@ class TestGetProfile(unittest.TestCase):
             'rev0': {'outfile': '{}.irev'.format(self.chromfilerev), 'rev': 0},
             'rev1': {'outfile': '{}.rev'.format(self.chromfilerev), 'rev': 1},
         }
-        self.peaks_fwd = []
-        self.reads_fwd = []
-        self.peaks_rev = []
-        self.reads_rev = []
 
     def test_cast_line_to_numbers(self):
         a = ['1', '2', '3.2', '4.3', '5']
@@ -40,12 +36,37 @@ class TestGetProfile(unittest.TestCase):
         self.assertEqual(len(peaks_rev), 161844)
         self.assertEqual(len(reads_rev), 74985)
 
-    def test_process_forward_fwd0(self):
+    def test_process_fwd0(self):
         outfile = self.configurations['fwd0']['outfile']
-        lines, peaks_fwd, reads_fwd = getProfileParallel.load_data(self.nuclfile, self.chromfilerev)
-        sumPeaksFwd = getProfileParallel.process_forward(peaks_fwd, reads_fwd, outfile)
-        self.assertEqual(len(sumPeaksFwd), 147)
-        self.assertEqual(sumPeaksFwd[0], '270.0')
+        lines, peaks, reads = getProfileParallel.load_data(self.nuclfile, self.chromfilefwd)
+        sumPeaks = getProfileParallel.process_forward(peaks, reads, outfile)
+        self.assertEqual(len(sumPeaks), 147)
+        self.assertEqual(sumPeaks[0], 270.0)
+        self.assertEqual(sumPeaks[-1], 297.0)
+
+    def test_process_fwd1(self):
+        outfile = self.configurations['fwd1']['outfile']
+        lines, peaks, reads = getProfileParallel.load_data(self.nuclfile, self.chromfilefwd)
+        sumPeaks = getProfileParallel.process_reverse(peaks, reads, outfile)
+        self.assertEqual(len(sumPeaks), 147)
+        self.assertEqual(sumPeaks[0], 270.0)
+        self.assertEqual(sumPeaks[-1], 363.0)
+
+    def test_process_rev0(self):
+        outfile = self.configurations['rev0']['outfile']
+        lines, peaks, reads = getProfileParallel.load_data(self.nuclfile, self.chromfilerev)
+        sumPeaks = getProfileParallel.process_forward(peaks, reads, outfile)
+        self.assertEqual(len(sumPeaks), 147)
+        self.assertEqual(sumPeaks[0], 264.0)
+        self.assertEqual(sumPeaks[-1], 318.0)
+
+    def test_process_rev1(self):
+        outfile = self.configurations['rev1']['outfile']
+        lines, peaks, reads = getProfileParallel.load_data(self.nuclfile, self.chromfilerev)
+        sumPeaks = getProfileParallel.process_reverse(peaks, reads, outfile)
+        self.assertEqual(len(sumPeaks), 147)
+        self.assertEqual(sumPeaks[0], 259.0)
+        self.assertEqual(sumPeaks[-1], 314.0)
 
     # def test_fwd0(self):
     #     outfile = self.configurations['fwd0']['outfile']
