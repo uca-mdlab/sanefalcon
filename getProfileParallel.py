@@ -59,7 +59,7 @@ def process_forward(peaks, reads, outfile):
     thread_name = threading.current_thread().name
     before = len(peaks)  # just to be sure
     peaks.append([-1, 0])
-    logger.debug('{} (fwd append) id: {} (len += {})'.format(thread_name, id(peaks), len(peaks) - before))
+    logger.debug('process_forward {} (fwd append) id: {} (len += {}) [0] = {}; [-1] = {}'.format(thread_name, id(peaks), len(peaks) - before, peaks[0], peaks[-1]))
 
     maxDist = 147
     sumPeak = [0. for _ in range(maxDist)]
@@ -68,7 +68,7 @@ def process_forward(peaks, reads, outfile):
     nuclHit = []
     for i, peakPair in enumerate(peaks):
         if i == 0 or i == len(peaks) - 1:
-            logger.debug('{} (fwd enumerate id: {}) i: {} peakPair {}'.format(thread_name, id(peaks), i, peakPair))
+            logger.debug('process_forward {} (fwd enumerate id: {}) i: {} peakPair {}'.format(thread_name, id(peaks), i, peakPair))
         peak = peakPair[0]
         peakWeight = peakPair[1]
         thisPeak = [0. for x in range(maxDist)]
@@ -96,11 +96,14 @@ def process_forward(peaks, reads, outfile):
 
 def process_reverse(peaks, reads, outfile):
     thread_name = threading.current_thread().name
+    if peaks[-1] == [-1, 0]:  # it happens to have already the [-1, 0] pair at the end. This is a hotfix. FIXME
+        peaks = peaks[:-1]
+
     peaks.reverse()
     reads.reverse()
     before = len(peaks)  # just to be sure
     peaks.append([-1, 0])
-    logger.debug('{} (rev append) id: {} (len += {})'.format(thread_name, id(peaks), len(peaks) - before))
+    logger.debug('process_reverse {} (rev append) id: {} (len += {}) [0] = {}; [-1] = {}'.format(thread_name, id(peaks), len(peaks) - before, peaks[0], peaks[-1]))
 
     maxDist = 147
     sumPeak = [0. for _ in range(maxDist)]
@@ -110,7 +113,7 @@ def process_reverse(peaks, reads, outfile):
 
     for i, peakPair in enumerate(peaks):
         if i == 0 or i == len(peaks):
-            logger.debug('{} (rev enumerate id: {}) i: {} peakPair {}'.format(thread_name, id(peaks), i, peakPair))
+            logger.debug('process_reverse {} (rev enumerate id: {}) i: {} peakPair {}'.format(thread_name, id(peaks), i, peakPair))
         peak = peakPair[0]
         peakWeight = peakPair[1]
         thisPeak = [0. for x in range(maxDist)]
