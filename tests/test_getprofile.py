@@ -9,10 +9,10 @@ class TestGetProfile(unittest.TestCase):
         self.chromfilerev = './tests/chromfile.rev'
         self.nuclfile = './tests/nuclfile'
         self.configurations = {
-            'fwd0': {'outfile': '{}.fwd'.format(self.chromfilefwd), 'rev': 0},
-            'fwd1': {'outfile': '{}.ifwd'.format(self.chromfilefwd), 'rev': 1},
-            'rev0': {'outfile': '{}.irev'.format(self.chromfilerev), 'rev': 0},
-            'rev1': {'outfile': '{}.rev'.format(self.chromfilerev), 'rev': 1},
+            'fwd0': {'outfile': '{}.p.fwd'.format(self.chromfilefwd), 'rev': 0},
+            'fwd1': {'outfile': '{}.p.ifwd'.format(self.chromfilefwd), 'rev': 1},
+            'rev0': {'outfile': '{}.p.irev'.format(self.chromfilerev), 'rev': 0},
+            'rev1': {'outfile': '{}.p.rev'.format(self.chromfilerev), 'rev': 1},
         }
 
     def test_fwd0(self):
@@ -22,7 +22,7 @@ class TestGetProfile(unittest.TestCase):
         self.assertEqual(result, 0)
         with open(outfile, 'r') as resfile:
             arr = resfile.readlines()[0].split(',')
-
+        self.assertEqual(len(arr), 147)
         self.assertEqual(arr[0].strip(), '270.0')
         self.assertEqual(arr[-1].strip(), '297.0')
 
@@ -34,6 +34,7 @@ class TestGetProfile(unittest.TestCase):
         with open(outfile, 'r') as resfile:
             arr = resfile.readlines()[0].split(',')
 
+        self.assertEqual(len(arr), 147)
         self.assertEqual(arr[0].strip(), '270.0')
         self.assertEqual(arr[-1].strip(), '363.0')
 
@@ -45,6 +46,7 @@ class TestGetProfile(unittest.TestCase):
         with open(outfile, 'r') as resfile:
             arr = resfile.readlines()[0].split(',')
 
+        self.assertEqual(len(arr), 147)
         self.assertEqual(arr[0].strip(), '270.0')
         self.assertEqual(arr[-1].strip(), '297.0')
 
@@ -56,6 +58,7 @@ class TestGetProfile(unittest.TestCase):
         with open(outfile, 'r') as resfile:
             arr = resfile.readlines()[0].split(',')
 
+        self.assertEqual(len(arr), 147)
         self.assertEqual(arr[0].strip(), '270.0')
         self.assertEqual(arr[-1].strip(), '363.0')
 

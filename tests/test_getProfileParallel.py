@@ -4,6 +4,7 @@ import getProfileParallel
 
 
 class TestGetProfile(unittest.TestCase):
+
     def setUp(self):
         self.chromfilefwd = './tests/chromfile.fwd'
         self.chromfilerev = './tests/chromfile.rev'
@@ -14,6 +15,10 @@ class TestGetProfile(unittest.TestCase):
             'rev0': {'outfile': '{}.irev'.format(self.chromfilerev), 'rev': 0},
             'rev1': {'outfile': '{}.rev'.format(self.chromfilerev), 'rev': 1},
         }
+        self.peaks_fwd = []
+        self.reads_fwd = []
+        self.peaks_rev = []
+        self.reads_rev = []
 
     def test_cast_line_to_numbers(self):
         a = ['1', '2', '3.2', '4.3', '5']
@@ -23,11 +28,24 @@ class TestGetProfile(unittest.TestCase):
         with self.assertRaises(ValueError):
             res = getProfileParallel.cast_line_to_numbers(a)
 
-    def test_load_data(self):
-        lines, peaks, reads = getProfileParallel.load_data(self.nuclfile, self.chromfilefwd)
+    def test_load_data_fwd(self):
+        lines, peaks_fwd, reads_fwd = getProfileParallel.load_data(self.nuclfile, self.chromfilefwd)
         self.assertEqual(len(lines), 173875)
-        self.assertEqual(len(peaks), 161844)
-        self.assertEqual(len(reads), 71999)
+        self.assertEqual(len(peaks_fwd), 161844)
+        self.assertEqual(len(reads_fwd), 71999)
+
+    def test_load_data_rev(self):
+        lines, peaks_rev, reads_rev = getProfileParallel.load_data(self.nuclfile, self.chromfilerev)
+        self.assertEqual(len(lines), 173875)
+        self.assertEqual(len(peaks_rev), 161844)
+        self.assertEqual(len(reads_rev), 74985)
+
+    def test_process_forward_fwd0(self):
+        outfile = self.configurations['fwd0']['outfile']
+        lines, peaks_fwd, reads_fwd = getProfileParallel.load_data(self.nuclfile, self.chromfilerev)
+        sumPeaksFwd = getProfileParallel.process_forward(peaks_fwd, reads_fwd, outfile)
+        self.assertEqual(len(sumPeaksFwd), 147)
+        self.assertEqual(sumPeaksFwd[0], '270.0')
 
     # def test_fwd0(self):
     #     outfile = self.configurations['fwd0']['outfile']
