@@ -8,7 +8,7 @@ import threading
 logger = logging.getLogger('getProfileParallel')
 logging.basicConfig(format='%(asctime)s - %(levelname)s:%(message)s',
                     level=logging.DEBUG,
-                    filename='getProfileParallel.log',
+                    filename='profileparallel.log',
                     filemode='w')
 
 # parameters and functions taken from the original script
@@ -181,11 +181,13 @@ def run_forward(chrom, outdir, fwd_file, nucl_ex_file):
     fwd_out = output_stubname + ".fwd"
     try:
         sumPeakFwd = process_forward(peaks, reads, fwd_out)  # -> .fwd
+        logger.debug("run_forward - chrom {} id {}: process_forward completed: sumPeaks [{}..{}]".format(chrom, id(peaks), sumPeakFwd[0], sumPeakFwd[-1]))
     except IndexError:
         logger.error("IndexError: .fwd: peaks {}, reads {}".format(len(peaks), len(reads)))
     ifwd_out = output_stubname + ".ifwd"
     try:
         sumPeakRev = process_reverse(peaks, reads, ifwd_out)  # -> .ifwd
+        logger.debug("run_forward - chrom {} id {}: process_reverse completed: sumPeaks [{}..{}]".format(chrom, id(peaks), sumPeakRev[0], sumPeakRev[-1]))
     except IndexError:
         logger.error("IndexError: .ifwd: peaks {}, reads {}".format(len(peaks), len(reads)))
 
@@ -201,11 +203,13 @@ def run_reverse(chrom, outdir, rev_file, nucl_ex_file):
     irev_out = output_stubname + ".irev"
     try:
         sumPeakFwd = process_forward(peaks, reads, irev_out)  # -> .irev
+        logger.debug("run_reverse - chrom {} id {}: process_forward completed: sumPeaks [{}..{}]".format(chrom, id(peaks), sumPeakFwd[0], sumPeakFwd[-1]))
     except IndexError:
         logger.error("IndexError: .irev: peaks {}, reads {}".format(len(peaks), len(reads)))
     rev_out = output_stubname + ".rev"
     try:
         sumPeakRev = process_reverse(peaks, reads, rev_out)  # -> .rev
+        logger.debug("run_reverse - chrom {} id {}: process_reverse completed: sumPeaks [{}..{}]".format(chrom, id(peaks), sumPeakRev[0], sumPeakRev[-1]))
     except IndexError:
         logger.error("IndexError: .rev: peaks {}, reads {}".format(len(peaks), len(reads)))
     return len(sumPeakFwd), len(sumPeakRev)
