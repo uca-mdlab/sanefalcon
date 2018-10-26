@@ -18,10 +18,12 @@ with open(sys.argv[1],'r') as referenceFile:
 	
 with open(sys.argv[2],'r') as profileFile:
 	# In these readlines -1 to drop the 'end of line' comma from a previous awk
-	profile = [float(x) for x in profileFile.readline().split(",")[:-1]]
-	profile.reverse()
-	#profile2=([float(x) for x in profileFile.readline().split(",")[1:-1]])
-	profile.extend([float(x) for x in profileFile.readline().split(",")[1:-1]])
+	my_lines = profileFile.readlines()
+profileFile.close()
+profile = [float(x) for x in my_lines[0].split(",") if x != '\n']
+profile.reverse()
+
+profile.extend([float(x) for x in my_lines[1].split(",") if x != '\n'])
 #print len(profile)
 totalReads=sum(profile)
 normProfile=[x/totalReads for x in profile]
@@ -32,7 +34,7 @@ for i,val in enumerate(normProfile):
 fetalFraction = scalars[0]*summed+scalars[1]
 
 if len(correlations) == len(normProfile):
-	print "Fetal Fraction:\t",fetalFraction
+	print ("Fetal Fraction:\t",fetalFraction)
 else:
-	print "ERROR: correlation and sample profiles are not aligned"
-print "Nucleosome Profile:","\t".join([str(x) for x in normProfile])
+	print ("ERROR: correlation and sample profiles are not aligned")
+print ("Nucleosome Profile:","\t".join([str(x) for x in normProfile]))
