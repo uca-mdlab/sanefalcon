@@ -5,9 +5,9 @@ import os
 class TestGetProfile(unittest.TestCase):
     def setUp(self):
         self.scriptname = 'getProfile.py'
-        self.chromfilefwd = './tests/chromfile.fwd'
-        self.chromfilerev = './tests/chromfile.rev'
-        self.nuclfile = './tests/nuclfile'
+        self.chromfilefwd = './tests/data/chromfile.fwd'
+        self.chromfilerev = './tests/data/chromfile.rev'
+        self.nuclfile = './tests/data/nuclfile'
         self.configurations = {
             'fwd0': {'outfile': '{}.p.fwd'.format(self.chromfilefwd), 'rev': 0},
             'fwd1': {'outfile': '{}.p.ifwd'.format(self.chromfilefwd), 'rev': 1},

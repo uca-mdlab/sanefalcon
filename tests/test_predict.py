@@ -4,8 +4,8 @@ import os
 class MyTestCase(unittest.TestCase):
     def setUp(self):
         self.scriptname = 'predict.sh'
-        self.model = './tests/out.model'
-        self.sample = './tests/sample.bam'
+        self.model = './tests/data/out.model'
+        self.sample = './tests/data/sample.bam'
 
         # self.nprev =
         # self.npifwd =
