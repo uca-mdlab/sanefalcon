@@ -163,7 +163,7 @@ def get_data(train_folder, outfolder, nucl_stub):
             else:
                 continue
     logger.debug('Found {} .start.fwd and {} .start.rev files'.format(len(fwd_files), len(rev_files)))
-    chromosomes = range(1, 23)
+    chromosomes = range(1, 23) ## 1, 23
     d = dict.fromkeys(chromosomes)
     for c in chromosomes:
         nucl_file = [f for f in nucl_files if int(f.split('.')[-1]) == c][0]  # get the nucl file for the chromosome

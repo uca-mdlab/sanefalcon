@@ -43,8 +43,10 @@ def loadNuclFile(nuclFile):
 			splitLine=line.strip().split(",")
 			if len(splitLine)<3:
 				continue
-			sampleName=splitLine[0].split("/")[-1].split(".")[0].split('-')[-1]
-			values=[float(x) for x in splitLine[int(sys.argv[6]):int(sys.argv[7])]]
+			sampleName = splitLine[0].split("/")[-1]
+			# sampleName=splitLine[0].split("/")[-1].split(".")[0].split('-')[-1] ## old version
+			# values=[float(x) for x in splitLine[int(sys.argv[6]):int(sys.argv[7])]] ## old version
+			values = [float(x) for x in splitLine[1:]]
 			valSum=sum(values)
 			samples[sampleName]=[x/valSum for x in values]
 			coverages[sampleName]=valSum
@@ -57,9 +59,10 @@ def loadRefFile(refFile):
 	bads=dict()
 	with open(refFile) as referenceFile:
 		for line in referenceFile:
-			splitLine=line.strip().split(" ")
-			
-			splitLine[0] = splitLine[0].split('-')[-1]
+			splitLine=line.strip().split("\t")
+
+			# splitLine[0] = splitLine[0].split('-')[-1] ## ligne originale ne pas supprimer
+			splitLine[0] = splitLine[0]
 			
 			if len(splitLine)<3:
 				continue
@@ -78,7 +81,7 @@ def loadRefFile(refFile):
 			elif splitLine[2]=='BAD':
 				bads[splitLine[0]]=float(splitLine[1])
 			else:
-				print splitLine[2]
+				print (splitLine[2])
 	return reference,series,girls,bads
 
 def loadRefFileTrisomy(refFile):
@@ -97,14 +100,14 @@ def splitByReference(samples,reference):
 		if ref in samples:
 			overlap.append(ref)
 	overlap.sort()
-	print len(overlap),"samples overlap"
+	print (len(overlap),"samples overlap")
 
 	noOverlap=[]
 	for sample in samples:
 		if sample not in overlap:
 			noOverlap.append(sample)
 	noOverlap.sort()
-	print len(noOverlap),"samples noOverlap"
+	print (len(noOverlap),"samples noOverlap")
 	
 	return overlap,noOverlap
 
@@ -181,8 +184,8 @@ def testPolyFit(samples,reference,p,prefix):
 	fitSamples=[]
 	for i,val in enumerate(samples):
 		fitSamples.append(p[0]*val+p[1])
-	print prefix+" polyFit: Pearson:",pearsonr(fitSamples,reference)
-	print prefix+" polyFit: errorRate:",getErrorRate(fitSamples,reference)
+	print (prefix+" polyFit: Pearson:",pearsonr(fitSamples,reference))
+	print (prefix+" polyFit: errorRate:",getErrorRate(fitSamples,reference))
 	return fitSamples
 	
 def trainPolyFit(samples,reference):
@@ -191,10 +194,10 @@ def trainPolyFit(samples,reference):
 	
 def testLinearModel(samples,reference,clf,prefix):
 	predicted=clf.predict(samples)
-	print prefix+" linearModel: Pearson:",pearsonr(predicted,reference)
-	print prefix+ (" linearModel: Residual sum of squares: %.2f" % numpy.mean((predicted - reference) ** 2))
-	print prefix+ (' linearModel: Variance score: %.2f' % clf.score(samples, reference))
-	print prefix+" linearModel: errorRate:",getErrorRate(predicted,reference)
+	print (prefix+" linearModel: Pearson:",pearsonr(predicted,reference))
+	print (prefix+ (" linearModel: Residual sum of squares: %.2f" % numpy.mean((predicted - reference) ** 2)))
+	print (prefix+ (' linearModel: Variance score: %.2f' % clf.score(samples, reference)))
+	print (prefix+" linearModel: errorRate:",getErrorRate(predicted,reference))
 	return predicted
 		
 def trainLinearModel(samples,reference):
@@ -343,7 +346,7 @@ def main(argv=None):
 	if argv is None:
 		argv = sys.argv
 
-	print "- Training stage:"
+	print ("- Training stage:")
 
 	# Load sample data
 	samples,coverages = loadNuclFile(argv[1])
@@ -400,7 +403,7 @@ def main(argv=None):
 	for i,val in enumerate(sampleScores):
 		#print i,val,yVals[i],val*polyFit[0]+polyFit[1]
 		fittedVals[i]=val*polyFit[0]+polyFit[1]
-	print ' '.join([str(x) for x in polyFit])
+	print (' '.join([str(x) for x in polyFit]))
 	
 	plt.scatter(fittedVals,yVals)
 	plt.xlim([0,25])
@@ -416,7 +419,7 @@ def main(argv=None):
 
 	# If we were blessed with a test set then use it
 	if len(argv) >= 5:
-		print "\n- Testing Stage:"
+		print ("\n- Testing Stage:")
 		# Load test data
 		newSamples,newCoverages=loadNuclFile(argv[4])
 		
@@ -429,7 +432,7 @@ def main(argv=None):
 		
 		# Match nucleosome profiles with reference values
 		newYVals=[newReference[x] for x in testSet]
-		print testSet
+		print (testSet)
 
 		singleRun=["15P0008B","15P0135A","15P0136A","15P0137A","15P0138A","15P0139A","15P0140A","15P0148A","15P0149A","15P0150A","15P0151A","15P0152A"]##			
 #["15P0184A","15P0185A","15P0186A","15P0187A","15P0197A","15P0198A","15P0199A","15P0200A","15P0201A","15P0206A"]#		print [x for x in testSet if x in singleRun]
@@ -466,8 +469,8 @@ def main(argv=None):
 		for i in range(len(tePolyFit)):
 			#print newYVals[i],tePolyFit[i]
 			errorValues[i]=tePolyFit[i]-newYVals[i]
-		print numpy.mean(errorValues),numpy.std(errorValues)
-		print numpy.mean([abs(x) for x in errorValues]),numpy.std([abs(x) for x in errorValues])
+		print (numpy.mean(errorValues),numpy.std(errorValues))
+		print (numpy.mean([abs(x) for x in errorValues]),numpy.std([abs(x) for x in errorValues]))
 		
 		
 		errorValues=[]
@@ -475,8 +478,8 @@ def main(argv=None):
 			#print newYVals[i],tePolyFit[i]
 			if newYVals[i] > 10 and newYVals[i] < 15:
 				errorValues.append(tePolyFit[i]-newYVals[i])
-		print numpy.mean(errorValues),numpy.std(errorValues)
-		print numpy.mean([abs(x) for x in errorValues]),numpy.std([abs(x) for x in errorValues])
+		print (numpy.mean(errorValues),numpy.std(errorValues))
+		print (numpy.mean([abs(x) for x in errorValues]),numpy.std([abs(x) for x in errorValues]))
 		
 		testPolyFit([newSampleScores[x] for x in recolor],[newYVals[x] for x in recolor],polyFit,"recolor")
 		#testLinearModel([newSelectedRegions[x] for x in recolor],[newYVals[x] for x in recolor],linearModel,"recolor")
