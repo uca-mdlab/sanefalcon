@@ -6,9 +6,9 @@ import getProfileParallel
 class TestGetProfile(unittest.TestCase):
 
     def setUp(self):
-        self.chromfilefwd = './tests/chromfile.fwd'
-        self.chromfilerev = './tests/chromfile.rev'
-        self.nuclfile = './tests/nuclfile'
+        self.chromfilefwd = './tests/data/chromfile.fwd'
+        self.chromfilerev = './tests/data/chromfile.rev'
+        self.nuclfile = './tests/data/nuclfile'
         self.configurations = {
             'fwd0': {'outfile': '{}.fwd'.format(self.chromfilefwd), 'rev': 0},
             'fwd1': {'outfile': '{}.ifwd'.format(self.chromfilefwd), 'rev': 1},
@@ -113,7 +113,11 @@ class TestGetProfile(unittest.TestCase):
     #     self.assertEqual(arr[-1].strip(), '363.0')
 
     def tearDown(self):
-        pass
+        for key, conf in self.configurations.items():
+            try:
+                os.remove(conf['outfile'])
+            except FileNotFoundError:
+                pass
 
 
 if __name__ == '__main__':
