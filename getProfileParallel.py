@@ -74,7 +74,7 @@ def process_forward(peaks, reads, outfile):
         thisPeak = [0. for x in range(maxDist)]
         while read <= peak:
             if read > peak - maxDist:
-                thisPeak[peak - read] += 1   # FIXME I think it's here
+                thisPeak[peak - read] += 1
             j += 1
             if j >= len(reads):
                 break
