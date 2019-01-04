@@ -20,7 +20,7 @@ do
 	OUTFILE="$OUTDIR/${SHORT//".sort.bam"/}"
 	echo "IN:$SAMPLE, OUT:$OUTFILE"
 	
-	for ARG_TASKID in `seq 1 2` # or "X"
+	for ARG_TASKID in `seq 1 22` # or "X"
 		do
 		    if [ ! -f $OUTFILE.$ARG_TASKID.start.fwd ]; then
 			    $SCRIPT_SAMTOOLS view \
