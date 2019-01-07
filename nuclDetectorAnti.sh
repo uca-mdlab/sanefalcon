@@ -1,10 +1,11 @@
+#!/usr/bin/env bash
 #export SCRIPT_NUCDEC=~/sanefalcon/nuclDetector.py
 export SCRIPT_NUCDEC=nuclDetector.py
 
 #export SCRIPT_PYTHON=/illumina/diagnostics/bin/Python-2.7.3/bin/python
 export SCRIPT_PYTHON=python
 
-export INDIR=`greadlink -f $1`
+export INDIR=`readlink -f $1`
 
 for CHROM in $(seq 22 -1 1)
 do
