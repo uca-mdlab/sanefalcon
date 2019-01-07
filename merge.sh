@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-INDIR=`greadlink -f $1`
+INDIR=`readlink -f $1`
 
 for i in $(seq 1 22)
 do
