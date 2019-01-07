@@ -1,9 +1,10 @@
+#!/usr/bin/env bash
 #set -x
 
 INDIR=`readlink -f $1`
 SUB=$2
 
-for CHROM in $(seq 3 -1 1)  # local testing replace 3->22
+for CHROM in $(seq 22 -1 1)  # local testing replace 3->22
 do
 	COLLECT=`ls $INDIR/*/merge.$CHROM | grep -v "$SUB/merge"`
 	sort -n -m $COLLECT > $INDIR/$SUB/anti.$CHROM #  #" | qsub
