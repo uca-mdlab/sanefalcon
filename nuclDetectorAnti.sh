@@ -11,6 +11,6 @@ for CHROM in $(seq 22 -1 1)
 do
 #	echo "$SCRIPT_PYTHON $SCRIPT_NUCDEC $INDIR/anti.$CHROM $INDIR/nucl_ex3.$CHROM" | qsub
     echo $INDIR
-	$SCRIPT_PYTHON $SCRIPT_NUCDEC $INDIR/anti.$CHROM $INDIR/nucl_ex3.$CHROM"
+	$SCRIPT_PYTHON $SCRIPT_NUCDEC $INDIR/anti.$CHROM $INDIR/nucl_ex3.$CHROM
 done
 
