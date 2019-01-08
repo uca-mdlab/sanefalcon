@@ -141,7 +141,7 @@ flush(curArea,lastPos)
 inFile.close()
 
 # Dump results to a file
-with open(sys.argv[2], "wb") as output_file:
+with open(sys.argv[2], "w") as output_file:
 	for nucl in allNucl:
 		#output_file.write(str(nucl[0]) + "\t" + str(nucl[1]) + "\n")
 		output_file.write("\t".join([str(x) for x in nucl])+"\n")
