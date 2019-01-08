@@ -86,7 +86,7 @@ def flush(area,endPoint):
 	def findCenters(start,end):
 		if end-start < 1:
 			return []
-		maxIndex, bpMax = max(enumerate(bpScores[start:end]), key=operator.itemgetter(1))
+		maxIndex, bpMax = max(enumerate(bpScores[int(start):int(end)]), key=operator.itemgetter(1))
 		if bpMax > 1:
 		
 			# If the max is part of a flat line take it's center position instead
