@@ -35,8 +35,8 @@ def plotRegion(start,end,area,bpScores,centers):
 	smooth=[]
 	for i in range(len(area)):
 		smooth.append(sum(area[max(0,i-10):i+10])/20.)
-	print smooth
-	print centers
+	print (smooth)
+	print (centers)
 	for center in centers:
 		#plt.axvline(center[0]-start-74, color="gray")
 		#plt.axvline(center[0]-start+74, color="gray")
@@ -105,7 +105,7 @@ def flush(area,endPoint):
 		
 	newCenters=findCenters(0,areaLen)
 	if newCenters!=[] and newCenters[-1]!=[] and newCenters[-1][0] > len(extra):
-		print newCenters[-1],len(extra),len(bpScores),bpScores[-5:]
+		print (newCenters[-1],len(extra),len(bpScores),bpScores[-5:])
 	allNucl.extend([[x[0]+startPoint]+x[1:]+extra[x[0]] for x in newCenters])
 	
 	
