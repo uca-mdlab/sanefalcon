@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 #export SCRIPT_NUCDEC=~/sanefalcon/nuclDetector.py
-export SCRIPT_NUCDEC=nuclDetector.py
+#export SCRIPT_NUCDEC=nuclDetector.py
+export SCRIPT_NUCDEC=/home/mdlab/storage/scripts/fetalfraction/script/sanefalcon/nuclDetector.py ##modifier
+
 
 #export SCRIPT_PYTHON=/illumina/diagnostics/bin/Python-2.7.3/bin/python
 export SCRIPT_PYTHON=python
