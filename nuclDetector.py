@@ -69,9 +69,9 @@ def flush(area,endPoint):
 	for i in range(padding,areaLen+padding):
 		window=bins[i-areaSize:i+areaSize+1]
 		
-		leftVal=sum(bins[i-areaSize-sideSize:i-areaSize])
-		rightVal=sum(bins[i+areaSize+1:i+areaSize+sideSize+1])
-		innerVal=sum(window)
+		leftVal=sum(bins[i-areaSize-sideSize:i-areaSize]) ##calcul de 0 à 20
+		rightVal=sum(bins[i+areaSize+1:i+areaSize+sideSize+1]) ##calcul de 167 à 187
+		innerVal=sum(window) ## calcul de 20 à 167
 		outerVal=leftVal+rightVal#min(leftVal,rightVal)
 		#if leftVal > 25 and rightVal > 25:
 			# Solve zero devision and score this pos twice as high
