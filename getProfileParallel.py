@@ -139,7 +139,7 @@ def process_reverse(peaks, reads, outfile):
     return sumPeak
 
 
-def get_data(train_folder, outfolder, nucl_stub):
+def get_data(train_folder, outfolder, nucl_stub,nucl_end):
     """
     Avoid calling multiple times the getProfileSubmit.sh script, as it loads all the data in memory.
 
@@ -148,7 +148,7 @@ def get_data(train_folder, outfolder, nucl_stub):
     :return: a dictionary with all the data packed and organized for processing
     """
     nucl_files = [os.path.join(train_folder, f) for f in os.listdir(train_folder)
-                  if os.path.isfile(os.path.join(train_folder, f)) and f.startswith(nucl_stub)]
+                  if os.path.isfile(os.path.join(train_folder, f)) and f.startswith(nucl_stub) and f.endswith(nucl_end)]
     logger.debug('Found {} nucl_files'.format(len(nucl_files)))
     if not os.path.isdir(outfolder):
         os.makedirs(outfolder)
@@ -265,7 +265,8 @@ if __name__ == "__main__":
         logger.info('Created out folder {}'.format(outfolder))
 
     nucl_stub = 'nucl_ex4' # HORRIBLE
-    data = get_data(train_folder, outfolder, nucl_stub)  # all the available data
+    nucl_end = '_sorted' ##à modifier
+    data = get_data(train_folder, outfolder, nucl_stub,nucl_end)  # all the available data
 
     # for chrom, dic in data.items():
     #     process(chrom, dic, outfolder)
