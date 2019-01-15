@@ -166,7 +166,7 @@ def get_data(train_folder, outfolder, nucl_stub,nucl_end):
     chromosomes = range(1, 23) ## 1, 23
     d = dict.fromkeys(chromosomes)
     for c in chromosomes:
-        nucl_file = [f for f in nucl_files if int(f.split('.')[-1]) == c][0]  # get the nucl file for the chromosome
+        nucl_file = [f for f in nucl_files if int(f.split('.')[-1].split('_')[0]) == c][0]  # get the nucl file for the chromosome ##supprimer le 2eme .split('_')
         regexp = re.compile(".bam.{}.start".format(c))
         c_fwd_files = [f for f in fwd_files if re.search(regexp, f)]          # add fwd files
         c_rev_files = [f for f in rev_files if re.search(regexp, f)]          # add rev files
