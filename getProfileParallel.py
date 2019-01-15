@@ -139,7 +139,7 @@ def process_reverse(peaks, reads, outfile):
     return sumPeak
 
 
-def get_data(train_folder, outfolder, nucl_stub,nucl_end):
+def get_data(train_folder, outfolder, nucl_stub):
     """
     Avoid calling multiple times the getProfileSubmit.sh script, as it loads all the data in memory.
 
@@ -148,7 +148,7 @@ def get_data(train_folder, outfolder, nucl_stub,nucl_end):
     :return: a dictionary with all the data packed and organized for processing
     """
     nucl_files = [os.path.join(train_folder, f) for f in os.listdir(train_folder)
-                  if os.path.isfile(os.path.join(train_folder, f)) and f.startswith(nucl_stub) and f.endswith(nucl_end)]
+                  if os.path.isfile(os.path.join(train_folder, f)) and f.startswith(nucl_stub)]
     logger.debug('Found {} nucl_files'.format(len(nucl_files)))
     if not os.path.isdir(outfolder):
         os.makedirs(outfolder)
