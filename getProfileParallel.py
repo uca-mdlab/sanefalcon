@@ -264,7 +264,7 @@ if __name__ == "__main__":
         os.makedirs(outfolder)
         logger.info('Created out folder {}'.format(outfolder))
 
-    nucl_stub = 'nucl_ex4' # HORRIBLE
+    nucl_stub = 'nucl_ex3' # HORRIBLE
     nucl_end = '_sorted' ##à modifier
     data = get_data(train_folder, outfolder, nucl_stub,nucl_end)  # all the available data
 
