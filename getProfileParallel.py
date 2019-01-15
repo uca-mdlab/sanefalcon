@@ -58,10 +58,12 @@ def load_data(nucl_ex_file, fwd_rev_file):
 
 
         # print(lines,"TESTLINES")
-        peaks = [int(l[0]),loadNucl(l) for l in lines if nuclFilt(l[2:])]
+        # peaks = [loadNucl(l) for l in lines if nuclFilt(l[2:])]
+        peaks=[]
         for l in lines:
             if nuclFilt(l[2:]):
-                print (l,"TESTL")
+                l[0]=int(l[0])
+                peaks+=[loadNucl(l)]
         # print(peaks,"TESTPEAKS")
 
     with open(fwd_rev_file, 'r') as infile:
