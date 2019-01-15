@@ -52,6 +52,7 @@ def load_data(nucl_ex_file, fwd_rev_file):
             listx=x.split()
             listx[0]=int(listx[0])
             my_list+=[listx]
+        print(my_list)
         lines=list(map(cast_line_to_numbers(my_list)))
 
 
