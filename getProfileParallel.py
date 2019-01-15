@@ -46,7 +46,9 @@ def cast_line_to_numbers(list_of_strings):
 def load_data(nucl_ex_file, fwd_rev_file):
     with open(nucl_ex_file, 'r') as infile:
         lines = list(map(cast_line_to_numbers, [x.split() for x in infile.readlines()]))
+        print(lines,"TESTLINES")
         peaks = [loadNucl(l) for l in lines if nuclFilt(l[2:])]
+        print(peaks,"TESTPEAKS")
 
     with open(fwd_rev_file, 'r') as infile:
         reads = [int(line) for line in infile]
