@@ -31,6 +31,7 @@ def nuclFilt(prop):
 
 def loadNucl(nuclLine):
     return nuclLine[0:2]
+    # int(nuclLine[0])
 
 
 def cast_line_to_numbers(list_of_strings):
@@ -45,7 +46,16 @@ def cast_line_to_numbers(list_of_strings):
 
 def load_data(nucl_ex_file, fwd_rev_file):
     with open(nucl_ex_file, 'r') as infile:
-        lines = list(map(cast_line_to_numbers, [x.split() for x in infile.readlines()]))
+        # lines = list(map(cast_line_to_numbers, [x.split() for x in infile.readlines()] int(x[0])))
+        my_list=[]
+        for x in infile.readlines():
+            listx=x.split()
+            listx[0]=int(listx[0])
+            my_list+=[listx]
+        lines=list(map(cast_line_to_numbers(my_list)))
+
+
+
         # print(lines,"TESTLINES")
         peaks = [loadNucl(l) for l in lines if nuclFilt(l[2:])]
         print(peaks,"TESTPEAKS")
