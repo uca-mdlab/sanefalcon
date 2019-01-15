@@ -147,8 +147,8 @@ def get_data(train_folder, outfolder, nucl_stub):
     :param outfolder: /tmp/...
     :return: a dictionary with all the data packed and organized for processing
     """
-    nucl_files = [os.path.join(train_folder, f) for f in os.listdir(train_folder)
-                  if os.path.isfile(os.path.join(train_folder, f)) and f.startswith(nucl_stub)]
+    nucl_files = [os.path.join(train_folder, f) for f in os.listdir(train_folder) if os.path.isfile(os.path.join(train_folder, f)) and f.startswith(nucl_stub)]
+
     logger.debug('Found {} nucl_files'.format(len(nucl_files)))
     if not os.path.isdir(outfolder):
         os.makedirs(outfolder)
