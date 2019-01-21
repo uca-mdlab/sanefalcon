@@ -100,6 +100,7 @@ def splitByReference(samples,reference):
 		if ref in samples:
 			overlap.append(ref)
 	overlap.sort()
+	print(overlap)
 	print (len(overlap),"samples overlap")
 
 	noOverlap=[]
@@ -107,6 +108,7 @@ def splitByReference(samples,reference):
 		if sample not in overlap:
 			noOverlap.append(sample)
 	noOverlap.sort()
+	print(noOverlap)
 	print (len(noOverlap),"samples noOverlap")
 	
 	return overlap,noOverlap
