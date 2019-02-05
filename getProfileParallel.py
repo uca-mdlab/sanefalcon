@@ -172,7 +172,7 @@ def get_data(train_folder, outfolder, nucl_stub):
                 continue
     logger.debug('Found {} .start.fwd and {} .start.rev files'.format(len(fwd_files), len(rev_files)))
     chromosomes = range(1, 23) ## 1, 23
-    chromosomes = range(2,2) ## 1, 23, ## a supprimer
+    chromosomes = range(2,3) ## 1, 23, ## a supprimer
     d = dict.fromkeys(chromosomes)
     for c in chromosomes:
         print(c,"TEST C")
