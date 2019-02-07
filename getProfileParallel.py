@@ -268,7 +268,7 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description='Get Nucleosome Profile for Sanefalcon')
     parser.add_argument('train_folder', type=str, help='Folder containing data for the Nucleosome profile')
-    parser.add_argument('outfolder', dest='outfolder', type=str, help='Output data folder')
+    parser.add_argument('outfolder', type=str, help='Output data folder')
     parser.add_argument('-n', '--nucltrack', dest='nucl_stub', type=str, default="nucl_ex4",
                         help='Give a nucltrack name without the extension')
     args = parser.parse_args()
