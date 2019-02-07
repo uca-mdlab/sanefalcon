@@ -4,6 +4,7 @@ import logging
 import re
 import concurrent.futures
 import threading
+import argparse
 
 logger = logging.getLogger('getProfileParallel')
 logging.basicConfig(format='%(asctime)s - %(levelname)s:%(message)s',
@@ -172,7 +173,6 @@ def get_data(train_folder, outfolder, nucl_stub):
                 continue
     logger.debug('Found {} .start.fwd and {} .start.rev files'.format(len(fwd_files), len(rev_files)))
     chromosomes = range(1, 23) ## 1, 23
-    chromosomes = range(2,3) ## 1, 23, ## a supprimer
     d = dict.fromkeys(chromosomes)
     for c in chromosomes:
         print(c,"TEST C")
@@ -266,15 +266,24 @@ def _process(tup):
 if __name__ == "__main__":
     import multiprocessing as mp
 
-    train_folder = sys.argv[1]
-    outfolder = sys.argv[2]
+    parser = argparse.ArgumentParser(description='Get Nucleosome Profile for Sanefalcon')
+    parser.add_argument('train_folder', type=str, help='Folder containing data for the Nucleosome profile')
+    parser.add_argument('outfolder', dest='outfolder', type=str, help='Output data folder')
+    parser.add_argument('-n', '--nucltrack', dest='nucl_stub', type=str, default="nucl_ex4",
+                        help='Give a nucltrack name without the extension')
+    args = parser.parse_args()
+
+    # train_folder = sys.argv[1]
+    train_folder = args.train_folder
+    # outfolder = sys.argv[2]
+    outfolder = args.outfolder
     logger.info('Starting on {}'.format(train_folder))
 
     if not os.path.isdir(outfolder):
         os.makedirs(outfolder)
         logger.info('Created out folder {}'.format(outfolder))
 
-    nucl_stub = 'nucl_ex4' # HORRIBLE
+    nucl_stub = args.nucl_stub
     data = get_data(train_folder, outfolder, nucl_stub)  # all the available data
 
     # for chrom, dic in data.items():
