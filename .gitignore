@@ -4,3 +4,8 @@
 temporary
 temporary2
 tests
+*.ifwd
+*.fwd
+*.rev
+*.irev
+__pycache*
