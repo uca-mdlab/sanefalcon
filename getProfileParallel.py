@@ -229,33 +229,57 @@ def run_reverse(chrom, outdir, rev_file, nucl_ex_file):
 
 
 def process(chrom, dic, outdir):
+    MAX_FILES_PROCESSED = 10  # limit parallelism not to overload memory
+
     nucl_ex_file = dic['nucl_file']
     fwd_files = dic['fwd']
+    fwd_files_left = len(fwd_files)
+    fwd_files_iter = iter(fwd_files)
+
     rev_files = dic['rev']
+    rev_files_left = len(rev_files)
+    rev_files_iter = iter(rev_files)
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=5, thread_name_prefix='fwd') as executor:
-        futures_run = {executor.submit(run_forward, chrom, outdir, f, nucl_ex_file): f for f in fwd_files}
-        for future in concurrent.futures.as_completed(futures_run):
-            lengths = futures_run[future]
-            try:
-                l_tup = future.result()
-            except Exception as ex:
-                logger.error('[fwd] Exception in {} - {}'.format(lengths, ex))
-            else:
-                logger.info('[fwd] Got future: {}'.format(l_tup))
+        jobs = {}
+        while fwd_files_left:
+            for this_fwd_file in fwd_files_iter:
+                job = executor.submit(run_forward, chrom, outdir, this_fwd_file, nucl_ex_file)
+                jobs[job] = this_fwd_file
+                if len(jobs) > MAX_FILES_PROCESSED:
+                    break
+            for job in concurrent.futures.as_completed(jobs):
+                fwd_files_left -= 1
+                try:
+                    l_tup = job.result()
+                except Exception as ex:
+                    logger.error('[fwd] Exception {}'.format(ex.__cause__))
+                this_fwd_file = jobs[job]
+                del jobs[job]
+                logger.info('[fwd] Got future for'.format(this_fwd_file))
+
+    logger.info('End of forward concurrent phase for chrom {}'.format(chrom))
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=5, thread_name_prefix='rev') as executor:
-        futures_run = {executor.submit(run_reverse, chrom, outdir, f, nucl_ex_file): f for f in rev_files}
-        for future in concurrent.futures.as_completed(futures_run):
-            lengths = futures_run[future]
-            try:
-                l_tup = future.result()
-            except Exception as ex:
-                logger.error('[rev] Exception in {} - {}'.format(lengths, ex))
-            else:
-                logger.info('[rev] Got future: {}'.format(l_tup))
+        jobs = {}
+        while rev_files_left:
+            for this_rev_file in rev_files_iter:
+                job = executor.submit(run_forward, chrom, outdir, this_rev_file, nucl_ex_file)
+                jobs[job] = this_rev_file
+                if len(jobs) > MAX_FILES_PROCESSED:
+                    break
+            for job in concurrent.futures.as_completed(jobs):
+                rev_files_left -= 1
+                try:
+                    l_tup = job.result()
+                except Exception as ex:
+                    logger.error('[rev] Exception {}'.format(ex.__cause__))
+                this_rev_file = jobs[job]
+                del jobs[job]
+                logger.info('[rev] Got future for'.format(this_rev_file))
 
-    logger.debug('Finished processing chrom {}'.format(chrom))
+    logger.info('End of reverse concurrent phase for chrom {}'.format(chrom))
+    logger.info('Finished processing chrom {}'.format(chrom))
     return chrom
 
 
