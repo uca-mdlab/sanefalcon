@@ -59,20 +59,20 @@ def list_files_to_use(bamdir):
                    not re.search('DPNI', d) or os.path.getmtime(os.path.join(bamdir, d)) <= timestamp])
 
     files_to_link = []
-    for r, s, files in os.walk(bamdir):
-        print("ici")
-        print(bamdir,"bamdir")
+    for root, subdir, files in os.walk(bamdir):
+        # print("ici")
+        # print(bamdir,"bamdir")
         # print(root,subdir,files,"okokokok")
-        # subdir[:] = set(subdir) - exclude
+        subdir[:] = set(subdir) - exclude
         # subdir[:] = set(subdir)
-        print(s,'subdir')
-        print(files,'files')
+        # print(s,'subdir')
+        # print(files,'files')
         for f in files:
-            print(f)
+            # print(f)
             if f.endswith(".bam") or f.endswith(".bai"):
-                files_to_link.append(os.path.join(r, f))
-            # if r.count(os.sep) >= 1:  # stop at first level
-            #     del subdir[:]
+                files_to_link.append(os.path.join(root, f))
+            if root.count(os.sep) >= 1:  # stop at first level
+                del subdir[:]
 
     manip_list = list(set([f.split('/')[-2] for f in files_to_link]))  # list of manip with .bam files
     logger.info("Found {} manip with {} bam files".format(len(manip_list), len(files_to_link)))
@@ -132,8 +132,3 @@ if __name__ == '__main__':
     traindir = args.traindir
     #
     prepare_train_folder(bamdir, traindir)
-    # print(traindir)
-
-
-    # print(list_files_to_use2(readfile(bamlist)))
-
