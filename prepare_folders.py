@@ -66,7 +66,7 @@ def list_files_to_use(bamdir):
         subdir[:] = set(subdir) - exclude
         # subdir[:] = set(subdir)
         print(subdir,'subdir')
-        print(files'files')
+        print(files,'files')
         for f in files:
             print(f)
             if f.endswith(".bam") or f.endswith(".bai"):
