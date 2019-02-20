@@ -63,7 +63,7 @@ def list_files_to_use(bamdir):
         # print("ici")
         # print(bamdir,"bamdir")
         # print(root,subdir,files,"okokokok")
-        subdir[:] = set(subdir) - exclude
+        # subdir[:] = set(subdir) - exclude
         # subdir[:] = set(subdir)
         # print(s,'subdir')
         # print(files,'files')
@@ -71,8 +71,8 @@ def list_files_to_use(bamdir):
             # print(f)
             if f.endswith(".bam") or f.endswith(".bai"):
                 files_to_link.append(os.path.join(root, f))
-            if root.count(os.sep) >= 1:  # stop at first level
-                del subdir[:]
+            # if root.count(os.sep) >= 1:  # stop at first level
+            #     del subdir[:]
 
     manip_list = list(set([f.split('/')[-2] for f in files_to_link]))  # list of manip with .bam files
     logger.info("Found {} manip with {} bam files".format(len(manip_list), len(files_to_link)))
