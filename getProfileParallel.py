@@ -180,6 +180,8 @@ def get_data(train_folder, outfolder, nucl_stub):
         regexp = re.compile(".bam.{}.start".format(c))
         c_fwd_files = [f for f in fwd_files if re.search(regexp, f)]          # add fwd files
         c_rev_files = [f for f in rev_files if re.search(regexp, f)]          # add rev files
+        logger.debug("Consistency c_fwd_files = {}".format(all([f.endswith('.fwd') for f in c_fwd_files])))
+        logger.debug("Consistency c_fwd_files = {}".all([f.endswith('.rev') for f in c_fwd_files]))
         d[c] = {'nucl_file': nucl_file, 'fwd': c_fwd_files, 'rev': c_rev_files}  # pack together in a dictionary
         logger.debug('Chrom {}: {} fwd files, {} rev files'.format(c, len(c_fwd_files), len(c_rev_files)))
     return d
