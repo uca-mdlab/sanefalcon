@@ -60,6 +60,8 @@ def list_files_to_use(bamdir):
 
     files_to_link = []
     for root, subdir, files in os.walk(bamdir):
+        print(bamdir,"bamdir")
+        print(root,subdir,files,"okokokok")
         # subdir[:] = set(subdir) - exclude
         subdir[:] = set(subdir)
         for f in files:
