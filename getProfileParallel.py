@@ -190,26 +190,27 @@ def get_data(train_folder, outfolder, nucl_stub):
 
 def run_forward(chrom, outdir, fwd_file, nucl_ex_file):
     output_stubname = os.path.join(outdir, os.path.basename(fwd_file) + '.{}'.format(chrom))
-    logger.debug("0. run_forward chrom {}. outdir={}, fwd_file={}, nucl_ex_file={}, output_stubname={}".format(chrom, outdir, fwd_file,
-                                                                                           nucl_ex_file, output_stubname))
+    logger.debug("run_forward chrom {}. outdir={}, fwd_file={}, nucl_ex_file={}, "
+                 "output_stubname={}".format(chrom, outdir, fwd_file,nucl_ex_file, output_stubname))
     lines, peaks, reads = load_data(nucl_ex_file, fwd_file)
-    logger.debug('1. run_forward chrom {}-{}. peaks id {}'.format(nucl_ex_file.split('.')[-1], os.path.basename(fwd_file), id(peaks)))
+    logger.debug('run_forward chrom {}-{}, peaks id {}'.format(nucl_ex_file.split('.')[-1], os.path.basename(fwd_file), id(peaks)))
     sumPeakFwd = []
     sumPeakRev = []
     fwd_out = output_stubname + ".fwd"
-    logger.debug("2. run_forward fwd_out={}".format(fwd_out))
     try:
         sumPeakFwd = process_forward(peaks, reads, fwd_out)  # -> .fwd
-        logger.debug("3. run_forward - chrom {} id {}: process_forward completed: sumPeaks [{}..{}]".format(chrom, id(peaks), sumPeakFwd[0], sumPeakFwd[-1]))
+        logger.debug(
+            "run_forward - chrom {} id {}: process_forward completed: sumPeaks [{}..{}]".format(chrom, id(peaks),
+                                                                                                sumPeakFwd[0],
+                                                                                                sumPeakFwd[-1]))
     except IndexError:
-        logger.error("3. IndexError: .fwd: peaks {}, reads {}".format(len(peaks), len(reads)))
+        logger.error("run_forward IndexError: .fwd: peaks {}, reads {}".format(len(peaks), len(reads)))
     ifwd_out = output_stubname + ".ifwd"
-    logger.debug("4. run_forward ifwd_out={}".format(ifwd_out))
     try:
         sumPeakRev = process_reverse(peaks, reads, ifwd_out)  # -> .ifwd
-        logger.debug("5. run_forward - chrom {} id {}: process_reverse completed: sumPeaks [{}..{}]".format(chrom, id(peaks), sumPeakRev[0], sumPeakRev[-1]))
+        logger.debug("run_forward - chrom {} id {}: process_reverse completed: sumPeaks [{}..{}]".format(chrom, id(peaks), sumPeakRev[0], sumPeakRev[-1]))
     except IndexError:
-        logger.error("5. IndexError: .ifwd: peaks {}, reads {}".format(len(peaks), len(reads)))
+        logger.error("IndexError: .ifwd: peaks {}, reads {}".format(len(peaks), len(reads)))
 
     return len(sumPeakFwd), len(sumPeakRev)
 
