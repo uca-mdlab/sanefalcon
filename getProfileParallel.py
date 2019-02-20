@@ -175,13 +175,14 @@ def get_data(train_folder, outfolder, nucl_stub):
     chromosomes = range(1, 23) ## 1, 23
     d = dict.fromkeys(chromosomes)
     for c in chromosomes:
-        print(c,"TEST C")
         nucl_file = [f for f in nucl_files if int(f.split('.')[-1]) == c][0]  # get the nucl file for the chromosome
         regexp = re.compile(".bam.{}.start".format(c))
         c_fwd_files = [f for f in fwd_files if re.search(regexp, f)]          # add fwd files
         c_rev_files = [f for f in rev_files if re.search(regexp, f)]          # add rev files
-        logger.debug("Consistency c_fwd_files = {}".format(all([f.endswith('.fwd') for f in c_fwd_files])))
-        logger.debug("Consistency c_rev_files = {}".format(all([f.endswith('.rev') for f in c_rev_files])))
+        logger.debug("Consistency c_fwd_files, c_rev_files = {} - {}".format(all([f.endswith('.fwd') for
+                                                                                  f in c_fwd_files]),
+                                                                             all([f.endswith('.rev')
+                                                                                  for f in c_rev_files])))
         d[c] = {'nucl_file': nucl_file, 'fwd': c_fwd_files, 'rev': c_rev_files}  # pack together in a dictionary
         logger.debug('Chrom {}: {} fwd files, {} rev files'.format(c, len(c_fwd_files), len(c_rev_files)))
     return d
@@ -270,7 +271,7 @@ def process(chrom, dic, outdir):
         jobs = {}
         while rev_files_left:
             for this_rev_file in rev_files_iter:
-                job = executor.submit(run_forward, chrom, outdir, this_rev_file, nucl_ex_file)
+                job = executor.submit(run_reverse, chrom, outdir, this_rev_file, nucl_ex_file)
                 jobs[job] = this_rev_file
                 if len(jobs) > MAX_FILES_PROCESSED:
                     break
