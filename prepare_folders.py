@@ -55,18 +55,18 @@ def list_files_to_use(bamdir):
     first_date = datetime.date(2017, 1, 13)
     timestamp = time.mktime(first_date.timetuple())
 
-    # exclude = set([d for d in os.listdir(bamdir) if re.search('_tn_', d) or not re.search('Auto_user_', d) or
-    #                not re.search('DPNI', d) or os.path.getmtime(os.path.join(bamdir, d)) <= timestamp])
+    exclude = set([d for d in os.listdir(bamdir) if re.search('_tn_', d) or not re.search('Auto_user_', d) or
+                   not re.search('DPNI', d) or os.path.getmtime(os.path.join(bamdir, d)) <= timestamp])
 
     files_to_link = []
     for root, subdir, files in os.walk(bamdir):
         print("ici")
         print(bamdir,"bamdir")
         # print(root,subdir,files,"okokokok")
-        # subdir[:] = set(subdir) - exclude
+        subdir[:] = set(subdir) - exclude
         # subdir[:] = set(subdir)
-        print(subdir)
-        print(files)
+        print(subdir,'subdir')
+        print(files'files')
         for f in files:
             print(f)
             if f.endswith(".bam") or f.endswith(".bai"):
