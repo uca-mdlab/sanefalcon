@@ -21,11 +21,12 @@ def readfile(bamlist):
     return myfile
 
 def list_files_to_use(bamlist,bamdir):
+    files_to_link=[]
     for root, subdir, files in os.walk(bamdir):
         for f in files:
             if f in bamlist:
             # if os.path.join(root,file) in
-            files_to_link.append(os.path.join(root,f))
+                files_to_link.append(os.path.join(root,f))
 
 
     # files_to_link=["/".join((bamdir,x)) for x in bamlist if os.path.isfile("/".join((bamdir,x)))]
