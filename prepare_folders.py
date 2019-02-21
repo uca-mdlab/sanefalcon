@@ -24,11 +24,11 @@ def list_files_to_use(bamlist,bamdir):
     list_files=[x.split('/')[-1] for x in bamlist]
     files_to_link=[]
     for root,subdir,files in os.walk(bamdir):
-        # for f in files:
-        #     if f in list_files:
-        #         files_to_link.append(os.path.join(root,f))
+        for f in files:
+            if f in list_files:
+                files_to_link.append(os.path.join(root,f))
 
-        files_to_link=[os.path.join(root,f) for f in files if f in list_files]
+        # files_to_link=[os.path.join(root,f) for f in files if f in list_files]
 
 
     # files_to_link=["/".join((bamdir,x)) for x in bamlist if os.path.isfile("/".join((bamdir,x)))]
