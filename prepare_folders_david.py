@@ -47,7 +47,7 @@ def list_files_to_use(bamdir):
 
     manip_list = list(set([f.split('/')[-2] for f in bamdir]))  # list of manip with .bam files
     logger.info("Found {} manip with {} bam files".format(len(manip_list), len(bamdir)))
-    return files_to_link, manip_list
+    return bamdir, manip_list
 
 
 
