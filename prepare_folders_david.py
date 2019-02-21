@@ -44,7 +44,7 @@ def list_files_to_use(bamlist,bamdir):
     #
     files_to_link = []
     for elm in bamlist:
-        files_to_link.append("/".join(bamdir,elm))
+        files_to_link.append("/".join((bamdir,elm)))
 
 
     manip_list = list(set([f.split('/')[-2] for f in files_to_link]))  # list of manip with .bam files
