@@ -21,11 +21,12 @@ def readfile(bamlist):
     return myfile
 
 def list_files_to_use(bamlist,bamdir):
+    list_files=[x.split('/')[-1] for x in bamlist]
     files_to_link=[]
-    for root, subdir, files in os.walk(bamdir):
+    for root,subdir,files in os.walk(bamdir):
         for f in files:
-            f_regex = re.compile(f)
-            if re.search(f_regex, bamlist):
+            # f_regex = re.compile(f)
+            if f in list_files:
             # print(f)
             # # if f in bamlist:
             # if os.path.join(root,file) in
