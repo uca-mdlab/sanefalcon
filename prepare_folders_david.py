@@ -46,6 +46,8 @@ def list_files_to_use(bamlist,bamdir):
     for elm in bamlist:
         files_to_link.append("/".join((bamdir,elm)))
 
+    files_to_link=["/".join((bamdir,x)) for x in bamlist if os.isfile("/".join((bamdir,x))) ]
+
     for elm in files_to_link:
         print (elm)
 
