@@ -13,14 +13,14 @@ logging.basicConfig(format='%(asctime)s - %(levelname)s: %(message)s',
 
 logger = logging.getLogger(__name__)
 
-def readfile(bamdir):
-    with open (bamdir) as f:
+def readfile(bamlist):
+    with open (bamlist) as f:
         myfile=[x.strip() for x in f.readlines()]
     f.close()
 
     return myfile
 
-def list_files_to_use(bamdir):
+def list_files_to_use(bamlist,bamdir):
     # dict_run={}
     # for x in bamlist:
     #     run,file=x.split(';')
@@ -42,12 +42,14 @@ def list_files_to_use(bamdir):
     # # return dict_run
     #
     #
-    # files_to_link = []
+    files_to_link = []
+    for elm in bamlist:
+        files_to_link.append("/".join(bamdir,elm))
 
 
-    manip_list = list(set([f.split('/')[-2] for f in bamdir]))  # list of manip with .bam files
-    logger.info("Found {} manip with {} bam files".format(len(manip_list), len(bamdir)))
-    return bamdir, manip_list
+    manip_list = list(set([f.split('/')[-2] for f in files_to_link]))  # list of manip with .bam files
+    logger.info("Found {} manip with {} bam files".format(len(manip_list), len(files_to_link)))
+    return files_to_link, manip_list
 
 
 
@@ -93,11 +95,11 @@ def prepare_batches(manip_list):
         yield manip_list[i:i + 5]
 
 
-def prepare_train_folder(bamdir, traindir):
+def prepare_train_folder(bamlist,bamdir, traindir):
 # def prepare_train_folder(bamlist, traindir):
     letters = list(string.ascii_lowercase)
     # files_to_link,manip_list=list_files_to_use2(bamlist)
-    files_to_link, manip_list = list_files_to_use(readfile(bamdir))
+    files_to_link, manip_list = list_files_to_use(readfile(bamlist),bamdir)
 
     batches = {}
     for num_batch, batch in enumerate(prepare_batches(manip_list)):
@@ -136,7 +138,7 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
     bamdir = args.bamdir
-    # bamlist = args.bamlist
+    bamlist = args.bamlist
     traindir = args.traindir
     #
-    prepare_train_folder(bamdir, traindir)
+    prepare_train_folder(bamlist,bamdir, traindir)
