@@ -21,8 +21,14 @@ def readfile(bamlist):
     return myfile
 
 def list_files_to_use(bamlist,bamdir):
+    for root, subdir, files in os.walk(bamdir):
+        for f in files:
+            if f in bamlist:
+            # if os.path.join(root,file) in
+            files_to_link.append(os.path.join(root,f))
 
-    files_to_link=["/".join((bamdir,x)) for x in bamlist if os.path.isfile("/".join((bamdir,x)))]
+
+    # files_to_link=["/".join((bamdir,x)) for x in bamlist if os.path.isfile("/".join((bamdir,x)))]
 
     manip_list = list(set([f.split('/')[-2] for f in files_to_link if os.path.isfile(f)]))  # list of manip with .bam files
     logger.info("Found {} manip with {} bam files".format(len(manip_list), len(files_to_link)))
