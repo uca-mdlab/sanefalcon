@@ -13,14 +13,14 @@ logging.basicConfig(format='%(asctime)s - %(levelname)s: %(message)s',
 
 logger = logging.getLogger(__name__)
 
-def readfile(bamlist):
-    with open (bamlist) as f:
+def readfile(bamdir):
+    with open (bamdir) as f:
         myfile=[x.strip() for x in f.readlines()]
     f.close()
 
     return myfile
 
-def list_files_to_use(bamlist):
+def list_files_to_use(bamdir):
     # dict_run={}
     # for x in bamlist:
     #     run,file=x.split(';')
@@ -45,7 +45,7 @@ def list_files_to_use(bamlist):
     # files_to_link = []
 
 
-    manip_list = list(set([f.split('/')[-2] for f in bamlist]))  # list of manip with .bam files
+    manip_list = list(set([f.split('/')[-2] for f in bamdir]))  # list of manip with .bam files
     logger.info("Found {} manip with {} bam files".format(len(manip_list), len(files_to_link)))
     return files_to_link, manip_list
 
@@ -131,12 +131,12 @@ if __name__ == '__main__':
                                      formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
     parser.add_argument('bamdir', type=str, default="/results/analysis/output/Home", help='path of the manipulation')
-    parser.add_argument('bamlist', type=str, help='list of bamfiles')
+    # parser.add_argument('bamlist', type=str, help='list of bamfiles')
     parser.add_argument('traindir', type=str, default="/tmp/sanefalcontrain", help='path of the train subtree')
 
     args = parser.parse_args()
     bamdir = args.bamdir
-    bamlist = args.bamlist
+    # bamlist = args.bamlist
     traindir = args.traindir
     #
     prepare_train_folder(bamdir, traindir)
