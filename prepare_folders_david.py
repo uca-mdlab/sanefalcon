@@ -133,7 +133,7 @@ if __name__ == '__main__':
                                      formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
     parser.add_argument('bamdir', type=str, default="/results/analysis/output/Home", help='path of the manipulation')
-    # parser.add_argument('bamlist', type=str, help='list of bamfiles')
+    parser.add_argument('bamlist', type=str, help='list of bamfiles')
     parser.add_argument('traindir', type=str, default="/tmp/sanefalcontrain", help='path of the train subtree')
 
     args = parser.parse_args()
