@@ -26,8 +26,8 @@ def list_files_to_use(bamlist,bamdir):
         for f in files:
             f_regex = re.compile(f)
             if re.search(f_regex, bamlist):
-            print(f)
-            # if f in bamlist:
+            # print(f)
+            # # if f in bamlist:
             # if os.path.join(root,file) in
                 files_to_link.append(os.path.join(root,f))
 
