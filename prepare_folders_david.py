@@ -20,31 +20,39 @@ def readfile(bamlist):
 
     return myfile
 
-def list_files_to_use2(bamlist):
-    dict_run={}
-    for x in bamlist:
-        run,file=x.split(';')
-        print(file,"file")
-        print(run,'run')
-        # run=x.split(';')[1]
-        if run not in dict_run:
-            dict_run[run]=[]
-            dict_run[run].append(file)
+def list_files_to_use(bamlist):
+    # dict_run={}
+    # for x in bamlist:
+    #     run,file=x.split(';')
+    #     print(file,"file")
+    #     print(run,'run')
+    #     # run=x.split(';')[1]
+    #     if run not in dict_run:
+    #         dict_run[run]=[]
+    #         dict_run[run].append(file)
+    #
+    #     else:
+    #         dict_run[run].append(file)
+    #
+    # # run,file=[x for k,v in dict_run.items()]
+    #
+    # # for k,v in dict_run.items():
+    # #      print(k,v)
+    #
+    # # return dict_run
+    #
+    #
+    # files_to_link = []
 
-        else:
-            dict_run[run].append(file)
 
-    # run,file=[x for k,v in dict_run.items()]
-
-    # for k,v in dict_run.items():
-    #      print(k,v)
-
-    return dict_run
+    manip_list = list(set([f.split('/')[-2] for f in bamlist]))  # list of manip with .bam files
+    logger.info("Found {} manip with {} bam files".format(len(manip_list), len(files_to_link)))
+    return files_to_link, manip_list
 
 
 
 
-def list_files_to_use(bamdir):
+def list_files_to_use2(bamdir):
     """
 
     :param bamdir: the root of all manips
@@ -89,7 +97,7 @@ def prepare_train_folder(bamdir, traindir):
 # def prepare_train_folder(bamlist, traindir):
     letters = list(string.ascii_lowercase)
     # files_to_link,manip_list=list_files_to_use2(bamlist)
-    files_to_link, manip_list = list_files_to_use(bamdir)
+    files_to_link, manip_list = list_files_to_use(readfile(bamdir))
 
     batches = {}
     for num_batch, batch in enumerate(prepare_batches(manip_list)):
@@ -123,12 +131,12 @@ if __name__ == '__main__':
                                      formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
     parser.add_argument('bamdir', type=str, default="/results/analysis/output/Home", help='path of the manipulation')
-    # parser.add_argument('bamlist', type=str, help='list of bamfiles')
+    parser.add_argument('bamlist', type=str, help='list of bamfiles')
     parser.add_argument('traindir', type=str, default="/tmp/sanefalcontrain", help='path of the train subtree')
 
     args = parser.parse_args()
     bamdir = args.bamdir
-    # bamlist = args.bamlist
+    bamlist = args.bamlist
     traindir = args.traindir
     #
     prepare_train_folder(bamdir, traindir)
