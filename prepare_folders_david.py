@@ -50,7 +50,7 @@ def list_files_to_use(bamlist,bamdir):
         print (elm)
 
 
-    manip_list = list(set([f.split('/')[-2] for f in files_to_link]))  # list of manip with .bam files
+    manip_list = list(set([f.split('/')[-2] for f in files_to_link if os.path.isfile(f)]))  # list of manip with .bam files
     logger.info("Found {} manip with {} bam files".format(len(manip_list), len(files_to_link)))
     return files_to_link, manip_list
 
