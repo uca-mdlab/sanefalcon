@@ -11,6 +11,14 @@ import re
 chromosomes = range(1, 23)
 
 
+def sort_and_write(data, outfile):
+    data = list(set(data))  # remove duplicates and sort
+    data.sort()
+    to_be_written = map(lambda x: str(x) + "\n", data)
+    with open(outfile, 'w') as out:
+        out.writelines(to_be_written)
+
+
 def prepare_file_lists(trainfolder):
     """
 
@@ -50,22 +58,31 @@ def merge(files_dic):
         for dir, files in dic.items():
             data = []
             for f in files:
-                data.extend([int(line.strip()) for line in open(f, 'r') for f in files])
-            sort_data = sorted(list(set(data)))  # remove duplicates and sort
-            to_be_written = map(lambda x: str(x) + "\n", sort_data)
-            with open(os.path.join(dir, "merge.{}".format(chrom)), 'w') as out:
-                out.writelines(to_be_written)
+                data.extend([int(line.strip()) for line in open(f, 'r')])
+            outfile = os.path.join(dir, "merge.{}".format(chrom))
+            sort_and_write(data, outfile)
 
 
-
-def merge_subs(trainfolder):
+def merge_subs(trainfolder, files_dic):
     """
     input: [sanefalcontrain/a/merge.chr1, sanefalcontrain/b/merge.chr1, sanefalcontrain/c/merge.chr1, ...]
     output: sanefalcontrain/merge.chr1
     :param trainfolder:
     :return:
     """
-    pass
+    for chrom in chromosomes:
+        files_to_merge = []
+        for dir, _ in files_dic[chrom].items():
+            subdir_merge_file = os.path.join(dir, "merge.{}".format(chrom))
+            if not os.path.isfile(subdir_merge_file):
+                exit("{} not found".format(subdir_merge_file))
+            files_to_merge.append(subdir_merge_file)
+
+        data = []
+        for mergefile in files_to_merge:
+            data.extend([int(line.strip()) for line in open(mergefile, 'r')])
+        outfile = os.path.join(trainfolder, "merge.{}".format(chrom))
+        sort_and_write(data, outfile)
 
 
 def merge_anti_subs(trainfolder):
@@ -88,4 +105,5 @@ if __name__ == "__main__":
     nucleosomefolder = config['default']['nucleosomefolder']
 
     dic = prepare_file_lists(trainfolder)
-    merge(dic)
+    # merge(dic)
+    merge_subs(trainfolder, dic)
