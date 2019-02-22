@@ -26,7 +26,7 @@ def find_merge_files_in_subdirectories(trainfolder):
     for root, subdirs, files in os.walk(trainfolder):
         for fname in files:
             filename = os.path.join(root, fname)
-            if re.match(pattern_name, fname) and re.search(pattern_subdir, os.path.join(root, filename)):
+            if re.match(pattern_name, fname) and re.search(pattern_subdir, filename):
                 merge_files.append(filename)
     return merge_files
 
