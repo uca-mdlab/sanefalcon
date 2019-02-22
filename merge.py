@@ -19,6 +19,18 @@ def sort_and_write(data, outfile):
         out.writelines(to_be_written)
 
 
+def find_merge_files_in_subdirectories(trainfolder):
+    merge_files = []
+    pattern_name = re.compile("merge.\d{1,2}")
+    pattern_subdir = re.compile("/[a-z]/")
+    for root, subdirs, files in os.walk(trainfolder):
+        for fname in files:
+            filename = os.path.join(root, fname)
+            if re.match(pattern_name, fname) and re.search(pattern_subdir, os.path.join(root, filename)):
+                merge_files.append(filename)
+    return merge_files
+
+
 def prepare_file_lists(trainfolder):
     """
 
@@ -92,6 +104,9 @@ def merge_anti_subs(trainfolder):
     :param trainfolder:
     :return:
     """
+    merge_files = find_merge_files_in_subdirectories(trainfolder)
+    print(merge_files)
+
     pass
 
 if __name__ == "__main__":
@@ -106,4 +121,5 @@ if __name__ == "__main__":
 
     dic = prepare_file_lists(trainfolder)
     # merge(dic)
-    merge_subs(trainfolder, dic)
+    # merge_subs(trainfolder, dic)
+    merge_anti_subs(trainfolder)
