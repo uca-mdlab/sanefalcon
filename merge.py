@@ -132,6 +132,9 @@ if __name__ == "__main__":
     nucleosomefolder = config['default']['nucleosomefolder']
 
     dic = prepare_file_lists(trainfolder)
-    # merge(dic)
-    # merge_subs(trainfolder, dic)
+    merge(dic)
+    print("merge done")
+    merge_subs(trainfolder, dic)
+    print("merge_subs done")
     merge_anti_subs(trainfolder)
+    print("merge_anti_subs done")
