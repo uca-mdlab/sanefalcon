@@ -104,10 +104,22 @@ def merge_anti_subs(trainfolder):
     :param trainfolder:
     :return:
     """
-    merge_files = find_merge_files_in_subdirectories(trainfolder)
-    print(merge_files)
-
-    pass
+    all_merge_files = find_merge_files_in_subdirectories(trainfolder)
+    subdirs = [subdir.path for subdir in os.scandir(trainfolder) if subdir.is_dir()]
+    done = dict.fromkeys(subdirs, False)
+    for subdir in subdirs:
+        if not done[subdir]:
+            current = subdir
+            merge_files = [x for x in all_merge_files if not re.match(current, x)]
+            for chrom in chromosomes:
+                data = []
+                files_to_merge = [f for f in merge_files if f.endswith(".{}".format(chrom))]
+                for mergefile in files_to_merge:
+                    data.extend([int(line.strip()) for line in open(mergefile, 'r')])
+                if len(data) > 0:
+                    outfile = os.path.join(subdir, "anti.{}".format(chrom))
+                    sort_and_write(data, outfile)
+                done[subdir] = True
 
 if __name__ == "__main__":
     conf_file = 'sanefalcon.conf'
