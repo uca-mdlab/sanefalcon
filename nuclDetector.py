@@ -100,7 +100,7 @@ def flush(area, endPoint):
             return leftList + [thisList] + rightList
         return []
 
-    newCenters = findCenters(0,areaLen)
+    newCenters = findCenters(0, areaLen)
     if newCenters != [] and newCenters[-1] != [] and newCenters[-1][0] > len(extra):
         print(newCenters[-1], len(extra), len(bpScores), bpScores[-5:])
     allNucl.extend([[x[0]+startPoint]+x[1:]+extra[int(x[0])] for x in newCenters])
@@ -116,8 +116,8 @@ inFile = open(sys.argv[1], 'rb')
 allNucl = []
 
 for line in inFile:
-    splitLine=line.split()
-    position=int(splitLine[0])
+    splitLine = line.split()
+    position = int(splitLine[0])
     distance = position - lastPos
 
     #if position > 17500000:
