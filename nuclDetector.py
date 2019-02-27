@@ -55,7 +55,7 @@ def flush(area, endPoint):
     # Sliding window settings, area is half the nucleosome size
     bins = [0] * padding + area + [0] * padding
     areaLen = len(area)
-    startPoint = endPoint-areaLen + 1 # TODO check +1?
+    startPoint = endPoint-areaLen + 1  # TODO check +1?
 
     # Let's move out
     bpScores=[]
@@ -125,7 +125,7 @@ for line in inFile:
 
     # So far away no nucleosome can be detected in between, finish this region
     if distance > maxDist:
-        flush(curArea,lastPos)
+        flush(curArea, lastPos)
         curArea=[1]
     # Add read to current region
     else:
