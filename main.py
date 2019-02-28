@@ -55,9 +55,12 @@ if __name__ == "__main__":
     prepare_samples(datafolder, trainfolder, samtools)
     logger.info("prepare_samples ok")
 
-    prepare_train_folder(bamlist, datafolder, trainfolder)
-    logger.info("prepare_folders ok")
-    
+    try:
+        prepare_train_folder(bamlist, datafolder, trainfolder)
+        logger.info("prepare_folders ok")
+    except FileExistsError:
+        logger.info("train folder symlinks already in place")
+
     merge_all(trainfolder)
     logger.info("merge_all ok")
 
