@@ -89,19 +89,22 @@ def merge(files_dic):
         tmp = {}
         for fname in list_:
             subdir = search_manip_name(manips, fname)
-            tmp[subdir].append(fname)
+            if subdir in tmp:
+                tmp[subdir].append(fname)
+            else:
+                tmp[subdir] = [fname]
 
         print(tmp)
         exit()
-        logger.debug("merging directory {}".format(subdir))
-
-            data = []
-            for f in files:
-                logger.debug("merging {}".format(f))
-                data.extend([int(line.strip()) for line in open(f, 'r')])
-            outfile = os.path.join(dir, "merge.{}".format(chrom))
-            logger.debug("merge into {}".format(outfile))
-            sort_and_write(data, outfile)
+        # logger.debug("merging directory {}".format(subdir))
+        #
+        #     data = []
+        #     for f in files:
+        #         logger.debug("merging {}".format(f))
+        #         data.extend([int(line.strip()) for line in open(f, 'r')])
+        #     outfile = os.path.join(dir, "merge.{}".format(chrom))
+        #     logger.debug("merge into {}".format(outfile))
+        #     sort_and_write(data, outfile)
 
 
 def merge_subs(trainfolder, files_dic):
