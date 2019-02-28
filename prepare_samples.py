@@ -4,18 +4,16 @@ import configparser
 import os
 import subprocess
 import sys
+import logging
 
 
-if __name__ == "__main__":
-    conf_file = 'sanefalcon.conf'
-    config = configparser.ConfigParser()
-    config.read(conf_file)
+logging.basicConfig(format='%(asctime)s - %(levelname)s: %(message)s',
+                    filename='sanefalcon.log', filemode='w', level=logging.DEBUG)
 
-    samtools = config['default']['samtools']
-    datafolder = config['default']['datafolder']
-    trainfolder = config['default']['trainfolder']
-    nucleosomefolder = config['default']['nucleosomefolder']
+logger = logging.getLogger("prepare_samples")
 
+
+def prepare_samples(datafolder, trainfolder, samtools):
     chromosomes = range(1, 23)
 
     for root, subdir, files in os.walk(datafolder):
@@ -42,3 +40,17 @@ if __name__ == "__main__":
                         p3 = subprocess.Popen(three, stdin=p2.stdout, stdout=open(revoutfile, 'w'))
                         output = p3.communicate()[0]
 
+                logger.debug("prep_samples for {}".format(fname))
+
+
+if __name__ == "__main__":
+    conf_file = 'sanefalcon.conf'
+    config = configparser.ConfigParser()
+    config.read(conf_file)
+
+    samtools = config['default']['samtools']
+    datafolder = config['default']['datafolder']
+    trainfolder = config['default']['trainfolder']
+    nucleosomefolder = config['default']['nucleosomefolder']
+
+    prepare_samples(datafolder, trainfolder, samtools)
