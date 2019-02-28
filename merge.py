@@ -67,7 +67,6 @@ def prepare_file_lists(trainfolder):
              }
     """
     res = {'manips': find_all_manips(trainfolder)}
-
     files_dic = dict.fromkeys(chromosomes, [])
     pattern = re.compile("\.bam\.\d{1,2}\.start")
     for root, subdirs, files in os.walk(trainfolder):
@@ -76,6 +75,7 @@ def prepare_file_lists(trainfolder):
                 filename = os.path.join(root, fname)
                 match = re.search(pattern, fname)
                 chrom = int(match.group(0).split(".")[2])
+                logger.debug("Found {} for chrom {}".format(filename, chrom))
                 files_dic[chrom].append(filename)
 
     res.update({'files': files_dic})
@@ -90,9 +90,6 @@ def merge(files_to_merge, manips):
     :return:
     """
     for chrom, dic in files_to_merge.items():
-        print(chrom)
-        print(dic)
-        exit()
         for dir, files in manips.items():
             logger.debug("merging directory {}".format(dir))
             data = []
@@ -179,7 +176,6 @@ if __name__ == "__main__":
     trainfolder = config['default']['trainfolder']
 
     files_to_merge = prepare_file_lists(trainfolder)
-    print(files_to_merge['manips'])
     print(files_to_merge['files'][1])
     # merge(files_to_merge, manips)
     # merge_all(trainfolder)
