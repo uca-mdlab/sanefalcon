@@ -75,14 +75,17 @@ def prepare_file_lists(trainfolder):
     return res
 
 
-def merge(files_to_merge, manips):
+def merge(files_dic):
     """
     input: [sanefalcontrain/sample1.start.fwd, sanefalcontrain/sample1.start.rev]
     output: sanefalcontrain/a/merge.chr1
     :param trainfolder:
     :return:
     """
-    for chrom, dic in files_to_merge.items():
+    manips = files_dic['manips']
+    for chrom, list_ in files_dic['files'].items():
+        print(chrom, list_)
+        exit()
         for dir, files in manips.items():
             logger.debug("merging directory {}".format(dir))
             data = []
