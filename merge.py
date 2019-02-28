@@ -75,6 +75,20 @@ def prepare_file_lists(trainfolder):
     return res
 
 
+def pick_manip_pairs(manips, list_):
+    res = {}
+    for subdir, manip_list in manips.items():
+        for manip in manip_list:
+            files = []
+            manip_name = os.path.basename(manip)
+            for path in list_:
+                base = os.path.basename(path)
+                if os.path.commonprefix([base, manip_name]) == manip_name:
+                    files.append(path)
+            res[manip] = files
+    return res
+
+
 def merge(files_dic):
     """
     input: [sanefalcontrain/sample1.start.fwd, sanefalcontrain/sample1.start.rev]
@@ -83,30 +97,19 @@ def merge(files_dic):
     :return:
     """
     manips = files_dic['manips']
+
     for chrom, list_ in files_dic['files'].items():
-        logger.debug("Merging {} start files for chrom {}".format(len(list_), chrom))
-
-        tmp = {}
-        for fname in list_:
-            subdir = search_manip_name(manips, fname)
-            if subdir and subdir in tmp:
-                tmp[subdir].append(fname)
-            elif subdir:
-                tmp[subdir] = [fname]
-            else:
-                pass
-
-        print(tmp)
-        exit()
-        # logger.debug("merging directory {}".format(subdir))
-        #
-        #     data = []
-        #     for f in files:
-        #         logger.debug("merging {}".format(f))
-        #         data.extend([int(line.strip()) for line in open(f, 'r')])
-        #     outfile = os.path.join(dir, "merge.{}".format(chrom))
-        #     logger.debug("merge into {}".format(outfile))
-        #     sort_and_write(data, outfile)
+        pairs = pick_manip_pairs(manips, list_)
+        for manip, pair in pairs.items():
+            print(manip)
+            logger.debug("merging files {} in {}".format(pair, manip))
+            data = []
+            for f in pair:
+                logger.debug("merging {}".format(f))
+                data.extend([int(line.strip()) for line in open(f, 'r')])
+            # outfile = os.path.join(, "merge.{}".format(chrom))
+            # logger.debug("merge into {}".format(outfile))
+            # sort_and_write(data, outfile)
 
 
 def merge_subs(trainfolder, files_dic):
@@ -183,7 +186,9 @@ if __name__ == "__main__":
     datafolder = config['default']['datafolder']
     trainfolder = config['default']['trainfolder']
 
+
+
     files_to_merge = prepare_file_lists(trainfolder)
     merge(files_to_merge)
-    # merge_all(trainfolder)
+    # # merge_all(trainfolder)
     # merge(dic)
