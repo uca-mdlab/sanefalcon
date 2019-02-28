@@ -145,6 +145,5 @@ if __name__ == "__main__":
     samtools = config['default']['samtools']
     datafolder = config['default']['datafolder']
     trainfolder = config['default']['trainfolder']
-    nucleosomefolder = config['default']['nucleosomefolder']
 
     merge_all(trainfolder)
