@@ -17,7 +17,8 @@ logging.basicConfig(format='%(asctime)s - %(levelname)s: %(message)s',
 logger = logging.getLogger("main")
 
 
-def run_profileParallel(trainfolder, outfolder, nucl_stub):
+def run_profileParallel(trainfolder, nucl_stub):
+    outfolder = os.path.join(trainfolder, "profiles")
     if not os.path.isdir(outfolder):
         os.makedirs(outfolder)
         logger.info('run_profileParallel: Created out folder {}'.format(outfolder))
@@ -66,4 +67,5 @@ if __name__ == "__main__":
     create_nucl_files(trainfolder, anti_template, 'anti')
     logger.info("nucleosome detector anti ok")
 
-
+    run_profileParallel(trainfolder, nucl_file_template)
+    logger.info("run profile parallel ok")
