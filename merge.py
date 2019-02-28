@@ -7,6 +7,11 @@ import os
 import logging
 import re
 
+logging.basicConfig(format='%(asctime)s - %(levelname)s: %(message)s',
+                    filename='sanefalcon.log', filemode='w', level=logging.DEBUG)
+
+logger = logging.getLogger("merge")
+
 
 chromosomes = range(1, 23)
 
@@ -121,6 +126,17 @@ def merge_anti_subs(trainfolder):
                     sort_and_write(data, outfile)
                 done[subdir] = True
 
+
+def merge_all(trainfolder):
+    dic = prepare_file_lists(trainfolder)
+    merge(dic)
+    logger.debug("merge done")
+    merge_subs(trainfolder, dic)
+    logger.debug("merge_subs done")
+    merge_anti_subs(trainfolder)
+    logger.debug("merge_anti_subs done")
+
+
 if __name__ == "__main__":
     conf_file = 'sanefalcon.conf'
     config = configparser.ConfigParser()
@@ -131,10 +147,4 @@ if __name__ == "__main__":
     trainfolder = config['default']['trainfolder']
     nucleosomefolder = config['default']['nucleosomefolder']
 
-    dic = prepare_file_lists(trainfolder)
-    merge(dic)
-    print("merge done")
-    merge_subs(trainfolder, dic)
-    print("merge_subs done")
-    merge_anti_subs(trainfolder)
-    print("merge_anti_subs done")
+    merge_all(trainfolder)
