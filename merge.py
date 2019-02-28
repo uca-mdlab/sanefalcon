@@ -47,7 +47,7 @@ def find_merge_files_in_subdirectories(trainfolder):
 def search_manip_name(manips, fname):
     base = os.path.basename(fname)
     for subdir, manip_names in manips.items():
-        if any([re.match(base, os.path.basename(x)) for x in manip_names]):
+        if any([os.path.commonprefix([f, base]) == f for f in manip_names]):
             return subdir
         else:
             return None
@@ -74,9 +74,9 @@ def prepare_file_lists(trainfolder):
                 match = re.search(pattern, fname)
                 chrom = int(match.group(0).split(".")[2])
                 subdir = os.path.dirname(filename)
-                print('one: {}'.subdir)
+                print('one: {}'.format(subdir))
                 subdir2 = search_manip_name(manips, filename)
-                print('two: {}'.subdir2)
+                print('two: {}'.format(subdir2))
                 logger.debug("prepare file list: adding subdir: {}. fname: {}".format(subdir, filename))
                 if subdir in files_dic[chrom]:
                     files_dic[chrom][subdir].append(filename)
