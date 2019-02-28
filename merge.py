@@ -179,7 +179,7 @@ if __name__ == "__main__":
     trainfolder = config['default']['trainfolder']
 
     files_to_merge = prepare_file_lists(trainfolder)
-    for k, v in files_to_merge:
+    for k, v in files_to_merge.items():
         print(k)
         print(v)
         print('====')
