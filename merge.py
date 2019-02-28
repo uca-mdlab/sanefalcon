@@ -77,15 +77,15 @@ def prepare_file_lists(trainfolder):
                 filename = os.path.join(root, fname)
                 match = re.search(pattern, fname)
                 chrom = int(match.group(0).split(".")[2])
-                subdir = os.path.dirname(filename)
-                print('one: {}'.format(subdir))
-                subdir2 = search_manip_name(manips, filename)
-                print('two: {}'.format(subdir2))
-                logger.debug("prepare file list: adding subdir: {}. fname: {}".format(subdir, filename))
-                if subdir in files_dic[chrom]:
-                    files_dic[chrom][subdir].append(filename)
-                else:
-                    files_dic[chrom] = {subdir: [filename]}
+                # subdir = os.path.dirname(filename)
+                # print('one: {}'.format(subdir))
+                subdir = search_manip_name(manips, filename)
+                if subdir:
+                    logger.debug("prepare file list: adding subdir: {}. fname: {}".format(subdir, filename))
+                    if subdir in files_dic[chrom]:
+                        files_dic[chrom][subdir].append(filename)
+                    else:
+                        files_dic[chrom] = {subdir: [filename]}
 
     return files_dic
 
