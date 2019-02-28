@@ -56,25 +56,25 @@ def prepare_train_folder(bamlist, bamdir, traindir):
         logger.debug("Batch {}: {}".format(letters[num_batch], batch))
 
     for batch_name, batch_list in batches.items():
-        workingdir = os.path.join(traindir, batch_name)
+        subdir = os.path.join(traindir, batch_name)
         try:
-            os.mkdir(workingdir)
-            logger.debug("Created folder: {}".format(workingdir))
+            os.mkdir(subdir)
+            logger.debug("Created folder: {}".format(subdir))
         except FileExistsError:
-            logger.warning("Folder {} exists, skipping...".format(workingdir))
+            logger.warning("Folder {} exists, skipping...".format(subdir))
 
         for manip in batch_list:
             manip_regex = re.compile(manip)
             files = [f for f in files_to_link if re.search(manip_regex, f)]
             logger.debug("Batch {}: {}".format(batch_name, files))
-            runpath = ''
+            # runpath = ''
             for fname in files:
-                run = fname.split(bamdir)[1].split('/')[1]
-                # runpath = os.path.join(workingdir, run)
+                # run = fname.split(bamdir)[1].split('/')[1]
+                # runpath = os.path.join(subdir, run)
                 #if not os.path.isdir(runpath):
                 #    os.mkdir(runpath)
                 # logger.debug("prepare train folder: run {}, runpath: {} for file {}. symlink {}".format(run, runpath, fname, os.path.join(runpath, fname.split('/')[-1])))
-                os.symlink(fname, os.path.join(workingdir, fname.split('/')[-1]))
+                os.symlink(fname, os.path.join(subdir, fname.split('/')[-1]))
         logger.info("Batches created with symlinks")
 
 
