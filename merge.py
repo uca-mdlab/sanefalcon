@@ -88,15 +88,18 @@ def prepare_file_lists(trainfolder):
     return files_dic
 
 
-def merge(files_dic):
+def merge(files_to_merge, manips):
     """
     input: [sanefalcontrain/sample1.start.fwd, sanefalcontrain/sample1.start.rev]
     output: sanefalcontrain/a/merge.chr1
     :param trainfolder:
     :return:
     """
-    for chrom, dic in files_dic.items():
-        for dir, files in dic.items():
+    for chrom, dic in files_to_merge.items():
+        print(chrom)
+        print(dic)
+        exit()
+        for dir, files in manips.items():
             logger.debug("merging directory {}".format(dir))
             data = []
             for f in files:
@@ -182,9 +185,7 @@ if __name__ == "__main__":
     trainfolder = config['default']['trainfolder']
 
     manips = find_all_manips(trainfolder)
-    dic = prepare_file_lists(trainfolder)
-    print('manips')
-    for k, v in manips.items():
-        print(k, v)
+    files_to_merge = prepare_file_lists(trainfolder)
+    merge(files_to_merge, manips)
     # merge_all(trainfolder)
     # merge(dic)
