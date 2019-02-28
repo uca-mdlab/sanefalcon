@@ -46,7 +46,9 @@ def find_merge_files_in_subdirectories(trainfolder):
 
 def search_manip_name(manips, fname):
     base = os.path.basename(fname)
+    logger.debug("Searching for manip {}".format(base))
     for subdir, manip_names in manips.items():
+        logger.debug("{} - {}".format(subdir, manip_names))
         if any([os.path.commonprefix([f, base]) == f for f in manip_names]):
             return subdir
         else:
