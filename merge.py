@@ -182,7 +182,8 @@ if __name__ == "__main__":
     trainfolder = config['default']['trainfolder']
 
     manips = find_all_manips(trainfolder)
-
+    for k, v in manips.items():
+        print(k, v)
     # merge_all(trainfolder)
     # dic = prepare_file_lists(trainfolder)
     # merge(dic)
