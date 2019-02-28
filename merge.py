@@ -73,10 +73,13 @@ def merge(files_dic):
     """
     for chrom, dic in files_dic.items():
         for dir, files in dic.items():
+            logger.debug("merging directory {}".format(dir))
             data = []
             for f in files:
+                logger.debug("merging {}".format(f))
                 data.extend([int(line.strip()) for line in open(f, 'r')])
             outfile = os.path.join(dir, "merge.{}".format(chrom))
+            logger.debug("merge into {}".format(outfile))
             sort_and_write(data, outfile)
 
 
