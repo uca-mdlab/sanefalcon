@@ -56,6 +56,7 @@ def prepare_file_lists(trainfolder):
                 match = re.search(pattern, fname)
                 chrom = int(match.group(0).split(".")[2])
                 subdir = os.path.dirname(filename)
+                logger.debug("prepare file list: adding subdir: {}. fname: {}".format(subdir, filename))
                 if subdir in files_dic[chrom]:
                     files_dic[chrom][subdir].append(filename)
                 else:
@@ -149,4 +150,6 @@ if __name__ == "__main__":
     datafolder = config['default']['datafolder']
     trainfolder = config['default']['trainfolder']
 
-    merge_all(trainfolder)
+    # merge_all(trainfolder)
+    dic = prepare_file_lists(trainfolder)
+    print(dic)
