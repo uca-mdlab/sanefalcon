@@ -108,7 +108,6 @@ def create_nucl_files(trainfolder, outfname, fname_to_search):
                     for nucl in allNucl:
                         output_file.write("\t".join([str(x) for x in nucl]) + "\n")
             logger.info('Nucleosome [{}] saved for chrom {} in {}'.format(fname_to_search, chrom, output_file.name))
-            break
 
 
 if __name__ == "__main__":

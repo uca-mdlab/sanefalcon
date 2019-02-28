@@ -117,6 +117,7 @@ def merge_subs(trainfolder, files_dic):
     for chrom in chromosomes:
         files_to_merge = []
         for dir, _ in files_dic[chrom].items():
+            logger.debug("subs merging directory {}".format(dir))
             subdir_merge_file = os.path.join(dir, "merge.{}".format(chrom))
             if not os.path.isfile(subdir_merge_file):
                 exit("{} not found".format(subdir_merge_file))
@@ -124,8 +125,10 @@ def merge_subs(trainfolder, files_dic):
 
         data = []
         for mergefile in files_to_merge:
+            logger.debug("subs merging {}".format(mergefile))
             data.extend([int(line.strip()) for line in open(mergefile, 'r')])
         outfile = os.path.join(trainfolder, "merge.{}".format(chrom))
+        logger.debug("subs merge into {}".format(outfile))
         sort_and_write(data, outfile)
 
 
@@ -150,9 +153,11 @@ def merge_anti_subs(trainfolder):
                 data = []
                 files_to_merge = [f for f in merge_files if f.endswith(".{}".format(chrom))]
                 for mergefile in files_to_merge:
+                    logger.debug("anti_subs merging {}".format(mergefile))
                     data.extend([int(line.strip()) for line in open(mergefile, 'r')])
                 if len(data) > 0:
                     outfile = os.path.join(subdir, "anti.{}".format(chrom))
+                    logger.debug("anti_subs merge into {}".format(outfile))
                     sort_and_write(data, outfile)
             done[subdir] = True
 
