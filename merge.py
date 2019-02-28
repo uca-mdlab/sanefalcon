@@ -185,9 +185,6 @@ if __name__ == "__main__":
     dic = prepare_file_lists(trainfolder)
     print('manips')
     for k, v in manips.items():
-        print(k, sorted(v))
+        print(k, v)
     # merge_all(trainfolder)
-    print('dic')
-    for k, v in dic.items():
-        print(k, sorted(v))
     # merge(dic)
