@@ -57,7 +57,7 @@ if __name__ == "__main__":
 
     prepare_train_folder(bamlist, datafolder, trainfolder)
     logger.info("prepare_folders ok")
-    exit(0)
+    
     merge_all(trainfolder)
     logger.info("merge_all ok")
 

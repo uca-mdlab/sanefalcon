@@ -77,8 +77,6 @@ def prepare_file_lists(trainfolder):
                 filename = os.path.join(root, fname)
                 match = re.search(pattern, fname)
                 chrom = int(match.group(0).split(".")[2])
-                # subdir = os.path.dirname(filename)
-                # print('one: {}'.format(subdir))
                 subdir = search_manip_name(manips, filename)
                 if subdir:
                     logger.debug("prepare file list: adding subdir: {}. fname: {}".format(subdir, filename))
@@ -178,6 +176,5 @@ if __name__ == "__main__":
     manips = find_all_manips(trainfolder)
 
     # merge_all(trainfolder)
-    dic = prepare_file_lists(trainfolder)
-    print(dic[1])
+    # dic = prepare_file_lists(trainfolder)
     # merge(dic)
