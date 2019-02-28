@@ -179,10 +179,8 @@ if __name__ == "__main__":
     trainfolder = config['default']['trainfolder']
 
     files_to_merge = prepare_file_lists(trainfolder)
-    for k, v in files_to_merge.items():
-        print(k)
-        print(v)
-        print('====')
+    print(files_to_merge['manips'])
+    print(files_to_merge['files'][1])
     # merge(files_to_merge, manips)
     # merge_all(trainfolder)
     # merge(dic)
