@@ -28,14 +28,14 @@ if __name__ == "__main__":
     samtools = config['default']['samtools']
     datafolder = config['default']['datafolder']
     trainfolder = config['default']['trainfolder']
-    nucleosomefolder = config['default']['nucleosomefolder']
+    # nucleosomefolder = config['default']['nucleosomefolder']
     nucl_file_template = config['default']['nucltemplate']
     bamlist = config['default']['bamlist']
 
     logger.info("Starting sanefalcon with configuration file {}".format(args.conffile))
     logger.debug("Data folder = {}".format(datafolder))
     logger.debug("Train folder = {}".format(trainfolder))
-    logger.debug("Nucl folder = {}".format(nucleosomefolder))
+    # logger.debug("Nucl folder = {}".format(nucleosomefolder))
 
     prepare_samples(datafolder, trainfolder, samtools)
     logger.info("prepare_samples ok")
