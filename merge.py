@@ -89,7 +89,10 @@ def merge(files_dic):
         tmp = {}
         for fname in list_:
             subdir = search_manip_name(manips, fname)
-            tmp[subdir].append(fname)
+            if subdir in tmp:
+                tmp[subdir].append(fname)
+            else:
+                tmp[subdir] = [fname]
 
         print(tmp)
         exit()
