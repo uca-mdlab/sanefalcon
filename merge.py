@@ -24,6 +24,14 @@ def sort_and_write(data, outfile):
         out.writelines(to_be_written)
 
 
+def find_all_manips(trainfolder):
+    manips = {}
+    subfolders = [f.path for f in os.scandir(trainfolder) if f.is_dir()]
+    for subdir in subfolders:
+        manips[subdir] = [f.path for f in os.scandir(subdir) if f.is_dir()]
+    return manips
+
+
 def find_merge_files_in_subdirectories(trainfolder):
     merge_files = []
     pattern_name = re.compile("merge.\d{1,2}")
@@ -36,6 +44,15 @@ def find_merge_files_in_subdirectories(trainfolder):
     return merge_files
 
 
+def search_manip_name(manips, fname):
+    base = os.path.basename(fname)
+    for subdir, manip_names in manips.items():
+        if any([re.match(base, os.path.basename(x)) for x in manip_names]):
+            return subdir
+        else:
+            return None
+
+
 def prepare_file_lists(trainfolder):
     """
 
@@ -45,6 +62,7 @@ def prepare_file_lists(trainfolder):
               ...
              }
     """
+    manips = find_all_manips(trainfolder)
 
     files_dic = dict.fromkeys(chromosomes, dict())
 
@@ -56,6 +74,9 @@ def prepare_file_lists(trainfolder):
                 match = re.search(pattern, fname)
                 chrom = int(match.group(0).split(".")[2])
                 subdir = os.path.dirname(filename)
+                print('one: {}'.subdir)
+                subdir2 = search_manip_name(manips, filename)
+                print('two: {}'.subdir2)
                 logger.debug("prepare file list: adding subdir: {}. fname: {}".format(subdir, filename))
                 if subdir in files_dic[chrom]:
                     files_dic[chrom][subdir].append(filename)
@@ -67,7 +88,7 @@ def prepare_file_lists(trainfolder):
 
 def merge(files_dic):
     """
-    input: [sanefalcontrain/a/sample1.start.fwd, sanefalcontrain/a/sample1.start.rev]
+    input: [sanefalcontrain/sample1.start.fwd, sanefalcontrain/sample1.start.rev]
     output: sanefalcontrain/a/merge.chr1
     :param trainfolder:
     :return:
@@ -150,6 +171,9 @@ if __name__ == "__main__":
     datafolder = config['default']['datafolder']
     trainfolder = config['default']['trainfolder']
 
+    manips = find_all_manips(trainfolder)
+
     # merge_all(trainfolder)
     dic = prepare_file_lists(trainfolder)
-    print(dic)
+    print(dic[1])
+    # merge(dic)
