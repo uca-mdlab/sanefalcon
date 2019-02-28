@@ -66,10 +66,9 @@ def prepare_file_lists(trainfolder):
               ...
              }
     """
-    manips = find_all_manips(trainfolder)
+    res = {'manips': find_all_manips(trainfolder)}
 
-    files_dic = dict.fromkeys(chromosomes, dict())
-
+    files_dic = dict.fromkeys(chromosomes, [])
     pattern = re.compile("\.bam\.\d{1,2}\.start")
     for root, subdirs, files in os.walk(trainfolder):
         for fname in files:
@@ -77,15 +76,10 @@ def prepare_file_lists(trainfolder):
                 filename = os.path.join(root, fname)
                 match = re.search(pattern, fname)
                 chrom = int(match.group(0).split(".")[2])
-                subdir = search_manip_name(manips, filename)
-                if subdir:
-                    logger.debug("prepare file list: adding subdir: {}. fname: {}".format(subdir, filename))
-                    if subdir in files_dic[chrom]:
-                        files_dic[chrom][subdir].append(filename)
-                    else:
-                        files_dic[chrom] = {subdir: [filename]}
+                files_dic[chrom].append(filename)
 
-    return files_dic
+    res.update({'files': files_dic})
+    return res
 
 
 def merge(files_to_merge, manips):
@@ -184,8 +178,11 @@ if __name__ == "__main__":
     datafolder = config['default']['datafolder']
     trainfolder = config['default']['trainfolder']
 
-    manips = find_all_manips(trainfolder)
     files_to_merge = prepare_file_lists(trainfolder)
-    merge(files_to_merge, manips)
+    for k, v in files_to_merge:
+        print(k)
+        print(v)
+        print('====')
+    # merge(files_to_merge, manips)
     # merge_all(trainfolder)
     # merge(dic)
