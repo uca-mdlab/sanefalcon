@@ -49,6 +49,7 @@ def search_manip_name(manips, fname):
     logger.debug("Searching for manip {}".format(base))
     for subdir, manip_names in manips.items():
         logger.debug("{} - {}".format(subdir, manip_names))
+        logger.warning("any: {}".format(any([os.path.commonprefix([f, base]) == f for f in manip_names])))
         if any([os.path.commonprefix([f, base]) == f for f in manip_names]):
             return subdir
         else:
