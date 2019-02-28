@@ -44,30 +44,22 @@ def find_merge_files_in_subdirectories(trainfolder):
     return merge_files
 
 
-def search_manip_name(manips, fname):
-    base = os.path.basename(fname)
-    logger.debug("Searching for manip {}".format(base))
-    for subdir, manip_names in manips.items():
-        logger.debug("{} - {}".format(subdir, manip_names))
-        basenames = [os.path.basename(f) for f in manip_names]
-        logger.warning("any: {}".format(any([os.path.commonprefix([bn, base]) == bn for bn in basenames])))
-        if any([os.path.commonprefix([bn, base]) == bn for bn in basenames]):
-            return subdir
-        else:
-            return None
+# def search_manip_name(manips, fname):
+#     base = os.path.basename(fname)
+#     logger.debug("Searching for manip {}".format(base))
+#     for subdir, manip_names in manips.items():
+#         logger.debug("{} - {}".format(subdir, manip_names))
+#         basenames = [os.path.basename(f) for f in manip_names]
+#         logger.warning("any: {}".format(any([os.path.commonprefix([bn, base]) == bn for bn in basenames])))
+#         if any([os.path.commonprefix([bn, base]) == bn for bn in basenames]):
+#             return subdir
+#         else:
+#             return None
 
 
 def prepare_file_lists(trainfolder):
-    """
-
-    :param trainfolder: sanefalcontrain
-    :return: {chr1: {a: [sanefalcontrain/a/chr1.fwd,sanefalcontrain/a/chr1.rev], b: [...]},
-              chr2: {a: [sanefalcontrain/a/chr2.fwd,sanefalcontrain/a/chr2.rev], b: [...]},
-              ...
-             }
-    """
     res = {'manips': find_all_manips(trainfolder)}
-    files_dic = dict.fromkeys(chromosomes, [])
+    files_dic = dict.fromkeys(list(map(str, chromosomes)), [])
     pattern = re.compile("\.bam\.\d{1,2}\.start")
     for root, subdirs, files in os.walk(trainfolder):
         for fname in files:
@@ -76,7 +68,7 @@ def prepare_file_lists(trainfolder):
                 match = re.search(pattern, fname)
                 chrom = int(match.group(0).split(".")[2])
                 logger.debug("Found {} for chrom {}".format(filename, chrom))
-                files_dic[chrom].append(filename)
+                files_dic[str(chrom)].append(filename)
 
     res.update({'files': files_dic})
     return res
@@ -176,7 +168,8 @@ if __name__ == "__main__":
     trainfolder = config['default']['trainfolder']
 
     files_to_merge = prepare_file_lists(trainfolder)
-    print(files_to_merge['files'][1])
+    print(type(files_to_merge['files']))
+    print(files_to_merge['files']['1'])
     # merge(files_to_merge, manips)
     # merge_all(trainfolder)
     # merge(dic)
