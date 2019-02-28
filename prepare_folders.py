@@ -45,7 +45,7 @@ def prepare_batches(manip_list):
         yield manip_list[i:i + 5]
 
 
-def prepare_train_folder(bamlist,bamdir, traindir):
+def prepare_train_folder(bamlist, bamdir, traindir):
 # def prepare_train_folder(bamlist, traindir):
     letters = list(string.ascii_lowercase)
     files_to_link, manip_list = list_files_to_use(readfile(bamlist),bamdir)
