@@ -176,6 +176,5 @@ if __name__ == "__main__":
     manips = find_all_manips(trainfolder)
 
     # merge_all(trainfolder)
-    dic = prepare_file_lists(trainfolder)
-    print(dic[1])
+    # dic = prepare_file_lists(trainfolder)
     # merge(dic)
