@@ -44,17 +44,17 @@ def find_merge_files_in_subdirectories(trainfolder):
     return merge_files
 
 
-# def search_manip_name(manips, fname):
-#     base = os.path.basename(fname)
-#     logger.debug("Searching for manip {}".format(base))
-#     for subdir, manip_names in manips.items():
-#         logger.debug("{} - {}".format(subdir, manip_names))
-#         basenames = [os.path.basename(f) for f in manip_names]
-#         logger.warning("any: {}".format(any([os.path.commonprefix([bn, base]) == bn for bn in basenames])))
-#         if any([os.path.commonprefix([bn, base]) == bn for bn in basenames]):
-#             return subdir
-#         else:
-#             return None
+def search_manip_name(manips, fname):
+    base = os.path.basename(fname)
+    logger.debug("Searching for manip {}".format(base))
+    for subdir, manip_names in manips.items():
+        logger.debug("{} - {}".format(subdir, manip_names))
+        basenames = [os.path.basename(f) for f in manip_names]
+        logger.warning("any: {}".format(any([os.path.commonprefix([bn, base]) == bn for bn in basenames])))
+        if any([os.path.commonprefix([bn, base]) == bn for bn in basenames]):
+            return subdir
+        else:
+            return None
 
 
 def prepare_file_lists(trainfolder):
@@ -84,10 +84,17 @@ def merge(files_dic):
     """
     manips = files_dic['manips']
     for chrom, list_ in files_dic['files'].items():
-        print(chrom, list_)
+        logger.debug("Merging {} start files for chrom {}".format(len(list_), chrom))
+
+        tmp = {}
+        for fname in list_:
+            subdir = search_manip_name(manips, fname)
+            tmp[subdir].append(fname)
+
+        print(tmp)
         exit()
-        for dir, files in manips.items():
-            logger.debug("merging directory {}".format(dir))
+        logger.debug("merging directory {}".format(subdir))
+
             data = []
             for f in files:
                 logger.debug("merging {}".format(f))
