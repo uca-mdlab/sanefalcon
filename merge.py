@@ -137,9 +137,12 @@ def merge_anti_subs(trainfolder):
     :return:
     """
     all_merge_files = find_merge_files_in_subdirectories(trainfolder)
+    logger.debug("merge_anti_subs. Files: {}".format(all_merge_files))
     subdirs = [subdir.path for subdir in os.scandir(trainfolder) if subdir.is_dir()]
+    logger.debug("merge_anti_subs. subdirs: {}".format(subdirs))
     done = dict.fromkeys(subdirs, False)
     for subdir in subdirs:
+        logger.debug("merge_anti_subs. working in subdir: {}".format(subdir))
         if not done[subdir]:
             current = subdir
             merge_files = [x for x in all_merge_files if not re.match(current, x)]
@@ -151,7 +154,7 @@ def merge_anti_subs(trainfolder):
                 if len(data) > 0:
                     outfile = os.path.join(subdir, "anti.{}".format(chrom))
                     sort_and_write(data, outfile)
-                done[subdir] = True
+            done[subdir] = True
 
 
 def merge_all(trainfolder):
