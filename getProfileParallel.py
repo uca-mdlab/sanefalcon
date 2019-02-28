@@ -291,7 +291,7 @@ def process(chrom, dic, outdir):
     return chrom
 
 
-def _process(tup):
+def submit_process(tup):
     return process(*tup)
 
 
@@ -326,5 +326,5 @@ if __name__ == "__main__":
     num_cores = mp.cpu_count()
     #num_cores = 2
     with mp.Pool(num_cores) as pool:
-        finished = pool.map(_process, input_list)
+        finished = pool.map(submit_process, input_list)
         print(len(finished) == 22)
