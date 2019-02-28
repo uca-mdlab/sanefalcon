@@ -69,7 +69,7 @@ def prepare_file_lists(trainfolder):
     for chrom in chromosomes:
         string_pattern = "\.bam\.{}\.start".format(chrom)
         pattern = re.compile(string_pattern)
-        files_dic[str(chrom)] = filter(lambda x: re.search(pattern, x), all_start_files)
+        files_dic[str(chrom)] = list(filter(lambda x: re.search(pattern, x), all_start_files))
 
     res.update({'files': files_dic})
     return res
@@ -169,8 +169,6 @@ if __name__ == "__main__":
     trainfolder = config['default']['trainfolder']
 
     files_to_merge = prepare_file_lists(trainfolder)
-    print(type(files_to_merge['files']))
-    print(files_to_merge['files']['1'])
-    # merge(files_to_merge, manips)
+    merge(files_to_merge)
     # merge_all(trainfolder)
     # merge(dic)
