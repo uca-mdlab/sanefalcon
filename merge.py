@@ -59,16 +59,17 @@ def find_merge_files_in_subdirectories(trainfolder):
 
 def prepare_file_lists(trainfolder):
     res = {'manips': find_all_manips(trainfolder)}
-    files_dic = dict.fromkeys(list(map(str, chromosomes)), [])
-    pattern = re.compile("\.bam\.\d{1,2}\.start")
+    files_dic = dict.fromkeys(list(map(str, chromosomes)), list())
+    all_start_files = []
     for root, subdirs, files in os.walk(trainfolder):
         for fname in files:
             if fname.endswith('.fwd') or fname.endswith('.rev'):
-                filename = os.path.join(root, fname)
-                match = re.search(pattern, fname)
-                chrom = int(match.group(0).split(".")[2])
-                logger.debug("Found {} for chrom {}".format(filename, chrom))
-                files_dic[str(chrom)].append(filename)
+                all_start_files.append(os.path.join(root, fname))
+
+    for chrom in chromosomes:
+        string_pattern = "\.bam\.{}\.start".format(chrom)
+        pattern = re.compile(string_pattern)
+        files_dic[str(chrom)] = filter(lambda x: re.search(pattern, x), all_start_files)
 
     res.update({'files': files_dic})
     return res
