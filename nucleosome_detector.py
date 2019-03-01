@@ -2,6 +2,8 @@ import configparser
 import os
 import logging
 import operator
+import re
+import collections
 
 logger = logging.getLogger('nucleosome_detector')
 logging.basicConfig(format='%(asctime)s - %(levelname)s:%(message)s',
@@ -16,6 +18,25 @@ sideSize = 20  # 25
 padding = areaSize + sideSize
 outerLen = 2 * sideSize  # len(left)+len(right)
 innerLen = areaSize * 2 + 1  # len(window)
+
+
+def find_merge_anti_files(trainfolder):
+    merge_files = []
+    anti_files = []
+    root_merge_files = []
+    pattern_name = re.compile("merge.\d{1,2}")
+    anti_pattern_name = re.compile("anti.\d{1,2}")
+    pattern_subdir = re.compile("/[a-z]/")
+    for root, subdirs, files in os.walk(trainfolder):
+        for fname in files:
+            filename = os.path.join(root, fname)
+            if re.match(pattern_name, fname) and re.search(pattern_subdir, filename):
+                merge_files.append(filename)
+            elif re.match(pattern_name, fname) and not re.search(pattern_subdir, filename):
+                root_merge_files.append(filename)
+            if re.match(anti_pattern_name, fname) and re.search(pattern_subdir, filename):
+                anti_files.append(filename)
+    return merge_files, anti_files, root_merge_files
 
 
 def flush(area, endPoint, allNucl):
@@ -110,6 +131,23 @@ def create_nucl_files(trainfolder, outfname, fname_to_search):
             logger.info('Nucleosome [{}] saved for chrom {} in {}'.format(fname_to_search, chrom, output_file.name))
 
 
+def assemble_runs(trainfolder, files, subdirs=None):
+    runs = []
+    tmp = collections.defaultdict(list)
+    for f in files:
+        tmp[f.split('.')[1]].append(f)
+
+    if subdirs:
+        for folder in subdirs:
+            pattern = re.compile('({})'.format(folder))  # matching "folder"
+            reduced_tmp = {k: list(filter(lambda x: re.match(pattern, x), v)) for k, v in tmp.items()}
+            run = [(folder, k, v) for k, v in reduced_tmp.items()]
+            runs.extend(run)
+    else:
+        run = [(trainfolder, k, v) for k, v in tmp.items()]
+        runs.extend(run)
+    return runs
+
 if __name__ == "__main__":
     conf_file = 'sanefalcon.conf'
     config = configparser.ConfigParser()
@@ -118,6 +156,13 @@ if __name__ == "__main__":
     trainfolder = config['default']['trainfolder']
     nucl_file_template = config['default']['nucltemplate']
 
-    create_nucl_files(trainfolder, nucl_file_template, 'merge')
-    anti_template = nucl_file_template + '_anti'
-    create_nucl_files(trainfolder, anti_template, 'anti')
+    subdirs = [f.path for f in os.scandir(trainfolder) if f.is_dir()]
+    merge_files, anti_files, root_merge_files = find_merge_anti_files(trainfolder)
+    runs = assemble_runs(trainfolder, merge_files, subdirs)
+    runs.extend(assemble_runs(trainfolder, anti_files, subdirs))
+    runs.extend(assemble_runs(trainfolder, root_merge_files))
+    for i in runs:
+        print(i)
+    # create_nucl_files(trainfolder, nucl_file_template, 'merge')
+    # anti_template = nucl_file_template + '_anti'
+    # create_nucl_files(trainfolder, anti_template, 'anti')
