@@ -73,7 +73,8 @@ def prepare_train_folder(bamlist, bamdir, traindir):
                 if not os.path.isdir(runpath):
                     os.mkdir(runpath)
                 os.symlink(fname, os.path.join(runpath, fname.split('/')[-1]))
-                os.symlink(fname+".bai", os.path.join(runpath, fname.split('/')[-1]))
+                fname=fname+".bai"
+                os.symlink(fname, os.path.join(runpath, fname.split('/')[-1]))
         logger.info("Batches created with symlinks")
 
 
