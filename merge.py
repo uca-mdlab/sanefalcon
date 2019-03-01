@@ -28,7 +28,7 @@ def find_all_manips(trainfolder):
     manips = {}
     subfolders = [f.path for f in os.scandir(trainfolder) if f.is_dir()]
     for subdir in subfolders:
-        manips[os.path.basename(subdir)] = [os.path.basename(f.path) for f in os.scandir(subdir) if f.is_dir()]
+        manips[subdir] = [os.path.basename(f.path) for f in os.scandir(subdir) if f.is_dir()]
     return manips
 
 
@@ -43,21 +43,26 @@ def find_merge_files_in_subdirectories(trainfolder):
                 merge_files.append(filename)
     return merge_files
 
-
-def search_manip_name(manips, fname):
-    base = os.path.basename(fname)
-    logger.debug("Searching for manip {}".format(base))
-    for subdir, manip_names in manips.items():
-        logger.debug("{} - {}".format(subdir, manip_names))
-        basenames = [os.path.basename(f) for f in manip_names]
-        logger.warning("any: {}".format(any([os.path.commonprefix([bn, base]) == bn for bn in basenames])))
-        if any([os.path.commonprefix([bn, base]) == bn for bn in basenames]):
-            return subdir
-        else:
-            return None
+#
+# def search_manip_name(manips, fname):
+#     base = os.path.basename(fname)
+#     logger.debug("Searching for manip {}".format(base))
+#     for subdir, manip_names in manips.items():
+#         logger.debug("{} - {}".format(subdir, manip_names))
+#         basenames = [os.path.basename(f) for f in manip_names]
+#         logger.warning("any: {}".format(any([os.path.commonprefix([bn, base]) == bn for bn in basenames])))
+#         if any([os.path.commonprefix([bn, base]) == bn for bn in basenames]):
+#             return subdir
+#         else:
+#             return None
 
 
 def prepare_file_lists(trainfolder):
+    """
+
+    :param trainfolder:
+    :return: {'chr1': {'a': [chr1.start.fwd, chr1.start.rev], 'b': [...]}}
+    """
     res = {}
     manips = find_all_manips(trainfolder)
     files_dic = dict.fromkeys(list(map(str, chromosomes)), list())
