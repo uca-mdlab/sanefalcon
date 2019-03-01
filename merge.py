@@ -58,9 +58,8 @@ def search_manip_name(manips, fname):
 
 
 def prepare_file_lists(trainfolder):
-    res = {'manips': find_all_manips(trainfolder)}
-    print(res)
-    exit()
+    res = {}
+    manips = find_all_manips(trainfolder)
     files_dic = dict.fromkeys(list(map(str, chromosomes)), list())
     all_start_files = []
     for root, subdirs, files in os.walk(trainfolder):
@@ -73,7 +72,19 @@ def prepare_file_lists(trainfolder):
         pattern = re.compile(string_pattern)
         files_dic[str(chrom)] = list(filter(lambda x: re.search(pattern, x), all_start_files))
 
-    res.update({'files': files_dic})
+    for chrom, chrom_start_files in files_dic.items():
+        logger.debug('Preparing start_files from chrom {}'.format(chrom))
+        files_per_subdir = {}
+        for subdir, manip_names in manips.items():
+            start_per_manip = []
+            for n in manip_names:
+                start_per_manip.extend(list(filter(lambda x: re.search(n, x), chrom_start_files)))
+            if subdir in files_per_subdir:
+                files_per_subdir[subdir].extend(start_per_manip)
+            else:
+                files_per_subdir[subdir] = start_per_manip
+        res[chrom] = files_per_subdir
+
     return res
 
 
@@ -189,7 +200,10 @@ if __name__ == "__main__":
     trainfolder = config['default']['trainfolder']
 
     files_to_merge = prepare_file_lists(trainfolder)
-
+    for k, v in files_to_merge['22'].items():
+        print(k)
+        for n in sorted(v):
+            print(n)
     # merge(files_to_merge)
     # # merge_all(trainfolder)
     # merge(dic)
