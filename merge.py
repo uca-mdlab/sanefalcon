@@ -3,6 +3,7 @@
 
 import configparser
 import concurrent.futures
+import threading
 import os
 import logging
 import re
@@ -93,6 +94,13 @@ def prepare_file_lists(trainfolder):
     return res
 
 
+def read_all_files(file_list):
+    data = []
+    for f in file_list:
+        data.extend([int(line.strip()) for line in open(f, 'r')])
+    return data
+
+
 def pick_manip_pairs(manips, list_):
     res = {}
     for subdir, manip_list in manips.items():
@@ -107,27 +115,33 @@ def pick_manip_pairs(manips, list_):
     return res
 
 
-def merge(files_dic):
-    """
-    input: [sanefalcontrain/sample1.start.fwd, sanefalcontrain/sample1.start.rev]
-    output: sanefalcontrain/a/merge.chr1
-    :param trainfolder:
-    :return:
-    """
-    manips = files_dic['manips']
+def _merge(files, subdir, chrom):
+    print("{} launched on {} (chrom {})".format(threading.current_thread(), subdir, chrom))
+    logger.debug("merging chrom {} start files in {}".format(chrom, subdir))
+    data = read_all_files(files)
+    outfile = os.path.join(subdir, "merge.{}".format(chrom))
+    logger.debug("merge into {}".format(outfile))
+    sort_and_write(data, outfile)
+    print("{} completed on {} (chrom {})".format(threading.current_thread(), subdir, chrom))
 
-    for chrom, list_ in files_dic['files'].items():
-        pairs = pick_manip_pairs(manips, list_)
-        for manip, pair in pairs.items():
-            print(manip)
-            logger.debug("merging files {} in {}".format(pair, manip))
-            data = []
-            for f in pair:
-                logger.debug("merging {}".format(f))
-                data.extend([int(line.strip()) for line in open(f, 'r')])
-            # outfile = os.path.join(, "merge.{}".format(chrom))
-            # logger.debug("merge into {}".format(outfile))
-            # sort_and_write(data, outfile)
+
+def _prepare_jobs_arguments(files_to_merge):
+    runs = []
+    for chrom, dic in files_to_merge.items():
+        for subdir, files in dic.items():
+            runs.append((files, subdir, chrom))
+    return runs
+
+
+def merge(files_to_merge):
+    runs = _prepare_jobs_arguments(files_to_merge)
+    with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:
+            jobs = {executor.submit(_merge, *run): run for run in runs}
+            for job in concurrent.futures.as_completed(jobs):
+                try:
+                    _ = job.result()
+                except Exception as ex:
+                    logger.error('Future Exception {}'.format(ex.__cause__))
 
 
 def merge_subs(trainfolder, files_dic):
@@ -205,10 +219,10 @@ if __name__ == "__main__":
     trainfolder = config['default']['trainfolder']
 
     files_to_merge = prepare_file_lists(trainfolder)
-    for k, v in files_to_merge['22'].items():
-        print(k)
-        for n in sorted(v):
-            print(n)
-    # merge(files_to_merge)
+    # for k, v in files_to_merge['22'].items():
+    #     print(k)
+    #     for n in sorted(v):
+    #         print(n)
+    concurrent_merge(files_to_merge)
     # # merge_all(trainfolder)
     # merge(dic)
