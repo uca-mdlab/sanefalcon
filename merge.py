@@ -14,7 +14,7 @@ logging.basicConfig(format='%(asctime)s - %(levelname)s: %(message)s',
 
 logger = logging.getLogger("merge")
 
-
+MAX_THREAD_NUMBER = 15
 chromosomes = range(1, 23)
 
 
@@ -136,7 +136,7 @@ def _prepare_jobs_arguments(files_to_merge):
 
 def merge(files_to_merge):
     runs = _prepare_jobs_arguments(files_to_merge)
-    with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_THREAD_NUMBER) as executor:
         jobs = {executor.submit(_merge, *run): run for run in runs}
         for job in concurrent.futures.as_completed(jobs):
             try:
@@ -161,8 +161,47 @@ def merge_subs(trainfolder):
         tmp[f.split('.')[1]].append(f)
 
     runs = [(k, v, trainfolder) for k, v in tmp.items()]
-    with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_THREAD_NUMBER) as executor:
         jobs = {executor.submit(_merge_subs, *run): run for run in runs}
+        for job in concurrent.futures.as_completed(jobs):
+            try:
+                _ = job.result()
+            except Exception as ex:
+                logger.error('Future Exception {}'.format(ex.__cause__))
+    return merge_files
+
+
+def _merge_anti_subs(folder, chrom, files):
+    # print("{} launched on {} ".format(threading.current_thread(), chrom))
+    logger.debug("merge anti subs chrom: {}, folder: {}".format(chrom, folder))
+    data = read_all_files(files)
+    outfile = os.path.join(folder, "anti.{}".format(chrom))
+    sort_and_write(data, outfile)
+    # print("{} completed on {}".format(threading.current_thread(), chrom))
+
+
+def merge_anti_subs(merge_files, trainfolder):
+    """
+    input: [sanefalcontrain/b/merge.chr1, sanefalcontrain/c/merge.chr1, ...]
+    output: sanefalcontrain/a/anti.chr1
+    :param trainfolder:
+    :return:
+    """
+    tmp = collections.defaultdict(list)
+    for f in merge_files:
+        tmp[f.split('.')[1]].append(f)
+    # print(tmp)
+    subfolders = [f.path for f in os.scandir(trainfolder) if f.is_dir()]
+
+    runs = []
+    for folder in subfolders:
+        pattern = re.compile('(?!{})'.format(folder))  # matching "not folder"
+        reduced_tmp = {k: list(filter(lambda x: re.match(pattern, x), v)) for k, v in tmp.items()}
+        run = [(folder, k, v) for k, v in reduced_tmp.items()]
+        runs.extend(run)
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_THREAD_NUMBER) as executor:
+        jobs = {executor.submit(_merge_anti_subs, *run): run for run in runs}
         for job in concurrent.futures.as_completed(jobs):
             try:
                 _ = job.result()
@@ -170,43 +209,13 @@ def merge_subs(trainfolder):
                 logger.error('Future Exception {}'.format(ex.__cause__))
 
 
-def merge_anti_subs(trainfolder):
-    """
-    input: [sanefalcontrain/b/merge.chr1, sanefalcontrain/c/merge.chr1, ...]
-    output: sanefalcontrain/a/anti.chr1
-    :param trainfolder:
-    :return:
-    """
-    all_merge_files = find_merge_files_in_subdirectories(trainfolder)
-    logger.debug("merge_anti_subs. Files: {}".format(all_merge_files))
-    subdirs = [subdir.path for subdir in os.scandir(trainfolder) if subdir.is_dir()]
-    logger.debug("merge_anti_subs. subdirs: {}".format(subdirs))
-    done = dict.fromkeys(subdirs, False)
-    for subdir in subdirs:
-        logger.debug("merge_anti_subs. working in subdir: {}".format(subdir))
-        if not done[subdir]:
-            current = subdir
-            merge_files = [x for x in all_merge_files if not re.match(current, x)]
-            for chrom in chromosomes:
-                data = []
-                files_to_merge = [f for f in merge_files if f.endswith(".{}".format(chrom))]
-                for mergefile in files_to_merge:
-                    logger.debug("anti_subs merging {}".format(mergefile))
-                    data.extend([int(line.strip()) for line in open(mergefile, 'r')])
-                if len(data) > 0:
-                    outfile = os.path.join(subdir, "anti.{}".format(chrom))
-                    logger.debug("anti_subs merge into {}".format(outfile))
-                    sort_and_write(data, outfile)
-            done[subdir] = True
-
-
 def merge_all(trainfolder):
     dic = prepare_file_lists(trainfolder)
     merge(dic)
     logger.debug("merge done")
-    merge_subs(trainfolder)
+    merge_files = merge_subs(trainfolder)
     logger.debug("merge_subs done")
-    merge_anti_subs(trainfolder)
+    merge_anti_subs(merge_files, trainfolder)
     logger.debug("merge_anti_subs done")
 
 
@@ -225,6 +234,8 @@ if __name__ == "__main__":
     #     for n in sorted(v):
     #         print(n)
     # merge(files_to_merge)
-    merge_subs(trainfolder)
+    # merge_files = merge_subs(trainfolder)
+    merge_files = find_merge_files_in_subdirectories(trainfolder)
+    merge_anti_subs(merge_files, trainfolder)
     # # merge_all(trainfolder)
     # merge(dic)
