@@ -28,7 +28,7 @@ def find_all_manips(trainfolder):
     manips = {}
     subfolders = [f.path for f in os.scandir(trainfolder) if f.is_dir()]
     for subdir in subfolders:
-        manips[subdir] = [f.path for f in os.scandir(subdir) if f.is_dir()]
+        manips[os.path.basename(subdir)] = [os.path.basename(f.path) for f in os.scandir(subdir) if f.is_dir()]
     return manips
 
 
@@ -59,6 +59,8 @@ def search_manip_name(manips, fname):
 
 def prepare_file_lists(trainfolder):
     res = {'manips': find_all_manips(trainfolder)}
+    print(res)
+    exit()
     files_dic = dict.fromkeys(list(map(str, chromosomes)), list())
     all_start_files = []
     for root, subdirs, files in os.walk(trainfolder):
@@ -186,9 +188,8 @@ if __name__ == "__main__":
     datafolder = config['default']['datafolder']
     trainfolder = config['default']['trainfolder']
 
-
-
     files_to_merge = prepare_file_lists(trainfolder)
-    merge(files_to_merge)
+
+    # merge(files_to_merge)
     # # merge_all(trainfolder)
     # merge(dic)
