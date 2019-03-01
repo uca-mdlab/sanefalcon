@@ -210,6 +210,7 @@ def merge_anti_subs(merge_files, trainfolder):
 
 
 def merge_all(trainfolder):
+    logger.info("starting merge all")
     dic = prepare_file_lists(trainfolder)
     merge(dic)
     logger.debug("merge done")
@@ -217,6 +218,7 @@ def merge_all(trainfolder):
     logger.debug("merge_subs done")
     merge_anti_subs(merge_files, trainfolder)
     logger.debug("merge_anti_subs done")
+    logger.info("merging completed")
 
 
 if __name__ == "__main__":
