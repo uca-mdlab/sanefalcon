@@ -4,6 +4,9 @@ import logging
 import operator
 import re
 import collections
+import concurrent.futures
+
+MAX_THREAD_NUMBER = 15
 
 logger = logging.getLogger('nucleosome_detector')
 logging.basicConfig(format='%(asctime)s - %(levelname)s:%(message)s',
@@ -142,25 +145,42 @@ def assemble_runs(trainfolder, files, file_template, subdirs=None):
             pattern = re.compile('({})'.format(folder))  # matching "folder"
             reduced_tmp = {k: list(filter(lambda x: re.match(pattern, x), v)) for k, v in tmp.items()}
             fname_stub = os.path.join(folder, file_template)
-            run = [(folder, k, v[0], fname_stub + ".{}".format(k)) for k, v in reduced_tmp.items()]
+            run = [(folder, k, v[0], fname_stub) for k, v in reduced_tmp.items()]
             runs.extend(run)
     else:
         fname_stub = os.path.join(trainfolder, file_template)
-        run = [(trainfolder, k, v[0], fname_stub + ".{}".format(k)) for k, v in tmp.items()]
+        run = [(trainfolder, k, v[0], fname_stub) for k, v in tmp.items()]
         runs.extend(run)
     return runs
 
 
-def create_nucleosome_file(folder, chrom, files, fname):
-    pass
-    # logger.info("Creating nucleosome file {}".format(fname))
-    # curArea = [0]
-    # lastPos = 0
-    # maxDist = 190  # A little over our sliding window size
-    # allNucl = []
+def create_nucleosome_file(folder, chrom, mergefile, fname):
+    logger.info("Creating nucleosome file {} for {}".format(fname, mergefile))
+    curArea = [0]
+    lastPos = 0
+    maxDist = 190  # A little over our sliding window size
+    allNucl = []
+    with open(mergefile, 'r') as infile:
+        logger.debug('working on {}'.format(infile.name))
+        for line in infile:
+            position = int(line.strip())
+            distance = position - lastPos
+            if distance > maxDist:
+                allNucl = flush(curArea, lastPos, allNucl)
+                curArea = [1]
+            # Add read to current region
+            else:
+                curArea += [0 for x in range(distance)]
+                curArea[-1] += 1
+            lastPos = position
 
+        allNucl = flush(curArea, lastPos, allNucl)
 
-
+        # Dump results to a file
+        with open(os.path.join(folder, fname + ".{}".format(chrom)), "w") as output_file:
+            for nucl in allNucl:
+                output_file.write("\t".join([str(x) for x in nucl]) + "\n")
+    logger.info('Nucleosome saved for chrom {} in {}'.format(chrom, output_file.name))
 
 if __name__ == "__main__":
     conf_file = 'sanefalcon.conf'
@@ -176,9 +196,16 @@ if __name__ == "__main__":
     runs = assemble_runs(trainfolder, merge_files, nucl_file_template, subdirs)
     runs.extend(assemble_runs(trainfolder, anti_files, anti_file_template, subdirs))
     runs.extend(assemble_runs(trainfolder, root_merge_files, nucl_file_template))
-    for run in runs:
-        print(run)
-        create_nucleosome_file(*run)
+    # for run in runs:
+    #     create_nucleosome_file(*run)
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_THREAD_NUMBER) as executor:
+        jobs = {executor.submit(create_nucleosome_file, *run): run for run in runs}
+        for job in concurrent.futures.as_completed(jobs):
+            try:
+                _ = job.result()
+            except Exception as ex:
+                logger.error('Future Exception {}'.format(ex.__cause__))
 
     # create_nucl_files(trainfolder, nucl_file_template, 'merge')
     # anti_template = nucl_file_template + '_anti'
