@@ -131,7 +131,7 @@ def create_nucl_files(trainfolder, outfname, fname_to_search):
             logger.info('Nucleosome [{}] saved for chrom {} in {}'.format(fname_to_search, chrom, output_file.name))
 
 
-def assemble_runs(trainfolder, files, subdirs=None):
+def assemble_runs(trainfolder, files, file_template, subdirs=None):
     runs = []
     tmp = collections.defaultdict(list)
     for f in files:
@@ -141,12 +141,26 @@ def assemble_runs(trainfolder, files, subdirs=None):
         for folder in subdirs:
             pattern = re.compile('({})'.format(folder))  # matching "folder"
             reduced_tmp = {k: list(filter(lambda x: re.match(pattern, x), v)) for k, v in tmp.items()}
-            run = [(folder, k, v) for k, v in reduced_tmp.items()]
+            fname_stub = os.path.join(folder, file_template)
+            run = [(folder, k, v[0], fname_stub + ".{}".format(k)) for k, v in reduced_tmp.items()]
             runs.extend(run)
     else:
-        run = [(trainfolder, k, v) for k, v in tmp.items()]
+        fname_stub = os.path.join(trainfolder, file_template)
+        run = [(trainfolder, k, v[0], fname_stub + ".{}".format(k)) for k, v in tmp.items()]
         runs.extend(run)
     return runs
+
+
+def create_nucleosome_file(folder, chrom, files, fname):
+    pass
+    # logger.info("Creating nucleosome file {}".format(fname))
+    # curArea = [0]
+    # lastPos = 0
+    # maxDist = 190  # A little over our sliding window size
+    # allNucl = []
+
+
+
 
 if __name__ == "__main__":
     conf_file = 'sanefalcon.conf'
@@ -155,14 +169,17 @@ if __name__ == "__main__":
 
     trainfolder = config['default']['trainfolder']
     nucl_file_template = config['default']['nucltemplate']
+    anti_file_template = nucl_file_template + '_anti'
 
     subdirs = [f.path for f in os.scandir(trainfolder) if f.is_dir()]
     merge_files, anti_files, root_merge_files = find_merge_anti_files(trainfolder)
-    runs = assemble_runs(trainfolder, merge_files, subdirs)
-    runs.extend(assemble_runs(trainfolder, anti_files, subdirs))
-    runs.extend(assemble_runs(trainfolder, root_merge_files))
-    for i in runs:
-        print(i)
+    runs = assemble_runs(trainfolder, merge_files, nucl_file_template, subdirs)
+    runs.extend(assemble_runs(trainfolder, anti_files, anti_file_template, subdirs))
+    runs.extend(assemble_runs(trainfolder, root_merge_files, nucl_file_template))
+    for run in runs:
+        print(run)
+        create_nucleosome_file(*run)
+
     # create_nucl_files(trainfolder, nucl_file_template, 'merge')
     # anti_template = nucl_file_template + '_anti'
     # create_nucl_files(trainfolder, anti_template, 'anti')
