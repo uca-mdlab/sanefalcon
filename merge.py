@@ -230,14 +230,14 @@ if __name__ == "__main__":
     datafolder = config['default']['datafolder']
     trainfolder = config['default']['trainfolder']
 
-    files_to_merge = prepare_file_lists(trainfolder)
+    # files_to_merge = prepare_file_lists(trainfolder)
     # for k, v in files_to_merge['22'].items():
     #     print(k)
     #     for n in sorted(v):
     #         print(n)
     # merge(files_to_merge)
     # merge_files = merge_subs(trainfolder)
-    merge_files = find_merge_files_in_subdirectories(trainfolder)
-    merge_anti_subs(merge_files, trainfolder)
-    # # merge_all(trainfolder)
+    # merge_files = find_merge_files_in_subdirectories(trainfolder)
+    # merge_anti_subs(merge_files, trainfolder)
+    merge_all(trainfolder)
     # merge(dic)
