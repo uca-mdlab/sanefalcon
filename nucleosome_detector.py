@@ -160,29 +160,39 @@ def create_nucleosome_file(folder, chrom, mergefile, fname):
     lastPos = 0
     maxDist = 190  # A little over our sliding window size
     allNucl = []
+    s = time.time()
     with open(mergefile, 'r') as infile:
         logger.debug('working on {}'.format(infile.name))
-        for line in infile:
-            position = int(line.strip())
-            distance = position - lastPos
-            if distance > maxDist:
-                allNucl = flush(curArea, lastPos, allNucl)
-                curArea = [1]
-            # Add read to current region
-            else:
-                curArea += [0 for x in range(distance)]
-                curArea[-1] += 1
-            lastPos = position
+        lines = list(map(int, infile.readlines()))
 
-        allNucl = flush(curArea, lastPos, allNucl)
+    count = 0
+    for position in lines:
+        count += 1
+        # position = int(line.strip())
+        distance = position - lastPos
+        if distance > maxDist:
+            allNucl = flush(curArea, lastPos, allNucl)
+            curArea = [1]
+        # Add read to current region
+        else:
+            curArea += [0 for x in range(distance)]
+            curArea[-1] += 1
+        lastPos = position
+        if count % 100000 == 0:
+            print("moving to line {} - pos: {}. time = {}".format(count, lastPos, time.time() - s))
+            s = time.time()
 
-        # Dump results to a file
-        with open(os.path.join(folder, fname + ".{}".format(chrom)), "w") as output_file:
-            for nucl in allNucl:
-                output_file.write("\t".join([str(x) for x in nucl]) + "\n")
+    allNucl = flush(curArea, lastPos, allNucl)
+
+    # Dump results to a file
+    with open(os.path.join(folder, fname + ".{}".format(chrom)), "w") as output_file:
+        for nucl in allNucl:
+            output_file.write("\t".join([str(x) for x in nucl]) + "\n")
     logger.info('Nucleosome saved for chrom {} in {}'.format(chrom, output_file.name))
 
+
 if __name__ == "__main__":
+    import time
     conf_file = 'sanefalcon.conf'
     config = configparser.ConfigParser()
     config.read(conf_file)
@@ -197,7 +207,13 @@ if __name__ == "__main__":
     runs.extend(assemble_runs(trainfolder, anti_files, anti_file_template, subdirs))
     runs.extend(assemble_runs(trainfolder, root_merge_files, nucl_file_template))
     # for run in runs:
+    #     print(run)
     #     create_nucleosome_file(*run)
+
+    s = time.time()
+    create_nucleosome_file(*runs[0])
+    print('done:', time.time() - s)
+    exit()
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_THREAD_NUMBER) as executor:
         jobs = {executor.submit(create_nucleosome_file, *run): run for run in runs}
