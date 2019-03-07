@@ -6,7 +6,7 @@ import configparser
 from merge import merge_all
 from prepare_folders import prepare_train_folder
 from prepare_samples import prepare_samples
-from nucleosome_detector import create_nucl_files
+from nucleosome_detector import create_nucleosome_files
 from getProfileParallel import get_data, submit_process
 import multiprocessing as mp
 
@@ -64,11 +64,8 @@ if __name__ == "__main__":
     merge_all(trainfolder)
     logger.info("merge_all ok")
 
-    create_nucl_files(trainfolder, nucl_file_template, 'merge')
-    logger.info("nucleosome detector merge ok")
-    anti_template = nucl_file_template + '_anti'
-    create_nucl_files(trainfolder, anti_template, 'anti')
-    logger.info("nucleosome detector anti ok")
+    create_nucleosome_files(trainfolder)
+    logger.info("nucleosome ok")
 
     run_profileParallel(trainfolder, nucl_file_template)
     logger.info("run profile parallel ok")
