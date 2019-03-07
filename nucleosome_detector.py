@@ -113,6 +113,7 @@ def assemble_runs(trainfolder, files, file_template, subdirs=None):
             pattern = re.compile('({})'.format(folder))  # matching "folder"
             reduced_tmp = {k: list(filter(lambda x: re.match(pattern, x), v)) for k, v in tmp.items()}
             fname_stub = os.path.join(folder, file_template)
+            print(reduced_tmp)
             run = [(folder, k, v[0], fname_stub) for k, v in reduced_tmp.items()]
             runs.extend(run)
     else:
