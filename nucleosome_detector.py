@@ -5,6 +5,8 @@ import operator
 import re
 import collections
 import concurrent.futures
+import time
+
 import threading
 
 MAX_THREAD_NUMBER = 15
@@ -185,7 +187,7 @@ def create_nucleosome_files(trainfolder, nucl_file_template,anti_file_template):
                 logger.error('Future Exception {}'.format(ex.__cause__))
 
 if __name__ == "__main__":
-    import time
+    # import time
     conf_file = 'sanefalcon.conf'
     config = configparser.ConfigParser()
     config.read(conf_file)
