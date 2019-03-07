@@ -162,7 +162,7 @@ def _create_nucleosome_file(folder, chrom, mergefile, fname):
     logger.info('Nucleosome saved for chrom {} in {}'.format(chrom, output_file.name))
 
 
-def create_nucleosome_files(trainfolder):
+def create_nucleosome_files(trainfolder, nucl_file_template,anti_file_template):
     merge_files, anti_files, root_merge_files = find_merge_anti_files(trainfolder)
     runs = assemble_runs(trainfolder, merge_files, nucl_file_template, subdirs)
     runs.extend(assemble_runs(trainfolder, anti_files, anti_file_template, subdirs))

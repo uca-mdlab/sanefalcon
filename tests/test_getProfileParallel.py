@@ -6,15 +6,17 @@ import getProfileParallel
 class TestGetProfile(unittest.TestCase):
 
     def setUp(self):
-        self.chromfilefwd = './tests/data/chromfile.fwd'
-        self.chromfilerev = './tests/data/chromfile.rev'
-        self.nuclfile = './tests/data/nuclfile'
-        self.configurations = {
-            'fwd0': {'outfile': '{}.fwd'.format(self.chromfilefwd), 'rev': 0},
-            'fwd1': {'outfile': '{}.ifwd'.format(self.chromfilefwd), 'rev': 1},
-            'rev0': {'outfile': '{}.irev'.format(self.chromfilerev), 'rev': 0},
-            'rev1': {'outfile': '{}.rev'.format(self.chromfilerev), 'rev': 1},
-        }
+        self.merge_data_new = './tests/data/sanefalcon_new'
+        self.merge_data_old = './tests/data/sanefalcon_old'
+        # self.chromfilefwd = './tests/data/chromfile.fwd'
+        # self.chromfilerev = './tests/data/chromfile.rev'
+        # self.nuclfile = './tests/data/nuclfile'
+        # self.configurations = {
+        #     'fwd0': {'outfile': '{}.fwd'.format(self.chromfilefwd), 'rev': 0},
+        #     'fwd1': {'outfile': '{}.ifwd'.format(self.chromfilefwd), 'rev': 1},
+        #     'rev0': {'outfile': '{}.irev'.format(self.chromfilerev), 'rev': 0},
+        #     'rev1': {'outfile': '{}.rev'.format(self.chromfilerev), 'rev': 1},
+        # }
 
     def test_cast_line_to_numbers(self):
         a = ['1', '2', '3.2', '4.3', '5']
