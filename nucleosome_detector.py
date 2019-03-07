@@ -113,13 +113,16 @@ def assemble_runs(trainfolder, files, file_template, subdirs=None):
 
     if subdirs:
         for folder in subdirs:
-            print(folder,'FOLDERS')
-            pattern = re.compile('({})'.format(folder))  # matching "folder"
-            reduced_tmp = {k: list(filter(lambda x: re.match(pattern, x), v)) for k, v in tmp.items()}
-            fname_stub = os.path.join(folder, file_template)
-            print(reduced_tmp)
-            run = [(folder, k, v[0], fname_stub) for k, v in reduced_tmp.items()]
-            runs.extend(run)
+            if len(folder) == 1:
+                print(folder,'FOLDERS')
+                pattern = re.compile('({})'.format(folder))  # matching "folder"
+                reduced_tmp = {k: list(filter(lambda x: re.match(pattern, x), v)) for k, v in tmp.items()}
+                fname_stub = os.path.join(folder, file_template)
+                print(reduced_tmp)
+                run = [(folder, k, v[0], fname_stub) for k, v in reduced_tmp.items()]
+                runs.extend(run)
+            else:
+                logger.error("there is a problem with folder {} it's longer than 1".format(folder))
     else:
         fname_stub = os.path.join(trainfolder, file_template)
         run = [(trainfolder, k, v[0], fname_stub) for k, v in tmp.items()]
