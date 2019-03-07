@@ -109,9 +109,11 @@ def assemble_runs(trainfolder, files, file_template, subdirs=None):
     for f in files:
         tmp[f.split('.')[1]].append(f)
     print(tmp,"tmp2")
+    print(subdirs,'SUBDIRS')
 
     if subdirs:
         for folder in subdirs:
+            print(folder,'FOLDERS')
             pattern = re.compile('({})'.format(folder))  # matching "folder"
             reduced_tmp = {k: list(filter(lambda x: re.match(pattern, x), v)) for k, v in tmp.items()}
             fname_stub = os.path.join(folder, file_template)
