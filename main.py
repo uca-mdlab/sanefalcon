@@ -53,17 +53,17 @@ if __name__ == "__main__":
     logger.debug("Data folder = {}".format(datafolder))
     logger.debug("Train folder = {}".format(trainfolder))
 
-    prepare_samples(datafolder, trainfolder, samtools)
-    logger.info("prepare_samples ok")
-
-    try:
-        prepare_train_folder(bamlist, datafolder, trainfolder)
-        logger.info("prepare_folders ok")
-    except FileExistsError:
-        logger.info("train folder symlinks already in place")
-
-    merge_all(trainfolder)
-    logger.info("merge_all ok")
+    # prepare_samples(datafolder, trainfolder, samtools)
+    # logger.info("prepare_samples ok")
+    #
+    # try:
+    #     prepare_train_folder(bamlist, datafolder, trainfolder)
+    #     logger.info("prepare_folders ok")
+    # except FileExistsError:
+    #     logger.info("train folder symlinks already in place")
+    #
+    # merge_all(trainfolder)
+    # logger.info("merge_all ok")
 
     create_nucleosome_files(trainfolder,nucl_file_template,anti_file_template)
     logger.info("nucleosome ok")
