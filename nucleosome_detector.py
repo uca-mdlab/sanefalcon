@@ -105,8 +105,10 @@ def flush(area, endPoint, allNucl):
 def assemble_runs(trainfolder, files, file_template, subdirs=None):
     runs = []
     tmp = collections.defaultdict(list)
+    print(tmp1)
     for f in files:
         tmp[f.split('.')[1]].append(f)
+    print(tmp2)
 
     if subdirs:
         for folder in subdirs:
