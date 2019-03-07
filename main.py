@@ -46,6 +46,7 @@ if __name__ == "__main__":
     datafolder = config['default']['datafolder']
     trainfolder = config['default']['trainfolder']
     nucl_file_template = config['default']['nucltemplate']
+    anti_file_template = nucl_file_template + '_anti'
     bamlist = config['default']['bamlist']
 
     logger.info("Starting sanefalcon with configuration file {}".format(args.conffile))
@@ -64,7 +65,7 @@ if __name__ == "__main__":
     merge_all(trainfolder)
     logger.info("merge_all ok")
 
-    create_nucleosome_files(trainfolder)
+    create_nucleosome_files(trainfolder,nucl_file_template,anti_file_template)
     logger.info("nucleosome ok")
 
     run_profileParallel(trainfolder, nucl_file_template)
