@@ -5,6 +5,7 @@ import operator
 import re
 import collections
 import concurrent.futures
+import threading
 
 MAX_THREAD_NUMBER = 15
 
@@ -101,39 +102,6 @@ def flush(area, endPoint, allNucl):
     return allNucl
 
 
-def create_nucl_files(trainfolder, outfname, fname_to_search):
-    logger.info("Creating nucleosome file {} for {}".format(outfname, fname_to_search))
-    curArea = [0]
-    lastPos = 0
-    maxDist = 190  # A little over our sliding window size
-    allNucl = []
-
-    subdirs = [subdir.path for subdir in os.scandir(trainfolder) if subdir.is_dir()]
-    for subdir in subdirs:
-        for chrom in chromosomes:
-            with open(os.path.join(subdir, "{}.{}".format(fname_to_search, chrom))) as infile:
-                logger.debug('working on {}'.format(infile.name))
-                for line in infile:
-                    position = int(line.strip())
-                    distance = position - lastPos
-                    if distance > maxDist:
-                        allNucl = flush(curArea, lastPos, allNucl)
-                        curArea = [1]
-                    # Add read to current region
-                    else:
-                        curArea += [0 for x in range(distance)]
-                        curArea[-1] += 1
-                    lastPos = position
-
-                allNucl = flush(curArea, lastPos, allNucl)
-
-                # Dump results to a file
-                with open(os.path.join(subdir, outfname + ".{}".format(chrom)), "w") as output_file:
-                    for nucl in allNucl:
-                        output_file.write("\t".join([str(x) for x in nucl]) + "\n")
-            logger.info('Nucleosome [{}] saved for chrom {} in {}'.format(fname_to_search, chrom, output_file.name))
-
-
 def assemble_runs(trainfolder, files, file_template, subdirs=None):
     runs = []
     tmp = collections.defaultdict(list)
@@ -154,19 +122,20 @@ def assemble_runs(trainfolder, files, file_template, subdirs=None):
     return runs
 
 
-def create_nucleosome_file(folder, chrom, mergefile, fname):
+def _create_nucleosome_file(folder, chrom, mergefile, fname):
+    print('starting {} on file {}'.format(os.getpid(), mergefile))
     logger.info("Creating nucleosome file {} for {}".format(fname, mergefile))
     curArea = [0]
     lastPos = 0
     maxDist = 190  # A little over our sliding window size
     allNucl = []
-    s = time.time()
     with open(mergefile, 'r') as infile:
         logger.debug('working on {}'.format(infile.name))
-        lines = list(map(int, infile.readlines()))
-
+        positions = list(map(int, infile.readlines()))
+        length = len(positions)
+    s = time.time()
     count = 0
-    for position in lines:
+    for position in positions:
         count += 1
         # position = int(line.strip())
         distance = position - lastPos
@@ -176,10 +145,12 @@ def create_nucleosome_file(folder, chrom, mergefile, fname):
         # Add read to current region
         else:
             curArea += [0 for x in range(distance)]
+            # print(curArea)
             curArea[-1] += 1
         lastPos = position
         if count % 100000 == 0:
-            print("moving to line {} - pos: {}. time = {}".format(count, lastPos, time.time() - s))
+            logger.debug("[p:{} f:{}], line {} ({}). time = {}".format(os.getpid(), mergefile, count, '{:.1%}'
+                                                                       .format(count/length), time.time() - s))
             s = time.time()
 
     allNucl = flush(curArea, lastPos, allNucl)
@@ -190,6 +161,19 @@ def create_nucleosome_file(folder, chrom, mergefile, fname):
             output_file.write("\t".join([str(x) for x in nucl]) + "\n")
     logger.info('Nucleosome saved for chrom {} in {}'.format(chrom, output_file.name))
 
+
+def create_nucleosome_files(trainfolder):
+    merge_files, anti_files, root_merge_files = find_merge_anti_files(trainfolder)
+    runs = assemble_runs(trainfolder, merge_files, nucl_file_template, subdirs)
+    runs.extend(assemble_runs(trainfolder, anti_files, anti_file_template, subdirs))
+    runs.extend(assemble_runs(trainfolder, root_merge_files, nucl_file_template))
+    with concurrent.futures.ProcessPoolExecutor(max_workers=os.cpu_count()) as executor:
+        jobs = {executor.submit(_create_nucleosome_file, *run): run for run in runs}
+        for job in concurrent.futures.as_completed(jobs):
+            try:
+                _ = job.result()
+            except Exception as ex:
+                logger.error('Future Exception {}'.format(ex.__cause__))
 
 if __name__ == "__main__":
     import time
@@ -203,26 +187,25 @@ if __name__ == "__main__":
 
     subdirs = [f.path for f in os.scandir(trainfolder) if f.is_dir()]
     merge_files, anti_files, root_merge_files = find_merge_anti_files(trainfolder)
-    runs = assemble_runs(trainfolder, merge_files, nucl_file_template, subdirs)
-    runs.extend(assemble_runs(trainfolder, anti_files, anti_file_template, subdirs))
+    runs = []
+    #runs = assemble_runs(trainfolder, merge_files, nucl_file_template, subdirs)
+    # runs.extend(assemble_runs(trainfolder, anti_files, anti_file_template, subdirs))
     runs.extend(assemble_runs(trainfolder, root_merge_files, nucl_file_template))
-    # for run in runs:
-    #     print(run)
-    #     create_nucleosome_file(*run)
-
+    # print(len(runs))
+    # exit()
+    # s = time.time()
+    # create_nucleosome_file(*tup)
+    # print('done:', time.time() - s)
+    # exit()
     s = time.time()
-    create_nucleosome_file(*runs[0])
-    print('done:', time.time() - s)
-    exit()
-
-    with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_THREAD_NUMBER) as executor:
-        jobs = {executor.submit(create_nucleosome_file, *run): run for run in runs}
+    with concurrent.futures.ProcessPoolExecutor(max_workers=os.cpu_count()) as executor:
+        jobs = {executor.submit(_create_nucleosome_file, *run): run for run in runs}
         for job in concurrent.futures.as_completed(jobs):
             try:
                 _ = job.result()
             except Exception as ex:
                 logger.error('Future Exception {}'.format(ex.__cause__))
-
+    print('End: ', time.time() - s)
     # create_nucl_files(trainfolder, nucl_file_template, 'merge')
     # anti_template = nucl_file_template + '_anti'
     # create_nucl_files(trainfolder, anti_template, 'anti')
