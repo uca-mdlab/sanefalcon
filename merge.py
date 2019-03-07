@@ -19,7 +19,7 @@ chromosomes = range(1, 23)
 
 
 def sort_and_write(data, outfile):
-    data = list(set(data))  # remove duplicates and sort
+    # data = list(set(data))  # remove duplicates and sort
     data.sort()
     to_be_written = map(lambda x: str(x) + "\n", data)
     with open(outfile, 'w') as out:
