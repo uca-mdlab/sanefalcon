@@ -70,3 +70,4 @@ if __name__ == "__main__":
 
     run_profileParallel(trainfolder, nucl_file_template)
     logger.info("run profile parallel ok")
+

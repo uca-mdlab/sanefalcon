@@ -175,9 +175,9 @@ def _create_nucleosome_file(folder, chrom, mergefile, fname):
 def create_nucleosome_files(trainfolder, nucl_file_template,anti_file_template):
     subdirs = [f.path for f in os.scandir(trainfolder) if f.is_dir()]
     merge_files, anti_files, root_merge_files = find_merge_anti_files(trainfolder)
-    runs = assemble_runs(trainfolder, merge_files, nucl_file_template, subdirs)
+    # runs = assemble_runs(trainfolder, merge_files, nucl_file_template, subdirs)
     runs.extend(assemble_runs(trainfolder, anti_files, anti_file_template, subdirs))
-    runs.extend(assemble_runs(trainfolder, root_merge_files, nucl_file_template))
+    # runs.extend(assemble_runs(trainfolder, root_merge_files, nucl_file_template))
     with concurrent.futures.ProcessPoolExecutor(max_workers=os.cpu_count()) as executor:
         jobs = {executor.submit(_create_nucleosome_file, *run): run for run in runs}
         for job in concurrent.futures.as_completed(jobs):
