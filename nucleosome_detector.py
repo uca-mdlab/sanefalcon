@@ -115,7 +115,7 @@ def assemble_runs(trainfolder, files, file_template, subdirs=None):
 
     if subdirs:
         for folder in subdirs:
-            if len(folder) == 1:
+            if len(folder.split('/')[-1]) == 1:
                 print(folder,'FOLDERS')
                 pattern = re.compile('({})'.format(folder))  # matching "folder"
                 reduced_tmp = {k: list(filter(lambda x: re.match(pattern, x), v)) for k, v in tmp.items()}
