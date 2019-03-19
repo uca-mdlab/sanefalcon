@@ -62,11 +62,11 @@ if __name__ == "__main__":
     # except FileExistsError:
     #     logger.info("train folder symlinks already in place")
     #
-    merge_all(trainfolder)
-    logger.info("merge_all ok")
-
-    create_nucleosome_files(trainfolder,nucl_file_template,anti_file_template)
-    logger.info("nucleosome ok")
+    # merge_all(trainfolder)
+    # logger.info("merge_all ok")
+    #
+    # create_nucleosome_files(trainfolder,nucl_file_template,anti_file_template)
+    # logger.info("nucleosome ok")
 
     run_profileParallel(trainfolder, nucl_file_template)
     logger.info("run profile parallel ok")
