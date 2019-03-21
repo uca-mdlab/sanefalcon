@@ -67,7 +67,6 @@ if __name__ == "__main__":
     #
     # create_nucleosome_files(trainfolder,nucl_file_template,anti_file_template)
     # logger.info("nucleosome ok")
-
+    print(trainfolder,"TRAINFOLDER ++++++++++")
     run_profileParallel(trainfolder, nucl_file_template)
     logger.info("run profile parallel ok")
-
