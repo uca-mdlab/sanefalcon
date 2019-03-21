@@ -4,7 +4,7 @@ import logging
 import re
 import concurrent.futures
 import threading
-import argparse
+from collections import defaultdict
 
 logger = logging.getLogger('getProfileParallel')
 logging.basicConfig(format='%(asctime)s - %(levelname)s:%(message)s',
@@ -148,7 +148,36 @@ def process_reverse(peaks, reads, outfile):
     return sumPeak
 
 
-def get_data(train_folder, outfolder, nucl_stub):
+def get_nucl_files_per_subfolder(train_folder):
+    nucl_files = defaultdict(list)
+    subfolders = [f.path for f in os.scandir(train_folder) if f.is_dir()]
+    for subfolder in subfolders:
+        for root, sub, files in os.walk(subfolder):
+            for f in files:
+                if os.path.isfile(os.path.join(subfolder, f)) and f.startswith(nucl_stub_anti):
+                    nucl_files[subfolder].append(os.path.join(subfolder, f))
+    return nucl_files
+
+
+def get_fwd_rev_files_per_subfolder(train_folder):
+    subfolders = [f.path for f in os.scandir(train_folder) if f.is_dir()]
+    pattern = re.compile('\.start\.(fwd|rev)')
+    fwd_rev_files = [f for f in os.listdir(train_folder) if re.search(pattern, f)]
+    fwd_rev_names_per_subdir = defaultdict(list)
+    for sub in subfolders:
+        fwd_rev_names_per_subdir[sub] = [os.path.basename(os.path.join(sub, o)) for o in os.listdir(sub)
+                                         if os.path.isdir(os.path.join(sub, o))]
+
+    fwd_rev = defaultdict(list)
+    for subdir, names in fwd_rev_names_per_subdir.items():
+        for manip_name in names:
+            pattern = re.compile(manip_name)
+            fwd_rev[subdir].extend(list(filter(lambda x: re.match(pattern, x), fwd_rev_files)))
+
+    return fwd_rev
+
+
+def get_data(train_folder, outfolder, nucl_stub_anti):
     """
     Avoid calling multiple times the getProfileSubmit.sh script, as it loads all the data in memory.
 
@@ -156,30 +185,16 @@ def get_data(train_folder, outfolder, nucl_stub):
     :param outfolder: /tmp/...
     :return: a dictionary with all the data packed and organized for processing
     """
-    nucl_files=[]
-    subfolders = [f.path for f in os.scandir(train_folder) if f.is_dir()]
-    for subfolder in subfolders:
-        print(subfolder,'subfolder')
-        print(type(subfolder))
-        for root, sub, files in os.walk(subfolder):
-            for f in files:
-                if os.path.isfile(os.path.join(subfolder,f)) and f.startswith(nucl_stub):
-                    nucl_files.append(os.path.join(subfolder,f))
-        # nucl_files = [os.path.join(subfolder, f) for root, sub, f in os.walk(subfolder) if os.path.isfile(os.path.join(subfolder, f)) and f.startswith(nucl_stub)]
-    # nucl_files = [os.path.join(train_folder, f) for f in os.listdir(train_folder) if os.path.isfile(os.path.join(train_folder, f)) and f.startswith(nucl_stub)]
-    # nucl_files = [os.path.join(train_folder, f) for root,sub,f in os.walk(subfolders) if os.path.isfile(os.path.join(train_folder, f)) and f.startswith(nucl_stub)]
-    # # nucl_files = [os.path.join(train_folder, f) for root,sub,f in os.walk(train_folder) if os.path.isfile(os.path.join(train_folder, f)) and f.startswith(nucl_stub)]
-    # for root, subdir, files in os.walk(train_folder):
-    #     for f in files:
-    #         if os.path.isfile(os.path.join(root, f)) and f.startswith(nucl_stub):
-    #             # nucl_files.append(os.path.join(train_folder, f))
-    #             nucl_files.append(os.path.join(root, f))
-    # print(nucl_files,"NUCL_FILE")
-    # print(train_folder,"trainfolder")
-    # print(outfolder,"outfolder")
-    # print(nucl_stub,"nuclstub")
-    print(nucl_files,"------------------------------")
-    print(subfolders)
+    nucl_files = get_nucl_files_per_subfolder(train_folder)
+    fwd_rev_file = get_fwd_rev_files_per_subfolder(train_folder)
+
+    exit()  # FIXME
+    """
+    We have two dictionaries here organized per subdir (a/ b/ etc).
+    
+    They must be merged and organized per chromosome.
+    
+    """
     # print(len(nucl_files))
     # print(nucl_stub,"nucl_stub")
     # for f in os.listdir(train_folder):
@@ -202,8 +217,10 @@ def get_data(train_folder, outfolder, nucl_stub):
                 rev_files.append(os.path.join(root, f))
             else:
                 continue
+
+
     logger.debug('Found {} .start.fwd and {} .start.rev files'.format(len(fwd_files), len(rev_files)))
-    chromosomes = range(1, 23) ## 1, 23
+    chromosomes = range(1, 23)
     d = dict.fromkeys(chromosomes)
     for c in chromosomes:
         nucl_file = [f for f in nucl_files if int(f.split('.')[-1]) == c][0]  # get the nucl file for the chromosome
@@ -328,27 +345,25 @@ def submit_process(tup):
 
 if __name__ == "__main__":
     import multiprocessing as mp
+    import configparser
 
-    parser = argparse.ArgumentParser(description='Get Nucleosome Profile for Sanefalcon')
-    parser.add_argument('train_folder', type=str, help='Folder containing data for the Nucleosome profile')
-    parser.add_argument('outfolder', type=str, help='Output data folder')
-    parser.add_argument('-n', '--nucltrack', dest='nucl_stub', type=str, default="nucl_ex4",
-                        help='Give a nucltrack name without the extension')
-    args = parser.parse_args()
+    conf_file = 'sanefalcon.conf'
+    config = configparser.ConfigParser()
+    config.read(conf_file)
 
-    # train_folder = sys.argv[1]
-    train_folder = args.train_folder
-    # outfolder = sys.argv[2]
-    outfolder = args.outfolder
+    train_folder = config['default']['trainfolder']
+
+    outfolder = config['default']['outfolder']
     logger.info('Starting on {}'.format(train_folder))
 
     if not os.path.isdir(outfolder):
         os.makedirs(outfolder)
         logger.info('Created out folder {}'.format(outfolder))
 
-    nucl_stub = args.nucl_stub
-    data = get_data(train_folder, outfolder, nucl_stub)  # all the available data
-
+    nucl_stub_anti = config['default']['nucltemplate']
+    data = get_data(train_folder, outfolder, nucl_stub_anti)  # all the available data
+    print(data)
+    exit(0)
     # for chrom, dic in data.items():
     #     process(chrom, dic, outfolder)
 
