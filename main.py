@@ -25,6 +25,7 @@ def run_profileParallel(trainfolder, nucl_stub):
 
     data = get_data(trainfolder, outfolder, nucl_stub)  # all the available data
     input_list = [(chrom, dic, outfolder) for chrom, dic in data.items()]
+    print(data,"DATA")
     logger.info("Launching multiprocessing pool...")
     num_cores = mp.cpu_count()
     with mp.Pool(num_cores) as pool:
