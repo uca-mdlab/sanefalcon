@@ -162,7 +162,8 @@ def get_nucl_files_per_subfolder(train_folder):
 def get_fwd_rev_files_per_subfolder(train_folder):
     subfolders = [f.path for f in os.scandir(train_folder) if f.is_dir()]
     pattern = re.compile('\.start\.(fwd|rev)')
-    fwd_rev_files = [f for f in os.listdir(train_folder) if re.search(pattern, f)]
+    fwd_rev_files = [os.path.join(train_folder, f) for f in os.listdir(train_folder) if re.search(pattern, f)]
+
     fwd_rev_names_per_subdir = defaultdict(list)
     for sub in subfolders:
         fwd_rev_names_per_subdir[sub] = [os.path.basename(os.path.join(sub, o)) for o in os.listdir(sub)
@@ -172,7 +173,7 @@ def get_fwd_rev_files_per_subfolder(train_folder):
     for subdir, names in fwd_rev_names_per_subdir.items():
         for manip_name in names:
             pattern = re.compile(manip_name)
-            fwd_rev[subdir].extend(list(filter(lambda x: re.match(pattern, x), fwd_rev_files)))
+            fwd_rev[subdir].extend(list(filter(lambda x: re.search(pattern, x), fwd_rev_files)))
 
     return fwd_rev
 
@@ -185,54 +186,29 @@ def get_data(train_folder, outfolder, nucl_stub_anti):
     :param outfolder: /tmp/...
     :return: a dictionary with all the data packed and organized for processing
     """
+    d = defaultdict(dict)
     nucl_files = get_nucl_files_per_subfolder(train_folder)
-    fwd_rev_file = get_fwd_rev_files_per_subfolder(train_folder)
+    fwd_rev_files = get_fwd_rev_files_per_subfolder(train_folder)
 
-    exit()  # FIXME
-    """
-    We have two dictionaries here organized per subdir (a/ b/ etc).
-    
-    They must be merged and organized per chromosome.
-    
-    """
-    # print(len(nucl_files))
-    # print(nucl_stub,"nucl_stub")
-    # for f in os.listdir(train_folder):
-    #     # if os.path.isfile(os.path.join(train_folder, f)) and f.startswith(nucl_stub):
-    #     if os.path.isfile(os.path.join(train_folder, f)):
-    #         print(f)
-
-    # print(os.listdir(train_folder))
-
-    logger.debug('Found {} nucl_files'.format(len(nucl_files)))
-    if not os.path.isdir(outfolder):
-        os.makedirs(outfolder)
-    fwd_files = []
-    rev_files = []
-    for root, subdir, files in os.walk(train_folder):
-        for f in files:
-            if f.endswith('fwd'):
-                fwd_files.append(os.path.join(root, f))
-            elif f.endswith('rev'):
-                rev_files.append(os.path.join(root, f))
-            else:
-                continue
-
-
-    logger.debug('Found {} .start.fwd and {} .start.rev files'.format(len(fwd_files), len(rev_files)))
     chromosomes = range(1, 23)
-    d = dict.fromkeys(chromosomes)
-    for c in chromosomes:
-        nucl_file = [f for f in nucl_files if int(f.split('.')[-1]) == c][0]  # get the nucl file for the chromosome
-        regexp = re.compile(".bam.{}.start".format(c))
-        c_fwd_files = [f for f in fwd_files if re.search(regexp, f)]          # add fwd files
-        c_rev_files = [f for f in rev_files if re.search(regexp, f)]          # add rev files
-        logger.debug("Consistency c_fwd_files, c_rev_files = {} - {}".format(all([f.endswith('.fwd') for
-                                                                                  f in c_fwd_files]),
-                                                                             all([f.endswith('.rev')
-                                                                                  for f in c_rev_files])))
-        d[c] = {'nucl_file': nucl_file, 'fwd': c_fwd_files, 'rev': c_rev_files}  # pack together in a dictionary
-        logger.debug('Chrom {}: {} fwd files, {} rev files'.format(c, len(c_fwd_files), len(c_rev_files)))
+
+    for subdir, fwd_rev_file_list in fwd_rev_files.items():
+        for c in chromosomes:
+            regexp = re.compile(".bam.{}.start".format(c))
+            fwd_files = [f for f in list(filter(lambda x: x.endswith('fwd'), fwd_rev_file_list)) if re.search(regexp, f)]
+            rev_files = [f for f in list(filter(lambda x: x.endswith('rev'), fwd_rev_file_list)) if re.search(regexp, f)]
+            nucl_file = [f for f in nucl_files[subdir] if f.endswith('.{}'.format(c))][0]
+            logger.debug('Chrom {} - nucl_file {} - Found {} fwd_files, {} rev_files'.format(c, nucl_file,
+                                                                                             len(fwd_files),
+                                                                                             len(rev_files)))
+
+            d[c].update({
+                subdir: {'fwd': fwd_files,
+                         'rev': rev_files,
+                         'nucl_file': nucl_file
+                         }
+            })
+
     return d
 
 
@@ -284,57 +260,59 @@ def run_reverse(chrom, outdir, rev_file, nucl_ex_file):
     return len(sumPeakFwd), len(sumPeakRev)
 
 
-def process(chrom, dic, outdir):
+def process(chrom, d, outdir):
     MAX_FILES_PROCESSED = 10  # limit parallelism not to overload memory
 
-    nucl_ex_file = dic['nucl_file']
-    fwd_files = dic['fwd']
-    fwd_files_left = len(fwd_files)
-    fwd_files_iter = iter(fwd_files)
+    for subdir, dic in d.items():
+        nucl_ex_file = dic['nucl_file']
+        fwd_files = dic['fwd']
+        fwd_files_left = len(fwd_files)
+        fwd_files_iter = iter(fwd_files)
 
-    rev_files = dic['rev']
-    rev_files_left = len(rev_files)
-    rev_files_iter = iter(rev_files)
+        rev_files = dic['rev']
+        rev_files_left = len(rev_files)
+        rev_files_iter = iter(rev_files)
+        logger.debug('Starting multithread on {} with {}'.format(subdir, nucl_ex_file))
+        with concurrent.futures.ThreadPoolExecutor(max_workers=5, thread_name_prefix='fwd') as executor:
+            jobs = {}
+            while fwd_files_left:
+                for this_fwd_file in fwd_files_iter:
+                    job = executor.submit(run_forward, chrom, outdir, this_fwd_file, nucl_ex_file)
+                    jobs[job] = this_fwd_file
+                    if len(jobs) > MAX_FILES_PROCESSED:
+                        break
+                for job in concurrent.futures.as_completed(jobs):
+                    fwd_files_left -= 1
+                    try:
+                        l_tup = job.result()
+                    except Exception as ex:
+                        logger.error('[fwd] Exception {}'.format(ex.__cause__))
+                    this_fwd_file = jobs[job]
+                    del jobs[job]
+                    logger.info('[fwd] Got future for'.format(this_fwd_file))
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers=5, thread_name_prefix='fwd') as executor:
-        jobs = {}
-        while fwd_files_left:
-            for this_fwd_file in fwd_files_iter:
-                job = executor.submit(run_forward, chrom, outdir, this_fwd_file, nucl_ex_file)
-                jobs[job] = this_fwd_file
-                if len(jobs) > MAX_FILES_PROCESSED:
-                    break
-            for job in concurrent.futures.as_completed(jobs):
-                fwd_files_left -= 1
-                try:
-                    l_tup = job.result()
-                except Exception as ex:
-                    logger.error('[fwd] Exception {}'.format(ex.__cause__))
-                this_fwd_file = jobs[job]
-                del jobs[job]
-                logger.info('[fwd] Got future for'.format(this_fwd_file))
+        logger.info('End of forward concurrent phase for chrom {}'.format(chrom))
 
-    logger.info('End of forward concurrent phase for chrom {}'.format(chrom))
+        with concurrent.futures.ThreadPoolExecutor(max_workers=5, thread_name_prefix='rev') as executor:
+            jobs = {}
+            while rev_files_left:
+                for this_rev_file in rev_files_iter:
+                    job = executor.submit(run_reverse, chrom, outdir, this_rev_file, nucl_ex_file)
+                    jobs[job] = this_rev_file
+                    if len(jobs) > MAX_FILES_PROCESSED:
+                        break
+                for job in concurrent.futures.as_completed(jobs):
+                    rev_files_left -= 1
+                    try:
+                        l_tup = job.result()
+                    except Exception as ex:
+                        logger.error('[rev] Exception {}'.format(ex.__cause__))
+                    this_rev_file = jobs[job]
+                    del jobs[job]
+                    logger.info('[rev] Got future for'.format(this_rev_file))
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers=5, thread_name_prefix='rev') as executor:
-        jobs = {}
-        while rev_files_left:
-            for this_rev_file in rev_files_iter:
-                job = executor.submit(run_reverse, chrom, outdir, this_rev_file, nucl_ex_file)
-                jobs[job] = this_rev_file
-                if len(jobs) > MAX_FILES_PROCESSED:
-                    break
-            for job in concurrent.futures.as_completed(jobs):
-                rev_files_left -= 1
-                try:
-                    l_tup = job.result()
-                except Exception as ex:
-                    logger.error('[rev] Exception {}'.format(ex.__cause__))
-                this_rev_file = jobs[job]
-                del jobs[job]
-                logger.info('[rev] Got future for'.format(this_rev_file))
+        logger.info('End of reverse concurrent phase for chrom {}'.format(chrom))
 
-    logger.info('End of reverse concurrent phase for chrom {}'.format(chrom))
     logger.info('Finished processing chrom {}'.format(chrom))
     return chrom
 
@@ -362,8 +340,6 @@ if __name__ == "__main__":
 
     nucl_stub_anti = config['default']['nucltemplate']
     data = get_data(train_folder, outfolder, nucl_stub_anti)  # all the available data
-    print(data)
-    exit(0)
     # for chrom, dic in data.items():
     #     process(chrom, dic, outfolder)
 
