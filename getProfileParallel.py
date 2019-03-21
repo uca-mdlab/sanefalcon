@@ -148,7 +148,7 @@ def process_reverse(peaks, reads, outfile):
     return sumPeak
 
 
-def get_nucl_files_per_subfolder(train_folder):
+def get_nucl_files_per_subfolder(train_folder,nucl_stub_anti):
     nucl_files = defaultdict(list)
     subfolders = [f.path for f in os.scandir(train_folder) if f.is_dir()]
     for subfolder in subfolders:
@@ -187,7 +187,7 @@ def get_data(train_folder, outfolder, nucl_stub_anti):
     :return: a dictionary with all the data packed and organized for processing
     """
     d = defaultdict(dict)
-    nucl_files = get_nucl_files_per_subfolder(train_folder)
+    nucl_files = get_nucl_files_per_subfolder(train_folder,nucl_stub_anti)
     fwd_rev_files = get_fwd_rev_files_per_subfolder(train_folder)
 
     chromosomes = range(1, 23)
