@@ -46,6 +46,7 @@ if __name__ == "__main__":
     samtools = config['default']['samtools']
     datafolder = config['default']['datafolder']
     trainfolder = config['default']['trainfolder']
+    rspfolder = config['default']['rspfolder']
     nucl_file_template = config['default']['nucltemplate']
     anti_file_template = nucl_file_template + '_anti'
     bamlist = config['default']['bamlist']
@@ -56,18 +57,17 @@ if __name__ == "__main__":
 
     # prepare_samples(datafolder, trainfolder, samtools)
     # logger.info("prepare_samples ok")
-    #
-    # try:
-    #     prepare_train_folder(bamlist, datafolder, trainfolder)
-    #     logger.info("prepare_folders ok")
-    # except FileExistsError:
-    #     logger.info("train folder symlinks already in place")
-    #
-    merge_all(trainfolder)
+
+    try:
+        prepare_train_folder(bamlist, datafolder, trainfolder)
+        logger.info("prepare_folders ok")
+    except FileExistsError:
+        logger.info("train folder symlinks already in place")
+
+    merge_all(trainfolder,rspfolder)
     logger.info("merge_all ok")
     #
-    # create_nucleosome_files(trainfolder,nucl_file_template,anti_file_template)
-    # logger.info("nucleosome ok")
-    print(trainfolder,"TRAINFOLDER ++++++++++")
-    # run_profileParallel(trainfolder, nucl_file_template)
+    create_nucleosome_files(trainfolder,nucl_file_template,anti_file_template)
+    logger.info("nucleosome ok")
+    run_profileParallel(trainfolder, nucl_file_template)
     logger.info("run profile parallel ok")

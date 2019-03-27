@@ -59,7 +59,7 @@ def find_merge_files_in_subdirectories(trainfolder):
 #             return None
 
 
-def prepare_file_lists(trainfolder):
+def prepare_file_lists(trainfolder,rspfolder):
     """
 
     :param trainfolder:
@@ -69,7 +69,9 @@ def prepare_file_lists(trainfolder):
     manips = find_all_manips(trainfolder)
     files_dic = dict.fromkeys(list(map(str, chromosomes)), list())
     all_start_files = []
-    for root, subdirs, files in os.walk(trainfolder):
+    # for root, subdirs, files in os.walk(trainfolder):
+    #test if rspfolder is working, otherwise put back trainfolder as argument
+    for root, subdirs, files in os.walk(rspfolder):
         for fname in files:
             if fname.endswith('.fwd') or fname.endswith('.rev'):
                 all_start_files.append(os.path.join(root, fname))
@@ -209,9 +211,10 @@ def merge_anti_subs(merge_files, trainfolder):
                 logger.error('Future Exception {}'.format(ex.__cause__))
 
 
-def merge_all(trainfolder):
+def merge_all(trainfolder,rspfolder):
     logger.info("starting merge all")
-    dic = prepare_file_lists(trainfolder)
+    # dic = prepare_file_lists(trainfolder)
+    dic = prepare_file_lists(trainfolder,rspfolder)
     merge(dic)
     logger.debug("merge done")
     merge_files = merge_subs(trainfolder)
@@ -229,6 +232,7 @@ if __name__ == "__main__":
     samtools = config['default']['samtools']
     datafolder = config['default']['datafolder']
     trainfolder = config['default']['trainfolder']
+    rspfolder = config['default']['rspfolder']
 
     # files_to_merge = prepare_file_lists(trainfolder)
     # for k, v in files_to_merge['22'].items():

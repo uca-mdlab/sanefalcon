@@ -68,7 +68,7 @@ def prepare_train_folder(bamlist, bamdir, traindir):
             files = [f for f in files_to_link if re.search(manip_regex, f)]
             logger.debug("Batch {}: {}".format(batch_name, files))
             for fname in files:
-                run = fname.split(bamdir)[1].split('/')[1]
+                run = fname.split(bamdir)[1].split('/')[-2]
                 runpath = os.path.join(workingdir, run)
                 if not os.path.isdir(runpath):
                     os.mkdir(runpath)
@@ -82,8 +82,9 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Prepare the environment and start the plugin',
                                      formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
-    parser.add_argument('bamdir', type=str, default="/results/analysis/output/Home", help='path of the manipulation')
+
     parser.add_argument('bamlist', type=str, help='list of bamfiles to use, with run names and sample names')
+    parser.add_argument('bamdir', type=str, default="/results/analysis/output/Home", help='path of the manipulation')
     parser.add_argument('traindir', type=str, default="/tmp/sanefalcontrain", help='path of the train subtree')
 
     args = parser.parse_args()
