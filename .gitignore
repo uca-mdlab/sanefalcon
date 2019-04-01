@@ -3,7 +3,6 @@
 .idea/*
 temporary
 temporary2
-tests
 *.ifwd
 *.fwd
 *.rev
