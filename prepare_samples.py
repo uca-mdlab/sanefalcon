@@ -13,7 +13,7 @@ logging.basicConfig(format='%(asctime)s - %(levelname)s: %(message)s',
 logger = logging.getLogger("prepare_samples")
 
 
-def prepare_samples(datafolder, trainfolder, samtools):
+def prepare_samples(datafolder, rspfolder, samtools):
     chromosomes = range(1, 23)
 
     for root, subdir, files in os.walk(datafolder):
@@ -22,7 +22,7 @@ def prepare_samples(datafolder, trainfolder, samtools):
                 bamfile = os.path.join(root, fname)
                 outfile_name = fname.split('.')[0] + '.sort.bam'
                 for chrom in chromosomes:
-                    outfile = os.path.join(trainfolder, outfile_name + '.{}.start.fwd'.format(chrom))
+                    outfile = os.path.join(rspfolder, outfile_name + '.{}.start.fwd'.format(chrom))
                     if not os.path.isfile(outfile):
                         one = [samtools, "view", bamfile, "chr{}".format(chrom), "-F", "20", "-q" "1"]
                         two = [sys.executable, "retro.py"]
@@ -32,7 +32,7 @@ def prepare_samples(datafolder, trainfolder, samtools):
                         p3 = subprocess.Popen(three, stdin=p2.stdout, stdout=open(outfile, 'w'))
                         output = p3.communicate()[0]
 
-                        revoutfile = os.path.join(trainfolder, outfile_name + '.{}.start.rev'.format(chrom))
+                        revoutfile = os.path.join(rspfolder, outfile_name + '.{}.start.rev'.format(chrom))
                         one = [samtools, "view", bamfile, "chr{}".format(chrom), "-f", "16", "-F", "4", "-q" "1"]
                         three = ["awk", "{print ($4 + length($10) - 1)}"]
                         p1 = subprocess.Popen(one, stdout=subprocess.PIPE)
