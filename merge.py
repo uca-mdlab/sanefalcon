@@ -8,6 +8,7 @@ import os
 import logging
 import re
 import collections
+from file_manager import FileManager
 
 logging.basicConfig(format='%(asctime)s - %(levelname)s: %(message)s',
                     filename='sanefalcon.log', filemode='w', level=logging.DEBUG)
@@ -26,24 +27,24 @@ def sort_and_write(data, outfile):
         out.writelines(to_be_written)
 
 
-def find_all_manips(trainfolder):
-    manips = {}
-    subfolders = [f.path for f in os.scandir(trainfolder) if f.is_dir()]
-    for subdir in subfolders:
-        manips[subdir] = [os.path.basename(f.path) for f in os.scandir(subdir) if f.is_dir()]
-    return manips
+# def find_all_manips(trainfolder):
+#     manips = {}
+#     subfolders = [f.path for f in os.scandir(trainfolder) if f.is_dir()]
+#     for subdir in subfolders:
+#         manips[subdir] = [os.path.basename(f.path) for f in os.scandir(subdir) if f.is_dir()]
+#     return manips
 
 
-def find_merge_files_in_subdirectories(trainfolder):
-    merge_files = []
-    pattern_name = re.compile("merge.\d{1,2}")
-    pattern_subdir = re.compile("/[a-z]/")
-    for root, subdirs, files in os.walk(trainfolder):
-        for fname in files:
-            filename = os.path.join(root, fname)
-            if re.match(pattern_name, fname) and re.search(pattern_subdir, filename):
-                merge_files.append(filename)
-    return merge_files
+# def find_merge_files_in_subdirectories(trainfolder):
+#     merge_files = []
+#     pattern_name = re.compile("merge.\d{1,2}")
+#     pattern_subdir = re.compile("/[a-z]/")
+#     for root, subdirs, files in os.walk(trainfolder):
+#         for fname in files:
+#             filename = os.path.join(root, fname)
+#             if re.match(pattern_name, fname) and re.search(pattern_subdir, filename):
+#                 merge_files.append(filename)
+#     return merge_files
 
 #
 # def search_manip_name(manips, fname):
@@ -59,42 +60,42 @@ def find_merge_files_in_subdirectories(trainfolder):
 #             return None
 
 
-def prepare_file_lists(trainfolder,rspfolder):
-    """
-
-    :param trainfolder:
-    :return: {'chr1': {'a': [chr1.start.fwd, chr1.start.rev], 'b': [...]}}
-    """
-    res = {}
-    manips = find_all_manips(trainfolder)
-    files_dic = dict.fromkeys(list(map(str, chromosomes)), list())
-    all_start_files = []
-    # for root, subdirs, files in os.walk(trainfolder):
-    #test if rspfolder is working, otherwise put back trainfolder as argument
-    for root, subdirs, files in os.walk(rspfolder):
-        for fname in files:
-            if fname.endswith('.fwd') or fname.endswith('.rev'):
-                all_start_files.append(os.path.join(root, fname))
-
-    for chrom in chromosomes:
-        string_pattern = "\.bam\.{}\.start".format(chrom)
-        pattern = re.compile(string_pattern)
-        files_dic[str(chrom)] = list(filter(lambda x: re.search(pattern, x), all_start_files))
-
-    for chrom, chrom_start_files in files_dic.items():
-        logger.debug('Preparing start_files from chrom {}'.format(chrom))
-        files_per_subdir = {}
-        for subdir, manip_names in manips.items():
-            start_per_manip = []
-            for n in manip_names:
-                start_per_manip.extend(list(filter(lambda x: re.search(n, x), chrom_start_files)))
-            if subdir in files_per_subdir:
-                files_per_subdir[subdir].extend(start_per_manip)
-            else:
-                files_per_subdir[subdir] = start_per_manip
-        res[chrom] = files_per_subdir
-
-    return res
+# def prepare_file_lists(trainfolder,rspfolder):
+#     """
+#
+#     :param trainfolder:
+#     :return: {'chr1': {'a': [chr1.start.fwd, chr1.start.rev], 'b': [...]}}
+#     """
+#     res = {}
+#     manips = find_all_manips(trainfolder)
+#     files_dic = dict.fromkeys(list(map(str, chromosomes)), list())
+#     all_start_files = []
+#     # for root, subdirs, files in os.walk(trainfolder):
+#     #test if rspfolder is working, otherwise put back trainfolder as argument
+#     for root, subdirs, files in os.walk(rspfolder):
+#         for fname in files:
+#             if fname.endswith('.fwd') or fname.endswith('.rev'):
+#                 all_start_files.append(os.path.join(root, fname))
+#
+#     for chrom in chromosomes:
+#         string_pattern = "\.bam\.{}\.start".format(chrom)
+#         pattern = re.compile(string_pattern)
+#         files_dic[str(chrom)] = list(filter(lambda x: re.search(pattern, x), all_start_files))
+#
+#     for chrom, chrom_start_files in files_dic.items():
+#         logger.debug('Preparing start_files from chrom {}'.format(chrom))
+#         files_per_subdir = {}
+#         for subdir, manip_names in manips.items():
+#             start_per_manip = []
+#             for n in manip_names:
+#                 start_per_manip.extend(list(filter(lambda x: re.search(n, x), chrom_start_files)))
+#             if subdir in files_per_subdir:
+#                 files_per_subdir[subdir].extend(start_per_manip)
+#             else:
+#                 files_per_subdir[subdir] = start_per_manip
+#         res[chrom] = files_per_subdir
+#
+#     return res
 
 
 def read_all_files(file_list):
@@ -156,13 +157,13 @@ def _merge_subs(chrom, files, trainfolder):
     # print("{} completed on {}".format(threading.current_thread(), chrom))
 
 
-def merge_subs(trainfolder):
-    merge_files = find_merge_files_in_subdirectories(trainfolder)
+def merge_subs(merge_subs_files, trainfolder):
     tmp = collections.defaultdict(list)
-    for f in merge_files:
+    for f in merge_subs_files:
         tmp[f.split('.')[1]].append(f)
 
     runs = [(k, v, trainfolder) for k, v in tmp.items()]
+
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_THREAD_NUMBER) as executor:
         jobs = {executor.submit(_merge_subs, *run): run for run in runs}
         for job in concurrent.futures.as_completed(jobs):
@@ -170,8 +171,6 @@ def merge_subs(trainfolder):
                 _ = job.result()
             except Exception as ex:
                 logger.error('Future Exception {}'.format(ex.__cause__))
-    return merge_files
-
 
 def _merge_anti_subs(folder, chrom, files):
     # print("{} launched on {} ".format(threading.current_thread(), chrom))
@@ -182,7 +181,7 @@ def _merge_anti_subs(folder, chrom, files):
     # print("{} completed on {}".format(threading.current_thread(), chrom))
 
 
-def merge_anti_subs(merge_files, trainfolder):
+def merge_anti_subs(merge_subs_files, trainfolder):
     """
     input: [sanefalcontrain/b/merge.chr1, sanefalcontrain/c/merge.chr1, ...]
     output: sanefalcontrain/a/anti.chr1
@@ -190,7 +189,7 @@ def merge_anti_subs(merge_files, trainfolder):
     :return:
     """
     tmp = collections.defaultdict(list)
-    for f in merge_files:
+    for f in merge_subs_files:
         tmp[f.split('.')[1]].append(f)
     # print(tmp)
     subfolders = [f.path for f in os.scandir(trainfolder) if f.is_dir()]
@@ -211,15 +210,15 @@ def merge_anti_subs(merge_files, trainfolder):
                 logger.error('Future Exception {}'.format(ex.__cause__))
 
 
-def merge_all(trainfolder,rspfolder):
+def merge_all(fm):
+    files_to_merge = fm.get_merge_file_lists()
     logger.info("starting merge all")
-    # dic = prepare_file_lists(trainfolder)
-    dic = prepare_file_lists(trainfolder,rspfolder)
-    merge(dic)
+    merge(files_to_merge)
     logger.debug("merge done")
-    merge_files = merge_subs(trainfolder)
+    merge_subs_files = fm.find_merge_files_in_subdirectories()
+    merge_subs(merge_subs_files, fm.trainfolder)
     logger.debug("merge_subs done")
-    merge_anti_subs(merge_files, trainfolder)
+    merge_anti_subs(merge_subs_files, fm.trainfolder)
     logger.debug("merge_anti_subs done")
     logger.info("merging completed")
 
