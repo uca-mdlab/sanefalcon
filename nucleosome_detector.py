@@ -105,14 +105,12 @@ def assemble_runs(trainfolder, files, file_template, subdirs=None):
 
 
 def _create_nucleosome_file(folder, chrom, mergefile, fname):
-    print('starting {} on file {}'.format(os.getpid(), mergefile))
-    logger.info("Creating nucleosome file {} for {}".format(fname, mergefile))
+    logger.info("{} creating nucleosome file for {}".format(os.getpid(), mergefile))
     curArea = [0]
     lastPos = 0
     maxDist = 190  # A little over our sliding window size
     allNucl = []
     with open(mergefile, 'r') as infile:
-        logger.debug('working on {}'.format(infile.name))
         positions = list(map(int, infile.readlines()))
         length = len(positions)
     s = time.time()
