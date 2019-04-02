@@ -8,3 +8,5 @@ temporary2
 *.rev
 *.irev
 __pycache*
+my.conf
+*.log
