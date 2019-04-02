@@ -22,6 +22,11 @@ class Utils:
 
         return lines
 
+    @staticmethod
+    def prepare_batches(list, n):
+        # Yield successive n-sized chunks from manip_list.
+        for i in range(0, len(list), n):
+            yield list[i:i + n]
 
 class FileManager:
     def __init__(self, config):
@@ -58,12 +63,12 @@ class FileManager:
         letters = list(string.ascii_lowercase)
         files_to_link, manip_list = self.list_files_to_use()
 
-        exit()
         batches = {}
         for num_batch, batch in enumerate(prepare_batches(manip_list)):
             batches[letters[num_batch]] = batch
-            logger.debug("Batch {}: {}".format(letters[num_batch], batch))
+            # logger.debug("Batch {}: {}".format(letters[num_batch], batch))
 
+        exit()
         for batch_name, batch_list in batches.items():
             workingdir = os.path.join(traindir, batch_name)
             try:
