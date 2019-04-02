@@ -62,7 +62,7 @@ if __name__ == "__main__":
     except FileExistsError:
         logger.info("train folder symlinks already in place")
 
-    # merge_all(fm)
+    merge_all(fm)
     logger.info("merge_all ok")
 
     create_nucleosome_files(fm, training=True)
