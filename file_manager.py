@@ -160,6 +160,24 @@ class FileManager:
                     merge_files.append(filename)
         return merge_files
 
+    def find_merge_anti_files(self):
+        merge_files = []
+        anti_files = []
+        root_merge_files = []
+        pattern_name = re.compile("merge.\d{1,2}")
+        anti_pattern_name = re.compile("anti.\d{1,2}")
+        pattern_subdir = re.compile("/[a-z]/")
+        for root, subdirs, files in os.walk(self.trainfolder):
+            for fname in files:
+                filename = os.path.join(root, fname)
+                if re.match(pattern_name, fname) and re.search(pattern_subdir, filename):
+                    merge_files.append(filename)
+                elif re.match(pattern_name, fname) and not re.search(pattern_subdir, filename):
+                    root_merge_files.append(filename)
+                if re.match(anti_pattern_name, fname) and re.search(pattern_subdir, filename):
+                    anti_files.append(filename)
+        return merge_files, anti_files, root_merge_files
+
 if __name__ == '__main__':
     import configparser
 
