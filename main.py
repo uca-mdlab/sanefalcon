@@ -17,15 +17,18 @@ logging.basicConfig(format='%(asctime)s - %(levelname)s: %(message)s',
 logger = logging.getLogger("main")
 
 
-def run_profileParallel(trainfolder, nucl_stub):
-    outfolder = os.path.join(trainfolder, "profiles")
+def run_profileParallel(fm, training=True):
+    if training:
+        nucl_stub = fm.anti_file_template
+    else:
+        nucl_stub = fm.nucl_file_template
+    outfolder = fm.profilefolder
     if not os.path.isdir(outfolder):
         os.makedirs(outfolder)
         logger.info('run_profileParallel: Created out folder {}'.format(outfolder))
 
-    data = get_data(trainfolder, outfolder, nucl_stub)  # all the available data
+    data = get_data(fm.trainfolder, outfolder, nucl_stub)  # all the available data
     input_list = [(chrom, dic, outfolder) for chrom, dic in data.items()]
-    print(data,"DATA")
     logger.info("Launching multiprocessing pool...")
     num_cores = mp.cpu_count()
     with mp.Pool(num_cores) as pool:
@@ -46,17 +49,9 @@ if __name__ == "__main__":
 
     fm = FileManager(config)
 
-    # datafolder = config['default']['datafolder']
-    # trainfolder = config['default']['trainfolder']
-    # rspfolder = config['default']['rspfolder']
-    # nucl_file_template = config['default']['nucltemplate']
-    # anti_file_template = nucl_file_template + '_anti'
-    # bamlist = config['default']['bamlist']
-
     logger.info("Starting sanefalcon with configuration file {}".format(args.conffile))
-    logger.debug("Data folder = {}".format(fm.datafolder))
-    logger.debug("Train folder = {}".format(fm.trainfolder))
 
+    # WARNING uncomment the next lines for full process (prepare_samples)
     # samtools = config['default']['samtools']
     # prepare_samples(fm.datafolder, fm.rspfolder, samtools)
     # logger.info("prepare_samples ok")
@@ -67,10 +62,11 @@ if __name__ == "__main__":
     except FileExistsError:
         logger.info("train folder symlinks already in place")
 
-    merge_all(trainfolder,rspfolder)
+    # merge_all(fm)
     logger.info("merge_all ok")
-    #
-    create_nucleosome_files(trainfolder,nucl_file_template,anti_file_template)
+
+    create_nucleosome_files(fm, training=True)
     logger.info("nucleosome ok")
-    run_profileParallel(trainfolder, nucl_file_template)
+
+    run_profileParallel(fm.trainfolder, fm.anti_file_template)  # training: fm.anti_file_template
     logger.info("run profile parallel ok")
