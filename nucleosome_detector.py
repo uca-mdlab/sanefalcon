@@ -1,4 +1,3 @@
-import configparser
 import os
 import logging
 import operator
@@ -6,8 +5,6 @@ import re
 import collections
 import concurrent.futures
 import time
-
-import threading
 
 MAX_THREAD_NUMBER = 15
 
@@ -24,25 +21,6 @@ sideSize = 20  # 25
 padding = areaSize + sideSize
 outerLen = 2 * sideSize  # len(left)+len(right)
 innerLen = areaSize * 2 + 1  # len(window)
-
-
-def find_merge_anti_files(trainfolder):
-    merge_files = []
-    anti_files = []
-    root_merge_files = []
-    pattern_name = re.compile("merge.\d{1,2}")
-    anti_pattern_name = re.compile("anti.\d{1,2}")
-    pattern_subdir = re.compile("/[a-z]/")
-    for root, subdirs, files in os.walk(trainfolder):
-        for fname in files:
-            filename = os.path.join(root, fname)
-            if re.match(pattern_name, fname) and re.search(pattern_subdir, filename):
-                merge_files.append(filename)
-            elif re.match(pattern_name, fname) and not re.search(pattern_subdir, filename):
-                root_merge_files.append(filename)
-            if re.match(anti_pattern_name, fname) and re.search(pattern_subdir, filename):
-                anti_files.append(filename)
-    return merge_files, anti_files, root_merge_files
 
 
 def flush(area, endPoint, allNucl):
@@ -107,24 +85,18 @@ def flush(area, endPoint, allNucl):
 def assemble_runs(trainfolder, files, file_template, subdirs=None):
     runs = []
     tmp = collections.defaultdict(list)
-    print(tmp,"tmp1")
     for f in files:
         tmp[f.split('.')[1]].append(f)
-    print(tmp,"tmp2")
-    print(subdirs,'SUBDIRS')
-
     if subdirs:
         for folder in subdirs:
-            if len(folder.split('/')[-1]) == 1:
-                print(folder,'FOLDERS')
+            if len(os.path.split(folder)[1]) == 1:
                 pattern = re.compile('({})'.format(folder))  # matching "folder"
                 reduced_tmp = {k: list(filter(lambda x: re.match(pattern, x), v)) for k, v in tmp.items()}
                 fname_stub = os.path.join(folder, file_template)
-                print(reduced_tmp)
                 run = [(folder, k, v[0], fname_stub) for k, v in reduced_tmp.items()]
                 runs.extend(run)
             else:
-                logger.error("there is a problem with folder {} it's longer than 1".format(folder))
+                logger.error("there is a problem with folder {} it's longer than 1".format(folder))  # useless FIXME
     else:
         fname_stub = os.path.join(trainfolder, file_template)
         run = [(trainfolder, k, v[0], fname_stub) for k, v in tmp.items()]
@@ -172,13 +144,15 @@ def _create_nucleosome_file(folder, chrom, mergefile, fname):
     logger.info('Nucleosome saved for chrom {} in {}'.format(chrom, output_file.name))
 
 
-def create_nucleosome_files(trainfolder, nucl_file_template,anti_file_template):
-    subdirs = [f.path for f in os.scandir(trainfolder) if f.is_dir()]
-    merge_files, anti_files, root_merge_files = find_merge_anti_files(trainfolder)
-    # runs = assemble_runs(trainfolder, merge_files, nucl_file_template, subdirs)
-    runs = assemble_runs(trainfolder, anti_files, anti_file_template, subdirs)
-    # runs.extend(assemble_runs(trainfolder, anti_files, anti_file_template, subdirs))
-    # runs.extend(assemble_runs(trainfolder, root_merge_files, nucl_file_template))
+def create_nucleosome_files(fm, training=True):
+    subdirs = [f.path for f in os.scandir(fm.trainfolder) if f.is_dir()]
+    merge_files, anti_files, root_merge_files = fm.find_merge_anti_files()
+
+    runs = assemble_runs(fm.trainfolder, anti_files, fm.anti_file_template, subdirs)
+    if not training:
+        runs.extend(assemble_runs(fm.trainfolder, merge_files, fm.nucl_file_template, subdirs))
+        runs.extend(assemble_runs(fm.trainfolder, root_merge_files, fm.nucl_file_template))
+
     with concurrent.futures.ProcessPoolExecutor(max_workers=os.cpu_count()) as executor:
         jobs = {executor.submit(_create_nucleosome_file, *run): run for run in runs}
         for job in concurrent.futures.as_completed(jobs):
@@ -186,38 +160,3 @@ def create_nucleosome_files(trainfolder, nucl_file_template,anti_file_template):
                 _ = job.result()
             except Exception as ex:
                 logger.error('Future Exception {}'.format(ex.__cause__))
-
-if __name__ == "__main__":
-    # import time
-    conf_file = 'sanefalcon.conf'
-    config = configparser.ConfigParser()
-    config.read(conf_file)
-
-    trainfolder = config['default']['trainfolder']
-    nucl_file_template = config['default']['nucltemplate']
-    anti_file_template = nucl_file_template + '_anti'
-
-    subdirs = [f.path for f in os.scandir(trainfolder) if f.is_dir()]
-    merge_files, anti_files, root_merge_files = find_merge_anti_files(trainfolder)
-    runs = []
-    #runs = assemble_runs(trainfolder, merge_files, nucl_file_template, subdirs)
-    # runs.extend(assemble_runs(trainfolder, anti_files, anti_file_template, subdirs))
-    runs.extend(assemble_runs(trainfolder, root_merge_files, nucl_file_template))
-    # print(len(runs))
-    # exit()
-    # s = time.time()
-    # create_nucleosome_file(*tup)
-    # print('done:', time.time() - s)
-    # exit()
-    s = time.time()
-    with concurrent.futures.ProcessPoolExecutor(max_workers=os.cpu_count()) as executor:
-        jobs = {executor.submit(_create_nucleosome_file, *run): run for run in runs}
-        for job in concurrent.futures.as_completed(jobs):
-            try:
-                _ = job.result()
-            except Exception as ex:
-                logger.error('Future Exception {}'.format(ex.__cause__))
-    print('End: ', time.time() - s)
-    # create_nucl_files(trainfolder, nucl_file_template, 'merge')
-    # anti_template = nucl_file_template + '_anti'
-    # create_nucl_files(trainfolder, anti_template, 'anti')
