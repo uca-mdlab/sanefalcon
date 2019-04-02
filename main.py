@@ -4,12 +4,12 @@ import re
 import logging
 import configparser
 from merge import merge_all
-from prepare_folders import prepare_train_folder
+# from prepare_folders import prepare_train_folder
 from prepare_samples import prepare_samples
 from nucleosome_detector import create_nucleosome_files
 from getProfileParallel import get_data, submit_process
 import multiprocessing as mp
-
+from file_manager import FileManager
 
 logging.basicConfig(format='%(asctime)s - %(levelname)s: %(message)s',
                     filename='sanefalcon.log', filemode='w', level=logging.DEBUG)
@@ -37,33 +37,37 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description='Launch everything',
                                      formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('conffile', nargs='?', type=str, default="./sanefalcon.conf", help='path of the configuration file')
+    parser.add_argument('-c', '--conffile', nargs='?', type=str, default="./sanefalcon.conf",
+                        help='path of the configuration file')
     args = parser.parse_args()
 
     config = configparser.ConfigParser()
     config.read(args.conffile)
 
-    samtools = config['default']['samtools']
-    datafolder = config['default']['datafolder']
-    trainfolder = config['default']['trainfolder']
-    rspfolder = config['default']['rspfolder']
-    nucl_file_template = config['default']['nucltemplate']
-    anti_file_template = nucl_file_template + '_anti'
-    bamlist = config['default']['bamlist']
+    fm = FileManager(config)
+
+    # datafolder = config['default']['datafolder']
+    # trainfolder = config['default']['trainfolder']
+    # rspfolder = config['default']['rspfolder']
+    # nucl_file_template = config['default']['nucltemplate']
+    # anti_file_template = nucl_file_template + '_anti'
+    # bamlist = config['default']['bamlist']
 
     logger.info("Starting sanefalcon with configuration file {}".format(args.conffile))
-    logger.debug("Data folder = {}".format(datafolder))
-    logger.debug("Train folder = {}".format(trainfolder))
+    logger.debug("Data folder = {}".format(fm.datafolder))
+    logger.debug("Train folder = {}".format(fm.trainfolder))
 
-    # prepare_samples(datafolder, trainfolder, samtools)
+    # samtools = config['default']['samtools']
+    # prepare_samples(fm.datafolder, fm.trainfolder, fm.samtools)
     # logger.info("prepare_samples ok")
 
     try:
-        prepare_train_folder(bamlist, datafolder, trainfolder)
+        fm.prepare_train_folder()
         logger.info("prepare_folders ok")
     except FileExistsError:
         logger.info("train folder symlinks already in place")
 
+    exit()
     merge_all(trainfolder,rspfolder)
     logger.info("merge_all ok")
     #
