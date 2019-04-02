@@ -58,7 +58,7 @@ if __name__ == "__main__":
     logger.debug("Train folder = {}".format(fm.trainfolder))
 
     # samtools = config['default']['samtools']
-    # prepare_samples(fm.datafolder, fm.trainfolder, fm.samtools)
+    # prepare_samples(fm.datafolder, fm.rspfolder, samtools)
     # logger.info("prepare_samples ok")
 
     try:
@@ -67,7 +67,6 @@ if __name__ == "__main__":
     except FileExistsError:
         logger.info("train folder symlinks already in place")
 
-    exit()
     merge_all(trainfolder,rspfolder)
     logger.info("merge_all ok")
     #
