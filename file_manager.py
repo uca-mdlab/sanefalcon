@@ -37,13 +37,12 @@ class FileManager:
             exit('Unable to find the list of bam files to use. Aborting.')
         list_files = [os.path.basename(x) for x in self.bamlist]
         files_to_link = []
+        manip_list = []
         for root, subdir, files in os.walk(self.datafolder):
             for f in files:
                 if f in list_files:
                     files_to_link.append(os.path.join(root, f))
-        manip_list = list(
-            set([f.split('/')[-2] for f in files_to_link if os.path.isfile(f)]))  # list of manip with .bam files
-        # logger.info("Found {} manip with {} bam files".format(len(manip_list), len(files_to_link)))
+                    manip_list.append(os.path.split(root)[1])
 
         return files_to_link, manip_list
 
@@ -55,10 +54,11 @@ class FileManager:
         """
         return Utils.readfile(bamlistfile)
 
-    def prepare_train_folder(self, bamlist, bamdir, traindir):
+    def prepare_train_folder(self):
         letters = list(string.ascii_lowercase)
         files_to_link, manip_list = self.list_files_to_use()
 
+        exit()
         batches = {}
         for num_batch, batch in enumerate(prepare_batches(manip_list)):
             batches[letters[num_batch]] = batch
@@ -85,3 +85,12 @@ class FileManager:
                     fname = fname + ".bai"
                     os.symlink(fname, os.path.join(runpath, fname.split('/')[-1]))
             logger.info("Batches created with symlinks")
+
+
+if __name__ == '__main__':
+    import configparser
+
+    config = configparser.ConfigParser()
+    config.read('my.conf')
+    f = FileManager(config)
+    f.prepare_train_folder()
