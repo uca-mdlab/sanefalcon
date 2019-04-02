@@ -43,6 +43,7 @@ class FileManager:
     def __init__(self, config):
         self.datafolder = config['default']['datafolder']
         self.trainfolder = config['default']['trainfolder']
+        self.profilefolder = config['default']['profilefolder']
         self.batch_size = int(config['default']['batchsize'])
         self.rspfolder = config['default']['rspfolder']
         self.nucl_file_template = config['default']['nucltemplate']
