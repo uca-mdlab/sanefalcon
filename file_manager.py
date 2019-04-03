@@ -33,10 +33,10 @@ class Utils:
         return lines
 
     @staticmethod
-    def prepare_batches(list, n):
+    def prepare_batches(lis, n):
         # Yield successive n-sized chunks from manip_list.
-        for i in range(0, len(list), n):
-            yield list[i:i + n]
+        for i in range(0, len(lis), n):
+            yield lis[i:i + n]
 
 
 class FileManager:
@@ -59,14 +59,14 @@ class FileManager:
             exit('Unable to find the list of bam files to use. Aborting.')
         list_files = [os.path.basename(x) for x in self.bamlist]
         files_to_link = []
-        manip_list = []
+        manip_list = set()
         for root, subdir, files in os.walk(self.datafolder):
             for f in files:
                 if f in list_files:
                     files_to_link.append(os.path.join(root, f))
-                    manip_list.append(os.path.split(root)[1])
+                    manip_list.add(os.path.split(root)[1])
 
-        return files_to_link, manip_list
+        return files_to_link, list(manip_list)
 
     def set_bamlist(self, bamlistfile):
         """
@@ -82,13 +82,14 @@ class FileManager:
         """
         letters = list(string.ascii_lowercase)
         files_to_link, manip_list = self.list_files_to_use()
-
+        logger.debug('Found {} files_to_link in {} manips'.format(len(files_to_link), len(manip_list)))
         batches = {}
         for num_batch, batch in enumerate(Utils.prepare_batches(manip_list, self.batch_size)):
             batches[letters[num_batch]] = batch
-            logger.debug("Batch {}: {}".format(letters[num_batch], batch))
+            logger.debug("Batch {} ({}): {}".format(letters[num_batch], len(batch), batch))
 
         for batch_name, batch_list in batches.items():
+            logger.debug("Preparing Batch {} with {} items".format(batch_name, len(batch_list)))
             workingdir = os.path.join(self.trainfolder, batch_name)
             try:
                 os.mkdir(workingdir)
@@ -105,10 +106,13 @@ class FileManager:
                     runpath = os.path.join(workingdir, run)
                     if not os.path.isdir(runpath):
                         os.mkdir(runpath)
+                    logger.debug("runpath {} exists ".format(runpath))
                     os.symlink(fname, os.path.join(runpath, os.path.split(fname)[1]))
-                    fname = fname + ".bai"
-                    os.symlink(fname, os.path.join(runpath, os.path.split(fname)[1]))
-            logger.info("Batches created with symlinks")
+                    bai_fname = fname + ".bai"
+                    os.symlink(bai_fname, os.path.join(runpath, os.path.split(bai_fname)[1]))
+                
+                
+        logger.info("Batches created with symlinks")
 
     def find_all_manips_per_subfolder(self):
         subfolders = [f.path for f in os.scandir(self.trainfolder) if f.is_dir()]
@@ -183,6 +187,6 @@ if __name__ == '__main__':
     import configparser
 
     config = configparser.ConfigParser()
-    config.read('my.conf')
+    config.read('sanefalcon.conf')
     f = FileManager(config)
     f.prepare_train_folder()
