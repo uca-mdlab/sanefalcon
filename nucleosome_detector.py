@@ -6,7 +6,7 @@ import collections
 import concurrent.futures
 import time
 
-MAX_THREAD_NUMBER = 15
+MAX_THREAD_NUMBER = 10
 
 logger = logging.getLogger('nucleosome_detector')
 logging.basicConfig(format='%(asctime)s - %(levelname)s:%(message)s',

@@ -15,7 +15,7 @@ logging.basicConfig(format='%(asctime)s - %(levelname)s: %(message)s',
 
 logger = logging.getLogger("merge")
 
-MAX_THREAD_NUMBER = 15
+MAX_THREAD_NUMBER = 10
 chromosomes = range(1, 23)
 
 
@@ -211,8 +211,11 @@ def merge_anti_subs(merge_subs_files, trainfolder):
 
 
 def merge_all(fm):
-    files_to_merge = fm.get_merge_file_lists()
     logger.info("starting merge all")
+    files_to_merge = fm.get_merge_file_lists()
+    for chrom, dic in files_to_merge.items():
+        for subdir, files in dic.items():
+            logger.debug('Chrom {}. Subdir {} with {} files'.format(chrom, subdir, len(files)))
     merge(files_to_merge)
     logger.debug("merge done")
     merge_subs_files = fm.find_merge_files_in_subdirectories()
