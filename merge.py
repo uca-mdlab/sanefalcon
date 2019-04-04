@@ -139,6 +139,8 @@ def _prepare_jobs_arguments(files_to_merge):
 
 def merge(files_to_merge):
     runs = _prepare_jobs_arguments(files_to_merge)
+    logger.debug('Submitting {} runs to merge'.format(len(runs)))
+
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_THREAD_NUMBER) as executor:
         jobs = {executor.submit(_merge, *run): run for run in runs}
         for job in concurrent.futures.as_completed(jobs):
@@ -163,6 +165,7 @@ def merge_subs(merge_subs_files, trainfolder):
         tmp[f.split('.')[1]].append(f)
 
     runs = [(k, v, trainfolder) for k, v in tmp.items()]
+    logger.debug('Submitting {} runs to merge_subs'.format(len(runs)))
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_THREAD_NUMBER) as executor:
         jobs = {executor.submit(_merge_subs, *run): run for run in runs}
@@ -171,6 +174,7 @@ def merge_subs(merge_subs_files, trainfolder):
                 _ = job.result()
             except Exception as ex:
                 logger.error('Future Exception {}'.format(ex.__cause__))
+
 
 def _merge_anti_subs(folder, chrom, files):
     # print("{} launched on {} ".format(threading.current_thread(), chrom))
@@ -200,6 +204,8 @@ def merge_anti_subs(merge_subs_files, trainfolder):
         reduced_tmp = {k: list(filter(lambda x: re.match(pattern, x), v)) for k, v in tmp.items()}
         run = [(folder, k, v) for k, v in reduced_tmp.items()]
         runs.extend(run)
+
+    logger.debug('Submitting {} runs to merge_anti_subs'.format(len(runs)))
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_THREAD_NUMBER) as executor:
         jobs = {executor.submit(_merge_anti_subs, *run): run for run in runs}
