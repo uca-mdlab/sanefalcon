@@ -16,6 +16,7 @@ logging.basicConfig(format='%(asctime)s - %(levelname)s: %(message)s',
 logger = logging.getLogger("merge")
 
 MAX_THREAD_NUMBER = 10
+MAX_JOB_NUMBER = 10
 chromosomes = range(1, 23)
 
 
@@ -25,77 +26,6 @@ def sort_and_write(data, outfile):
     to_be_written = map(lambda x: str(x) + "\n", data)
     with open(outfile, 'w') as out:
         out.writelines(to_be_written)
-
-
-# def find_all_manips(trainfolder):
-#     manips = {}
-#     subfolders = [f.path for f in os.scandir(trainfolder) if f.is_dir()]
-#     for subdir in subfolders:
-#         manips[subdir] = [os.path.basename(f.path) for f in os.scandir(subdir) if f.is_dir()]
-#     return manips
-
-
-# def find_merge_files_in_subdirectories(trainfolder):
-#     merge_files = []
-#     pattern_name = re.compile("merge.\d{1,2}")
-#     pattern_subdir = re.compile("/[a-z]/")
-#     for root, subdirs, files in os.walk(trainfolder):
-#         for fname in files:
-#             filename = os.path.join(root, fname)
-#             if re.match(pattern_name, fname) and re.search(pattern_subdir, filename):
-#                 merge_files.append(filename)
-#     return merge_files
-
-#
-# def search_manip_name(manips, fname):
-#     base = os.path.basename(fname)
-#     logger.debug("Searching for manip {}".format(base))
-#     for subdir, manip_names in manips.items():
-#         logger.debug("{} - {}".format(subdir, manip_names))
-#         basenames = [os.path.basename(f) for f in manip_names]
-#         logger.warning("any: {}".format(any([os.path.commonprefix([bn, base]) == bn for bn in basenames])))
-#         if any([os.path.commonprefix([bn, base]) == bn for bn in basenames]):
-#             return subdir
-#         else:
-#             return None
-
-
-# def prepare_file_lists(trainfolder,rspfolder):
-#     """
-#
-#     :param trainfolder:
-#     :return: {'chr1': {'a': [chr1.start.fwd, chr1.start.rev], 'b': [...]}}
-#     """
-#     res = {}
-#     manips = find_all_manips(trainfolder)
-#     files_dic = dict.fromkeys(list(map(str, chromosomes)), list())
-#     all_start_files = []
-#     # for root, subdirs, files in os.walk(trainfolder):
-#     #test if rspfolder is working, otherwise put back trainfolder as argument
-#     for root, subdirs, files in os.walk(rspfolder):
-#         for fname in files:
-#             if fname.endswith('.fwd') or fname.endswith('.rev'):
-#                 all_start_files.append(os.path.join(root, fname))
-#
-#     for chrom in chromosomes:
-#         string_pattern = "\.bam\.{}\.start".format(chrom)
-#         pattern = re.compile(string_pattern)
-#         files_dic[str(chrom)] = list(filter(lambda x: re.search(pattern, x), all_start_files))
-#
-#     for chrom, chrom_start_files in files_dic.items():
-#         logger.debug('Preparing start_files from chrom {}'.format(chrom))
-#         files_per_subdir = {}
-#         for subdir, manip_names in manips.items():
-#             start_per_manip = []
-#             for n in manip_names:
-#                 start_per_manip.extend(list(filter(lambda x: re.search(n, x), chrom_start_files)))
-#             if subdir in files_per_subdir:
-#                 files_per_subdir[subdir].extend(start_per_manip)
-#             else:
-#                 files_per_subdir[subdir] = start_per_manip
-#         res[chrom] = files_per_subdir
-#
-#     return res
 
 
 def read_all_files(file_list):
@@ -142,12 +72,31 @@ def merge(files_to_merge):
     logger.debug('Submitting {} runs to merge'.format(len(runs)))
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_THREAD_NUMBER) as executor:
-        jobs = {executor.submit(_merge, *run): run for run in runs}
-        for job in concurrent.futures.as_completed(jobs):
-            try:
+        jobs = {}
+        runs_left = len(runs)
+        runs_iter = iter(runs)
+
+        while runs_left:
+            for run in runs_iter:
+                job = executor.submit(_merge, *run)
+                jobs[job] = run
+                if len(jobs) > MAX_JOB_NUMBER:
+                    break
+
+            for job in concurrent.futures.as_completed(jobs):
+                runs_left -= 1
                 _ = job.result()
-            except Exception as ex:
-                logger.error('Future Exception {}'.format(ex.__cause__))
+                run = jobs[job]
+                logger.debug('Ended job {}'.format(run))
+                del jobs[job]
+                break
+
+        # jobs = {executor.submit(_merge, *run): run for run in runs}
+        # for job in concurrent.futures.as_completed(jobs):
+        #     try:
+        #         _ = job.result()
+        #     except Exception as ex:
+        #         logger.error('Future Exception {}'.format(ex.__cause__))
 
 
 def _merge_subs(chrom, files, trainfolder):
