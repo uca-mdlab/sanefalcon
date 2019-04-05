@@ -1,7 +1,8 @@
 import unittest
 import os
 
-class MyTestCase(unittest.TestCase):
+
+class TestPredict(unittest.TestCase):
     def setUp(self):
         self.scriptname = 'predict.sh'
         self.model = './tests/data/out.model'
