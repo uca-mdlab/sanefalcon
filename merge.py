@@ -20,7 +20,8 @@ MAX_JOB_NUMBER = 10
 chromosomes = range(1, 23)
 
 
-def launch_multithreads(runs):
+def launch_multithreads(runs, name='merge'):
+    logger.info('Starting multithreaded {} '.format(name))
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_THREAD_NUMBER) as executor:
         jobs = {}
         runs_left = len(runs)
@@ -41,7 +42,7 @@ def launch_multithreads(runs):
                 del jobs[job]
                 break
 
-    logger.info('Multithread ended')
+    logger.info('Multithreaded {} ended'.format(name))
 
 
 def sort_and_write(data, outfile):
@@ -94,7 +95,7 @@ def _prepare_jobs_arguments(files_to_merge):
 def merge(files_to_merge):
     runs = _prepare_jobs_arguments(files_to_merge)
     logger.debug('Submitting {} runs to merge'.format(len(runs)))
-    launch_multithreads(runs)
+    launch_multithreads(runs, name='merge')
 
 
 def _merge_subs(chrom, files, trainfolder):
@@ -113,7 +114,7 @@ def merge_subs(merge_subs_files, trainfolder):
 
     runs = [(k, v, trainfolder) for k, v in tmp.items()]
     logger.debug('Submitting {} runs to merge_subs'.format(len(runs)))
-    launch_multithreads(runs)
+    launch_multithreads(runs, name='merge_subs')
 
 
 def _merge_anti_subs(folder, chrom, files):
@@ -146,7 +147,7 @@ def merge_anti_subs(merge_subs_files, trainfolder):
         runs.extend(run)
 
     logger.debug('Submitting {} runs to merge_anti_subs'.format(len(runs)))
-    launch_multithreads(runs)
+    launch_multithreads(runs, name='merge_anti_subs')
 
 
 def merge_all(fm):
