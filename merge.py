@@ -20,6 +20,30 @@ MAX_JOB_NUMBER = 10
 chromosomes = range(1, 23)
 
 
+def launch_multithreads(runs):
+    with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_THREAD_NUMBER) as executor:
+        jobs = {}
+        runs_left = len(runs)
+        runs_iter = iter(runs)
+
+        while runs_left:
+            for run in runs_iter:
+                job = executor.submit(_merge, *run)
+                jobs[job] = run
+                if len(jobs) > MAX_JOB_NUMBER:
+                    break
+
+            for job in concurrent.futures.as_completed(jobs):
+                runs_left -= 1
+                _ = job.result()
+                run = jobs[job]
+                logger.debug('Ended job {}'.format(run))
+                del jobs[job]
+                break
+
+    logger.info('Multithread ended')
+
+
 def sort_and_write(data, outfile):
     # data = list(set(data))  # remove duplicates and sort
     data.sort()
@@ -70,33 +94,7 @@ def _prepare_jobs_arguments(files_to_merge):
 def merge(files_to_merge):
     runs = _prepare_jobs_arguments(files_to_merge)
     logger.debug('Submitting {} runs to merge'.format(len(runs)))
-
-    with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_THREAD_NUMBER) as executor:
-        jobs = {}
-        runs_left = len(runs)
-        runs_iter = iter(runs)
-
-        while runs_left:
-            for run in runs_iter:
-                job = executor.submit(_merge, *run)
-                jobs[job] = run
-                if len(jobs) > MAX_JOB_NUMBER:
-                    break
-
-            for job in concurrent.futures.as_completed(jobs):
-                runs_left -= 1
-                _ = job.result()
-                run = jobs[job]
-                logger.debug('Ended job {}'.format(run))
-                del jobs[job]
-                break
-
-        # jobs = {executor.submit(_merge, *run): run for run in runs}
-        # for job in concurrent.futures.as_completed(jobs):
-        #     try:
-        #         _ = job.result()
-        #     except Exception as ex:
-        #         logger.error('Future Exception {}'.format(ex.__cause__))
+    launch_multithreads(runs)
 
 
 def _merge_subs(chrom, files, trainfolder):
@@ -115,14 +113,7 @@ def merge_subs(merge_subs_files, trainfolder):
 
     runs = [(k, v, trainfolder) for k, v in tmp.items()]
     logger.debug('Submitting {} runs to merge_subs'.format(len(runs)))
-
-    with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_THREAD_NUMBER) as executor:
-        jobs = {executor.submit(_merge_subs, *run): run for run in runs}
-        for job in concurrent.futures.as_completed(jobs):
-            try:
-                _ = job.result()
-            except Exception as ex:
-                logger.error('Future Exception {}'.format(ex.__cause__))
+    launch_multithreads(runs)
 
 
 def _merge_anti_subs(folder, chrom, files):
@@ -155,14 +146,7 @@ def merge_anti_subs(merge_subs_files, trainfolder):
         runs.extend(run)
 
     logger.debug('Submitting {} runs to merge_anti_subs'.format(len(runs)))
-
-    with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_THREAD_NUMBER) as executor:
-        jobs = {executor.submit(_merge_anti_subs, *run): run for run in runs}
-        for job in concurrent.futures.as_completed(jobs):
-            try:
-                _ = job.result()
-            except Exception as ex:
-                logger.error('Future Exception {}'.format(ex.__cause__))
+    launch_multithreads(runs)
 
 
 def merge_all(fm):
