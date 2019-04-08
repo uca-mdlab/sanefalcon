@@ -25,20 +25,26 @@ def prepare_samples(datafolder, rspfolder, samtools):
                     outfile = os.path.join(rspfolder, outfile_name + '.{}.start.fwd'.format(chrom))
                     if not os.path.isfile(outfile):
                         one = [samtools, "view", bamfile, "chr{}".format(chrom), "-F", "20", "-q" "1"]
-                        two = [sys.executable, "retro.py"]
-                        three = ["awk", "{print $4}"]
+                        # two = [sys.executable, "retro.py"]
+                        two = [sys.executable, "retro.py", "-fwd"]
+                        # three = ["awk", "{print $4}"]
                         p1 = subprocess.Popen(one, stdout=subprocess.PIPE)
-                        p2 = subprocess.Popen(two, stdin=p1.stdout, stdout=subprocess.PIPE)
-                        p3 = subprocess.Popen(three, stdin=p2.stdout, stdout=open(outfile, 'w'))
-                        output = p3.communicate()[0]
+                        # p2 = subprocess.Popen(two, stdin=p1.stdout, stdout=subprocess.PIPE)
+                        p2 = subprocess.Popen(two, stdin=p1.stdout, stdout=open(outfile, 'w'))
+                        # p3 = subprocess.Popen(three, stdin=p2.stdout, stdout=open(outfile, 'w'))
+                        # output = p3.communicate()[0]
+                        output = p2.communicate()[0]
 
                         revoutfile = os.path.join(rspfolder, outfile_name + '.{}.start.rev'.format(chrom))
                         one = [samtools, "view", bamfile, "chr{}".format(chrom), "-f", "16", "-F", "4", "-q" "1"]
-                        three = ["awk", "{print ($4 + length($10) - 1)}"]
+                        two = [sys.executable, "retro.py", "-rev"]
+                        # three = ["awk", "{print ($4 + length($10) - 1)}"]
                         p1 = subprocess.Popen(one, stdout=subprocess.PIPE)
-                        p2 = subprocess.Popen(two, stdin=p1.stdout, stdout=subprocess.PIPE)
-                        p3 = subprocess.Popen(three, stdin=p2.stdout, stdout=open(revoutfile, 'w'))
-                        output = p3.communicate()[0]
+                        # p2 = subprocess.Popen(two, stdin=p1.stdout, stdout=subprocess.PIPE)
+                        # p3 = subprocess.Popen(three, stdin=p2.stdout, stdout=open(revoutfile, 'w'))
+                        # output = p3.communicate()[0]
+                        p2 = subprocess.Popen(two, stdin=p1.stdout, stdout=open(revoutfile, 'w'))
+                        output = p2.communicate()[0]
 
                 logger.debug("prep_samples for {}".format(fname))
 
