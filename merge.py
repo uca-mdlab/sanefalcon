@@ -22,6 +22,15 @@ chromosomes = range(1, 23)
 
 def launch_multithreads(runs, name='merge'):
     logger.info('Starting multithreaded {} '.format(name))
+    if name == 'merge':
+        fn = _merge
+    elif name == 'merge_subs':
+        fn = _merge_subs
+    elif name == 'merge_anti_subs':
+        fn = _merge_anti_subs
+    else:
+        exit('Unknown function ({}) for multithread'.format(name))
+
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_THREAD_NUMBER) as executor:
         jobs = {}
         runs_left = len(runs)
@@ -29,7 +38,7 @@ def launch_multithreads(runs, name='merge'):
 
         while runs_left:
             for run in runs_iter:
-                job = executor.submit(_merge, *run)
+                job = executor.submit(fn, *run)
                 jobs[job] = run
                 if len(jobs) > MAX_JOB_NUMBER:
                     break
@@ -111,7 +120,6 @@ def merge_subs(merge_subs_files, trainfolder):
     tmp = collections.defaultdict(list)
     for f in merge_subs_files:
         tmp[f.split('.')[1]].append(f)
-
     runs = [(k, v, trainfolder) for k, v in tmp.items()]
     logger.debug('Submitting {} runs to merge_subs'.format(len(runs)))
     launch_multithreads(runs, name='merge_subs')
@@ -167,7 +175,7 @@ def merge_all(fm):
 
 
 if __name__ == "__main__":
-    conf_file = 'sanefalcon.conf'
+    conf_file = 'my.conf'
     config = configparser.ConfigParser()
     config.read(conf_file)
 
@@ -175,15 +183,5 @@ if __name__ == "__main__":
     datafolder = config['default']['datafolder']
     trainfolder = config['default']['trainfolder']
     rspfolder = config['default']['rspfolder']
-
-    # files_to_merge = prepare_file_lists(trainfolder)
-    # for k, v in files_to_merge['22'].items():
-    #     print(k)
-    #     for n in sorted(v):
-    #         print(n)
-    # merge(files_to_merge)
-    # merge_files = merge_subs(trainfolder)
-    # merge_files = find_merge_files_in_subdirectories(trainfolder)
-    # merge_anti_subs(merge_files, trainfolder)
-    merge_all(trainfolder)
-    # merge(dic)
+    fm = FileManager(config)
+    merge_all(fm)
