@@ -48,7 +48,7 @@ class FileManager:
         self.rspfolder = os.path.abspath(config['default']['rspfolder'])
         self.nucl_file_template = config['default']['nucltemplate']
         self.anti_file_template = self.nucl_file_template + '_anti'
-        self.bamlist = self.set_bamlist(os.path.abspath(config['default']['bamlist']))
+        self.bamlist = Utils.readfile(os.path.abspath(config['default']['bamlist']))
         self.manips = {}
         self.merge_file_lists = {}
         logger.debug("Data folder = {}".format(self.datafolder))
@@ -67,14 +67,6 @@ class FileManager:
                     manip_list.add(os.path.split(root)[1])
 
         return files_to_link, list(manip_list)
-
-    def set_bamlist(self, bamlistfile):
-        """
-        Get the list of bam files to use from the bam list file
-        :param bamlistfile:
-        :return: list of paths
-        """
-        return Utils.readfile(bamlistfile)
 
     def prepare_train_folder(self):
         """
@@ -110,8 +102,7 @@ class FileManager:
                     os.symlink(fname, os.path.join(runpath, os.path.split(fname)[1]))
                     bai_fname = fname + ".bai"
                     os.symlink(bai_fname, os.path.join(runpath, os.path.split(bai_fname)[1]))
-                
-                
+
         logger.info("Batches created with symlinks")
 
     def find_all_manips_per_subfolder(self):
@@ -192,6 +183,5 @@ if __name__ == '__main__':
     f = FileManager(config)
 
     a, b = f.list_files_to_use()
-    print(a)
-    print(b)
+    print(f.bamlist)
 
