@@ -84,7 +84,7 @@ class FileManager:
             logger.debug("Preparing Batch {} with {} items".format(batch_name, len(batch_list)))
             workingdir = os.path.join(self.trainfolder, batch_name)
             try:
-                os.mkdir(workingdir)
+                os.makedirs(workingdir)
                 logger.debug("Created folder: {}".format(workingdir))
             except FileExistsError:
                 logger.warning("Folder {} exists, skipping...".format(workingdir))
