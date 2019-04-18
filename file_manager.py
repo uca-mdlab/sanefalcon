@@ -41,14 +41,14 @@ class Utils:
 
 class FileManager:
     def __init__(self, config):
-        self.datafolder = config['default']['datafolder']
-        self.trainfolder = config['default']['trainfolder']
-        self.profilefolder = config['default']['profilefolder']
+        self.datafolder = os.path.abspath(config['default']['datafolder'])
+        self.trainfolder = os.path.abspath(config['default']['trainfolder'])
+        self.profilefolder = os.path.abspath(config['default']['profilefolder'])
         self.batch_size = int(config['default']['batchsize'])
-        self.rspfolder = config['default']['rspfolder']
+        self.rspfolder = os.path.abspath(config['default']['rspfolder'])
         self.nucl_file_template = config['default']['nucltemplate']
         self.anti_file_template = self.nucl_file_template + '_anti'
-        self.bamlist = self.set_bamlist(config['default']['bamlist'])
+        self.bamlist = self.set_bamlist(os.path.abspath(config['default']['bamlist']))
         self.manips = {}
         self.merge_file_lists = {}
         logger.debug("Data folder = {}".format(self.datafolder))
@@ -183,10 +183,15 @@ class FileManager:
                     anti_files.append(filename)
         return merge_files, anti_files, root_merge_files
 
+
 if __name__ == '__main__':
     import configparser
 
     config = configparser.ConfigParser()
-    config.read('sanefalcon.conf')
+    config.read('tests/data/test.conf')
     f = FileManager(config)
-    f.prepare_train_folder()
+
+    a, b = f.list_files_to_use()
+    print(a)
+    print(b)
+
