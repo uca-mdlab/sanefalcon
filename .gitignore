@@ -10,3 +10,4 @@ temporary2
 __pycache*
 my.conf
 *.log
+.coverage
