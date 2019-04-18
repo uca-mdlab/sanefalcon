@@ -175,7 +175,7 @@ def merge_all(fm):
 
 
 if __name__ == "__main__":
-    conf_file = 'my.conf'
+    conf_file = 'tests/data/test.conf'
     config = configparser.ConfigParser()
     config.read(conf_file)
 
