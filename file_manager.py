@@ -181,7 +181,8 @@ if __name__ == '__main__':
     config = configparser.ConfigParser()
     config.read('tests/data/test.conf')
     f = FileManager(config)
-
     a, b = f.list_files_to_use()
-    print(f.bamlist)
+    print(a)
+    print(b)
+
 
