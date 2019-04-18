@@ -30,7 +30,5 @@ class TestFileUtils(unittest.TestCase):
                 self.assertEqual(num_odd_chunks, 1)
 
 
-
-
 if __name__ == '__main__':
     unittest.main()
