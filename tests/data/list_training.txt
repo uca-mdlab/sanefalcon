@@ -1,0 +1,10 @@
+tests/data/bamtest/p0.bam
+tests/data/bamtest/p1.bam
+tests/data/bamtest/p2.bam
+tests/data/bamtest/p3.bam
+tests/data/bamtest/p4.bam
+tests/data/bamtest/s0.bam
+tests/data/bamtest/s1.bam
+tests/data/bamtest/s2.bam
+tests/data/bamtest/s3.bam
+tests/data/bamtest/s4.bam
