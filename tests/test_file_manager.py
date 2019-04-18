@@ -10,27 +10,28 @@ class TestFileUtils(unittest.TestCase):
         conf_file = './tests/data/test.conf'
         self.config = configparser.ConfigParser()
         self.config.read(conf_file)
+        self.fm = FileManager(self.config)
 
     def test_constructor(self):
-        fm = FileManager(self.config)
-        self.assertIsNotNone(fm.datafolder)
-        self.assertIsNotNone(fm.trainfolder)
-        self.assertIsNotNone(fm.profilefolder)
-        self.assertIsInstance(fm.batch_size, int)
-        self.assertIsNotNone(fm.rspfolder)
-        self.assertIsNotNone(fm.nucl_file_template)
-        self.assertEqual(fm.nucl_file_template + '_anti', fm.anti_file_template)
-        self.assertIsNotNone(fm.bamlist)
-        self.assertIsInstance(fm.manips, dict)
-        self.assertIsInstance(fm.merge_file_lists, dict)
+        self.assertIsNotNone(self.fm.datafolder)
+        self.assertIsNotNone(self.fm.trainfolder)
+        self.assertIsNotNone(self.fm.profilefolder)
+        self.assertIsInstance(self.fm.batch_size, int)
+        self.assertIsNotNone(self.fm.rspfolder)
+        self.assertIsNotNone(self.fm.nucl_file_template)
+        self.assertEqual(self.fm.nucl_file_template + '_anti', self.fm.anti_file_template)
+        self.assertIsNotNone(self.fm.bamlist)
+        self.assertIsInstance(self.fm.manips, dict)
+        self.assertIsInstance(self.fm.merge_file_lists, dict)
 
     def test_list_files_to_use(self):
-        fm = FileManager(self.config)
-        files, manips = fm.list_files_to_use()
+        files, manips = self.fm.list_files_to_use()
         self.assertEqual(len(files), 10)
         self.assertEqual(len(manips), 1)
         self.assertTrue(isabs(files[0]))
 
+    def test_prepare_train_folder(self):
+        self.fm.prepare_train_folder()
 
 if __name__ == '__main__':
     unittest.main()
