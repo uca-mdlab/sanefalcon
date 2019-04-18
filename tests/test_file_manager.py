@@ -1,7 +1,8 @@
 import unittest
-from os.path import isabs
+import os
 from file_manager import FileManager
 import configparser
+import shutil
 
 
 class TestFileUtils(unittest.TestCase):
@@ -27,11 +28,21 @@ class TestFileUtils(unittest.TestCase):
     def test_list_files_to_use(self):
         files, manips = self.fm.list_files_to_use()
         self.assertEqual(len(files), 10)
-        self.assertEqual(len(manips), 1)
-        self.assertTrue(isabs(files[0]))
+        self.assertEqual(len(manips), 5)
+        self.assertTrue(os.path.isabs(files[0]))
 
     def test_prepare_train_folder(self):
         self.fm.prepare_train_folder()
+        self.assertEqual(len(os.listdir(self.fm.trainfolder)), 1)
+        links = []
+        for root, subdir, files in os.walk(self.fm.trainfolder):
+            for f in files:
+                links.append(os.path.join(root, f))
+        self.assertTrue(all([os.path.islink(x) for x in links]))
+
+    def tearDown(self):
+        shutil.rmtree(self.fm.trainfolder, ignore_errors=True)
+
 
 if __name__ == '__main__':
     unittest.main()
