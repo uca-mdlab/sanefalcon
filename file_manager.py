@@ -99,9 +99,15 @@ class FileManager:
                     if not os.path.isdir(runpath):
                         os.mkdir(runpath)
                     logger.debug("runpath {} exists ".format(runpath))
-                    os.symlink(fname, os.path.join(runpath, os.path.split(fname)[1]))
+                    try:
+                        os.symlink(fname, os.path.join(runpath, os.path.split(fname)[1]))
+                    except FileExistsError:
+                        logger.warning('Link to {} exists: {}'.format(fname, os.path.join(runpath, os.path.split(fname)[1])))
                     bai_fname = fname + ".bai"
-                    os.symlink(bai_fname, os.path.join(runpath, os.path.split(bai_fname)[1]))
+                    try:
+                        os.symlink(bai_fname, os.path.join(runpath, os.path.split(bai_fname)[1]))
+                    except FileExistsError:
+                        logger.warning('Link to {} exists: {}'.format(fname, os.path.join(runpath, os.path.split(fname)[1])))
 
         logger.info("Batches created with symlinks")
 
@@ -181,8 +187,7 @@ if __name__ == '__main__':
     config = configparser.ConfigParser()
     config.read('tests/data/test.conf')
     f = FileManager(config)
-    a, b = f.list_files_to_use()
-    print(a)
-    print(b)
-
-
+    f.prepare_train_folder()
+    for k, v in f.merge_file_lists.items():
+        print(k)
+        print(v)
