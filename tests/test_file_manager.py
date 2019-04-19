@@ -2,7 +2,6 @@ import unittest
 import os
 from file_manager import FileManager
 import configparser
-import shutil
 
 
 class TestFileUtils(unittest.TestCase):
@@ -39,10 +38,6 @@ class TestFileUtils(unittest.TestCase):
             for f in files:
                 links.append(os.path.join(root, f))
         self.assertTrue(all([os.path.islink(x) for x in links]))
-
-    def tearDown(self):
-        shutil.rmtree(self.fm.trainfolder, ignore_errors=True)
-
 
 if __name__ == '__main__':
     unittest.main()
