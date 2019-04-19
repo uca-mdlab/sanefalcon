@@ -102,12 +102,14 @@ class FileManager:
                     try:
                         os.symlink(fname, os.path.join(runpath, os.path.split(fname)[1]))
                     except FileExistsError:
-                        logger.warning('Link to {} exists: {}'.format(fname, os.path.join(runpath, os.path.split(fname)[1])))
+                        logger.warning(
+                            'Link to {} exists: {}'.format(fname, os.path.join(runpath, os.path.split(fname)[1])))
                     bai_fname = fname + ".bai"
                     try:
                         os.symlink(bai_fname, os.path.join(runpath, os.path.split(bai_fname)[1]))
                     except FileExistsError:
-                        logger.warning('Link to {} exists: {}'.format(fname, os.path.join(runpath, os.path.split(fname)[1])))
+                        logger.warning(
+                            'Link to {} exists: {}'.format(fname, os.path.join(runpath, os.path.split(fname)[1])))
 
         logger.info("Batches created with symlinks")
 
