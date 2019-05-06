@@ -11,7 +11,7 @@ MAX_THREAD_NUMBER = 10
 logger = logging.getLogger('nucleosome_detector')
 logging.basicConfig(format='%(asctime)s - %(levelname)s:%(message)s',
                     level=logging.DEBUG,
-                    filename='nucleosome.log',
+                    filename='sanefalcon.log',
                     filemode='w')
 
 chromosomes = range(1, 23)
@@ -87,6 +87,7 @@ def assemble_runs(trainfolder, files, file_template, subdirs=None):
     tmp = collections.defaultdict(list)
     for f in files:
         tmp[f.split('.')[1]].append(f)
+
     if subdirs:
         for folder in subdirs:
             if len(os.path.split(folder)[1]) == 1:
@@ -109,7 +110,7 @@ def _create_nucleosome_file(folder, chrom, mergefile, fname):
     if os.path.isfile(outfile):
         logger.info("Nucleosome file for {} = {} already there. Skipping..".format(mergefile, outfile))
         return
-    logger.info("{} creating nucleosome file for {} = {}".format(os.getpid(), mergefile, outfile))
+    logger.info("p:{} creating nucleosome file for {} = {}".format(os.getpid(), mergefile, outfile))
     curArea = [0]
     lastPos = 0
     maxDist = 190  # A little over our sliding window size
@@ -164,3 +165,14 @@ def create_nucleosome_files(fm, training=True):
                 _ = job.result()
             except Exception as ex:
                 logger.error('Future Exception {}'.format(ex.__cause__))
+
+
+if __name__ == "__main__":
+    import configparser
+    from file_manager import FileManager
+    conf_file = 'tests/data/test.conf'
+    config = configparser.ConfigParser()
+    config.read(conf_file)
+
+    fm = FileManager(config)
+    create_nucleosome_files(fm)
