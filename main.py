@@ -54,12 +54,10 @@ if __name__ == "__main__":
     # prepare_samples(fm.datafolder, fm.rspfolder, samtools)
     # logger.info("prepare_samples ok")
 
-    try:
-        fm.prepare_train_folder()
-        logger.info("prepare_folders ok")
-    except FileExistsError:
-        logger.info("train folder symlinks already in place")
+    fm.prepare_train_folder()
+    logger.info("prepare_folders ok")
 
+    exit(0)
     merge_all(fm)
     logger.info("merge_all ok")
 
