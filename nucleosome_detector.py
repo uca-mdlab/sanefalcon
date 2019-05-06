@@ -90,6 +90,7 @@ def assemble_runs(trainfolder, files, file_template, subdirs=None):
 
     if subdirs:
         for folder in subdirs:
+            logger.debug('Assembling runs on {}'.format(folder))
             if len(os.path.split(folder)[1]) == 1:
                 pattern = re.compile('({})'.format(folder))  # matching "folder"
                 reduced_tmp = {k: list(filter(lambda x: re.match(pattern, x), v)) for k, v in tmp.items()}
@@ -148,7 +149,8 @@ def _create_nucleosome_file(folder, chrom, mergefile, fname):
 
 
 def create_nucleosome_files(fm, training=True):
-    subdirs = [f.path for f in os.scandir(fm.trainfolder) if f.is_dir()]
+    subdirs = list(fm.find_all_manips_per_subfolder().keys())
+
     merge_files, anti_files, root_merge_files = fm.find_merge_anti_files()
 
     runs = assemble_runs(fm.trainfolder, anti_files, fm.anti_file_template, subdirs)
