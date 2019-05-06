@@ -148,6 +148,7 @@ def create_nucleosome_files(fm, training=True):
 
     runs = assemble_runs(fm.trainfolder, anti_files, fm.anti_file_template, subdirs)
     if not training:
+        logger.info('Training set to FALSE. Extending nucleosome runs')
         runs.extend(assemble_runs(fm.trainfolder, merge_files, fm.nucl_file_template, subdirs))
         runs.extend(assemble_runs(fm.trainfolder, root_merge_files, fm.nucl_file_template))
 
