@@ -86,8 +86,11 @@ def pick_manip_pairs(manips, list_):
 def _merge(files, subdir, chrom):
     # print("{} launched on {} (chrom {})".format(threading.current_thread(), subdir, chrom))
     logger.debug("merging chrom {} start files in {}".format(chrom, subdir))
-    data = read_all_files(files)
     outfile = os.path.join(subdir, "merge.{}".format(chrom))
+    if os.path.isfile(outfile):
+        logger.debug("merge. file {} already there. Skipping...".format(outfile))
+        return
+    data = read_all_files(files)
     logger.debug("merge into {}".format(outfile))
     sort_and_write(data, outfile)
     # print("{} completed on {} (chrom {})".format(threading.current_thread(), subdir, chrom))
@@ -110,8 +113,11 @@ def merge(files_to_merge):
 def _merge_subs(chrom, files, trainfolder):
     # print("{} launched on {} ".format(threading.current_thread(), chrom))
     logger.debug("merge subs chrom {}".format(chrom))
-    data = read_all_files(files)
     outfile = os.path.join(trainfolder, "merge.{}".format(chrom))
+    if os.path.isfile(outfile):
+        logger.debug("merge_subs. file {} already there. Skipping...".format(outfile))
+        return
+    data = read_all_files(files)
     sort_and_write(data, outfile)
     # print("{} completed on {}".format(threading.current_thread(), chrom))
 
@@ -128,8 +134,11 @@ def merge_subs(merge_subs_files, trainfolder):
 def _merge_anti_subs(folder, chrom, files):
     # print("{} launched on {} ".format(threading.current_thread(), chrom))
     logger.debug("merge anti subs chrom: {}, folder: {}".format(chrom, folder))
-    data = read_all_files(files)
     outfile = os.path.join(folder, "anti.{}".format(chrom))
+    if os.path.isfile(outfile):
+        logger.debug("merge_anti_subs. file {} already there. Skipping...".format(outfile))
+        return
+    data = read_all_files(files)
     sort_and_write(data, outfile)
     # print("{} completed on {}".format(threading.current_thread(), chrom))
 
