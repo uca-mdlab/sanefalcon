@@ -123,6 +123,10 @@ class FileManager:
         subfolders = [f.path for f in os.scandir(self.trainfolder) if f.is_dir()]
         for subdir in subfolders:
             self.manips[subdir] = [os.path.basename(f.path) for f in os.scandir(subdir) if f.is_dir()]
+        for path_to_exclude in [self.profilefolder, self.rspfolder]:
+            if path_to_exclude in self.manips:
+                del self.manips[path_to_exclude]
+        return self.manips
 
     def prepare_merge_file_lists(self):
         """
@@ -188,6 +192,33 @@ class FileManager:
                     anti_files.append(filename)
         return merge_files, anti_files, root_merge_files
 
+    def find_fwd_rev_files_per_subfolder(self):
+        res = {}
+        self.find_all_manips_per_subfolder()
+
+        fwd_pattern = re.compile(r"\.start\.fwd")
+        rev_pattern = re.compile(r"\.start\.rev")
+        fwds = []
+        revs = []
+        for root, subdir, files in os.walk(self.rspfolder):
+            for f in files:
+                if re.search(fwd_pattern, f):
+                    fwds.append(os.path.join(root, f))
+                if re.search(rev_pattern, f):
+                    revs.append(os.path.join(root, f))
+
+        for subdir, manip_names in self.manips.items():
+            res[subdir] = {}
+            for manip in manip_names:
+                fwd_of_manip = list(filter(lambda x: re.search(manip, x), fwds))
+                rev_of_manip = list(filter(lambda x: re.search(manip, x), revs))
+                if manip not in res[subdir]:
+                    res[subdir][manip] = {'fwd': fwd_of_manip, 'rev': rev_of_manip}
+                else:
+                    logger.error("Something wrong happened... ")
+                    logger.error(res)
+
+        return res
 
 if __name__ == '__main__':
     import configparser
@@ -195,9 +226,13 @@ if __name__ == '__main__':
     config = configparser.ConfigParser()
     config.read('tests/data/test.conf')
     f = FileManager(config)
-    a, b = f.list_files_to_use()
-    print(a)
-    print(b)
-    f.prepare_train_folder()
 
+    r = f.find_fwd_rev_files_per_subfolder()
+    for k, v in r.items():
+        print(k)
+        for k1, v1 in v.items():
+            print(k1)
+            print(v1)
+            print()
+        print('---')
 
