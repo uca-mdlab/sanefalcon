@@ -159,10 +159,11 @@ def get_nucl_files_per_subfolder(train_folder,nucl_stub_anti):
     return nucl_files
 
 
-def get_fwd_rev_files_per_subfolder(train_folder):
-    subfolders = [f.path for f in os.scandir(train_folder) if f.is_dir()]
+def get_fwd_rev_files_per_subfolder(fm):
+    subfolders = [f.path for f in os.scandir(fm.trainfolder) if f.is_dir()]
+    print(subfolders)
     pattern = re.compile('\.start\.(fwd|rev)')
-    fwd_rev_files = [os.path.join(train_folder, f) for f in os.listdir(train_folder) if re.search(pattern, f)]
+    fwd_rev_files = [os.path.join(fm.rspfolder, f) for f in os.listdir(fm.rspfolder) if re.search(pattern, f)]
 
     fwd_rev_names_per_subdir = defaultdict(list)
     for sub in subfolders:
@@ -178,38 +179,40 @@ def get_fwd_rev_files_per_subfolder(train_folder):
     return fwd_rev
 
 
-def get_data(train_folder, outfolder, nucl_stub_anti):
+def get_data(fm):
     """
     Avoid calling multiple times the getProfileSubmit.sh script, as it loads all the data in memory.
 
-    :param train_folder: sanefalcontrain/a
+    :param rspfolder:
     :param outfolder: /tmp/...
     :return: a dictionary with all the data packed and organized for processing
     """
     d = defaultdict(dict)
-    nucl_files = get_nucl_files_per_subfolder(train_folder,nucl_stub_anti)
-    fwd_rev_files = get_fwd_rev_files_per_subfolder(train_folder)
+    nucl_files = get_nucl_files_per_subfolder(fm.trainfolder, fm.anti_file_template)
+    fwd_rev_files = fm.find_fwd_rev_files_per_subfolder()
 
     chromosomes = range(1, 23)
 
-    for subdir, fwd_rev_file_list in fwd_rev_files.items():
-        for c in chromosomes:
-            regexp = re.compile(".bam.{}.start".format(c))
-            fwd_files = [f for f in list(filter(lambda x: x.endswith('fwd'), fwd_rev_file_list)) if re.search(regexp, f)]
-            rev_files = [f for f in list(filter(lambda x: x.endswith('rev'), fwd_rev_file_list)) if re.search(regexp, f)]
-            nucl_file = [f for f in nucl_files[subdir] if f.endswith('.{}'.format(c))][0]
-            logger.debug('Chrom {} - nucl_file {} - Found {} fwd_files, {} rev_files'.format(c, nucl_file,
-                                                                                             len(fwd_files),
-                                                                                             len(rev_files)))
-
-            d[c].update({
-                subdir: {'fwd': fwd_files,
-                         'rev': rev_files,
-                         'nucl_file': nucl_file
-                         }
-            })
-
-    return d
+    for subdir, dic in fwd_rev_files.items():
+        print(subdir)
+        print(dic.keys())
+    #     for c in chromosomes:
+    #         regexp = re.compile(".bam.{}.start".format(c))
+    #         fwd_files = [f for f in list(filter(lambda x: x.endswith('fwd'), fwd_rev_file_list)) if re.search(regexp, f)]
+    #         rev_files = [f for f in list(filter(lambda x: x.endswith('rev'), fwd_rev_file_list)) if re.search(regexp, f)]
+    #         nucl_file = [f for f in nucl_files[subdir] if f.endswith('.{}'.format(c))][0]
+    #         logger.debug('Chrom {} - nucl_file {} - Found {} fwd_files, {} rev_files'.format(c, nucl_file,
+    #                                                                                          len(fwd_files),
+    #                                                                                          len(rev_files)))
+    #
+    #         d[c].update({
+    #             subdir: {'fwd': fwd_files,
+    #                      'rev': rev_files,
+    #                      'nucl_file': nucl_file
+    #                      }
+    #         })
+    #
+    # return d
 
 
 def run_forward(chrom, outdir, fwd_file, nucl_ex_file):
@@ -324,27 +327,34 @@ def submit_process(tup):
 if __name__ == "__main__":
     import multiprocessing as mp
     import configparser
+    from file_manager import FileManager
 
-    conf_file = 'sanefalcon.conf'
+    conf_file = 'tests/data/test.conf'
     config = configparser.ConfigParser()
     config.read(conf_file)
 
-    train_folder = config['default']['trainfolder']
+    fm = FileManager(config)
 
-    outfolder = config['default']['outfolder']
-    logger.info('Starting on {}'.format(train_folder))
+    # train_folder = config['default']['trainfolder']
+    # rspfolder = config['default']['rspfolder']
+    # profilefolder = config['default']['profilefolder']
+    # nucl_stub_anti = config['default']['nucltemplate']
 
-    if not os.path.isdir(outfolder):
-        os.makedirs(outfolder)
-        logger.info('Created out folder {}'.format(outfolder))
+    logger.info('Starting on {}'.format(fm.trainfolder))
 
-    nucl_stub_anti = config['default']['nucltemplate']
-    data = get_data(train_folder, outfolder, nucl_stub_anti)  # all the available data
+    if not os.path.isdir(fm.profilefolder):
+        os.makedirs(fm.profilefolder)
+        logger.info('Created out folder {}'.format(fm.profilefolder))
+
+    data = get_data(fm)  # all the available data
+
+    exit()
     # for chrom, dic in data.items():
     #     process(chrom, dic, outfolder)
 
-    input_list = [(chrom, dic, outfolder) for chrom, dic in data.items()]
+    input_list = [(chrom, dic, profilefolder) for chrom, dic in data.items()]
 
+    exit()
     num_cores = mp.cpu_count()
     #num_cores = 2
     with mp.Pool(num_cores) as pool:
