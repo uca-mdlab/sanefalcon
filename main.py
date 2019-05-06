@@ -25,7 +25,10 @@ def run_profileParallel(fm, training=True):
         os.makedirs(outfolder)
         logger.info('run_profileParallel: Created out folder {}'.format(outfolder))
 
-    data = get_data(fm.trainfolder, outfolder, nucl_stub)  # all the available data
+    data = get_data(fm)  # all the available data
+
+    print(data)
+    exit()
     input_list = [(chrom, dic, outfolder) for chrom, dic in data.items()]
     logger.info("Launching multiprocessing pool...")
     num_cores = mp.cpu_count()
@@ -50,19 +53,18 @@ if __name__ == "__main__":
     logger.info("Starting sanefalcon with configuration file {}".format(args.conffile))
 
     # WARNING uncomment the next lines for full process (prepare_samples)
-    # samtools = config['default']['samtools']
-    # prepare_samples(fm.datafolder, fm.rspfolder, samtools)
-    # logger.info("prepare_samples ok")
+    samtools = config['default']['samtools']
+    prepare_samples(fm.datafolder, fm.rspfolder, samtools)
+    logger.info("prepare_samples ok")
 
     fm.prepare_train_folder()
     logger.info("prepare_folders ok")
 
-    exit(0)
     merge_all(fm)
     logger.info("merge_all ok")
 
     create_nucleosome_files(fm, training=True)
     logger.info("nucleosome ok")
-
-    run_profileParallel(fm.trainfolder, fm.anti_file_template)  # training: fm.anti_file_template
+    exit()
+    run_profileParallel(fm, training=True)  # training: fm.anti_file_template
     logger.info("run profile parallel ok")
