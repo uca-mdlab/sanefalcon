@@ -2,6 +2,7 @@ import os
 import string
 import re
 import logging
+import subprocess
 
 logging.basicConfig(format='%(asctime)s - %(levelname)s: %(message)s',
                     filename='sanefalcon.log', filemode='w', level=logging.DEBUG)
@@ -41,6 +42,7 @@ class Utils:
 
 class FileManager:
     def __init__(self, config):
+        self.samtools = config['default']['samtools']
         self.datafolder = os.path.abspath(config['default']['datafolder'])
         self.trainfolder = os.path.abspath(config['default']['trainfolder'])
         self.profilefolder = os.path.abspath(config['default']['profilefolder'])
@@ -99,9 +101,21 @@ class FileManager:
                     if not os.path.isdir(runpath):
                         os.mkdir(runpath)
                     logger.debug("runpath {} exists ".format(runpath))
-                    os.symlink(fname, os.path.join(runpath, os.path.split(fname)[1]))
+                    try:
+                        link_name = os.path.join(runpath, os.path.split(fname)[1])
+                        os.symlink(fname, link_name)
+                    except FileExistsError:
+                        logger.warning('Symlink already exists {}'.format(link_name))
                     bai_fname = fname + ".bai"
-                    os.symlink(bai_fname, os.path.join(runpath, os.path.split(bai_fname)[1]))
+                    if not os.path.isfile(bai_fname):
+                        logger.warning('Index file not found: {}. Creating...'.format(bai_fname))
+                        subprocess.Popen([self.samtools, 'index', fname], stdout=open(bai_fname, 'w')).wait()
+                        logger.warning('Index file created: {}.'.format(bai_fname))
+                    try:
+                        link_name = os.path.join(runpath, os.path.split(bai_fname)[1])
+                        os.symlink(bai_fname, link_name)
+                    except FileExistsError:
+                        logger.warning('Symlink already exists {}'.format(link_name))
 
         logger.info("Batches created with symlinks")
 
@@ -184,5 +198,6 @@ if __name__ == '__main__':
     a, b = f.list_files_to_use()
     print(a)
     print(b)
+    f.prepare_train_folder()
 
 
