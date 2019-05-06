@@ -11,3 +11,5 @@ __pycache*
 my.conf
 *.log
 .coverage
+*.bai
+.pytest*
