@@ -123,7 +123,7 @@ class FileManager:
         subfolders = [f.path for f in os.scandir(self.trainfolder) if f.is_dir()]
         for subdir in subfolders:
             self.manips[subdir] = [os.path.basename(f.path) for f in os.scandir(subdir) if f.is_dir()]
-        for path_to_exclude in [self.profilefolder, self.rspfolder]:
+        for path_to_exclude in [self.profilefolder, self.rspfolder]:  # just in case FIXME
             if path_to_exclude in self.manips:
                 del self.manips[path_to_exclude]
         return self.manips
