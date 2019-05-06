@@ -105,7 +105,11 @@ def assemble_runs(trainfolder, files, file_template, subdirs=None):
 
 
 def _create_nucleosome_file(folder, chrom, mergefile, fname):
-    logger.info("{} creating nucleosome file for {}".format(os.getpid(), mergefile))
+    outfile = os.path.join(folder, fname + ".{}".format(chrom))
+    if os.path.isfile(outfile):
+        logger.info("nucleosome file for {} = {} already there. Skipping..".format(mergefile, outfile))
+        return
+    logger.info("{} creating nucleosome file for {} = {}".format(os.getpid(), mergefile, outfile))
     curArea = [0]
     lastPos = 0
     maxDist = 190  # A little over our sliding window size
