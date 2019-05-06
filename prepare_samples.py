@@ -36,7 +36,6 @@ def prepare_samples(datafolder, rspfolder, samtools):
     chromosomes = range(1, 23)
     fwd_jobs = []
     rev_jobs = []
-    threads = []
 
     for root, subdir, files in os.walk(datafolder):
         for fname in files:
@@ -82,6 +81,5 @@ if __name__ == "__main__":
     datafolder = config['default']['datafolder']
     trainfolder = config['default']['trainfolder']
     rspfolder = config['default']['rspfolder']
-    # nucleosomefolder = config['default']['nucleosomefolder']
 
     prepare_samples(datafolder, rspfolder, samtools)
