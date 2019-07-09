@@ -2,7 +2,7 @@ import unittest
 import os
 from file_manager import FileManager
 import configparser
-
+import shutil
 
 class TestFileUtils(unittest.TestCase):
 
@@ -32,12 +32,19 @@ class TestFileUtils(unittest.TestCase):
 
     def test_prepare_train_folder(self):
         self.fm.prepare_train_folder()
-        self.assertEqual(len(os.listdir(self.fm.trainfolder)), 1)
+        self.assertEqual(len(os.listdir(self.fm.trainfolder)), 3)
         links = []
         for root, subdir, files in os.walk(self.fm.trainfolder):
             for f in files:
                 links.append(os.path.join(root, f))
         self.assertTrue(all([os.path.islink(x) for x in links]))
+
+    def tearDown(self):
+        try:
+            shutil.rmtree(self.fm.trainfolder)
+        except FileNotFoundError:
+            pass
+
 
 if __name__ == '__main__':
     unittest.main()

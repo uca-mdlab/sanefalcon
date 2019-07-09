@@ -74,6 +74,9 @@ class FileManager:
         """
         create the train folder by symlinking the original .bam and .bai files into a, b, c, .. subfolders
         """
+        if not os.path.isdir(self.trainfolder):
+            os.makedirs(self.trainfolder)
+
         letters = list(string.ascii_lowercase)
         files_to_link, manip_list = self.list_files_to_use()
         logger.debug('Found {} files_to_link in {} manips'.format(len(files_to_link), len(manip_list)))
@@ -219,6 +222,7 @@ class FileManager:
                     logger.error(res)
 
         return res
+
 
 if __name__ == '__main__':
     import configparser
