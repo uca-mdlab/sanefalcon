@@ -43,10 +43,9 @@ def prepare_samples(datafolder, rspfolder, samtools):
         for fname in files:
             if fname.endswith('.bam'):
                 bamfile = os.path.join(root, fname)
-                outfile_name = fname.split('.')[0] + '.sort.bam'
                 for chrom in chromosomes:
-                    outfile = os.path.join(rspfolder, outfile_name + '.{}.start.fwd'.format(chrom))
-                    revoutfile = os.path.join(rspfolder, outfile_name + '.{}.start.rev'.format(chrom))
+                    outfile = os.path.join(rspfolder, fname + '.{}.start.fwd'.format(chrom))
+                    revoutfile = os.path.join(rspfolder, fname + '.{}.start.rev'.format(chrom))
                     if not os.path.isfile(outfile):
                         run = (samtools, bamfile, outfile, chrom)
                         fwd_jobs.append(run)
