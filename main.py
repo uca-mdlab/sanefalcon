@@ -52,11 +52,6 @@ if __name__ == "__main__":
 
     logger.info("Starting sanefalcon with configuration file {}".format(args.conffile))
 
-    # WARNING uncomment the next lines for full process (prepare_samples)
-    samtools = config['default']['samtools']
-    prepare_samples(fm.datafolder, fm.rspfolder, samtools)
-    logger.info("prepare_samples ok")
-
     fm.prepare_train_folder()
     logger.info("prepare_folders ok")
 

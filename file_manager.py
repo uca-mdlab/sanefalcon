@@ -241,31 +241,31 @@ class FileManager:
                     anti_files.append(filename)
         return merge_files, anti_files, root_merge_files
 
-    def find_fwd_rev_files_per_subfolder(self):
-        res = {}
-        self.find_all_manips_per_subfolder()
-
-        fwd_pattern = re.compile(r"\.start\.fwd")
-        rev_pattern = re.compile(r"\.start\.rev")
-        fwds = []
-        revs = []
-        for fname in os.listdir(self.rspfolder):
-            if re.search(fwd_pattern, fname):
-                fwds.append(os.path.join(self.rspfolder, fname))
-            if re.search(rev_pattern, fname):
-                revs.append(os.path.join(self.rspfolder, fname))
-        logger.debug('Found {} fwd files and {} rev files'.format(len(fwds), len(revs)))
-        for subdir, manip_names in self.manips.items():
-            res[subdir] = {}
-            for manip in manip_names:
-                manip_folder = os.path.join(subdir, manip)
-                res[subdir][manip_folder] = {'fwd': [], 'rev': []}
-                bam_per_manip = [fname.split('.bam')[0] for fname in os.listdir(manip_folder) if fname.endswith('.bam')]
-                for bam_name in bam_per_manip:
-                    res[subdir][manip_folder]['fwd'].extend([x for x in fwds if re.search(bam_name, x)])
-                    res[subdir][manip_folder]['rev'].extend([x for x in revs if re.search(bam_name, x)])
-
-        return res
+    # def find_fwd_rev_files_per_subfolder(self):
+    #     res = {}
+    #     self.find_all_manips_per_subfolder()
+    #
+    #     fwd_pattern = re.compile(r"\.start\.fwd")
+    #     rev_pattern = re.compile(r"\.start\.rev")
+    #     fwds = []
+    #     revs = []
+    #     for fname in os.listdir(self.rspfolder):
+    #         if re.search(fwd_pattern, fname):
+    #             fwds.append(os.path.join(self.rspfolder, fname))
+    #         if re.search(rev_pattern, fname):
+    #             revs.append(os.path.join(self.rspfolder, fname))
+    #     logger.debug('Found {} fwd files and {} rev files'.format(len(fwds), len(revs)))
+    #     for subdir, manip_names in self.manips.items():
+    #         res[subdir] = {}
+    #         for manip in manip_names:
+    #             manip_folder = os.path.join(subdir, manip)
+    #             res[subdir][manip_folder] = {'fwd': [], 'rev': []}
+    #             bam_per_manip = [fname.split('.bam')[0] for fname in os.listdir(manip_folder) if fname.endswith('.bam')]
+    #             for bam_name in bam_per_manip:
+    #                 res[subdir][manip_folder]['fwd'].extend([x for x in fwds if re.search(bam_name, x)])
+    #                 res[subdir][manip_folder]['rev'].extend([x for x in revs if re.search(bam_name, x)])
+    #
+    #     return res
 
 
 if __name__ == '__main__':
