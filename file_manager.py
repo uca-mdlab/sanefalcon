@@ -2,6 +2,8 @@ import os
 import string
 import re
 import logging
+from prepare_samples import prepare_samples
+from collections import defaultdict
 
 logging.basicConfig(format='%(asctime)s - %(levelname)s: %(message)s',
                     filename='sanefalcon.log', filemode='w', level=logging.DEBUG)
@@ -52,6 +54,7 @@ class FileManager:
         self.bamlist = Utils.readfile(os.path.abspath(config['default']['bamlist']))
         self.manips = {}
         self.merge_file_lists = {}
+        self.rspfiles = defaultdict(dict)
         logger.debug("Data folder = {}".format(self.datafolder))
         logger.debug("Train folder = {}".format(self.trainfolder))
         self.check_conf()
@@ -87,7 +90,17 @@ class FileManager:
                     logger.warning("Link {} exists, skipping...".format(link_name))
                 batches[letters[num_batch]].append(link_name)
         logger.info("Batches created with symlinks")
-        return batches
+
+        logger.info('Preparing train folder: prepare_samples...')
+        rspfiles = prepare_samples(self.datafolder, self.rspfolder, self.samtools)
+        for letter, list_of_fnames in batches.items():
+            bam_names = [os.path.basename(f) for f in list_of_fnames]
+            for bam in bam_names:
+                rsp = list(filter(lambda x: re.search(bam, x), rspfiles))
+                self.rspfiles[letter][bam] = rsp
+
+        logger.info('Preparing train folder: mapping complete.')
+        return self.rspfiles
 
     def list_files_to_use(self):
         if not self.bamlist:
@@ -261,7 +274,11 @@ if __name__ == '__main__':
     config = configparser.ConfigParser()
     config.read('tests/data/test.conf')
     f = FileManager(config)
-    f.prepare_train_folder()
+    b = f.prepare_train_folder()
+    for k, v in f.rspfiles.items():
+        print(k)
+        for a, b in v.items():
+            print(a, b)
     exit()
     f.prepare_train_folder()
     r = f.find_fwd_rev_files_per_subfolder()
