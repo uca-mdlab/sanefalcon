@@ -2,7 +2,6 @@ import os
 import string
 import re
 import logging
-import subprocess
 
 logging.basicConfig(format='%(asctime)s - %(levelname)s: %(message)s',
                     filename='sanefalcon.log', filemode='w', level=logging.DEBUG)
@@ -55,6 +54,40 @@ class FileManager:
         self.merge_file_lists = {}
         logger.debug("Data folder = {}".format(self.datafolder))
         logger.debug("Train folder = {}".format(self.trainfolder))
+        self.check_conf()
+
+    def check_conf(self):
+        if not self.bamlist:
+            exit('Unable to find the list of bam files to use. Aborting.')
+        for destdir in [self.trainfolder, self.rspfolder, self.profilefolder]:
+            if not os.path.isdir(destdir):
+                logger.warning('{} not found. Creating...'.format(destdir))
+                os.makedirs(destdir)
+
+    def prepare_train_folder(self):
+        letters = list(string.ascii_lowercase)
+        batches = {}
+        logger.debug('Found {} files to link'.format(len(self.bamlist)))
+        logger.info('Preparing train folder: symlinking bam files...')
+        for num_batch, batch in enumerate([l for l in Utils.prepare_batches(self.bamlist, self.batch_size)]):
+            batches[letters[num_batch]] = []
+            for filename in batch:
+                basename = os.path.basename(filename)
+                batch_dir = os.path.join(self.trainfolder, letters[num_batch])
+                try:
+                    os.makedirs(batch_dir)
+                    logger.debug("Created folder: {}".format(batch_dir))
+                except FileExistsError:
+                    logger.warning("Folder {} exists, skipping...".format(batch_dir))
+                link_name = os.path.join(batch_dir, basename)
+                try:
+                    os.symlink(filename, link_name)
+                    os.symlink(filename + '.bai', link_name + '.bai')
+                except FileExistsError:
+                    logger.warning("Link {} exists, skipping...".format(link_name))
+                batches[letters[num_batch]].append(link_name)
+        logger.info("Batches created with symlinks")
+        return batches
 
     def list_files_to_use(self):
         if not self.bamlist:
@@ -70,57 +103,57 @@ class FileManager:
 
         return files_to_link, list(manip_list)
 
-    def prepare_train_folder(self):
-        """
-        create the train folder by symlinking the original .bam and .bai files into a, b, c, .. subfolders
-        """
-        if not os.path.isdir(self.trainfolder):
-            os.makedirs(self.trainfolder)
-
-        letters = list(string.ascii_lowercase)
-        files_to_link, manip_list = self.list_files_to_use()
-        logger.debug('Found {} files_to_link in {} manips'.format(len(files_to_link), len(manip_list)))
-        batches = {}
-        for num_batch, batch in enumerate(Utils.prepare_batches(manip_list, self.batch_size)):
-            batches[letters[num_batch]] = batch
-            logger.debug("Batch {} ({}): {}".format(letters[num_batch], len(batch), batch))
-
-        for batch_name, batch_list in batches.items():
-            logger.debug("Preparing Batch {} with {} items".format(batch_name, len(batch_list)))
-            workingdir = os.path.join(self.trainfolder, batch_name)
-            try:
-                os.makedirs(workingdir)
-                logger.debug("Created folder: {}".format(workingdir))
-            except FileExistsError:
-                logger.warning("Folder {} exists, skipping...".format(workingdir))
-
-            for manip in batch_list:
-                manip_regex = re.compile(manip)
-                files = [f for f in files_to_link if re.search(manip_regex, f)]
-                logger.debug("Batch {}: {}".format(batch_name, files))
-                for fname in files:
-                    run = os.path.split(os.path.split(fname)[0])[1]
-                    runpath = os.path.join(workingdir, run)
-                    if not os.path.isdir(runpath):
-                        os.mkdir(runpath)
-                    logger.debug("runpath {} exists ".format(runpath))
-                    try:
-                        link_name = os.path.join(runpath, os.path.split(fname)[1])
-                        os.symlink(fname, link_name)
-                    except FileExistsError:
-                        logger.warning('Symlink already exists {}'.format(link_name))
-                    bai_fname = fname + ".bai"
-                    if not os.path.isfile(bai_fname):
-                        logger.warning('Index file not found: {}. Creating...'.format(bai_fname))
-                        subprocess.Popen([self.samtools, 'index', fname], stdout=open(bai_fname, 'w')).wait()
-                        logger.warning('Index file created: {}.'.format(bai_fname))
-                    try:
-                        link_name = os.path.join(runpath, os.path.split(bai_fname)[1])
-                        os.symlink(bai_fname, link_name)
-                    except FileExistsError:
-                        logger.warning('Symlink already exists {}'.format(link_name))
-
-        logger.info("Batches created with symlinks")
+    # def _prepare_train_folder(self):
+    #     """
+    #     create the train folder by symlinking the original .bam and .bai files into a, b, c, .. subfolders
+    #     """
+    #     if not os.path.isdir(self.trainfolder):
+    #         os.makedirs(self.trainfolder)
+    #
+    #     letters = list(string.ascii_lowercase)
+    #     files_to_link, manip_list = self.list_files_to_use()
+    #     logger.debug('Found {} files_to_link in {} manips'.format(len(files_to_link), len(manip_list)))
+    #     batches = {}
+    #     for num_batch, batch in enumerate(Utils.prepare_batches(manip_list, self.batch_size)):
+    #         batches[letters[num_batch]] = batch
+    #         logger.debug("Batch {} ({}): {}".format(letters[num_batch], len(batch), batch))
+    #
+    #     for batch_name, batch_list in batches.items():
+    #         logger.debug("Preparing Batch {} with {} items".format(batch_name, len(batch_list)))
+    #         workingdir = os.path.join(self.trainfolder, batch_name)
+    #         try:
+    #             os.makedirs(workingdir)
+    #             logger.debug("Created folder: {}".format(workingdir))
+    #         except FileExistsError:
+    #             logger.warning("Folder {} exists, skipping...".format(workingdir))
+    #
+    #         for manip in batch_list:
+    #             manip_regex = re.compile(manip)
+    #             files = [f for f in files_to_link if re.search(manip_regex, f)]
+    #             logger.debug("Batch {}: {}".format(batch_name, files))
+    #             for fname in files:
+    #                 run = os.path.split(os.path.split(fname)[0])[1]
+    #                 runpath = os.path.join(workingdir, run)
+    #                 if not os.path.isdir(runpath):
+    #                     os.mkdir(runpath)
+    #                 logger.debug("runpath {} exists ".format(runpath))
+    #                 try:
+    #                     link_name = os.path.join(runpath, os.path.split(fname)[1])
+    #                     os.symlink(fname, link_name)
+    #                 except FileExistsError:
+    #                     logger.warning('Symlink already exists {}'.format(link_name))
+    #                 bai_fname = fname + ".bai"
+    #                 if not os.path.isfile(bai_fname):
+    #                     logger.warning('Index file not found: {}. Creating...'.format(bai_fname))
+    #                     subprocess.Popen([self.samtools, 'index', fname], stdout=open(bai_fname, 'w')).wait()
+    #                     logger.warning('Index file created: {}.'.format(bai_fname))
+    #                 try:
+    #                     link_name = os.path.join(runpath, os.path.split(bai_fname)[1])
+    #                     os.symlink(bai_fname, link_name)
+    #                 except FileExistsError:
+    #                     logger.warning('Symlink already exists {}'.format(link_name))
+    #
+    #     logger.info("Batches created with symlinks")
 
     def find_all_manips_per_subfolder(self):
         subfolders = [f.path for f in os.scandir(self.trainfolder) if f.is_dir()]
@@ -228,6 +261,8 @@ if __name__ == '__main__':
     config = configparser.ConfigParser()
     config.read('tests/data/test.conf')
     f = FileManager(config)
+    f.prepare_train_folder()
+    exit()
     f.prepare_train_folder()
     r = f.find_fwd_rev_files_per_subfolder()
     # for k, v in r.items():
