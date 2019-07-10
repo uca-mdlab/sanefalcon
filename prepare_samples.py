@@ -20,6 +20,7 @@ def prepare_fwd(samtools, bamfile, outfile, chrom):
     p1 = subprocess.Popen(one, stdout=subprocess.PIPE)
     p2 = subprocess.Popen(two, stdin=p1.stdout, stdout=open(outfile, 'w'))
     output = p2.communicate()[0]
+    return outfile
 
 
 def prepare_rev(samtools, bamfile, revoutfile, chrom):
@@ -28,6 +29,7 @@ def prepare_rev(samtools, bamfile, revoutfile, chrom):
     p1 = subprocess.Popen(one, stdout=subprocess.PIPE)
     p2 = subprocess.Popen(two, stdin=p1.stdout, stdout=open(revoutfile, 'w'))
     output = p2.communicate()[0]
+    return revoutfile
 
 
 def prepare_samples(datafolder, rspfolder, samtools):
@@ -36,7 +38,7 @@ def prepare_samples(datafolder, rspfolder, samtools):
     chromosomes = range(1, 23)
     fwd_jobs = []
     rev_jobs = []
-
+    outfiles = []
     for root, subdir, files in os.walk(datafolder):
         for fname in files:
             if fname.endswith('.bam'):
@@ -48,7 +50,6 @@ def prepare_samples(datafolder, rspfolder, samtools):
                     if not os.path.isfile(outfile):
                         run = (samtools, bamfile, outfile, chrom)
                         fwd_jobs.append(run)
-
                     if not os.path.isfile(revoutfile):
                         run = (samtools, bamfile, revoutfile, chrom)
                         rev_jobs.append(run)
@@ -67,9 +68,14 @@ def prepare_samples(datafolder, rspfolder, samtools):
             jobs[sub] = job
 
         for job in concurrent.futures.as_completed(jobs):
-            _ = job.result()
+            outfile = job.result()
+            outfiles.append(outfile)
 
     logger.info('End multithreading. Samples prepared.')
+    if len(outfiles) == 0:
+        return [os.path.join(rspfolder, fname) for fname in os.listdir(rspfolder)]
+    else:
+        return outfiles
 
 
 if __name__ == "__main__":
@@ -82,4 +88,4 @@ if __name__ == "__main__":
     trainfolder = config['default']['trainfolder']
     rspfolder = config['default']['rspfolder']
 
-    prepare_samples(datafolder, rspfolder, samtools)
+    print(prepare_samples(datafolder, rspfolder, samtools))
