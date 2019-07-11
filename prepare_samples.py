@@ -18,8 +18,9 @@ def prepare_fwd(samtools, bamfile, outfile, chrom):
     one = [samtools, "view", bamfile, "chr{}".format(chrom), "-F", "20", "-q", "1"]
     two = [sys.executable, "retro.py", "-fwd"]
     p1 = subprocess.Popen(one, stdout=subprocess.PIPE)
-    p2 = subprocess.Popen(two, stdin=p1.stdout, stdout=open(outfile, 'w'))
-    output = p2.communicate()[0]
+    with open(outfile, 'w') as out_:
+        p2 = subprocess.Popen(two, stdin=p1.stdout, stdout=out_)
+        output = p2.communicate()[0]
     return outfile
 
 
@@ -27,8 +28,9 @@ def prepare_rev(samtools, bamfile, revoutfile, chrom):
     one = [samtools, "view", bamfile, "chr{}".format(chrom), "-f", "16", "-F", "4", "-q", "1"]
     two = [sys.executable, "retro.py", "-rev"]
     p1 = subprocess.Popen(one, stdout=subprocess.PIPE)
-    p2 = subprocess.Popen(two, stdin=p1.stdout, stdout=open(revoutfile, 'w'))
-    output = p2.communicate()[0]
+    with open(revoutfile, 'w') as out_:
+        p2 = subprocess.Popen(two, stdin=p1.stdout, stdout=out_)
+        output = p2.communicate()[0]
     return revoutfile
 
 
