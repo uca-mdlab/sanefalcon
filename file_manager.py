@@ -118,72 +118,6 @@ class FileManager:
             merge_file_list[subdir] = res
         return merge_file_list
 
-    # def list_files_to_use(self):
-    #     if not self.bamlist:
-    #         exit('Unable to find the list of bam files to use. Aborting.')
-    #     list_files = [os.path.basename(x) for x in self.bamlist]
-    #     files_to_link = []
-    #     manip_list = set()
-    #     for root, subdir, files in os.walk(self.datafolder):
-    #         for f in files:
-    #             if f in list_files:
-    #                 files_to_link.append(os.path.join(root, f))
-    #                 manip_list.add(os.path.split(root)[1])
-    #
-    #     return files_to_link, list(manip_list)
-
-    # def _prepare_train_folder(self):
-    #     """
-    #     create the train folder by symlinking the original .bam and .bai files into a, b, c, .. subfolders
-    #     """
-    #     if not os.path.isdir(self.trainfolder):
-    #         os.makedirs(self.trainfolder)
-    #
-    #     letters = list(string.ascii_lowercase)
-    #     files_to_link, manip_list = self.list_files_to_use()
-    #     logger.debug('Found {} files_to_link in {} manips'.format(len(files_to_link), len(manip_list)))
-    #     batches = {}
-    #     for num_batch, batch in enumerate(Utils.prepare_batches(manip_list, self.batch_size)):
-    #         batches[letters[num_batch]] = batch
-    #         logger.debug("Batch {} ({}): {}".format(letters[num_batch], len(batch), batch))
-    #
-    #     for batch_name, batch_list in batches.items():
-    #         logger.debug("Preparing Batch {} with {} items".format(batch_name, len(batch_list)))
-    #         workingdir = os.path.join(self.trainfolder, batch_name)
-    #         try:
-    #             os.makedirs(workingdir)
-    #             logger.debug("Created folder: {}".format(workingdir))
-    #         except FileExistsError:
-    #             logger.warning("Folder {} exists, skipping...".format(workingdir))
-    #
-    #         for manip in batch_list:
-    #             manip_regex = re.compile(manip)
-    #             files = [f for f in files_to_link if re.search(manip_regex, f)]
-    #             logger.debug("Batch {}: {}".format(batch_name, files))
-    #             for fname in files:
-    #                 run = os.path.split(os.path.split(fname)[0])[1]
-    #                 runpath = os.path.join(workingdir, run)
-    #                 if not os.path.isdir(runpath):
-    #                     os.mkdir(runpath)
-    #                 logger.debug("runpath {} exists ".format(runpath))
-    #                 try:
-    #                     link_name = os.path.join(runpath, os.path.split(fname)[1])
-    #                     os.symlink(fname, link_name)
-    #                 except FileExistsError:
-    #                     logger.warning('Symlink already exists {}'.format(link_name))
-    #                 bai_fname = fname + ".bai"
-    #                 if not os.path.isfile(bai_fname):
-    #                     logger.warning('Index file not found: {}. Creating...'.format(bai_fname))
-    #                     subprocess.Popen([self.samtools, 'index', fname], stdout=open(bai_fname, 'w')).wait()
-    #                     logger.warning('Index file created: {}.'.format(bai_fname))
-    #                 try:
-    #                     link_name = os.path.join(runpath, os.path.split(bai_fname)[1])
-    #                     os.symlink(bai_fname, link_name)
-    #                 except FileExistsError:
-    #                     logger.warning('Symlink already exists {}'.format(link_name))
-    #
-    #     logger.info("Batches created with symlinks")
-
     def find_all_manips_per_subfolder(self):
         subfolders = [f.path for f in os.scandir(self.trainfolder) if f.is_dir()]
         for subdir in subfolders:
@@ -223,11 +157,6 @@ class FileManager:
                     files_per_subdir[subdir] = start_per_manip
             self.merge_file_lists[chrom] = files_per_subdir
 
-    def get_merge_file_lists(self):
-        if not self.merge_file_lists:
-            self.prepare_merge_file_lists()
-        return self.merge_file_lists
-
     def find_merge_files_in_subdirectories(self):
         merge_files = []
         pattern_name = re.compile("merge.\d{1,2}")
@@ -257,32 +186,6 @@ class FileManager:
                     anti_files.append(filename)
         return merge_files, anti_files, root_merge_files
 
-    # def find_fwd_rev_files_per_subfolder(self):
-    #     res = {}
-    #     self.find_all_manips_per_subfolder()
-    #
-    #     fwd_pattern = re.compile(r"\.start\.fwd")
-    #     rev_pattern = re.compile(r"\.start\.rev")
-    #     fwds = []
-    #     revs = []
-    #     for fname in os.listdir(self.rspfolder):
-    #         if re.search(fwd_pattern, fname):
-    #             fwds.append(os.path.join(self.rspfolder, fname))
-    #         if re.search(rev_pattern, fname):
-    #             revs.append(os.path.join(self.rspfolder, fname))
-    #     logger.debug('Found {} fwd files and {} rev files'.format(len(fwds), len(revs)))
-    #     for subdir, manip_names in self.manips.items():
-    #         res[subdir] = {}
-    #         for manip in manip_names:
-    #             manip_folder = os.path.join(subdir, manip)
-    #             res[subdir][manip_folder] = {'fwd': [], 'rev': []}
-    #             bam_per_manip = [fname.split('.bam')[0] for fname in os.listdir(manip_folder) if fname.endswith('.bam')]
-    #             for bam_name in bam_per_manip:
-    #                 res[subdir][manip_folder]['fwd'].extend([x for x in fwds if re.search(bam_name, x)])
-    #                 res[subdir][manip_folder]['rev'].extend([x for x in revs if re.search(bam_name, x)])
-    #
-    #     return res
-
 
 if __name__ == '__main__':
     import configparser
@@ -291,14 +194,4 @@ if __name__ == '__main__':
     config.read('tests/data/test.conf')
     f = FileManager(config)
     b = f.prepare_train_folder()
-    for k, v in f.rspfiles.items():
-        print(k)
-        for a, b in v.items():
-            print(a, b)
-    exit()
-    f.prepare_train_folder()
-    r = f.find_fwd_rev_files_per_subfolder()
-    # for k, v in r.items():
-    #     for k1, v1 in v.items():
-    #         print(k1, len(v1['fwd']), len(v1['rev']))
-    print(f.get_merge_file_lists())
+
