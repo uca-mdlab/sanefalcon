@@ -9,6 +9,7 @@ import logging
 import re
 import collections
 from file_manager import FileManager
+from collections import defaultdict
 
 logging.basicConfig(format='%(asctime)s - %(levelname)s: %(message)s',
                     filename='sanefalcon.log', filemode='w', level=logging.DEBUG)
@@ -98,8 +99,11 @@ def _merge(files, subdir, chrom):
 
 def _prepare_jobs_arguments(files_to_merge):
     runs = []
-    for chrom, dic in files_to_merge.items():
-        for subdir, files in dic.items():
+    for subdir, dic in files_to_merge.items():
+        for chrom in range(1, 23):
+            fwd = dic['fwd'][chrom]
+            rev = dic['rev'][chrom]
+            files = fwd + rev
             runs.append((files, subdir, chrom))
     return runs
 
@@ -125,7 +129,7 @@ def _merge_subs(chrom, files, trainfolder):
 def merge_subs(merge_subs_files, trainfolder):
     tmp = collections.defaultdict(list)
     for f in merge_subs_files:
-        tmp[f.split('.')[1]].append(f)
+        tmp[f.split('.')[1]].append(f)  # grep .chrom_number
     runs = [(k, v, trainfolder) for k, v in tmp.items()]
     logger.debug('Submitting {} runs to merge_subs'.format(len(runs)))
     launch_multithreads(runs, name='merge_subs')
@@ -150,14 +154,14 @@ def merge_anti_subs(merge_subs_files, trainfolder):
     :param trainfolder:
     :return:
     """
+    subfolders = set()
     tmp = collections.defaultdict(list)
     for f in merge_subs_files:
+        subfolders.add(os.path.join(trainfolder, os.path.basename(os.path.dirname(f))))
         tmp[f.split('.')[1]].append(f)
-    # print(tmp)
-    subfolders = [f.path for f in os.scandir(trainfolder) if f.is_dir()]
 
     runs = []
-    for folder in subfolders:
+    for folder in list(subfolders):
         pattern = re.compile('(?!{})'.format(folder))  # matching "not folder"
         reduced_tmp = {k: list(filter(lambda x: re.match(pattern, x), v)) for k, v in tmp.items()}
         run = [(folder, k, v) for k, v in reduced_tmp.items()]
@@ -169,11 +173,8 @@ def merge_anti_subs(merge_subs_files, trainfolder):
 
 def merge_all(fm):
     logger.info("starting merge all")
-    files_to_merge = fm.get_merge_file_lists()
-    for chrom, dic in files_to_merge.items():
-        for subdir, files in dic.items():
-            logger.debug('Chrom {}. Subdir {} with {} files'.format(chrom, subdir, len(files)))
-    merge(files_to_merge)
+    merge_file_list = fm.get_start_files_per_subdir()
+    merge(merge_file_list)
     logger.debug("merge done")
     merge_subs_files = fm.find_merge_files_in_subdirectories()
     merge_subs(merge_subs_files, fm.trainfolder)
