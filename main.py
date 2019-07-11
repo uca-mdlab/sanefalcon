@@ -27,9 +27,17 @@ def run_profileParallel(fm, training=True):
 
     data = get_data(fm)  # all the available data
 
-    print(data)
-    exit()
     input_list = [(chrom, dic, outfolder) for chrom, dic in data.items()]
+    # c, d, o = input_list[0]
+    # print('----')
+    # print(c)
+    # for k, v in d.items():
+    #     print(k)
+    #     print(v)
+    #     print()
+    # print(o)
+    # print('----')
+    # exit()
     logger.info("Launching multiprocessing pool...")
     num_cores = mp.cpu_count()
     with mp.Pool(num_cores) as pool:
@@ -61,6 +69,5 @@ if __name__ == "__main__":
     create_nucleosome_files(fm, training=True)
     logger.info("nucleosome ok")
 
-    exit()
     run_profileParallel(fm, training=True)  # training: fm.anti_file_template
     logger.info("run profile parallel ok")
