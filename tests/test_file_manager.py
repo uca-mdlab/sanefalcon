@@ -3,6 +3,8 @@ import os
 from file_manager import FileManager
 import configparser
 import shutil
+import warnings
+
 
 class TestFileUtils(unittest.TestCase):
 
@@ -24,20 +26,14 @@ class TestFileUtils(unittest.TestCase):
         self.assertIsInstance(self.fm.manips, dict)
         self.assertIsInstance(self.fm.merge_file_lists, dict)
 
-    def test_list_files_to_use(self):
-        files, manips = self.fm.list_files_to_use()
-        self.assertEqual(len(files), 10)
-        self.assertEqual(len(manips), 5)
-        self.assertTrue(os.path.isabs(files[0]))
-
     def test_prepare_train_folder(self):
-        self.fm.prepare_train_folder()
-        self.assertEqual(len(os.listdir(self.fm.trainfolder)), 3)
-        links = []
-        for root, subdir, files in os.walk(self.fm.trainfolder):
-            for f in files:
-                links.append(os.path.join(root, f))
-        self.assertTrue(all([os.path.islink(x) for x in links]))
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            res = self.fm.prepare_train_folder()
+            self.assertTrue(os.path.isdir(self.fm.trainfolder))
+            self.assertTrue(os.path.isdir(self.fm.rspfolder))
+            self.assertEqual(len(res.keys()), 2)
+            self.assertEqual(len(res['a']['p1.bam']), 44)
 
     def tearDown(self):
         try:
