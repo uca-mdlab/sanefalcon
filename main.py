@@ -3,7 +3,6 @@ import argparse
 import logging
 import configparser
 from merge import merge_all
-from prepare_samples import prepare_samples
 from nucleosome_detector import create_nucleosome_files
 from getProfileParallel import get_data, submit_process
 import multiprocessing as mp
