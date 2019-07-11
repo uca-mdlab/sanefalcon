@@ -69,11 +69,10 @@ class FileManager:
 
     def prepare_train_folder(self):
         letters = list(string.ascii_lowercase)
-        batches = {}
+        batches = defaultdict(list)
         logger.debug('Found {} files to link'.format(len(self.bamlist)))
         logger.info('Preparing train folder: symlinking bam files...')
         for num_batch, batch in enumerate([l for l in Utils.prepare_batches(self.bamlist, self.batch_size)]):
-            batches[letters[num_batch]] = []
             for filename in batch:
                 basename = os.path.basename(filename)
                 batch_dir = os.path.join(self.trainfolder, letters[num_batch])
@@ -88,7 +87,7 @@ class FileManager:
                     os.symlink(filename + '.bai', link_name + '.bai')
                 except FileExistsError:
                     logger.warning("Link {} exists, skipping...".format(link_name))
-                batches[letters[num_batch]].append(link_name)
+                batches[batch_dir].append(link_name)
         logger.info("Batches created with symlinks")
 
         logger.info('Preparing train folder: prepare_samples...')
@@ -101,6 +100,23 @@ class FileManager:
 
         logger.info('Preparing train folder: mapping complete.')
         return self.rspfiles
+
+    def get_start_files_per_subdir(self):
+        merge_file_list = defaultdict(dict)
+        for subdir, dic in self.rspfiles.items():
+            fwd = defaultdict(list)
+            rev = defaultdict(list)
+            for bamname, rspfiles in dic.items():
+                fwds = [f for f in rspfiles if f.endswith('.fwd')]
+                revs = [f for f in rspfiles if f.endswith('.rev')]
+                for chrom in range(1, 23):
+                    pattern = re.compile(r'\.{}\.'.format(chrom))
+                    fwd[chrom].extend(list(filter(lambda x: re.search(pattern, x), fwds)))
+                    rev[chrom].extend(list(filter(lambda x: re.search(pattern, x), revs)))
+
+            res = {'fwd': fwd, 'rev': rev}
+            merge_file_list[subdir] = res
+        return merge_file_list
 
     # def list_files_to_use(self):
     #     if not self.bamlist:
