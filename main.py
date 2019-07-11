@@ -60,6 +60,7 @@ if __name__ == "__main__":
 
     create_nucleosome_files(fm, training=True)
     logger.info("nucleosome ok")
+
     exit()
     run_profileParallel(fm, training=True)  # training: fm.anti_file_template
     logger.info("run profile parallel ok")
