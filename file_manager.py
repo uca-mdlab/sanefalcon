@@ -102,19 +102,19 @@ class FileManager:
         logger.info('Preparing train folder: mapping complete.')
         return self.rspfiles
 
-    def list_files_to_use(self):
-        if not self.bamlist:
-            exit('Unable to find the list of bam files to use. Aborting.')
-        list_files = [os.path.basename(x) for x in self.bamlist]
-        files_to_link = []
-        manip_list = set()
-        for root, subdir, files in os.walk(self.datafolder):
-            for f in files:
-                if f in list_files:
-                    files_to_link.append(os.path.join(root, f))
-                    manip_list.add(os.path.split(root)[1])
-
-        return files_to_link, list(manip_list)
+    # def list_files_to_use(self):
+    #     if not self.bamlist:
+    #         exit('Unable to find the list of bam files to use. Aborting.')
+    #     list_files = [os.path.basename(x) for x in self.bamlist]
+    #     files_to_link = []
+    #     manip_list = set()
+    #     for root, subdir, files in os.walk(self.datafolder):
+    #         for f in files:
+    #             if f in list_files:
+    #                 files_to_link.append(os.path.join(root, f))
+    #                 manip_list.add(os.path.split(root)[1])
+    #
+    #     return files_to_link, list(manip_list)
 
     # def _prepare_train_folder(self):
     #     """
