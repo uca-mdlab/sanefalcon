@@ -88,5 +88,5 @@ if __name__ == '__main__':
     f = FileManager(config)
     streams = create_streams(f)
     for k, v in streams.items():
-        print(k, v)
+        print(k, len(v))
 
