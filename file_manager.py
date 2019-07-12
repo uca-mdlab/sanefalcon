@@ -87,6 +87,8 @@ class FileManager:
                     os.symlink(filename + '.bai', link_name + '.bai')
                 except FileExistsError:
                     logger.warning("Link {} exists, skipping...".format(link_name))
+                except FileNotFoundError:
+                    pass
                 batches[batch_dir].append(link_name)
         logger.info("Batches created with symlinks")
 
