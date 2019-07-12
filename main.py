@@ -27,16 +27,6 @@ def run_profileParallel(fm, training=True):
     data = get_data(fm)  # all the available data
 
     input_list = [(chrom, dic, outfolder) for chrom, dic in data.items()]
-    # c, d, o = input_list[0]
-    # print('----')
-    # print(c)
-    # for k, v in d.items():
-    #     print(k)
-    #     print(v)
-    #     print()
-    # print(o)
-    # print('----')
-    # exit()
     logger.info("Launching multiprocessing pool...")
     num_cores = mp.cpu_count()
     with mp.Pool(num_cores) as pool:
