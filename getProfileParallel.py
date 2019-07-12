@@ -285,9 +285,7 @@ def process(chrom, d, outdir):
                         l_tup = job.result()
                     except Exception as ex:
                         logger.error('[fwd] Exception {}'.format(ex.__cause__))
-                    this_fwd_file = jobs[job]
                     del jobs[job]
-                    logger.info('[fwd] Got future for'.format(this_fwd_file))
 
         logger.info('End of forward concurrent phase for chrom {}'.format(chrom))
 
@@ -305,9 +303,7 @@ def process(chrom, d, outdir):
                         l_tup = job.result()
                     except Exception as ex:
                         logger.error('[rev] Exception {}'.format(ex.__cause__))
-                    this_rev_file = jobs[job]
                     del jobs[job]
-                    logger.info('[rev] Got future for'.format(this_rev_file))
 
         logger.info('End of reverse concurrent phase for chrom {}'.format(chrom))
 
