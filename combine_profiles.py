@@ -2,6 +2,12 @@ import os
 import re
 import csv
 from collections import Counter, defaultdict
+import logging
+
+logging.basicConfig(format='%(asctime)s - %(levelname)s: %(message)s',
+                    filename='sanefalcon.log', filemode='w', level=logging.DEBUG)
+
+logger = logging.getLogger(__name__)
 
 
 def sum_profile_file(proffile):
@@ -68,9 +74,11 @@ def create_streams(fm):
     for k, v in upstream.items():
         nums = [x for _, x in v.items()]
         nums.reverse()
+        logger.debug('Stream up (rev): {}. length {}. [0]: {}, [-1]: {}'.format(k, len(nums), nums[0], nums[-1]))
         streams[k] = nums[:-1]
     for k, v in downstream.items():
         nums = [x for _, x in v.items()]
+        logger.debug('Stream down: {}. length {}. [0]: {}, [-1]: {}'.format(k, len(nums), nums[0], nums[-1]))
         streams[k].extend(nums)
     return streams
 
@@ -88,5 +96,5 @@ if __name__ == '__main__':
     f = FileManager(config)
     streams = create_streams(f)
     for k, v in streams.items():
-        print(k, len(v))
+        print(k, v)
 
