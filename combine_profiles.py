@@ -10,13 +10,14 @@ logging.basicConfig(format='%(asctime)s - %(levelname)s: %(message)s',
 logger = logging.getLogger(__name__)
 
 
-def sum_profile_file(proffile):
-    s = 0
+def get_profile_file(proffile):
+    l = []
     with open(proffile, 'r') as in_:
-        reader = csv.reader(in_, delimiter=',')
+        reader = list(csv.reader(in_, delimiter=','))
+        assert len(reader) == 1
         for row in reader:
-            s += sum(list(map(float, row)))
-    return s
+            l = list(map(float, row))
+    return l
 
 
 def get_profile_files_per_chrom(fm, stream='up'):
@@ -39,62 +40,68 @@ def combine_profile_files(arr):
     pattern = re.compile(r"\w*\.bam")
     for fname in arr:
         name = re.match(pattern, os.path.basename(fname)).group()
-        d[name] = sum_profile_file(fname)
+        d[name] = get_profile_file(fname)
     return d
 
 
 def create_upstream(fm):
-    res = defaultdict(dict)
+    upstream = defaultdict(list)
+    tmp = defaultdict(list)
     for chrom, fwd, rev in get_profile_files_per_chrom(fm, stream='up'):
         d1 = combine_profile_files(fwd)
         d2 = combine_profile_files(rev)
-        c = Counter(d1)
-        c.update(Counter(d2))
-        for k, v in dict(c).items():
-            res[k].update({chrom: v})
-    return res
+        for k, v in d1.items():
+            tmp[k].append(v)
+        for k, v in d2.items():
+            tmp[k].append(v)
+    for k, v in tmp.items():
+        logger.debug('Upstream {}: {} files with {} entries each.'.format(k, len(v), set([len(x) for x in v])))
+        upstream[k] = [sum(x) for x in zip(*v)]
+    return upstream
 
 
 def create_downstream(fm):
-    res = defaultdict(dict)
+    downstream = defaultdict(list)
+    tmp = defaultdict(list)
     for chrom, ifwd, irev in get_profile_files_per_chrom(fm, stream='down'):
         d1 = combine_profile_files(ifwd)
         d2 = combine_profile_files(irev)
-        c = Counter(d1)
-        c.update(Counter(d2))
-        for k, v in dict(c).items():
-            res[k].update({chrom: v})
-    return res
+        for k, v in d1.items():
+            tmp[k].append(v)
+        for k, v in d2.items():
+            tmp[k].append(v)
+    for k, v in tmp.items():
+        logger.debug('Downstream {}: {} files with {} entries each.'.format(k, len(v), set([len(x) for x in v])))
+        downstream[k] = [sum(x) for x in zip(*v)]
+    return downstream
 
 
 def create_streams(fm):
     streams = {}
     upstream = create_upstream(fm)
     downstream = create_downstream(fm)
-    for k, v in upstream.items():
-        nums = [x for _, x in v.items()]
-        nums.reverse()
-        logger.debug('Stream up (rev): {}. length {}. [0]: {}, [-1]: {}'.format(k, len(nums), nums[0], nums[-1]))
-        streams[k] = nums[:-1]
-    for k, v in downstream.items():
-        nums = [x for _, x in v.items()]
-        logger.debug('Stream down: {}. length {}. [0]: {}, [-1]: {}'.format(k, len(nums), nums[0], nums[-1]))
-        streams[k].extend(nums)
+    # print(upstream['s48_np_090.bam'][0], downstream['s48_np_090.bam'][0])
+    # print(upstream['s48_np_090.bam'][-1], downstream['s48_np_090.bam'][-1])
+    import matplotlib.pyplot as plt
+    x = range(294)
+    for k in upstream.keys():
+        up = upstream[k]
+        down = downstream[k]
+        up.reverse()
+        y = up + down
+        plt.plot(x, y)
+    plt.show()
     return streams
 
 
 if __name__ == '__main__':
-    # fname = '/tmp/testsuite/profiles/p2.bam.15.start.fwd.15.fwd'
-    # s = sum_profile_file(fname)
-    # print(s)
-    # exit()
     import configparser
     from file_manager import FileManager
 
     config = configparser.ConfigParser()
-    config.read('tests/data/test.conf')
+    config.read('local.conf')
     f = FileManager(config)
     streams = create_streams(f)
-    for k, v in streams.items():
-        print(k, v)
+    # for k, v in streams.items():
+    #     print(k, v)
 
