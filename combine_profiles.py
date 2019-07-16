@@ -96,7 +96,7 @@ def plot_streams(streams):
     for sample, stream in streams.items():
         y = stream
         plt.plot(x, y, label=sample)
-    plt.legend(loc='upper left')
+    plt.legend(loc='upper center')
     plt.show()
 
 

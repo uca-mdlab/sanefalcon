@@ -159,8 +159,9 @@ def create_nucleosome_files(fm, training=True):
         runs.extend(assemble_runs(fm.trainfolder, merge_files, fm.nucl_file_template, subdirs))
         runs.extend(assemble_runs(fm.trainfolder, root_merge_files, fm.nucl_file_template))
 
-    logger.info('Creating nucleosomes: {} runs to be launched'.format(len(runs)))
-    with concurrent.futures.ProcessPoolExecutor(max_workers=os.cpu_count()) as executor:
+    tot = len(runs)
+    logger.info('Creating nucleosomes: {} runs to be launched'.format(tot))
+    with concurrent.futures.ThreadPoolExecutor(max_workers=os.cpu_count() * 2) as executor:
         jobs = {executor.submit(_create_nucleosome_file, *run): run for run in runs}
         for job in concurrent.futures.as_completed(jobs):
             try:
