@@ -20,8 +20,7 @@ def get_profile_file(proffile):
     return l
 
 
-def get_profile_files_per_chrom(fm, stream='up'):
-    fnames = [os.path.join(fm.profilefolder, fname) for fname in os.listdir(fm.profilefolder)]
+def get_profile_files_per_chrom(fnames, stream='up'):
     for chrom in range(1, 23):
         pattern = re.compile(r"\.{}\.".format(chrom))
         chrom_files = list(filter(lambda x: re.search(pattern, x), fnames))
@@ -44,10 +43,10 @@ def combine_profile_files(arr):
     return d
 
 
-def create_upstream(fm):
+def create_upstream(fnames):
     upstream = defaultdict(list)
     tmp = defaultdict(list)
-    for chrom, fwd, rev in get_profile_files_per_chrom(fm, stream='up'):
+    for chrom, fwd, rev in get_profile_files_per_chrom(fnames, stream='up'):
         d1 = combine_profile_files(fwd)
         d2 = combine_profile_files(rev)
         for k, v in d1.items():
@@ -60,10 +59,10 @@ def create_upstream(fm):
     return upstream
 
 
-def create_downstream(fm):
+def create_downstream(fnames):
     downstream = defaultdict(list)
     tmp = defaultdict(list)
-    for chrom, ifwd, irev in get_profile_files_per_chrom(fm, stream='down'):
+    for chrom, ifwd, irev in get_profile_files_per_chrom(fnames, stream='down'):
         d1 = combine_profile_files(ifwd)
         d2 = combine_profile_files(irev)
         for k, v in d1.items():
@@ -77,9 +76,10 @@ def create_downstream(fm):
 
 
 def create_streams(fm):
+    fnames = [os.path.join(fm.profilefolder, fname) for fname in os.listdir(fm.profilefolder)]
     streams = {}
-    upstream = create_upstream(fm)
-    downstream = create_downstream(fm)
+    upstream = create_upstream(fnames)
+    downstream = create_downstream(fnames)
     # print(upstream['s48_np_090.bam'][0], downstream['s48_np_090.bam'][0])
     # print(upstream['s48_np_090.bam'][-1], downstream['s48_np_090.bam'][-1])
     import matplotlib.pyplot as plt
