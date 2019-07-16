@@ -63,3 +63,4 @@ if __name__ == "__main__":
     logger.info("run profile parallel ok")
 
     save_streams_to_file(fm, fm.trainnuclfile)
+    logger.info("Training nucleosome profiles saved to {}".format(fm.trainnuclfile))

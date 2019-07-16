@@ -92,9 +92,9 @@ def create_streams(fm):
 
 def save_streams_to_file(fm, outfile):
     streams = create_streams(fm)
-    with open(outfile, 'wb') as out:
+    with open(outfile, 'w') as out:
         for sample, stream in streams.items():
-            out.write('{},{}\n'.format(sample, ','.join(stream)))
+            out.write('{},{}\n'.format(sample, ','.join(map(str, stream))))
     return outfile
 
 
