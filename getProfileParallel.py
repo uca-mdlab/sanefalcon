@@ -159,24 +159,24 @@ def get_nucl_files_per_subfolder(train_folder, nucl_stub_anti):
     return nucl_files
 
 
-def get_fwd_rev_files_per_subfolder(fm):
-    subfolders = [f.path for f in os.scandir(fm.trainfolder) if f.is_dir()]
-    print(subfolders)
-    pattern = re.compile('\.start\.(fwd|rev)')
-    fwd_rev_files = [os.path.join(fm.rspfolder, f) for f in os.listdir(fm.rspfolder) if re.search(pattern, f)]
-
-    fwd_rev_names_per_subdir = defaultdict(list)
-    for sub in subfolders:
-        fwd_rev_names_per_subdir[sub] = [os.path.basename(os.path.join(sub, o)) for o in os.listdir(sub)
-                                         if os.path.isdir(os.path.join(sub, o))]
-
-    fwd_rev = defaultdict(list)
-    for subdir, names in fwd_rev_names_per_subdir.items():
-        for manip_name in names:
-            pattern = re.compile(manip_name)
-            fwd_rev[subdir].extend(list(filter(lambda x: re.search(pattern, x), fwd_rev_files)))
-
-    return fwd_rev
+# def get_fwd_rev_files_per_subfolder(fm):
+#     subfolders = [f.path for f in os.scandir(fm.trainfolder) if f.is_dir()]
+#     print(subfolders)
+#     pattern = re.compile('\.start\.(fwd|rev)')
+#     fwd_rev_files = [os.path.join(fm.rspfolder, f) for f in os.listdir(fm.rspfolder) if re.search(pattern, f)]
+#
+#     fwd_rev_names_per_subdir = defaultdict(list)
+#     for sub in subfolders:
+#         fwd_rev_names_per_subdir[sub] = [os.path.basename(os.path.join(sub, o)) for o in os.listdir(sub)
+#                                          if os.path.isdir(os.path.join(sub, o))]
+#
+#     fwd_rev = defaultdict(list)
+#     for subdir, names in fwd_rev_names_per_subdir.items():
+#         for manip_name in names:
+#             pattern = re.compile(manip_name)
+#             fwd_rev[subdir].extend(list(filter(lambda x: re.search(pattern, x), fwd_rev_files)))
+#
+#     return fwd_rev
 
 
 def get_data(fm):
