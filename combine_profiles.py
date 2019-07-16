@@ -90,6 +90,14 @@ def create_streams(fm):
     return streams
 
 
+def save_streams_to_file(fm, outfile):
+    streams = create_streams(fm)
+    with open(outfile, 'wb') as out:
+        for sample, stream in streams.items():
+            out.write('{},{}\n'.format(sample, ','.join(stream)))
+    return outfile
+
+
 def plot_streams(streams):
     import matplotlib.pyplot as plt
     x = range(294)  # 147 * 2
@@ -107,5 +115,6 @@ if __name__ == '__main__':
     config = configparser.ConfigParser()
     config.read('local.conf')
     f = FileManager(config)
-    streams = create_streams(f)
-    plot_streams(streams)
+    outfile = save_streams_to_file(f, 'trainnucl.csv')
+    # streams = create_streams(f)
+    # plot_streams(streams)
