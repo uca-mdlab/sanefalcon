@@ -80,18 +80,24 @@ def create_streams(fm):
     streams = {}
     upstream = create_upstream(fnames)
     downstream = create_downstream(fnames)
-    # print(upstream['s48_np_090.bam'][0], downstream['s48_np_090.bam'][0])
-    # print(upstream['s48_np_090.bam'][-1], downstream['s48_np_090.bam'][-1])
+
+    for sample in upstream.keys():
+        up = upstream[sample]
+        up.reverse()
+        down = downstream[sample]
+        streams[sample] = up + down
+
+    return streams
+
+
+def plot_streams(streams):
     import matplotlib.pyplot as plt
     x = range(294)
-    for k in upstream.keys():
-        up = upstream[k]
-        down = downstream[k]
-        up.reverse()
-        y = up + down
-        plt.plot(x, y)
+    for sample, stream in streams.items():
+        y = stream
+        plt.plot(x, y, label=sample)
+    plt.legend(loc='upper left')
     plt.show()
-    return streams
 
 
 if __name__ == '__main__':
@@ -102,6 +108,4 @@ if __name__ == '__main__':
     config.read('local.conf')
     f = FileManager(config)
     streams = create_streams(f)
-    # for k, v in streams.items():
-    #     print(k, v)
-
+    plot_streams(streams)
