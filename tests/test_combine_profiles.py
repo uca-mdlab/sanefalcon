@@ -27,6 +27,14 @@ class TestCombineProfiles(unittest.TestCase):
         self.assertEqual(len(res), 147)
         self.assertEqual(res[0], 1981)
 
+    def test_create_upstream(self):
+        res = combine_profiles.create_upstream(self.upfiles)
+        self.assertEqual(len(res['sample.bam']), 147)
+
+    def test_create_dowstream(self):
+        res = combine_profiles.create_downstream(self.downfiles)
+        self.assertEqual(len(res['sample.bam']), 147)
+
 
 if __name__ == '__main__':
     unittest.main()
