@@ -52,6 +52,7 @@ class FileManager:
         self.nucl_file_template = config['default']['nucltemplate']
         self.anti_file_template = self.nucl_file_template + '_anti'
         self.bamlist = Utils.readfile(os.path.abspath(config['default']['bamlist']))
+        self.trainnuclfile = config['default']['trainnucl']
         self.manips = {}
         self.merge_file_lists = {}
         self.rspfiles = defaultdict(dict)
