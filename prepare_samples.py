@@ -57,7 +57,8 @@ def prepare_samples(datafolder, rspfolder, samtools):
 
                 logger.debug("prep_samples for {}".format(fname))
 
-    logger.info('Spawning {} threads'.format(len(fwd_jobs) + len(rev_jobs)))
+    tot = len(fwd_jobs) + len(rev_jobs)
+    logger.info('Spawning {} threads'.format(tot))
     with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
         jobs = {}
         for job in fwd_jobs:
@@ -71,6 +72,7 @@ def prepare_samples(datafolder, rspfolder, samtools):
         for job in concurrent.futures.as_completed(jobs):
             outfile = job.result()
             outfiles.append(outfile)
+            print('\r{}/{} threads completed'.format(len(outfiles), tot))
 
     logger.info('End multithreading. Samples prepared.')
     if len(outfiles) == 0:
