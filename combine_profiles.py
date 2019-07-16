@@ -92,7 +92,7 @@ def create_streams(fm):
 
 def plot_streams(streams):
     import matplotlib.pyplot as plt
-    x = range(294)
+    x = range(294)  # 147 * 2
     for sample, stream in streams.items():
         y = stream
         plt.plot(x, y, label=sample)
