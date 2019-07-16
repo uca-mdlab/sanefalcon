@@ -7,6 +7,7 @@ from nucleosome_detector import create_nucleosome_files
 from getProfileParallel import get_data, submit_process
 import multiprocessing as mp
 from file_manager import FileManager
+from combine_profiles import save_streams_to_file
 
 logging.basicConfig(format='%(asctime)s - %(levelname)s: %(message)s',
                     filename='sanefalcon.log', filemode='w', level=logging.DEBUG)
@@ -60,3 +61,5 @@ if __name__ == "__main__":
 
     run_profileParallel(fm, training=True)  # training: fm.anti_file_template
     logger.info("run profile parallel ok")
+
+    save_streams_to_file(fm, fm.trainnuclfile)
