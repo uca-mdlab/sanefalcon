@@ -85,30 +85,21 @@ def loadRefFileTrisomy(refFile):
     return reference, series
 
 
-def splitByReference(samples, reference):
-    overlap = []
-    for ref in reference:
-        if ref in samples:
-            overlap.append(ref)
+def split_by_reference(samples, reference):
+    overlap = [x for x in reference if x in samples]
     overlap.sort()
-    print(overlap)
-    print(len(overlap), "samples overlap")
-
-    noOverlap=[]
-    for sample in samples:
-        if sample not in overlap:
-            noOverlap.append(sample)
+    noOverlap = [x for x in reference if x not in samples]
     noOverlap.sort()
-    print(noOverlap)
-    print(len(noOverlap), "samples noOverlap")
 
+    print(len(overlap), "samples overlap")
+    print(len(noOverlap), "samples noOverlap")
     return overlap, noOverlap
 
 
 # ---------------------------------------------------------------------------- #
 # Data preparation functions
 # ---------------------------------------------------------------------------- #
-def getCorrelationProfile(samples, reference, trainingSet, yVals):
+def get_correlation_profile(samples, trainingSet, yVals):
     correlations = []
     for i in range(len(samples[trainingSet[0]])):
         bpVals = [samples[x][i] for x in trainingSet]
@@ -116,22 +107,15 @@ def getCorrelationProfile(samples, reference, trainingSet, yVals):
     return correlations
 
 
-def getNuclRatio(sample, correlations):
-    sampleVal = 0
-    for i, val in enumerate(sample):
-        sampleVal += val * correlations[i]
-
-    return sampleVal, sample
-
-
-def getNuclRatios(names, sampleSet, correlations):
-    selectedRegions = []
-    sampleScores = []
-    for sample in names:
-        a,b=getNuclRatio(sampleSet[sample], correlations)
-        sampleScores.append(a)
-        selectedRegions.append(b)
-    return sampleScores, selectedRegions
+def get_nucl_ratios(names, sampleSet, correlations):
+    selected_regions = []
+    sample_scores = []
+    for sample_name in names:
+        sample = sampleSet[sample_name]
+        score = sum([val * correlations[i] for i, val in enumerate(sample)])
+        sample_scores.append(score)
+        selected_regions.append(sample)
+    return sample_scores, selected_regions
 
 
 def getBinnedProfiles(trainingSet,binSize=25):
@@ -340,55 +324,36 @@ def main(argv=None):
     reference, series, girls, bads = load_reference_file(argv[2])
 
     # Filter out samples that are missing in either file
-    trainingSet,trainingSetNo = splitByReference(samples,reference)
-    print(trainingSet)
-    print(trainingSetNo)
-    exit()
-    covs=[coverages[x] for x in trainingSet]
+    training_set, training_set_no = split_by_reference(samples, reference)
+    covs = [coverages[x] for x in training_set]
 
     # Match nucleosome profiles with reference values
-    yVals=[reference[x] for x in trainingSet]
+    yVals = [reference[x] for x in training_set]
 
     # Obtain the nucleosome correlation profile over the reference samples
-    correlations = getCorrelationProfile(samples,reference,trainingSet,yVals)
-    #print correlations
+    correlations = get_correlation_profile(samples, training_set, yVals)
 
-    smoothedCorrelations=[numpy.mean(correlations[max(i-4,0):i+5]) for i in range(len(correlations))]
+    smoothedCorrelations = [np.mean(correlations[max(i - 4, 0): i + 5]) for i in range(len(correlations))]
     #correlations=smoothedCorrelations
 
     # Obtain predictive values
-    # sampleScores contains 1 value per sample (correlation weighted sum of read data)
-    # selectedRegions returns binned values
-    sampleScores,selectedRegions=getNuclRatios(trainingSet,samples,correlations)
-    profiles=selectedRegions
-    #for i,val in enumerate(sampleScores):
-    #	if val > 0.0725:
-    #		print i,trainingSet[i],val
+    # sample_scores contains 1 value per sample (correlation weighted sum of read data)
+    # selected_regions returns binned values
+    sample_scores, profiles = get_nucl_ratios(training_set, samples, correlations)
 
-    # Extensive testing procedures
-    #getBinnedProfiles(selectedRegions)
-    #binSizeScores=[]
-    #for binSize in range(5,25):
-    #	print binSize
-    #	scored=leaveSomeOut(getBinnedProfiles(selectedRegions,binSize),yVals,10)
-    #	binSizeScores.append([scored[0]*scored[1],binSize])
-        #print binSize,scored[0]*scored[1]
-    #binSizeScores.sort()
-    #print "Optimal bin size:",binSizeScores[0]
-    #bestBinSize=binSizeScores[0][1]
-    #selectedRegions=getBinnedProfiles(selectedRegions,bestBinSize)
-    selectedRegions=getAreaScores(selectedRegions)
+    selected_regions = getAreaScores(profiles)
+    exit()
 
     # Fit our models to the data
-    polyFit = trainPolyFit(sampleScores,yVals)
-    linearModel = trainLinearModel(selectedRegions,yVals)
+    polyFit = trainPolyFit(sample_scores,yVals)
+    linearModel = trainLinearModel(selected_regions,yVals)
 
     # Test our fit
-    trPolyFit = testPolyFit(sampleScores,yVals,polyFit,"Train")
-    trLinearModel = testLinearModel(selectedRegions,yVals,linearModel,"Train")
+    trPolyFit = testPolyFit(sample_scores,yVals,polyFit,"Train")
+    trLinearModel = testLinearModel(selected_regions,yVals,linearModel,"Train")
 
     fittedVals=[0]*len(yVals)
-    for i,val in enumerate(sampleScores):
+    for i,val in enumerate(sample_scores):
         #print i,val,yVals[i],val*polyFit[0]+polyFit[1]
         fittedVals[i]=val*polyFit[0]+polyFit[1]
     print(' '.join([str(x) for x in polyFit]))
@@ -431,9 +396,9 @@ def main(argv=None):
         #print recolor
 
         # Obtain predictive values
-        # sampleScores contains 1 value per sample (correlation weighted sum of read data)
-        # selectedRegions returns binned values
-        newSampleScores,newSelectedRegions=getNuclRatios(testSet,newSamples,correlations)
+        # sample_scores contains 1 value per sample (correlation weighted sum of read data)
+        # selected_regions returns binned values
+        newSampleScores,newSelectedRegions=get_nucl_ratios(testSet, newSamples, correlations)
         newProfiles=newSelectedRegions
 
         #newSelectedRegions=getBinnedProfiles(newSelectedRegions,bestBinSize)
@@ -445,11 +410,11 @@ def main(argv=None):
         plotScatter(trPolyFit,yVals,tePolyFit,newYVals,argv[3]+".polyfit",'Nucleosome based prediction',recolor)
         plotScatter(trLinearModel,yVals,teLinearModel,newYVals,argv[3]+".linearmodel",'linearmodel',recolor)
 
-        #print sampleScores,yVals,newSampleScores,newYVals
-        plotScatter(sampleScores,yVals,newSampleScores,newYVals,argv[3]+".direct",'direct',recolor)
+        #print sample_scores,yVals,newSampleScores,newYVals
+        plotScatter(sample_scores,yVals,newSampleScores,newYVals,argv[3]+".direct",'direct',recolor)
 
 
-        plotScatter(sampleScores,covs,newSampleScores,newCovs,argv[3]+".cov",'coverages',recolor)
+        plotScatter(sample_scores,covs,newSampleScores,newCovs,argv[3]+".cov",'coverages',recolor)
 
         plotProfiles(profiles,newProfiles,argv[3],correlations)
 
@@ -472,17 +437,17 @@ def main(argv=None):
         testPolyFit([newSampleScores[x] for x in recolor],[newYVals[x] for x in recolor],polyFit,"recolor")
         #testLinearModel([newSelectedRegions[x] for x in recolor],[newYVals[x] for x in recolor],linearModel,"recolor")
         plt.figure()
-        sampleScoresXX,selectedRegionsXX = getNuclRatios(trainingSet,samples,correlations)
-        newSampleScoresXX,newSelectedRegionsXX = getNuclRatios(testSetNo,newSamples,correlations)
+        sampleScoresXX,selectedRegionsXX = get_nucl_ratios(training_set, samples, correlations)
+        newSampleScoresXX,newSelectedRegionsXX = get_nucl_ratios(testSetNo, newSamples, correlations)
 
-        #print testPolyFit(sampleScores),testPolyFit(sampleScoresXX),testPolyFit(newSampleScores),testPolyFit(newSampleScoresXX)
+        #print testPolyFit(sample_scores),testPolyFit(sampleScoresXX),testPolyFit(newSampleScores),testPolyFit(newSampleScoresXX)
 
-        sampleScoresFit	=	[polyFit[0]*val+polyFit[1] for val in sampleScores]
+        sampleScoresFit	=	[polyFit[0]*val+polyFit[1] for val in sample_scores]
         sampleScoresXXFit	=	[polyFit[0]*val+polyFit[1] for val in sampleScoresXX]
         newSampleScoresFit	=	[polyFit[0]*val+polyFit[1] for val in newSampleScores]
         newSampleScoresXXFit	=	[polyFit[0]*val+polyFit[1] for val in newSampleScoresXX]
 
-        #plt.boxplot([sampleScores,sampleScoresXX,newSampleScores,newSampleScoresXX])#,newPredictedNoRef])
+        #plt.boxplot([sample_scores,sampleScoresXX,newSampleScores,newSampleScoresXX])#,newPredictedNoRef])
         plt.boxplot([sampleScoresFit,sampleScoresXXFit,newSampleScoresFit,newSampleScoresXXFit])#,newPredictedNoRef])
         plt.title("Boxplots for Regressor Fetal Fraction Outputs")
         plt.ylabel("FF score using Nucleosomes")
