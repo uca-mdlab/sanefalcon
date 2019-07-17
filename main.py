@@ -39,8 +39,8 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description='Launch everything',
                                      formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('-t', dest='training', action='store_true')
-    parser.add_argument('-c', '--conffile', nargs='?', type=str, default="./sanefalcon.conf",
+    parser.add_argument('-t', dest='training', action='store_true', help='training phase')
+    parser.add_argument('-c', dest='conffile', nargs='?', type=str, default="./sanefalcon.conf",
                         help='path of the configuration file')
 
     args = parser.parse_args()
