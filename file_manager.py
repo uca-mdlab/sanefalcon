@@ -95,7 +95,7 @@ class FileManager:
         logger.info("Batches created with symlinks")
 
         logger.info('Preparing train folder: prepare_samples...')
-        rspfiles = prepare_samples(self.trainfolder, self.rspfolder, self.samtools)
+        rspfiles = prepare_samples(self.datafolder, self.rspfolder, self.samtools)
         for letter, list_of_fnames in batches.items():
             bam_names = [os.path.basename(f) for f in list_of_fnames]
             for bam in bam_names:
