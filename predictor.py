@@ -36,54 +36,59 @@ import pickle
 ignoredSeries = []  # 'serie23_140707','serie12_140428']
 
 
-def loadNuclFile(nuclFile):
-    samples=dict()
-    coverages=dict()
-    with open(nuclFile) as sampleFile:
-        for line in sampleFile:
-            splitLine=line.strip().split(",")
-            if len(splitLine)<3:
-                continue
-            sampleName = splitLine[0].split("/")[-1]
-            # sampleName=splitLine[0].split("/")[-1].split(".")[0].split('-')[-1] ## old version
-            # values=[float(x) for x in splitLine[int(sys.argv[6]):int(sys.argv[7])]] ## old version
-            values = [float(x) for x in splitLine[1:]]
-            valSum=sum(values)
-            samples[sampleName]=[x/valSum for x in values]
-            coverages[sampleName]=valSum
-    return samples,coverages
+def load_nucleosome_file(fname):
+    samples = {}
+    coverages = {}
+    with open(fname) as in_:
+        for sample_line in in_:
+            arr = sample_line.split(',')
+            values = [float(x) for x in arr[1:]]
+            sum_values = sum(values)
+            samples[arr[0]] = [x / sum_values for x in values]
+            coverages[arr[0]] = sum_values
+    return samples, coverages
 
 
-def loadRefFile(refFile):
+# def loadNuclFile(nuclFile):
+#     samples = dict()
+#     coverages = dict()
+#     with open(nuclFile) as sampleFile:
+#         for line in sampleFile:
+#             splitLine=line.strip().split(",")
+#             if len(splitLine)<3:
+#                 continue
+#             sampleName = splitLine[0].split("/")[-1]
+#             # sampleName=splitLine[0].split("/")[-1].split(".")[0].split('-')[-1] ## old version
+#             # values=[float(x) for x in splitLine[int(sys.argv[6]):int(sys.argv[7])]] ## old version
+#             values = [float(x) for x in splitLine[1:]]
+#             valSum=sum(values)
+#             samples[sampleName]=[x/valSum for x in values]
+#             coverages[sampleName]=valSum
+#     return samples,coverages
+
+
+def load_reference_file(fname):
     series = dict()
     reference = dict()
     girls = dict()
     bads = dict()
-    with open(refFile) as referenceFile:
-        for line in referenceFile:
-            splitLine = line.strip().split("\t")
+    with open(fname) as in_:
+        for line in in_:
+            samplename, ffref, gender = line.strip().split("\t")
 
-            # splitLine[0] = splitLine[0].split('-')[-1] ## ligne originale ne pas supprimer
-            splitLine[0] = splitLine[0]
-
-            if len(splitLine) < 3:
+            if float(ffref) > 30 or float(ffref) < 3:
                 continue
-
-            if float(splitLine[-2]) > 30 or float(splitLine[-2]) < 3:
-                #print "Removing:", splitLine
+            if samplename in ignoredSeries:
                 continue
-            if splitLine[0] in ignoredSeries:
-                #print splitLine
-                continue
-            if splitLine[2] == 'Male':
-                reference[splitLine[0]] = float(splitLine[1])
-                series[splitLine[0]] = "Training"  # splitLine[-1]
-            elif splitLine[2] == 'Female':
-                girls[splitLine[0]] = float(splitLine[1])
-            elif splitLine[2] == 'BAD':
-                bads[splitLine[0]] = float(splitLine[1])
+            if gender == 'Male':
+                reference[samplename] = float(ffref)
+                series[samplename] = "Training"  # splitLine[-1]
+            elif gender == 'Female':
+                girls[samplename] = float(ffref)
+            elif gender == 'BAD':
+                bads[samplename] = float(ffref)
             else:
-                print(splitLine[2])
+                print(ffref)
     return reference, series, girls, bads
 
 
@@ -346,13 +351,12 @@ def main(argv=None):
         argv = sys.argv
 
     print("- Training stage:")
-
     # Load sample data
-    samples,coverages = loadNuclFile(argv[1])
+    samples, coverages = load_nucleosome_file(argv[1])
 
     # Load known answers for our data
-    reference,series,girls,bads = loadRefFile(argv[2])
-
+    reference,series,girls,bads = load_reference_file(argv[2])
+    exit()
     # Filter out samples that are missing in either file
     trainingSet,trainingSetNo = splitByReference(samples,reference)
     covs=[coverages[x] for x in trainingSet]
