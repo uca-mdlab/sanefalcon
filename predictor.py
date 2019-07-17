@@ -25,7 +25,7 @@ import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 from scipy.stats.stats import pearsonr
 from scipy.stats.stats import spearmanr
-import numpy
+import numpy as np
 import random
 import pickle
 
@@ -42,29 +42,11 @@ def load_nucleosome_file(fname):
     with open(fname) as in_:
         for sample_line in in_:
             arr = sample_line.split(',')
-            values = [float(x) for x in arr[1:]]
-            sum_values = sum(values)
-            samples[arr[0]] = [x / sum_values for x in values]
+            values = np.array([float(x) for x in arr[1:]])
+            sum_values = np.sum(values)
+            samples[arr[0]] = np.divide(values, sum_values)
             coverages[arr[0]] = sum_values
     return samples, coverages
-
-
-# def loadNuclFile(nuclFile):
-#     samples = dict()
-#     coverages = dict()
-#     with open(nuclFile) as sampleFile:
-#         for line in sampleFile:
-#             splitLine=line.strip().split(",")
-#             if len(splitLine)<3:
-#                 continue
-#             sampleName = splitLine[0].split("/")[-1]
-#             # sampleName=splitLine[0].split("/")[-1].split(".")[0].split('-')[-1] ## old version
-#             # values=[float(x) for x in splitLine[int(sys.argv[6]):int(sys.argv[7])]] ## old version
-#             values = [float(x) for x in splitLine[1:]]
-#             valSum=sum(values)
-#             samples[sampleName]=[x/valSum for x in values]
-#             coverages[sampleName]=valSum
-#     return samples,coverages
 
 
 def load_reference_file(fname):
@@ -355,10 +337,13 @@ def main(argv=None):
     samples, coverages = load_nucleosome_file(argv[1])
 
     # Load known answers for our data
-    reference,series,girls,bads = load_reference_file(argv[2])
-    exit()
+    reference, series, girls, bads = load_reference_file(argv[2])
+
     # Filter out samples that are missing in either file
     trainingSet,trainingSetNo = splitByReference(samples,reference)
+    print(trainingSet)
+    print(trainingSetNo)
+    exit()
     covs=[coverages[x] for x in trainingSet]
 
     # Match nucleosome profiles with reference values
