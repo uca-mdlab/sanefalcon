@@ -3,6 +3,7 @@ import re
 import csv
 from collections import Counter, defaultdict
 import logging
+import matplotlib.pyplot as plt
 
 logging.basicConfig(format='%(asctime)s - %(levelname)s: %(message)s',
                     filename='sanefalcon.log', filemode='w', level=logging.DEBUG)
@@ -100,7 +101,6 @@ def save_streams_to_file(fm, outfile):
 
 
 def plot_streams(streams, figname):
-    import matplotlib.pyplot as plt
     x = range(294)  # 147 * 2
     for sample, stream in streams.items():
         y = stream
