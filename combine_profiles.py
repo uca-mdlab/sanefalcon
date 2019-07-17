@@ -95,17 +95,19 @@ def save_streams_to_file(fm, outfile):
     with open(outfile, 'w') as out:
         for sample, stream in streams.items():
             out.write('{},{}\n'.format(sample, ','.join(map(str, stream))))
+    plot_streams(streams, outfile + '.png')
     return outfile
 
 
-def plot_streams(streams):
+def plot_streams(streams, figname):
     import matplotlib.pyplot as plt
     x = range(294)  # 147 * 2
     for sample, stream in streams.items():
         y = stream
         plt.plot(x, y, label=sample)
     plt.legend(loc='upper center')
-    plt.show()
+    plt.savefig(figname)
+    # plt.show()
 
 
 if __name__ == '__main__':
