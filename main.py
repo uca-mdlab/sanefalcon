@@ -39,9 +39,12 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description='Launch everything',
                                      formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parser.add_argument('-t', dest='training', action='store_true')
     parser.add_argument('-c', '--conffile', nargs='?', type=str, default="./sanefalcon.conf",
                         help='path of the configuration file')
+
     args = parser.parse_args()
+    is_training = args.training
 
     config = configparser.ConfigParser()
     config.read(args.conffile)
@@ -49,6 +52,7 @@ if __name__ == "__main__":
     fm = FileManager(config)
 
     logger.info("Starting sanefalcon with configuration file {}".format(args.conffile))
+    logger.info("Training = {}".format(is_training))
 
     fm.prepare_train_folder()
     logger.info("prepare_folders ok")
