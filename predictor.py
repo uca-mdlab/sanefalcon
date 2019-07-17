@@ -28,7 +28,7 @@ from scipy.stats.stats import spearmanr
 import numpy as np
 import random
 import pickle
-
+import sklearn.linear_model as sklm
 
 # ---------------------------------------------------------------------------- #
 # Data loading functions
@@ -128,7 +128,7 @@ def getBinnedProfiles(trainingSet,binSize=25):
     return binnedSamples
 
 
-def getAreaScores(samples):
+def get_area_scores(samples):
     scores = []
     for thisSample in samples:
         neg = sum(thisSample[30:60])  # + sum(thisSample[225:250])
@@ -140,42 +140,40 @@ def getAreaScores(samples):
 # ---------------------------------------------------------------------------- #
 # Data processing functions
 # ---------------------------------------------------------------------------- #
-def getErrorRate(prediction, reference):
+def get_error_rate(prediction, reference):
     errors = []
-    for i,val in enumerate(prediction):
+    for i, val in enumerate(prediction):
         error = (val - reference[i])
         errors.append(abs(error))
-    return numpy.median(errors)
+    return np.median(errors)
 
 
-def testPolyFit(samples,reference,p,prefix):
+def train_polyfit(samples, reference):
+    return np.polyfit(samples, reference, 1)
+
+
+def train_linear_model(samples, reference):
+    clf = sklm.LinearRegression()  # .Ridge(alpha = .3)#
+    clf.fit(samples, reference)
+    return clf
+
+
+def test_polyfit(samples, reference, p, prefix):
     fitSamples=[]
     for i, val in enumerate(samples):
         fitSamples.append(p[0] * val+p[1])
-    print(prefix + " polyFit: Pearson:", pearsonr(fitSamples, reference))
-    print(prefix + " polyFit: errorRate:", getErrorRate(fitSamples, reference))
+    print(prefix + " polyfit: Pearson:", pearsonr(fitSamples, reference))
+    print(prefix + " polyfit: errorRate:", get_error_rate(fitSamples, reference))
     return fitSamples
 
 
-def trainPolyFit(samples,reference):
-    p = numpy.polyfit(samples, reference, 1)
-    return p
-
-
-def testLinearModel(samples,reference,clf,prefix):
-    predicted=clf.predict(samples)
-    print (prefix + " linearModel: Pearson:", pearsonr(predicted,reference))
-    print (prefix + (" linearModel: Residual sum of squares: %.2f" % numpy.mean((predicted - reference) ** 2)))
-    print (prefix + (' linearModel: Variance score: %.2f' % clf.score(samples, reference)))
-    print (prefix+" linearModel: errorRate:", getErrorRate(predicted,reference))
+def test_linear_model(samples, reference, clf, prefix):
+    predicted = clf.predict(samples)
+    print(prefix + " linearModel: Pearson:", pearsonr(predicted,reference))
+    print(prefix + (" linearModel: Residual sum of squares: %.2f" % np.mean((predicted - reference) ** 2)))
+    print(prefix + (' linearModel: Variance score: %.2f' % clf.score(samples, reference)))
+    print(prefix + " linearModel: errorRate:", get_error_rate(predicted, reference))
     return predicted
-
-
-def trainLinearModel(samples, reference):
-    from sklearn import linear_model
-    clf = linear_model.LinearRegression()  # .Ridge(alpha = .3)#
-    clf.fit(samples, reference)
-    return clf
 
 
 def leaveSomeOut(samples, reference, leaveOutSize):
@@ -191,8 +189,8 @@ def leaveSomeOut(samples, reference, leaveOutSize):
         tempTeSamp = samples[i * leaveOutSize:i * leaveOutSize + leaveOutSize]
         tempTeRef = reference[i * leaveOutSize:i * leaveOutSize + leaveOutSize]
 
-        tempModel = trainLinearModel(tempTrSamp, tempTrRef)
-        errorRates.append(getErrorRate(tempModel.predict(tempTeSamp),tempTeRef))
+        tempModel = train_linear_model(tempTrSamp, tempTrRef)
+        errorRates.append(get_error_rate(tempModel.predict(tempTeSamp), tempTeRef))
 
     return numpy.mean(errorRates),numpy.std(errorRates)
 
@@ -341,34 +339,32 @@ def main(argv=None):
     # selected_regions returns binned values
     sample_scores, profiles = get_nucl_ratios(training_set, samples, correlations)
 
-    selected_regions = getAreaScores(profiles)
-    exit()
+    selected_regions = get_area_scores(profiles)
 
     # Fit our models to the data
-    polyFit = trainPolyFit(sample_scores,yVals)
-    linearModel = trainLinearModel(selected_regions,yVals)
+    poly_fit = train_polyfit(sample_scores, yVals)
+    linear_model = train_linear_model(selected_regions, yVals)
 
     # Test our fit
-    trPolyFit = testPolyFit(sample_scores,yVals,polyFit,"Train")
-    trLinearModel = testLinearModel(selected_regions,yVals,linearModel,"Train")
+    tr_polyfit = test_polyfit(sample_scores, yVals, poly_fit, "Train")
+    tr_linearmodel = test_linear_model(selected_regions, yVals, linear_model, "Train")
 
     fittedVals=[0]*len(yVals)
-    for i,val in enumerate(sample_scores):
-        #print i,val,yVals[i],val*polyFit[0]+polyFit[1]
-        fittedVals[i]=val*polyFit[0]+polyFit[1]
-    print(' '.join([str(x) for x in polyFit]))
+    for i, val in enumerate(sample_scores):
+        #print i,val,yVals[i],val*poly_fit[0]+poly_fit[1]
+        fittedVals[i] = val * poly_fit[0] + poly_fit[1]
+    print(' '.join([str(x) for x in poly_fit]))
 
     plt.scatter(fittedVals,yVals)
     plt.xlim([0, 25])
     plt.savefig(sys.argv[3]+'.direct2.pdf', dpi=100)
-
 
     #quit()
 
     with open(sys.argv[3]+'.model', 'w') as modelFile:
         modelFile.write(' '.join([str(x) for x in correlations]))
         modelFile.write('\n')
-        modelFile.write(' '.join([str(x) for x in polyFit]))
+        modelFile.write(' '.join([str(x) for x in poly_fit]))
 
     # If we were blessed with a test set then use it
     if len(argv) >= 5:
@@ -402,13 +398,13 @@ def main(argv=None):
         newProfiles=newSelectedRegions
 
         #newSelectedRegions=getBinnedProfiles(newSelectedRegions,bestBinSize)
-        newSelectedRegions=getAreaScores(newSelectedRegions)
+        newSelectedRegions=get_area_scores(newSelectedRegions)
 
         # Test our previously trained fits
-        tePolyFit     = testPolyFit(newSampleScores,newYVals,polyFit,"Test")
-        teLinearModel = testLinearModel(newSelectedRegions,newYVals,linearModel,"Test")
-        plotScatter(trPolyFit,yVals,tePolyFit,newYVals,argv[3]+".polyfit",'Nucleosome based prediction',recolor)
-        plotScatter(trLinearModel,yVals,teLinearModel,newYVals,argv[3]+".linearmodel",'linearmodel',recolor)
+        tePolyFit     = test_polyfit(newSampleScores, newYVals, poly_fit, "Test")
+        teLinearModel = test_linear_model(newSelectedRegions, newYVals, linear_model, "Test")
+        plotScatter(tr_polyfit,yVals,tePolyFit,newYVals,argv[3]+".polyfit",'Nucleosome based prediction',recolor)
+        plotScatter(tr_linearmodel,yVals,teLinearModel,newYVals,argv[3]+".linearmodel",'linearmodel',recolor)
 
         #print sample_scores,yVals,newSampleScores,newYVals
         plotScatter(sample_scores,yVals,newSampleScores,newYVals,argv[3]+".direct",'direct',recolor)
@@ -434,18 +430,18 @@ def main(argv=None):
         print (numpy.mean(errorValues),numpy.std(errorValues))
         print (numpy.mean([abs(x) for x in errorValues]),numpy.std([abs(x) for x in errorValues]))
 
-        testPolyFit([newSampleScores[x] for x in recolor],[newYVals[x] for x in recolor],polyFit,"recolor")
-        #testLinearModel([newSelectedRegions[x] for x in recolor],[newYVals[x] for x in recolor],linearModel,"recolor")
+        test_polyfit([newSampleScores[x] for x in recolor], [newYVals[x] for x in recolor], poly_fit, "recolor")
+        #testLinearModel([newSelectedRegions[x] for x in recolor],[newYVals[x] for x in recolor],linear_model,"recolor")
         plt.figure()
         sampleScoresXX,selectedRegionsXX = get_nucl_ratios(training_set, samples, correlations)
         newSampleScoresXX,newSelectedRegionsXX = get_nucl_ratios(testSetNo, newSamples, correlations)
 
         #print testPolyFit(sample_scores),testPolyFit(sampleScoresXX),testPolyFit(newSampleScores),testPolyFit(newSampleScoresXX)
 
-        sampleScoresFit	=	[polyFit[0]*val+polyFit[1] for val in sample_scores]
-        sampleScoresXXFit	=	[polyFit[0]*val+polyFit[1] for val in sampleScoresXX]
-        newSampleScoresFit	=	[polyFit[0]*val+polyFit[1] for val in newSampleScores]
-        newSampleScoresXXFit	=	[polyFit[0]*val+polyFit[1] for val in newSampleScoresXX]
+        sampleScoresFit	=	[poly_fit[0]*val+poly_fit[1] for val in sample_scores]
+        sampleScoresXXFit	=	[poly_fit[0]*val+poly_fit[1] for val in sampleScoresXX]
+        newSampleScoresFit	=	[poly_fit[0]*val+poly_fit[1] for val in newSampleScores]
+        newSampleScoresXXFit	=	[poly_fit[0]*val+poly_fit[1] for val in newSampleScoresXX]
 
         #plt.boxplot([sample_scores,sampleScoresXX,newSampleScores,newSampleScoresXX])#,newPredictedNoRef])
         plt.boxplot([sampleScoresFit,sampleScoresXXFit,newSampleScoresFit,newSampleScoresXXFit])#,newPredictedNoRef])
