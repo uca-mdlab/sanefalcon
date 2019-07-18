@@ -13,3 +13,7 @@ my.conf
 .coverage
 *.bai
 .pytest*
+list_training.txt
+local.conf
+*.ff
+
