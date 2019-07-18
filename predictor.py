@@ -192,7 +192,7 @@ def leaveSomeOut(samples, reference, leaveOutSize):
         tempModel = train_linear_model(tempTrSamp, tempTrRef)
         errorRates.append(get_error_rate(tempModel.predict(tempTeSamp), tempTeRef))
 
-    return numpy.mean(errorRates),numpy.std(errorRates)
+    return np.mean(errorRates), np.std(errorRates)
 
 
 # ---------------------------------------------------------------------------- #
