@@ -60,10 +60,10 @@ if __name__ == "__main__":
     merge_all(fm)
     logger.info("merge_all ok")
 
-    create_nucleosome_files(fm, training=True)
+    create_nucleosome_files(fm, training=is_training)
     logger.info("nucleosome ok")
 
-    run_profileParallel(fm, training=True)  # training: fm.anti_file_template
+    run_profileParallel(fm, training=is_training)  # training: fm.anti_file_template
     logger.info("run profile parallel ok")
 
     save_streams_to_file(fm, fm.trainnuclfile)
