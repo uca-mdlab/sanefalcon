@@ -21,7 +21,7 @@ class Tracker:
             pattern = re.compile(r'\d{1,2}$')
             chrom = re.search(pattern, f).group()
             outfile = outfilestub + '.{}'.format(chrom)
-            runs.append((folder, chrom, f, os.path.join(folder, outfile)))
+            runs.append((chrom, f, os.path.join(folder, outfile)))
 
         self.nucleosome_tracks[folder] = lp(runs, nd.create_nucleosome_file)
 

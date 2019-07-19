@@ -73,7 +73,7 @@ def flush(area, endPoint, allNucl):
     return allNucl
 
 
-def create_nucleosome_file(folder, chrom, mergefile, outfile):
+def create_nucleosome_file(chrom, mergefile, outfile):
     if os.path.isfile(outfile):
         logger.info("Nucleosome file for {} = {} already there. Skipping..".format(mergefile, outfile))
         return outfile
