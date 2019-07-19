@@ -1,12 +1,11 @@
 # This is the replacement for the following:
-# merge.sh, mergeSubs.sh, mergeAntiSub.sh
+# merger.sh, mergeSubs.sh, mergeAntiSub.sh
 
 import configparser
-import concurrent.futures
 import os
 import logging
 import re
-import collections
+from collections import defaultdict
 from file_manager import FileManager
 from multi.multithread import launch_multithreads as lt
 from .utils import Utils
@@ -20,38 +19,40 @@ def _merge(files, subdir, chrom):
     logger.debug("merging chrom {} start files in {}".format(chrom, subdir))
     outfile = os.path.join(subdir, "merge.{}".format(chrom))
     if os.path.isfile(outfile):
-        logger.debug("merge. file {} already there. Skipping...".format(outfile))
-        return
-    data = Utils.read_all_files(files)
-    logger.debug("merge into {}".format(outfile))
-    Utils.sort_and_write(data, outfile)
+        logger.debug("File {} already there. Skipping...".format(outfile))
+    else:
+        data = Utils.read_all_files(files)
+        logger.debug("merge into {}".format(outfile))
+        Utils.sort_and_write(data, outfile)
+    return subdir, outfile
 
 
 def merge(files_to_merge):
     runs = Utils.prepare_jobs_arguments(files_to_merge)
     logger.debug('Submitting {} runs to merge'.format(len(runs)))
-    lt(runs, _merge)
+    list_of_tup = lt(runs, _merge)
+    merge_files = defaultdict(list)
+    for subdir, mergefile in list_of_tup:
+        merge_files[subdir].append(mergefile)
+    return merge_files
 
 
-def _merge_subs(chrom, files, trainfolder):
+def _merge_subs(outfile, files):
     # print("{} launched on {} ".format(threading.current_thread(), chrom))
-    logger.debug("merge subs chrom {}".format(chrom))
-    outfile = os.path.join(trainfolder, "merge.{}".format(chrom))
+    logger.debug("merge subs file {}".format(outfile))
     if os.path.isfile(outfile):
         logger.debug("merge_subs. file {} already there. Skipping...".format(outfile))
-        return
-    data = read_all_files(files)
-    sort_and_write(data, outfile)
-    # print("{} completed on {}".format(threading.current_thread(), chrom))
+    else:
+        data = Utils.read_all_files(files)
+        Utils.sort_and_write(data, outfile)
+    return outfile
 
 
-def merge_subs(merge_subs_files, trainfolder):
-    tmp = collections.defaultdict(list)
-    for f in merge_subs_files:
-        tmp[f.split('.')[1]].append(f)  # grep .chrom_number
-    runs = [(k, v, trainfolder) for k, v in tmp.items()]
+def merge_subs(merged, trainfolder):
+    runs = [(os.path.join(trainfolder, fname), list_) for fname, list_ in merged.items()]
     logger.debug('Submitting {} runs to merge_subs'.format(len(runs)))
-    lt(runs, _merge_subs)
+    list_of_merge_files = lt(runs, _merge_subs)
+    return list_of_merge_files
 
 
 def _merge_anti_subs(folder, chrom, files):
@@ -61,20 +62,20 @@ def _merge_anti_subs(folder, chrom, files):
     if os.path.isfile(outfile):
         logger.debug("merge_anti_subs. file {} already there. Skipping...".format(outfile))
         return
-    data = read_all_files(files)
-    sort_and_write(data, outfile)
+    data = Utils.read_all_files(files)
+    Utils.sort_and_write(data, outfile)
     # print("{} completed on {}".format(threading.current_thread(), chrom))
 
 
 def merge_anti_subs(merge_subs_files, trainfolder):
     """
-    input: [sanefalcontrain/b/merge.chr1, sanefalcontrain/c/merge.chr1, ...]
+    input: [sanefalcontrain/b/merger.chr1, sanefalcontrain/c/merger.chr1, ...]
     output: sanefalcontrain/a/anti.chr1
     :param trainfolder:
     :return:
     """
     subfolders = set()
-    tmp = collections.defaultdict(list)
+    tmp = defaultdict(list)
     for f in merge_subs_files:
         subfolders.add(os.path.join(trainfolder, os.path.basename(os.path.dirname(f))))
         tmp[f.split('.')[1]].append(f)
