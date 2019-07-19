@@ -8,7 +8,7 @@ from collections import defaultdict
 from manager.file_manager import FileManager
 from manager.utils import Utils
 from manager.rsp import RspBuilder
-from merger.merge import merge, merge_subs
+from merger.merge import merge, merge_subs, merge_anti_subs
 
 logging.basicConfig(format='%(asctime)s - %(name)-21s - %(levelname)-8s: %(message)s',
                     filename='sanefalcon.log', filemode='w', level=logging.DEBUG)
@@ -63,10 +63,37 @@ def launch_merge_subs(mergeddic, trainfolder):
 
 
 def launch_merge_anti_subs(mergeddic):
-    for subdir, files in mergeddic.items():
-        print(subdir, files)
+    anti = defaultdict(list)
+    anti.update((k, []) for k in mergeddic.keys())
+    for path, pathfiles in mergeddic.items():
+        for antipath in anti.keys():
+            if antipath is not path:
+                anti[antipath].extend(pathfiles)
+
+    antisubs = []
+    for path, files in anti.items():
+        print(path)
+        for chrom in range(1, 23):
+            pattern = re.compile(r'\.{}$'.format(chrom))
+            per_chrom = [f for f in files if re.search(pattern, f)]
+            antisubs.append((path, chrom, per_chrom))
+
+    anti_sub_files = merge_anti_subs(antisubs)
+    return anti_sub_files
 
 
+def prepare_and_merge(fm, rsb, config):
+    bamlist = Utils.readfile(config['training']['bamlist'])
+    batchsize = int(config['training']['batchsize'])
+    batches = fm.prepare_train_folder(bamlist, batchsize)
+    logger.info('Batches prepared')
+    rspfiles = rsb.prepare_samples(f.datafolder, f.rspfolder)
+    logger.info('Samples prepared')
+    mapping = get_rsp_batches_mapping(batches, rspfiles)
+    merged = launch_merge(mapping)
+    merged_subs = launch_merge_subs(merged, f.trainfolder)
+    merged_anti = launch_merge_anti_subs(merged)
+    logger.info('Merge terminated')
 
 
 if __name__ == '__main__':
@@ -76,13 +103,4 @@ if __name__ == '__main__':
     f = FileManager(config)
     f.check_paths()
     rs = RspBuilder(config)
-    # print(f.get_data())
-    # print(f.get_data(mask='.bam$'))
-    bamlist = Utils.readfile(config['training']['bamlist'])
-    batchsize = int(config['training']['batchsize'])
-    batches = f.prepare_train_folder(bamlist, batchsize)
-    rspfiles = rs.prepare_samples(f.datafolder, f.rspfolder)
-    mapping = get_rsp_batches_mapping(batches, rspfiles)
-    merged = launch_merge(mapping)
-    merged_subs = launch_merge_subs(merged, f.trainfolder)
-    merged_anti = launch_merge_anti_subs(merged)
+    prepare_and_merge(f, rs, config)

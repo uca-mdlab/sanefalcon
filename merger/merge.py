@@ -1,16 +1,10 @@
-# This is the replacement for the following:
-# merger.sh, mergeSubs.sh, mergeAntiSub.sh
-
-import configparser
 import os
 import logging
-import re
 from collections import defaultdict
-from file_manager import FileManager
 from multi.multithread import launch_multithreads as lt
 from .utils import Utils
 
-logger = logging.getLogger("merge")
+logger = logging.getLogger(__name__)
 
 chromosomes = range(1, 23)
 
@@ -61,57 +55,15 @@ def _merge_anti_subs(folder, chrom, files):
     outfile = os.path.join(folder, "anti.{}".format(chrom))
     if os.path.isfile(outfile):
         logger.debug("merge_anti_subs. file {} already there. Skipping...".format(outfile))
-        return
-    data = Utils.read_all_files(files)
-    Utils.sort_and_write(data, outfile)
-    # print("{} completed on {}".format(threading.current_thread(), chrom))
+    else:
+        data = Utils.read_all_files(files)
+        Utils.sort_and_write(data, outfile)
+    return outfile
 
 
-def merge_anti_subs(merge_subs_files, trainfolder):
-    """
-    input: [sanefalcontrain/b/merger.chr1, sanefalcontrain/c/merger.chr1, ...]
-    output: sanefalcontrain/a/anti.chr1
-    :param trainfolder:
-    :return:
-    """
-    subfolders = set()
-    tmp = defaultdict(list)
-    for f in merge_subs_files:
-        subfolders.add(os.path.join(trainfolder, os.path.basename(os.path.dirname(f))))
-        tmp[f.split('.')[1]].append(f)
-
-    runs = []
-    for folder in list(subfolders):
-        pattern = re.compile('(?!{})'.format(folder))  # matching "not folder"
-        reduced_tmp = {k: list(filter(lambda x: re.match(pattern, x), v)) for k, v in tmp.items()}
-        run = [(folder, k, v) for k, v in reduced_tmp.items()]
-        runs.extend(run)
-
+def merge_anti_subs(antisubs):
+    runs = [(path, chrom, files) for path, chrom, files in antisubs]
     logger.debug('Submitting {} runs to merge_anti_subs'.format(len(runs)))
-    lt(runs, _merge_anti_subs)
+    antisubfiles = lt(runs, _merge_anti_subs)
+    return antisubfiles
 
-
-def merge_all(fm):
-    logger.info("starting merge all")
-    merge_file_list = fm.get_start_files_per_subdir()
-    merge(merge_file_list)
-    logger.debug("merge done")
-    merge_subs_files = fm.find_merge_files_in_subdirectories()
-    merge_subs(merge_subs_files, fm.trainfolder)
-    logger.debug("merge_subs done")
-    merge_anti_subs(merge_subs_files, fm.trainfolder)
-    logger.debug("merge_anti_subs done")
-    logger.info("merging completed")
-
-
-if __name__ == "__main__":
-    conf_file = 'tests/data/test.conf'
-    config = configparser.ConfigParser()
-    config.read(conf_file)
-
-    samtools = config['default']['samtools']
-    datafolder = config['default']['datafolder']
-    trainfolder = config['default']['trainfolder']
-    rspfolder = config['default']['rspfolder']
-    fm = FileManager(config)
-    merge_all(fm)
