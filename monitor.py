@@ -9,6 +9,7 @@ from manager.file_manager import FileManager
 from manager.utils import Utils
 from manager.rsp import RspBuilder
 from merger.merge import merge, merge_subs, merge_anti_subs
+from nucleosome.tracker import Tracker
 
 logging.basicConfig(format='%(asctime)s - %(name)-21s - %(levelname)-8s: %(message)s',
                     filename='sanefalcon.log', filemode='w', level=logging.DEBUG)
@@ -72,7 +73,6 @@ def launch_merge_anti_subs(mergeddic):
 
     antisubs = []
     for path, files in anti.items():
-        print(path)
         for chrom in range(1, 23):
             pattern = re.compile(r'\.{}$'.format(chrom))
             per_chrom = [f for f in files if re.search(pattern, f)]
@@ -96,6 +96,11 @@ def prepare_and_merge(fm, rsb, config):
     logger.info('Merge terminated')
 
 
+def create_nucleosome_profiles(fm, training=True):
+    t = Tracker(fm)
+    t.create_tracks()
+
+
 if __name__ == '__main__':
     config = configparser.ConfigParser()
     config.read('local.conf')
@@ -104,3 +109,4 @@ if __name__ == '__main__':
     f.check_paths()
     rs = RspBuilder(config)
     prepare_and_merge(f, rs, config)
+    create_nucleosome_profiles(f)
