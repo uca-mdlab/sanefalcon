@@ -4,8 +4,6 @@ import string
 from collections import defaultdict
 from .utils import Utils
 
-logging.basicConfig(format='%(asctime)s - %(name)-12s - %(levelname)-8s: %(message)s',
-                    filename='sanefalcon.log', filemode='w', level=logging.DEBUG)
 
 logger = logging.getLogger(__name__)
 
@@ -63,4 +61,3 @@ class FileManager:
                 batches[batch_dir].append(link_name)
         logger.info("Batches created with symlinks")
         return batches
-
