@@ -15,10 +15,11 @@ class FileManager:
         self.trainfolder = config['folders']['train']
         self.profilefolder = config['folders']['profiles']
         self.rspfolder = config['folders']['rsp']
+        self.config = config
 
     def check_paths(self):
         for name, path in self.__dict__.items():
-            if name == 'datafolder':
+            if name in ['datafolder', 'config']:
                 continue
             if not os.path.isdir(path):
                 logger.warning(f"{name} not found. Creating...")
