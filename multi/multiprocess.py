@@ -1,5 +1,8 @@
 import concurrent.futures
 import os
+import logging
+
+logger = logging.getLogger('multiprocess')
 
 MAX_PROCESS_NUMBER = os.cpu_count()
 MAX_JOB_NUMBER = MAX_PROCESS_NUMBER + 1
@@ -21,14 +24,14 @@ def launch_multiprocess(runs, fn):
 
         while runs_left:
             for run in runs_iter:
-                job = executor.submit(fn, run)
+                job = executor.submit(fn, *run)
                 jobs[job] = run
                 if len(jobs) > MAX_JOB_NUMBER:
                    break
 
             for job in concurrent.futures.as_completed(jobs):
-                runs_left -= 1
                 result = job.result()
+                runs_left -= 1
                 run = jobs[job]
                 del jobs[job]
                 done.append(result)
