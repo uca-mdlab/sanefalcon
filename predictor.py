@@ -307,6 +307,59 @@ def plotProfiles(training,testing,outFile,correlations=[]):
     plt.savefig(outFile+".profiles.pdf", dpi=100)
 
 
+def run_model(nucleosome_file, reference_file, outfile):
+    samples, coverages = load_nucleosome_file(nucleosome_file)
+
+    # Load known answers for our data
+    reference, series, girls, bads = load_reference_file(reference_file)
+
+    # Filter out samples that are missing in either file
+    training_set, training_set_no = split_by_reference(samples, reference)
+    covs = [coverages[x] for x in training_set]
+
+    # Match nucleosome profiles with reference values
+    yVals = [reference[x] for x in training_set]
+
+    # Obtain the nucleosome correlation profile over the reference samples
+    correlations = get_correlation_profile(samples, training_set, yVals)
+
+    smoothedCorrelations = [np.mean(correlations[max(i - 4, 0): i + 5]) for i in range(len(correlations))]
+    # correlations=smoothedCorrelations
+
+    # Obtain predictive values
+    # sample_scores contains 1 value per sample (correlation weighted sum of read data)
+    # selected_regions returns binned values
+    sample_scores, profiles = get_nucl_ratios(training_set, samples, correlations)
+
+    selected_regions = get_area_scores(profiles)
+
+    # Fit our models to the data
+    poly_fit = train_polyfit(sample_scores, yVals)
+    linear_model = train_linear_model(selected_regions, yVals)
+
+    # Test our fit
+    tr_polyfit = test_polyfit(sample_scores, yVals, poly_fit, "Train")
+    tr_linearmodel = test_linear_model(selected_regions, yVals, linear_model, "Train")
+
+    fittedVals = [0] * len(yVals)
+    for i, val in enumerate(sample_scores):
+        # print i,val,yVals[i],val*poly_fit[0]+poly_fit[1]
+        fittedVals[i] = val * poly_fit[0] + poly_fit[1]
+    print(' '.join([str(x) for x in poly_fit]))
+
+    plt.scatter(fittedVals, yVals)
+    plt.xlim([0, 25])
+    plt.savefig(outfile + '.direct2.pdf', dpi=100)
+
+    # quit()
+
+    with open(outfile + '.model', 'w') as modelFile:
+        modelFile.write(' '.join([str(x) for x in correlations]))
+        modelFile.write('\n')
+        modelFile.write(' '.join([str(x) for x in poly_fit]))
+
+
+
 # ---------------------------------------------------------------------------- #
 # Main stuff
 # ---------------------------------------------------------------------------- #
