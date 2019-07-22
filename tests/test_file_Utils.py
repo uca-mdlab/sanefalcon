@@ -1,5 +1,5 @@
 import unittest
-from file_manager import Utils
+from manager.utils import Utils
 
 
 class TestFileUtils(unittest.TestCase):

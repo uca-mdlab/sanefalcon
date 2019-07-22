@@ -1,10 +1,2 @@
 tests/data/bam/m0/p0.bam
-tests/data/bam/m0/p1.bam
 tests/data/bam/m1/p2.bam
-tests/data/bam/m1/p3.bam
-tests/data/bam/m2/p4.bam
-tests/data/bam/m3/s0.bam
-tests/data/bam/m3/s1.bam
-tests/data/bam/m3/s2.bam
-tests/data/bam/m4/s3.bam
-tests/data/bam/m4/s4.bam
