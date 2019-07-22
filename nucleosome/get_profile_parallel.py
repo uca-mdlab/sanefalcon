@@ -137,15 +137,15 @@ def process_reverse(peaks, reads, outfile):
     return sumPeak
 
 
-def get_nucl_files_per_subfolder(train_folder, nucl_stub_anti):
-    nucl_files = defaultdict(list)
-    subfolders = [f.path for f in os.scandir(train_folder) if f.is_dir()]
-    for subfolder in subfolders:
-        for root, sub, files in os.walk(subfolder):
-            for f in files:
-                if os.path.isfile(os.path.join(subfolder, f)) and f.startswith(nucl_stub_anti):
-                    nucl_files[subfolder].append(os.path.join(subfolder, f))
-    return nucl_files
+# def get_nucl_files_per_subfolder(train_folder, nucl_stub_anti):
+#     nucl_files = defaultdict(list)
+#     subfolders = [f.path for f in os.scandir(train_folder) if f.is_dir()]
+#     for subfolder in subfolders:
+#         for root, sub, files in os.walk(subfolder):
+#             for f in files:
+#                 if os.path.isfile(os.path.join(subfolder, f)) and f.startswith(nucl_stub_anti):
+#                     nucl_files[subfolder].append(os.path.join(subfolder, f))
+#     return nucl_files
 
 
 # def get_fwd_rev_files_per_subfolder(fm):
@@ -168,35 +168,35 @@ def get_nucl_files_per_subfolder(train_folder, nucl_stub_anti):
 #     return fwd_rev
 
 
-def get_data(fm):
-    """
-    Avoid calling multiple times the getProfileSubmit.sh script, as it loads all the data in memory.
-
-    :param rspfolder:
-    :param outfolder: /tmp/...
-    :return: a dictionary with all the data packed and organized for processing
-    """
-    d = defaultdict(dict)
-    nucl_files = get_nucl_files_per_subfolder(fm.trainfolder, fm.anti_file_template)
-    fwd_rev_files = fm.get_start_files_per_subdir()
-
-    for subdir, dic in fwd_rev_files.items():
-        for c in range(1, 23):
-            fwd_files = dic['fwd'][c]
-            rev_files = dic['rev'][c]
-            nucl_file = [f for f in nucl_files[subdir] if f.endswith('.{}'.format(c))][0]
-            logger.debug('sub: {}, Chrom {} - nucl_file {} - Found {} fwd_files, {} rev_files'.format(subdir, c,
-                                                                                                      nucl_file,
-                                                                                                      len(fwd_files),
-                                                                                                      len(rev_files)))
-
-            d[c].update({subdir:
-                             {'fwd': fwd_files,
-                              'rev': rev_files,
-                              'nucl_file': nucl_file}
-                         })
-
-    return d
+# def get_data(fm):
+#     """
+#     Avoid calling multiple times the getProfileSubmit.sh script, as it loads all the data in memory.
+#
+#     :param rspfolder:
+#     :param outfolder: /tmp/...
+#     :return: a dictionary with all the data packed and organized for processing
+#     """
+#     d = defaultdict(dict)
+#     nucl_files = get_nucl_files_per_subfolder(fm.trainfolder, fm.anti_file_template)
+#     fwd_rev_files = fm.get_start_files_per_subdir()
+#
+#     for subdir, dic in fwd_rev_files.items():
+#         for c in range(1, 23):
+#             fwd_files = dic['fwd'][c]
+#             rev_files = dic['rev'][c]
+#             nucl_file = [f for f in nucl_files[subdir] if f.endswith('.{}'.format(c))][0]
+#             logger.debug('sub: {}, Chrom {} - nucl_file {} - Found {} fwd_files, {} rev_files'.format(subdir, c,
+#                                                                                                       nucl_file,
+#                                                                                                       len(fwd_files),
+#                                                                                                       len(rev_files)))
+#
+#             d[c].update({subdir:
+#                              {'fwd': fwd_files,
+#                               'rev': rev_files,
+#                               'nucl_file': nucl_file}
+#                          })
+#
+#     return d
 
 
 def run_forward(chrom, outdir, fwd_file, nucl_ex_file):
