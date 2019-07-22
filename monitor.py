@@ -10,6 +10,7 @@ from manager.utils import Utils
 from manager.rsp import RspBuilder
 from merger.merge import merge, merge_subs, merge_anti_subs
 from nucleosome.tracker import Tracker
+from nucleosome.profiler import Profiler
 
 logging.basicConfig(format='%(asctime)s - %(name)-21s - %(levelname)-8s: %(message)s',
                     filename='sanefalcon.log', filemode='w', level=logging.DEBUG)
@@ -94,11 +95,14 @@ def prepare_and_merge(fm, rsb, config):
     merged_subs = launch_merge_subs(merged, f.trainfolder)
     merged_anti = launch_merge_anti_subs(merged)
     logger.info('Merge terminated')
+    return mapping, merged, merged_anti
 
 
-def create_nucleosome_profiles(fm, training=True):
+def create_nucleosome_profiles(fm, mapping, training=True):
     t = Tracker(fm)
     t.create_tracks()
+    p = Profiler(fm, t)
+    p.compute_profiles(mapping)
 
 
 if __name__ == '__main__':
@@ -108,5 +112,7 @@ if __name__ == '__main__':
     f = FileManager(config)
     f.check_paths()
     rs = RspBuilder(config)
-    prepare_and_merge(f, rs, config)
-    create_nucleosome_profiles(f)
+    mapping, merged, anti = prepare_and_merge(f, rs, config)
+    create_nucleosome_profiles(f, mapping)
+
+
