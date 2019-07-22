@@ -15,6 +15,8 @@ class FileManager:
         self.trainfolder = config['folders']['train']
         self.profilefolder = config['folders']['profiles']
         self.rspfolder = config['folders']['rsp']
+        self.testfolder = config['folders']['test']
+        self.testprofilefolder = config['folders']['testprofiles']
         self.config = config
 
     def check_paths(self):
