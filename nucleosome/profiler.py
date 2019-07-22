@@ -41,5 +41,5 @@ class Profiler:
 
     def combine(self):
         outfile = self.fm.config['default']['trainnucl']
-        model_file, img_file = cp.save_streams_to_file(self.fm, outfile)
-        return model_file, img_file
+        combined, img_file = cp.save_streams_to_file(self.fm, outfile)
+        return combined, img_file
