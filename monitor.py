@@ -12,8 +12,6 @@ from merger.merge import merge, merge_subs, merge_anti_subs
 from nucleosome.tracker import Tracker
 from nucleosome.profiler import Profiler
 
-logging.basicConfig(format='%(asctime)s - %(name)-21s - %(levelname)-8s: %(message)s',
-                    filename='sanefalcon.log', filemode='w', level=logging.DEBUG)
 
 logger = logging.getLogger('monitor')
 

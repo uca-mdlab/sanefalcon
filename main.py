@@ -5,7 +5,8 @@ import monitor
 import predictor
 import os
 
-logging.basicConfig(format='%(asctime)s - %(levelname)s: %(message)s',
+
+logging.basicConfig(format='%(asctime)s - %(name)-21s - %(levelname)-8s: %(message)s',
                     filename='sanefalcon.log', filemode='w', level=logging.DEBUG)
 
 logger = logging.getLogger("main")
