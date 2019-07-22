@@ -11,6 +11,7 @@ class Profiler:
     def __init__(self, fm, tracker):
         self.fm = fm
         self.tracker = tracker
+        self.profiles = []  # list of defaultdict
 
     def compute_profiles(self, mapping):
         data = self.tracker.get_data(mapping)
@@ -18,8 +19,8 @@ class Profiler:
         logger.info("Launching multiprocessing pool...")
         num_cores = mp.cpu_count()
         with mp.Pool(num_cores) as pool:
-            finished = pool.map(gpp.submit_process, input_list)
-            logger.info("Done. Result = {}".format(len(finished) == 22))
+            self.profiles = pool.map(gpp.submit_process, input_list)
+            logger.info("Done. Result = {}".format(len(self.profiles) == 22))
 
             # finished = [
             #  { '/var/tmp/testsuite/a': [
