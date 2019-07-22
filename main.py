@@ -2,7 +2,8 @@ import argparse
 import logging
 import configparser
 import monitor
-
+import predictor
+import os
 
 logging.basicConfig(format='%(asctime)s - %(levelname)s: %(message)s',
                     filename='sanefalcon.log', filemode='w', level=logging.DEBUG)
@@ -25,4 +26,12 @@ if __name__ == "__main__":
     config.read(args.conffile)
 
     if is_training:
-        monitor.training(config)
+        outmodel_file = os.path.join(config['folders']['train'], 'out')
+        reference_file = config['default']['trainref']
+        nucleosome_file = monitor.training(config)
+        predictor.run_model(nucleosome_file, reference_file, outmodel_file)
+    else:
+        nucleosome_file = monitor.testing(config)
+
+
+
