@@ -1,7 +1,8 @@
-import os
 import argparse
 import logging
 import configparser
+import monitor
+
 
 logging.basicConfig(format='%(asctime)s - %(levelname)s: %(message)s',
                     filename='sanefalcon.log', filemode='w', level=logging.DEBUG)
@@ -22,3 +23,6 @@ if __name__ == "__main__":
 
     config = configparser.ConfigParser()
     config.read(args.conffile)
+
+    if is_training:
+        monitor.training(config)

@@ -88,11 +88,11 @@ def prepare_and_merge(fm, rsb, config):
     batchsize = int(config['training']['batchsize'])
     batches = fm.prepare_train_folder(bamlist, batchsize)
     logger.info('Batches prepared')
-    rspfiles = rsb.prepare_samples(f.datafolder, f.rspfolder)
+    rspfiles = rsb.prepare_samples(fm.datafolder, fm.rspfolder)
     logger.info('Samples prepared')
     mapping = get_rsp_batches_mapping(batches, rspfiles)
     merged = launch_merge(mapping)
-    merged_subs = launch_merge_subs(merged, f.trainfolder)
+    merged_subs = launch_merge_subs(merged, fm.trainfolder)
     merged_anti = launch_merge_anti_subs(merged)
     logger.info('Merge terminated')
     return mapping, merged, merged_anti
@@ -103,17 +103,19 @@ def create_nucleosome_profiles(fm, mapping, training=True):
     t.create_tracks()
     p = Profiler(fm, t)
     p.compute_profiles(mapping)
-    p.combine()
+    return p.combine()
 
 
-if __name__ == '__main__':
-    config = configparser.ConfigParser()
-    config.read('local.conf')
+def training(config):
     logger.info('Starting...')
     f = FileManager(config)
     f.check_paths()
     rs = RspBuilder(config)
     mapping, merged, anti = prepare_and_merge(f, rs, config)
-    create_nucleosome_profiles(f, mapping)
+    model_file, img_file = create_nucleosome_profiles(f, mapping)
+    logger.info('Model created: {}'.format(model_file))
+
+
+
 
 

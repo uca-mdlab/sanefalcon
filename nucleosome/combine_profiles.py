@@ -94,8 +94,9 @@ def save_streams_to_file(fm, outfile):
     with open(outfile, 'w') as out:
         for sample, stream in streams.items():
             out.write('{},{}\n'.format(sample, ','.join(map(str, stream))))
-    plot_streams(streams, outfile + '.png')
-    return outfile
+    img_profile = outfile + '.png'
+    plot_streams(streams, img_profile)
+    return outfile, img_profile
 
 
 def plot_streams(streams, figname):
@@ -107,14 +108,3 @@ def plot_streams(streams, figname):
     plt.savefig(figname)
     # plt.show()
 
-
-if __name__ == '__main__':
-    import configparser
-    from file_manager import FileManager
-
-    config = configparser.ConfigParser()
-    config.read('local.conf')
-    f = FileManager(config)
-    outfile = save_streams_to_file(f, 'trainnucl.csv')
-    # streams = create_streams(f)
-    # plot_streams(streams)
