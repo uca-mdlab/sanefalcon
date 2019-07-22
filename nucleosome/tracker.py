@@ -39,4 +39,17 @@ class Tracker:
         for folder in folders:
             self.create_nucleosome_files(folder, nucl_track_stub, training)
 
-
+    def get_data(self, mapping):
+        pack = defaultdict(dict)
+        for subdir, dic in mapping.items():
+            for name, files in dic.items():
+                fwd = [f for f in files if f.endswith('.fwd')]
+                rev = [f for f in files if f.endswith('.rev')]
+                for chrom in range(1, 23):
+                    pattern = re.compile(r'\.{}\.'.format(chrom))
+                    nucl_pattern = re.compile(r'\.{}$'.format(chrom))
+                    nucl_track = [f for f in self.nucleosome_tracks[subdir] if re.search(nucl_pattern, f)][0]
+                    fwd_c = list(filter(lambda x: re.search(pattern, x), fwd))
+                    rev_c = list(filter(lambda x: re.search(pattern, x), rev))
+                    pack[chrom].update({subdir: {'fwd': fwd_c, 'rev': rev_c, 'nucl_file': nucl_track}})
+        return pack
