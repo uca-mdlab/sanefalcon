@@ -103,6 +103,7 @@ def create_nucleosome_profiles(fm, mapping, training=True):
     t.create_tracks()
     p = Profiler(fm, t)
     p.compute_profiles(mapping)
+    p.combine()
 
 
 if __name__ == '__main__':

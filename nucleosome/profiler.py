@@ -2,6 +2,7 @@ import multiprocessing as mp
 import logging
 
 import nucleosome.get_profile_parallel as gpp
+import nucleosome.combine_profiles as cp
 
 
 logger = logging.getLogger(__name__)
@@ -37,3 +38,7 @@ class Profiler:
             #     ]
             #   }
             # ]
+
+    def combine(self):
+        outfile = self.fm.config['default']['trainnucl']
+        cp.save_streams_to_file(self.fm, outfile)
