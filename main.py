@@ -32,7 +32,12 @@ if __name__ == "__main__":
         nucleosome_file = monitor.training(config)
         predictor.run_model(nucleosome_file, reference_file, outmodel_file)
     else:
+        training_nucleosome_file = config['default']['trainnucl']
+        training_reference_file = config['default']['trainref']
+        if not os.path.isfile(training_nucleosome_file):
+            exit('Run training first. -t flag')
         nucleosome_file = monitor.testing(config)
+
 
 
 
