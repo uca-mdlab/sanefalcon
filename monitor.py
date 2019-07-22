@@ -112,9 +112,39 @@ def training(config):
     f.check_paths()
     rs = RspBuilder(config)
     mapping, merged, anti = prepare_and_merge(f, rs, config)
-    model_file, img_file = create_nucleosome_profiles(f, mapping)
-    logger.info('Model created: {}'.format(model_file))
+    nucleosome_file, img_file = create_nucleosome_profiles(f, mapping)
+    logger.info('Model created: {}'.format(nucleosome_file))
+    return nucleosome_file
 
+
+# Testing phase
+def filter_out_rsp_files(fm):
+    train_names = [os.path.basename(f) for f in Utils.readfile(fm.config['training']['bamlist'])]
+    logger.debug('Found {} names in training'.format(len(train_names)))
+    pattern = re.compile(r'\.\d{1,2}\.')
+    testing_rsp = defaultdict(list)
+    for f in fm.get_read_start_positions_data():
+        basename = os.path.basename(f)
+        try:
+            token = re.search(pattern, basename).group()
+            name = basename.split(token)[0]
+            if name not in train_names:
+                testing_rsp[name].append(f)
+        except AttributeError:
+            pass
+
+    fwd, rev = get_fwd_rev_files(testing_rsp)
+    merge_file_list = defaultdict(dict)
+    merge_file_list[fm.testfolder] = {'fwd': fwd, 'rev': rev}
+
+    return merge_file_list
+
+
+def testing(config):
+    fm = FileManager(config)
+    rsp_to_merge = filter_out_rsp_files(fm)
+    merged = merge(rsp_to_merge)
+    print(merged)
 
 
 
