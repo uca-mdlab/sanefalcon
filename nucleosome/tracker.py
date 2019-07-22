@@ -33,7 +33,7 @@ class Tracker:
                        not (os.path.join(self.fm.trainfolder, o) in to_exclude)]
             nucl_track_stub = self.fm.config['default']['nucltemplate'] + '_anti'
         else:
-            folders = None  # FIXME where to put test merge files?
+            folders = [self.fm.testfolder]
             nucl_track_stub = self.fm.config['default']['nucltemplate']
 
         for folder in folders:
