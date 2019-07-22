@@ -1,10 +1,22 @@
+import multiprocessing as mp
+import logging
+
 import nucleosome.get_profile_parallel as gpp
 
 
-class Profiler:
-    def __init__(self, fm, tracks):
-        self.fm = fm
-        self.tracks = tracks
+logger = logging.getLogger(__name__)
 
-    def compute_profiles(self):
-        data = gpp.get_data(self.fm)
+
+class Profiler:
+    def __init__(self, fm, tracker):
+        self.fm = fm
+        self.tracker = tracker
+
+    def compute_profiles(self, mapping):
+        data = self.tracker.get_data(mapping)
+        input_list = [(chrom, dic, self.fm.profilefolder) for chrom, dic in data.items()]
+        logger.info("Launching multiprocessing pool...")
+        num_cores = mp.cpu_count()
+        with mp.Pool(num_cores) as pool:
+            finished = pool.map(gpp.submit_process, input_list)
+            logger.info("Done. Result = {}".format(len(finished) == 22))
