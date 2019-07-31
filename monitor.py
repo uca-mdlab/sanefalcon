@@ -100,8 +100,8 @@ def create_nucleosome_profiles(fm, mapping, training=True):
     t = Tracker(fm)
     t.create_tracks(training)
     p = Profiler(fm, t)
-    p.compute_profiles(mapping)
-    return p.combine()
+    p.compute_profiles(mapping, training)
+    return p.combine(training)
 
 
 def training(config):
@@ -121,6 +121,7 @@ def filter_out_rsp_files(fm):
     logger.debug('Found {} names in training'.format(len(train_names)))
     pattern = re.compile(r'\.\d{1,2}\.')
     testing_rsp = defaultdict(list)
+    rsps = []
     for f in fm.get_read_start_positions_data():
         basename = os.path.basename(f)
         try:
@@ -128,23 +129,27 @@ def filter_out_rsp_files(fm):
             name = basename.split(token)[0]
             if name not in train_names:
                 testing_rsp[name].append(f)
+                rsps.append(f)
         except AttributeError:
             pass
 
+    batch = fm.create_fake_batch_for_testing(list(testing_rsp.keys()))
+    mapping = get_rsp_batches_mapping(batch, rsps)
     fwd, rev = get_fwd_rev_files(testing_rsp)
     merge_file_list = defaultdict(dict)
     merge_file_list[fm.testfolder] = {'fwd': fwd, 'rev': rev}
 
-    return merge_file_list
+    return mapping, merge_file_list
 
 
 def testing(config):
     fm = FileManager(config)
-    rsp_to_merge = filter_out_rsp_files(fm)
+    mapping, rsp_to_merge = filter_out_rsp_files(fm)
     merged = merge(rsp_to_merge)
     logger.info('Merged testing: {}'.format(merged))
-    nucleosome_file, img_file = create_nucleosome_profiles(fm, merged, training=False)
+    nucleosome_file, img_file = create_nucleosome_profiles(fm, mapping, training=False)
     logger.info('Nucleosome file created: {}'.format(nucleosome_file))
+    return nucleosome_file
 
 
 
