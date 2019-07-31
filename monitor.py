@@ -98,7 +98,7 @@ def prepare_and_merge(fm, rsb, config):
 
 def create_nucleosome_profiles(fm, mapping, training=True):
     t = Tracker(fm)
-    t.create_tracks()
+    t.create_tracks(training)
     p = Profiler(fm, t)
     p.compute_profiles(mapping)
     return p.combine()
@@ -111,7 +111,7 @@ def training(config):
     rs = RspBuilder(config)
     mapping, merged, anti = prepare_and_merge(f, rs, config)
     nucleosome_file, img_file = create_nucleosome_profiles(f, mapping)
-    logger.info('Model created: {}'.format(nucleosome_file))
+    logger.info('Nucleosome file created: {}'.format(nucleosome_file))
     return nucleosome_file
 
 
@@ -142,7 +142,9 @@ def testing(config):
     fm = FileManager(config)
     rsp_to_merge = filter_out_rsp_files(fm)
     merged = merge(rsp_to_merge)
-    print(merged)
+    logger.info('Merged testing: {}'.format(merged))
+    nucleosome_file, img_file = create_nucleosome_profiles(fm, merged, training=False)
+    logger.info('Nucleosome file created: {}'.format(nucleosome_file))
 
 
 
