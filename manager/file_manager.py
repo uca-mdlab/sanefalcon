@@ -64,3 +64,8 @@ class FileManager:
                 batches[batch_dir].append(link_name)
         logger.info("Batches created with symlinks")
         return batches
+
+    def create_fake_batch_for_testing(self, bamlist):
+        batch = [os.path.join(self.datafolder, x) for x in bamlist]
+        return {self.testfolder: batch}
+
