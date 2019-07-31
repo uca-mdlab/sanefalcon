@@ -14,9 +14,13 @@ class Profiler:
         self.tracker = tracker
         self.profiles = []  # list of defaultdict
 
-    def compute_profiles(self, mapping):
+    def compute_profiles(self, mapping, training=True):
         data = self.tracker.get_data(mapping)
-        input_list = [(chrom, dic, self.fm.profilefolder) for chrom, dic in data.items()]
+        if training:
+            profilefolder = self.fm.profilefolder
+        else:
+            profilefolder = self.fm.testprofilefolder
+        input_list = [(chrom, dic, profilefolder) for chrom, dic in data.items()]
         logger.info("Launching multiprocessing pool...")
         num_cores = mp.cpu_count()
         with mp.Pool(num_cores) as pool:
@@ -39,7 +43,10 @@ class Profiler:
             #   }
             # ]
 
-    def combine(self):
-        outfile = self.fm.config['default']['trainnucl']
+    def combine(self, training=True):
+        if training:
+            outfile = self.fm.config['default']['trainnucl']
+        else:
+            outfile = self.fm.config['default']['testnucl']
         combined, img_file = cp.save_streams_to_file(self.fm, outfile)
         return combined, img_file
