@@ -90,7 +90,7 @@ def prepare_and_merge(fm, rsb, config):
     logger.info('Samples prepared')
     mapping = get_rsp_batches_mapping(batches, rspfiles)
     merged = launch_merge(mapping)
-    merged_subs = launch_merge_subs(merged, fm.trainfolder)
+    # merged_subs = launch_merge_subs(merged, fm.trainfolder)
     merged_anti = launch_merge_anti_subs(merged)
     logger.info('Merge terminated')
     return mapping, merged, merged_anti
