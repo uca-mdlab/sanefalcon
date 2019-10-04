@@ -16,4 +16,4 @@ my.conf
 list_training.txt
 local.conf
 *.ff
-
+*.pyc
