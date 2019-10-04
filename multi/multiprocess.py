@@ -4,7 +4,7 @@ import logging
 
 logger = logging.getLogger('multiprocess')
 
-MAX_PROCESS_NUMBER = os.cpu_count()
+MAX_PROCESS_NUMBER = int(os.cpu_count() / 2)
 MAX_JOB_NUMBER = MAX_PROCESS_NUMBER + 1
 
 
