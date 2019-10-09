@@ -51,7 +51,7 @@ def merge_subs(merged, trainfolder):
 
 def _merge_anti_subs(folder, chrom, files):
     # print("{} launched on {} ".format(threading.current_thread(), chrom))
-    logger.debug("merge anti subs chrom: {}, folder: {}".format(chrom, folder))
+    # logger.debug("merge anti subs chrom: {}, folder: {}".format(chrom, folder))
     outfile = os.path.join(folder, "anti.{}".format(chrom))
     if os.path.isfile(outfile):
         logger.debug("merge_anti_subs. file {} already there. Skipping...".format(outfile))
@@ -64,11 +64,12 @@ def _merge_anti_subs(folder, chrom, files):
 def merge_anti_subs(antisubs):
     runs = [(path, chrom, files) for path, chrom, files in antisubs]
     # logger.debug('Submitting {} runs to merge_anti_subs'.format(len(runs)))
-    logger.debug('Submitting {} runs to merge_anti_subs (sequential)'.format(len(runs)))
+    logger.info('Submitting {} runs to merge_anti_subs (sequential)'.format(len(runs)))
     antisubfiles = []
+    lrun = len(runs)
     for r in runs:
         antisub = _merge_anti_subs(*r)
         antisubfiles.append(antisub)
-        logger.debug('Antisub done: {}'.format(antisub))
+        logger.debug('Antisub done: {}. ({} to go...)'.format(antisub, lrun - len(antisubfiles)))
     return antisubfiles
 
