@@ -3,8 +3,8 @@ import concurrent.futures
 
 logger = logging.getLogger('multithread')
 
-MAX_THREAD_NUMBER = 10
-MAX_JOB_NUMBER = 10
+MAX_THREAD_NUMBER = 5
+MAX_JOB_NUMBER = 5
 
 
 def launch_multithreads(runs, func):
