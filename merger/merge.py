@@ -63,7 +63,12 @@ def _merge_anti_subs(folder, chrom, files):
 
 def merge_anti_subs(antisubs):
     runs = [(path, chrom, files) for path, chrom, files in antisubs]
-    logger.debug('Submitting {} runs to merge_anti_subs'.format(len(runs)))
-    antisubfiles = lt(runs, _merge_anti_subs)
+    # logger.debug('Submitting {} runs to merge_anti_subs'.format(len(runs)))
+    logger.debug('Submitting {} runs to merge_anti_subs (sequential)'.format(len(runs)))
+    antisubfiles = []
+    for r in runs:
+        antisub = _merge_anti_subs(*r)
+        antisubfiles.append(antisub)
+        logger.debug('Antisub done: {}'.format(antisub))
     return antisubfiles
 
