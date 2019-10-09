@@ -17,6 +17,7 @@ def launch_multithreads(runs, func):
         runs_iter = iter(runs)
 
         while runs_left:
+            logger.info('Multithread {}: runs_left = {}'.format(func, runs_left))
             for run in runs_iter:
                 job = executor.submit(func, *run)
                 jobs[job] = run

@@ -23,6 +23,7 @@ def launch_multiprocess(runs, fn):
         runs_iter = iter(runs)
 
         while runs_left:
+            logger.info('Multiprocess {}: runs_left = {}'.format(fn, runs_left))
             for run in runs_iter:
                 job = executor.submit(fn, *run)
                 jobs[job] = run
