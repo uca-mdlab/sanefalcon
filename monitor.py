@@ -31,11 +31,9 @@ def get_rsp_batches_mapping(batches, rspfiles):
 def get_fwd_rev_files(dic):
     fwd = defaultdict(list)
     rev = defaultdict(list)
-    fwds = []
-    revs = []
     for samplename, list_ in dic.items():
-        fwds.extend([fname for fname in list_ if fname.endswith('.fwd')])
-        revs.extend([fname for fname in list_ if fname.endswith('.rev')])
+        fwds = [fname for fname in list_ if fname.endswith('.fwd')]
+        revs = [fname for fname in list_ if fname.endswith('.rev')]
         for chrom in range(1, 23):
             pattern = re.compile(r'\.{}\.'.format(chrom))
             fwd[chrom].extend(list(filter(lambda x: re.search(pattern, x), fwds)))
