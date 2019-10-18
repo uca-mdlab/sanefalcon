@@ -11,7 +11,7 @@ class Tracker:
         self.fm = fm
         self.nucleosome_tracks = defaultdict(list)
 
-    def create_nucleosome_files(self, folder, outfilestub, training=True):
+    def build_runs(self, folder, outfilestub, training):
         runs = []
         if training:
             files = [os.path.join(folder, f) for f in os.listdir(folder) if re.match('^anti', f)]
@@ -22,7 +22,10 @@ class Tracker:
             chrom = re.search(pattern, f).group()
             outfile = outfilestub + '.{}'.format(chrom)
             runs.append((chrom, f, os.path.join(folder, outfile)))
+        return runs
 
+    def create_nucleosome_files(self, folder, outfilestub, training=True):
+        runs = self.build_runs(folder, outfilestub, training)
         self.nucleosome_tracks[folder] = lp(runs, nd.create_nucleosome_file)
 
     def create_tracks(self, training=True):
@@ -53,3 +56,20 @@ class Tracker:
                     rev_c = list(filter(lambda x: re.search(pattern, x), rev))
                     pack[chrom].update({subdir: {'fwd': fwd_c, 'rev': rev_c, 'nucl_file': nucl_track}})
         return pack
+
+
+if __name__ == '__main__':
+    import configparser
+    from manager.file_manager import FileManager
+
+    config = configparser.ConfigParser()
+    config.read('../sanefalcon.conf')
+    filemanager = FileManager(config)
+    t = Tracker(filemanager)
+    nucl_track_stub = t.fm.config['default']['nucltemplate'] + '_anti'
+    folder = os.path.join(t.fm.trainfolder, 'a')
+    runs = t.build_runs(folder, nucl_track_stub, training=True)
+    print(len(runs))
+    print(runs[0])
+
+
