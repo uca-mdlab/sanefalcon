@@ -1,9 +1,13 @@
 import os
 import re
 from collections import defaultdict
+import logging
 
 import nucleosome.nucleosome_detector as nd
 from multi.multiprocess import launch_multiprocess as lp
+
+
+logger = logging.getLogger(__name__)
 
 
 class Tracker:
@@ -45,6 +49,7 @@ class Tracker:
     def get_data(self, mapping):
         pack = defaultdict(dict)
         for subdir, dic in mapping.items():
+            logger.debug('working on {}'.format(subdir))
             for name, files in dic.items():
                 fwd = [f for f in files if f.endswith('.fwd')]
                 rev = [f for f in files if f.endswith('.rev')]
@@ -54,7 +59,13 @@ class Tracker:
                     nucl_track = [f for f in self.nucleosome_tracks[subdir] if re.search(nucl_pattern, f)][0]
                     fwd_c = list(filter(lambda x: re.search(pattern, x), fwd))
                     rev_c = list(filter(lambda x: re.search(pattern, x), rev))
-                    pack[chrom].update({subdir: {'fwd': fwd_c, 'rev': rev_c, 'nucl_file': nucl_track}})
+                    if subdir in pack[chrom].keys():
+                        pack[chrom][subdir].append({'fwd': fwd_c, 'rev': rev_c, 'nucl_file': nucl_track})
+                    else:
+                        pack[chrom][subdir] = [{'fwd': fwd_c, 'rev': rev_c, 'nucl_file': nucl_track}]
+                    logger.debug('pack[{}] = {}'.format(chrom, [(subdir, len(pack[chrom][subdir]))
+                                                                for subdir in pack[chrom].keys()]))
+
         return pack
 
 
