@@ -7,7 +7,7 @@ temporary2
 *.fwd
 *.rev
 *.irev
-__pycache*
+__pycache__/
 my.conf
 *.log
 .coverage
