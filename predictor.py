@@ -29,7 +29,10 @@ import numpy as np
 import random
 import pickle
 import sklearn.linear_model as sklm
+import logging
 
+
+logger = logging.getLogger('predictor')
 # ---------------------------------------------------------------------------- #
 # Data loading functions
 # ---------------------------------------------------------------------------- #
@@ -159,6 +162,8 @@ def train_linear_model(samples, reference):
 
 
 def test_polyfit(samples, reference, p, prefix):
+    logger.debug('test_polyfit. len(samples) = {}, len(reference) = {}'.format(len(samples), len(reference)))
+    logger.debug('test_polyfit. p = {}, len(p) = {}'.format(p, len(p)))
     fitSamples=[]
     for i, val in enumerate(samples):
         fitSamples.append(p[0] * val+p[1])

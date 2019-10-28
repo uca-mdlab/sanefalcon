@@ -35,10 +35,13 @@ if __name__ == "__main__":
         outmodel_file = os.path.join(config['folders']['test'], 'out')
         training_nucleosome_file = config['default']['trainnucl']
         training_reference_file = config['default']['trainref']
+
         if not os.path.isfile(training_nucleosome_file):
             exit('Run training first. -t flag')
         nucleosome_file = monitor.testing(config)
         reference_file = config['default']['testref']
+        logger.info('Testing. training _nucleosome_file = {}; _reference_file = {}'.format(training_nucleosome_file, training_reference_file))
+        logger.info('Testing. testing _nucleosome_file = {}, _reference_file = {}'.format(nucleosome_file, reference_file))
         predictor.run_model(training_nucleosome_file, training_reference_file, outmodel_file, nucleosome_file, reference_file)
 
 
