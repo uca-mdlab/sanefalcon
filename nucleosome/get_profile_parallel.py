@@ -55,18 +55,23 @@ def load_data(nucl_ex_file, fwd_rev_file):
 
 def process_forward(peaks, reads, outfile):
     thread_name = threading.current_thread().name
-    before = len(peaks)  # just to be sure
+    logger.debug('process_forward for {} (t-{})'.format(outfile, thread_name))
+    logger.debug('process_forward (t-{}): peaks ([0]: {}, len: {})'.format(thread_name, peaks[0], len(peaks)))
+    logger.debug('process_forward (t-{}): reads ([0]: {}, len: {})'.format(thread_name, reads[0], len(reads)))
+
+    # before = len(peaks)  # just to be sure
     peaks.append([-1, 0])
-    logger.debug('process_forward {} (fwd append) id: {} (len += {}) [0] = {}; [-1] = {}'.format(thread_name, id(peaks), len(peaks) - before, peaks[0], peaks[-1]))
+    # logger.debug('process_forward ({}) (fwd append) id: {} (len += {}) [0] = {}; [-1] = {}'.format(thread_name, id(peaks), len(peaks) - before, peaks[0], peaks[-1]))
 
     maxDist = 147
     sumPeak = [0. for _ in range(maxDist)]
     read = reads[0]  # +shift
     j = 0
     nuclHit = []
+    logger.debug('process_forward (t-{}): starting cycle on peaks'.format(thread_name))
     for i, peakPair in enumerate(peaks):
-        if i == 0 or i == len(peaks) - 1:
-            logger.debug('process_forward {} (fwd enumerate id: {}) i: {} peakPair {}'.format(thread_name, id(peaks), i, peakPair))
+        # if i == 0 or i == len(peaks) - 1:
+        #    logger.debug('process_forward {} (fwd enumerate id: {}) i: {} peakPair {}'.format(thread_name, id(peaks), i, peakPair))
         peak = peakPair[0]
         peakWeight = peakPair[1]
         thisPeak = [0. for x in range(maxDist)]
@@ -87,6 +92,8 @@ def process_forward(peaks, reads, outfile):
         # thisPeak=[x*peakWeight for x in thisPeak]
         sumPeak = [sumPeak[x] + thisPeak[x] for x in range(len(thisPeak))]
 
+    logger.debug('process_forward (t-{}): completed cycle on peaks'.format(thread_name))
+    logger.debug('process_forward (t-{}): len (nuclHit: {}, sumPeak: {})'.format(thread_name, len(nuclHit), len(sumPeak)))
     with open(outfile, 'w') as outPeaks:
         outPeaks.write(",".join([str(x) for x in sumPeak]))
     return sumPeak
