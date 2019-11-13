@@ -100,7 +100,7 @@ def create_nucleosome_file(chrom, mergefile, outfile):
             # print(curArea)
             curArea[-1] += 1
         lastPos = position
-        if count % 100000 == 0:
+        if count % 1000000 == 0:
             logger.debug("[p:{} f:{}], line {} ({}). time = {}".format(os.getpid(), mergefile, count, '{:.1%}'
                                                                        .format(count/length), time.time() - s))
             s = time.time()
