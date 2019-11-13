@@ -39,6 +39,8 @@ def cast_line_to_numbers(list_of_strings):
 
 
 def load_data(nucl_ex_file, fwd_rev_file):
+    thread_name = threading.current_thread().name
+    logger.debug("(t-{}): Loading data from nucl_file: {}; fwd_rev_file: {}".format(thread_name, nucl_ex_file, fwd_rev_file))
     with open(nucl_ex_file, 'r') as infile:
         lines = list(map(cast_line_to_numbers, [x.split() for x in infile.readlines()]))
         peaks = []
