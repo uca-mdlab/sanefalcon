@@ -26,7 +26,7 @@ if __name__ == "__main__":
         logger.info('=={}=='.format(section))
         for k, v in config[section].items():
             logger.info('{}:\t{}'.format(k, v))
-    exit()
+
     if is_training:
         logger.info('Training phase...')
         outmodel_file = os.path.join(config['folders']['train'], 'out')
