@@ -2,9 +2,9 @@ from collections import defaultdict
 import os
 import re
 
-import logging
+from log_setup import setup_logger
 
-logger = logging.getLogger(__name__)
+logger = setup_logger(__name__, 'logs/sanefalcon.log')
 
 chromosomes = range(1, 23)
 

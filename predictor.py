@@ -29,10 +29,10 @@ import numpy as np
 import random
 import pickle
 import sklearn.linear_model as sklm
-import logging
+# import logging
 
-
-logger = logging.getLogger('predictor')
+from log_setup import setup_logger
+logger = setup_logger(__name__, 'logs/predictor.log')
 # ---------------------------------------------------------------------------- #
 # Data loading functions
 # ---------------------------------------------------------------------------- #

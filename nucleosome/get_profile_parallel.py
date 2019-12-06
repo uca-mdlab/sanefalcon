@@ -1,10 +1,10 @@
 import os
-import logging
 import concurrent.futures
 import threading
 from collections import defaultdict
 
-logger = logging.getLogger(__name__)
+from log_setup import setup_logger
+logger = setup_logger(__name__, 'logs/nucleosome.log')
 
 # parameters and functions taken from the original script
 minSide = 25

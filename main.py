@@ -1,15 +1,11 @@
 import argparse
-import logging
 import configparser
 import monitor
 import predictor
 import os
+from log_setup import setup_logger
 
-
-logging.basicConfig(format='%(asctime)s - %(name)-21s - %(levelname)-8s: %(message)s',
-                    filename='sanefalcon.log', filemode='w', level=logging.DEBUG)
-
-logger = logging.getLogger("main")
+logger = setup_logger(__name__, "logs/sanefalcon.log")
 
 
 if __name__ == "__main__":
@@ -25,12 +21,20 @@ if __name__ == "__main__":
 
     config = configparser.ConfigParser()
     config.read(args.conffile)
-
+    logger.info('Started sanefalcon with config:')
+    for section in config.sections():
+        logger.info('=={}=='.format(section))
+        for k, v in config[section].items():
+            logger.info('{}:\t{}'.format(k, v))
+    exit()
     if is_training:
+        logger.info('Training phase...')
         outmodel_file = os.path.join(config['folders']['train'], 'out')
         reference_file = config['default']['trainref']
         nucleosome_file = monitor.training(config)
+        logger.info('Nucleosome file computed: {}'.format(nucleosome_file))
         predictor.run_model(nucleosome_file, reference_file, outmodel_file)
+        logger.info('Model trained. {}'.format(outmodel_file))
     else:
         outmodel_file = os.path.join(config['folders']['test'], 'out')
         training_nucleosome_file = config['default']['trainnucl']
@@ -42,8 +46,9 @@ if __name__ == "__main__":
         reference_file = config['default']['testref']
         logger.info('Testing. training _nucleosome_file = {}; _reference_file = {}'.format(training_nucleosome_file, training_reference_file))
         logger.info('Testing. testing _nucleosome_file = {}, _reference_file = {}'.format(nucleosome_file, reference_file))
-        predictor.run_model(training_nucleosome_file, training_reference_file, outmodel_file, nucleosome_file, reference_file)
+        # predictor.run_model(training_nucleosome_file, training_reference_file, outmodel_file, nucleosome_file, reference_file)
 
+    logger.info('Done.')
 
 
 

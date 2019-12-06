@@ -1,7 +1,8 @@
-import logging
 import concurrent.futures
 
-logger = logging.getLogger('multithread')
+from log_setup import setup_logger
+
+logger = setup_logger(__name__, 'logs/multi.log')
 
 MAX_THREAD_NUMBER = 8
 MAX_JOB_NUMBER = 8

@@ -3,9 +3,9 @@ import logging
 import string
 from collections import defaultdict
 from .utils import Utils
+from log_setup import setup_logger
 
-
-logger = logging.getLogger(__name__)
+logger = setup_logger(__name__, 'logs/manager.log')
 
 
 class FileManager:

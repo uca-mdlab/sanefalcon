@@ -1,10 +1,12 @@
 import os
-import logging
 from collections import defaultdict
 from multi.multithread import launch_multithreads as lt
 from .utils import Utils
 
-logger = logging.getLogger(__name__)
+from log_setup import setup_logger
+
+logger = setup_logger(__name__, 'logs/merger.log')
+
 
 chromosomes = range(1, 23)
 

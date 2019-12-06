@@ -2,12 +2,10 @@ import os
 import re
 import csv
 from collections import Counter, defaultdict
-import logging
 import matplotlib.pyplot as plt
 
-
-logger = logging.getLogger(__name__)
-
+from log_setup import setup_logger
+logger = setup_logger(__name__, 'logs/nucleosome.log')
 
 def get_profile_file(proffile):
     l = []

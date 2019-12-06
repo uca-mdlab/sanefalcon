@@ -1,8 +1,8 @@
 import concurrent.futures
-import os
-import logging
 
-logger = logging.getLogger('multiprocess')
+from log_setup import setup_logger
+
+logger = setup_logger(__name__, 'logs/multi.log')
 
 MAX_PROCESS_NUMBER = 8
 MAX_JOB_NUMBER = MAX_PROCESS_NUMBER

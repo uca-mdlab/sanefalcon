@@ -1,13 +1,13 @@
 import os
 import re
 from collections import defaultdict
-import logging
 
 import nucleosome.nucleosome_detector as nd
 from multi.multiprocess import launch_multiprocess as lp
 
 
-logger = logging.getLogger(__name__)
+from log_setup import setup_logger
+logger = setup_logger(__name__, 'logs/nucleosome.log')
 
 
 class Tracker:

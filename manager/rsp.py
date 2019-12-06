@@ -1,11 +1,11 @@
 import os
 import sys
 import subprocess
-import logging
 import concurrent.futures
 
+from log_setup import setup_logger
 
-logger = logging.getLogger(__name__)
+logger = setup_logger(__name__, 'logs/manager.log')
 
 
 class RspBuilder:

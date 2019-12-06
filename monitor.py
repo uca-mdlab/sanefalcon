@@ -1,5 +1,3 @@
-import configparser
-import logging
 import os
 import re
 
@@ -12,8 +10,9 @@ from merger.merge import merge, merge_subs, merge_anti_subs
 from nucleosome.tracker import Tracker
 from nucleosome.profiler import Profiler
 
+from log_setup import setup_logger
 
-logger = logging.getLogger('monitor')
+logger = setup_logger(__name__, 'logs/sanefalcon.log')
 
 
 def get_rsp_batches_mapping(batches, rspfiles):
