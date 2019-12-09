@@ -44,25 +44,28 @@ class FileManager:
         batches = defaultdict(list)
         logger.debug('Found {} files to link'.format(len(bamlist)))
         logger.info('Preparing train folder: symlinking bam files...')
-        for num_batch, batch in enumerate([l for l in Utils.prepare_batches(bamlist, batch_size)]):
-            for filename in batch:
-                basename = os.path.basename(filename)
-                batch_dir = os.path.join(self.trainfolder, letters[num_batch])
-                try:
-                    os.makedirs(batch_dir)
-                    logger.debug("Created folder: {}".format(batch_dir))
-                except FileExistsError:
-                    logger.warning("Folder {} exists, skipping...".format(batch_dir))
-                link_name = os.path.join(batch_dir, basename)
-                try:
-                    os.symlink(filename, link_name)
-                    os.symlink(filename + '.bai', link_name + '.bai')
-                except FileExistsError:
-                    logger.warning("Link {} exists, skipping...".format(link_name))
-                except FileNotFoundError:
-                    pass
-                batches[batch_dir].append(link_name)
-        logger.info("Batches created with symlinks")
+        # for num_batch, batch in enumerate([l for l in Utils.prepare_batches(bamlist, batch_size)]):
+        #     for filename in batch:
+        #         basename = os.path.basename(filename)
+        #         batch_dir = os.path.join(self.trainfolder, letters[num_batch])
+        #         try:
+        #             os.makedirs(batch_dir)
+        #             logger.debug("Created folder: {}".format(batch_dir))
+        #         except FileExistsError:
+        #             logger.warning("Folder {} exists, skipping...".format(batch_dir))
+        #         link_name = os.path.join(batch_dir, basename)
+        #         try:
+        #             os.symlink(filename, link_name)
+        #             os.symlink(filename + '.bai', link_name + '.bai')
+        #         except FileExistsError:
+        #             logger.warning("Link {} exists, skipping...".format(link_name))
+        #         except FileNotFoundError:
+        #             pass
+        #         batches[batch_dir].append(link_name)
+        # logger.info("Batches created with symlinks")
+        for root, dirs, files in os.walk(self.trainfolder):
+            for my_file in files:
+                batches[os.path.basename(os.path.dirname(os.path.join(root,my_file)))].append(os.path.join(root,my_file))
         return batches
 
     def create_fake_batch_for_testing(self, bamlist):
