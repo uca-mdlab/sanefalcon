@@ -353,7 +353,7 @@ def run_model(nucleosome_file, reference_file, outfile, test_nucleosome_file=Non
     print(' '.join([str(x) for x in poly_fit]))
 
     plt.scatter(fittedVals, yVals)
-    plt.xlim([0, 25])
+    # plt.xlim([0, 25])
     plt.savefig(outfile + '.direct2.pdf', dpi=100)
 
     with open(outfile + '.model', 'w') as modelFile:
