@@ -43,6 +43,7 @@ def get_fwd_rev_files(dic):
 def launch_merge(mapping):
     merge_file_list = defaultdict(dict)
     for subdir, dic in mapping.items():
+        logger.debug(f"launch_merge for {subdir}")
         fwd, rev = get_fwd_rev_files(dic)
         merge_file_list[subdir] = {'fwd': fwd, 'rev': rev}
     res = merge(merge_file_list)
