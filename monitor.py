@@ -53,6 +53,7 @@ def launch_merge(mapping):
 def launch_merge_subs(mergeddic, trainfolder):
     merged = defaultdict(list)
     for subdir, files in mergeddic.items():
+        logger.debug(f"launch_merge_subs for {subdir}")
         for f in files:
             merged[os.path.basename(f)].append(f)
 
@@ -70,6 +71,7 @@ def launch_merge_anti_subs(mergeddic):
 
     antisubs = []
     for path, files in anti.items():
+        logger.debug(f"launch_merge_anti_subs for {path}")
         for chrom in range(1, 23):
             pattern = re.compile(r'\.{}$'.format(chrom))
             per_chrom = [f for f in files if re.search(pattern, f)]
