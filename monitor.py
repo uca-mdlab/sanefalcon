@@ -43,6 +43,7 @@ def get_fwd_rev_files(dic):
 def launch_merge(mapping):
     merge_file_list = defaultdict(dict)
     for subdir, dic in mapping.items():
+        logger.debug(f"launch_merge for {subdir}")
         fwd, rev = get_fwd_rev_files(dic)
         merge_file_list[subdir] = {'fwd': fwd, 'rev': rev}
     res = merge(merge_file_list)
@@ -52,6 +53,7 @@ def launch_merge(mapping):
 def launch_merge_subs(mergeddic, trainfolder):
     merged = defaultdict(list)
     for subdir, files in mergeddic.items():
+        logger.debug(f"launch_merge_subs for {subdir}")
         for f in files:
             merged[os.path.basename(f)].append(f)
 
@@ -69,6 +71,7 @@ def launch_merge_anti_subs(mergeddic):
 
     antisubs = []
     for path, files in anti.items():
+        logger.debug(f"launch_merge_anti_subs for {path}")
         for chrom in range(1, 23):
             pattern = re.compile(r'\.{}$'.format(chrom))
             per_chrom = [f for f in files if re.search(pattern, f)]

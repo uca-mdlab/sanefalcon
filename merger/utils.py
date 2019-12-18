@@ -1,4 +1,7 @@
 import os
+from log_setup import setup_logger
+
+logger = setup_logger(__name__, 'logs/merge_utils.log')
 
 
 class Utils:
@@ -36,6 +39,8 @@ class Utils:
     def prepare_jobs_arguments(files_to_merge):
         runs = []
         for subdir, dic in files_to_merge.items():
+            logger.debug(f"prepare_job_arguments for {subdir}")
+            logger.debug(f"{dic.items()}")
             for chrom in range(1, 23):
                 fwd = dic['fwd'][chrom]
                 rev = dic['rev'][chrom]
