@@ -15,7 +15,7 @@ def merge_streams(profile_dir, samplename, ext, rev=False):
     for chrom in chromosomes:
         files = [os.path.join(profile_dir, f) for f in os.listdir(profile_dir) if
                  re.match(samplename, f) and (f.endswith(ext[0]) or f.endswith(ext[1]))]
-        logger.debug('Merging data from {}'.format(files))
+        logger.debug('Merging data from {} files'.format(len(files)))
         for f in files:
             with open(f, 'r') as infile:
                 arr = infile.readlines()
