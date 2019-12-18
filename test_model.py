@@ -60,10 +60,20 @@ def compute_ff(referenceFile, modelname, profile_dir):
     with open(referenceFile, 'r') as infile:
         for line in infile:
             samplename, ffref, gender = line.strip().split()
-            print(samplename)
             ff, nuclprofile = predict(modelname, samplename, profile_dir)
             with open(os.path.join(profile_dir, samplename + '.ff'), 'w') as out:
                 out.write('Fetal Fraction: {}\n'.format(ff))
                 out.write('Nucleosome Profile: {}'.format(nuclprofile))
             result[samplename] = ff
+            logger.debug(f"ff({samplename}) = {ff}")
     return result
+
+
+if __name__ == '__main__':
+    import sys
+    referenceFile = sys.argv[1]
+    modelname = sys.argv[2]
+    profiledir = sys.argv[3]
+    result = compute_ff(referenceFile, modelname, profiledir)
+    for samplename, ff in result.items():
+        print(samplename, ff)
