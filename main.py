@@ -50,7 +50,7 @@ if __name__ == "__main__":
 
         logger.info('Testing. training _nucleosome_file = {}; _reference_file = {}'.format(training_nucleosome_file, training_reference_file))
         logger.info('Testing. testing _nucleosome_file = {}, _reference_file = {}'.format(nucleosome_file, reference_file))
-        ffs = compute_ff(reference_file, outmodel_file, test_profile_dir)
+        ffs = compute_ff(outmodel_file, test_profile_dir)
         for k, v in ffs.items():
             print(k, v)
         # predictor.run_model(training_nucleosome_file, training_reference_file, outmodel_file, nucleosome_file, reference_file)
