@@ -58,7 +58,8 @@ def predict(model_file, sample, profile_dir):
 
 def compute_ff(modelname, profile_dir):
     result = {}
-    samplenames = [f.split('.bam')[0] + '.bam' for f in os.listdir(profile_dir)]
+    samplenames = list({f.split('.bam')[0] + '.bam' for f in os.listdir(profile_dir)})
+    logger.debug(f'Found {len(samplenames)} sample names for testing')
     for samplename in samplenames:
         ff, nuclprofile = predict(modelname, samplename, profile_dir)
         with open(os.path.join(profile_dir, samplename + '.ff'), 'w') as out:
