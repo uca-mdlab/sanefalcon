@@ -356,7 +356,8 @@ def run_model(nucleosome_file, reference_file, outfile, test_nucleosome_file=Non
     # plt.xlim([0, 25])
     plt.savefig(outfile + '.direct2.pdf', dpi=100)
 
-    with open(outfile + '.model', 'w') as modelFile:
+    modelFileName = outfile + '.model'
+    with open(modelFileName, 'w') as modelFile:
         modelFile.write(' '.join([str(x) for x in correlations]))
         modelFile.write('\n')
         modelFile.write(' '.join([str(x) for x in poly_fit]))
@@ -431,3 +432,4 @@ def run_model(nucleosome_file, reference_file, outfile, test_nucleosome_file=Non
     plotCorrelation(correlations, outfile +'.correlations.pdf')
     plotCorrelation(smoothedCorrelations, outfile +'.smoothedcorrelations.pdf')
 
+    return modelFileName
