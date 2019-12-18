@@ -4,6 +4,7 @@ import monitor
 import predictor
 import os
 from log_setup import setup_logger
+from test_model import compute_ff
 
 logger = setup_logger(__name__, "logs/sanefalcon.log")
 
@@ -33,19 +34,25 @@ if __name__ == "__main__":
         reference_file = config['default']['trainref']
         nucleosome_file = monitor.training(config)
         logger.info('Nucleosome file computed: {}'.format(nucleosome_file))
-        predictor.run_model(nucleosome_file, reference_file, outmodel_file)
+        modelfileName = predictor.run_model(nucleosome_file, reference_file, outmodel_file)
         logger.info('Model trained. {}'.format(outmodel_file))
     else:
-        outmodel_file = os.path.join(config['folders']['test'], 'out')
+        logger.info('Testing phase...')
+        outmodel_file = os.path.join(config['folders']['train'], 'out.model')
         training_nucleosome_file = config['default']['trainnucl']
         training_reference_file = config['default']['trainref']
-
+        logger.info(f'Model file located at {outmodel_file}')
         if not os.path.isfile(training_nucleosome_file):
             exit('Run training first. -t flag')
         nucleosome_file = monitor.testing(config)
         reference_file = config['default']['testref']
+        test_profile_dir = config['folders']['testprofiles']
+
         logger.info('Testing. training _nucleosome_file = {}; _reference_file = {}'.format(training_nucleosome_file, training_reference_file))
         logger.info('Testing. testing _nucleosome_file = {}, _reference_file = {}'.format(nucleosome_file, reference_file))
+        ffs = compute_ff(reference_file, outmodel_file, test_profile_dir)
+        for k, v in ffs.items():
+            print(k, v)
         # predictor.run_model(training_nucleosome_file, training_reference_file, outmodel_file, nucleosome_file, reference_file)
 
     logger.info('Done.')
