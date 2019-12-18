@@ -10,6 +10,7 @@ chromosomes = range(1, 23)
 
 
 def merge_streams(profile_dir, samplename, ext, rev=False):
+    logger.debug(f'Merge stream on {profile_dir} for {samplename} (ext = {ext}')
     dic = defaultdict(float)
     for chrom in chromosomes:
         files = [os.path.join(profile_dir, f) for f in os.listdir(profile_dir) if
