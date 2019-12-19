@@ -1,6 +1,6 @@
 import os
 import re
-
+from itertools import islice
 
 class Utils:
 
@@ -29,10 +29,7 @@ class Utils:
         return lines
 
     @staticmethod
-    def prepare_batches(lis, n):
-        if n == 0:
-            return lis
-        # Yield successive n-sized chunks from manip_list.
-        for i in range(0, len(lis), n):
-            yield lis[i:i + n]
+    def prepare_batches(lis, size):
+        it = iter(lis)
+        return iter(lambda: tuple(islice(it, size)), ())
 

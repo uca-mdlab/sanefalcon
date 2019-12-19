@@ -57,7 +57,7 @@ class FileManager:
             logger.info('Training dir empty, creating from scratch')
 
         if not batches:
-            for num_batch, batch in enumerate([l for l in Utils.prepare_batches(bamlist, batch_size)]):
+            for num_batch, batch in enumerate(list(Utils.prepare_batches(bamlist, batch_size))):
                 for filename in batch:
                     basename = os.path.basename(filename)
                     batch_dir = os.path.join(self.trainfolder, letters[num_batch])
