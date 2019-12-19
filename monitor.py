@@ -81,9 +81,7 @@ def launch_merge_anti_subs(mergeddic):
     return anti_sub_files
 
 
-def prepare_and_merge(fm, rsb, config):
-    bamlist = Utils.readfile(config['training']['bamlist'])
-    batchsize = int(config['training']['batchsize'])
+def prepare_and_merge(fm, bamlist, batchsize, rsb):
     batches = fm.prepare_train_folder(bamlist, batchsize)
     logger.info('Batches prepared')
     rspfiles = rsb.prepare_samples(fm.datafolder, fm.rspfolder)
@@ -104,21 +102,23 @@ def create_nucleosome_profiles(fm, mapping, training=True):
     return p.combine(training)
 
 
-def training(config):
-    logger.info('Starting...')
+def training(config, training_set):
+    logger.info('Starting training...')
+    batchsize = int(config['training']['batchsize'])
     f = FileManager(config)
     f.check_paths()
     rs = RspBuilder(config)
-    mapping, merged, anti = prepare_and_merge(f, rs, config)
+    mapping, merged, anti = prepare_and_merge(f, training_set, batchsize, rs)
     nucleosome_file, img_file = create_nucleosome_profiles(f, mapping)
     logger.info('Nucleosome file created: {}'.format(nucleosome_file))
     return nucleosome_file
 
 
 # Testing phase
-def filter_out_rsp_files(fm):
-    train_names = [os.path.basename(f) for f in Utils.readfile(fm.config['training']['bamlist'])]
-    logger.debug('Found {} names in training'.format(len(train_names)))
+def get_rsp_for_testing(fm, testing_set):
+    # train_names = [os.path.basename(f) for f in Utils.readfile(fm.config['training']['bamlist'])]
+    # logger.debug('Found {} names in training'.format(len(train_names)))
+    logger.debug('Found {} names in testing set'.format(len(testing_set)))
     pattern = re.compile(r'\.\d{1,2}\.')
     testing_rsp = defaultdict(list)
     rsps = []
@@ -127,7 +127,7 @@ def filter_out_rsp_files(fm):
         try:
             token = re.search(pattern, basename).group()
             name = basename.split(token)[0]
-            if name not in train_names:
+            if name in testing_set:
                 testing_rsp[name].append(f)
                 rsps.append(f)
         except AttributeError:
@@ -142,9 +142,9 @@ def filter_out_rsp_files(fm):
     return mapping, merge_file_list
 
 
-def testing(config):
+def testing(config, testing_set):
     fm = FileManager(config)
-    mapping, rsp_to_merge = filter_out_rsp_files(fm)
+    mapping, rsp_to_merge = get_rsp_for_testing(fm, testing_set)
     merged = merge(rsp_to_merge)
     logger.info('Merged testing: {}'.format(merged))
     nucleosome_file, img_file = create_nucleosome_profiles(fm, mapping, training=False)
