@@ -88,6 +88,7 @@ if __name__ == "__main__":
         model = train(group_name, training_set)
         test(group_name, model, testing_set)
         logger.info(f'{group_name} terminated.')
+        exit(0)
 
 
     # if is_training:
