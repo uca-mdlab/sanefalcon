@@ -83,9 +83,8 @@ if __name__ == "__main__":
 
     for group_file in group_files:
         group_name, training_set, testing_set = define_training_and_testing_set(group_file, data_folder)
-        logger.debug(f'{group_name}, {len(testing_set)}, {testing_set[:4]}')
-        logger.debug(f'{group_name}, {len(training_set)}, {training_set[:4]}')
-        exit(0)
+        logger.debug(f'TESTING {group_name}, {len(testing_set)}, {testing_set[:4]}')
+        logger.debug(f'TRAINING {group_name}, {len(training_set)}, {training_set[:4]}')
         model = train(group_name, training_set)
         test(group_name, model, testing_set)
         logger.info(f'{group_name} terminated.')
