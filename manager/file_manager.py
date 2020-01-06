@@ -76,9 +76,9 @@ class FileManager:
                         pass
                     batches[batch_dir].append(link_name)
 
-        logger.info("Batches created with symlinks")
+        logger.info(f"{len(batches)} Batches created with symlinks")
         for batch_dir, links in batches.items():
-            logger.debug(f"Batch {batch_dir} ({len(links)}:")
+            logger.debug(f"Batch {batch_dir} ({len(links)}):")
             for link in links:
                 logger.debug(link)
             logger.debug('--')
