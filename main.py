@@ -29,19 +29,20 @@ def define_training_and_testing_set(test_file, data_dir):
     return group_name, training_set, testing_set
 
 
-def train(group_name, training_set)
+def train(group_name, training_set):
     logger.info(f'Training phase {group_name}')
 
     outmodel_file = os.path.join(config['folders']['train'], group_name)
-    # reference_file = config['default']['trainref']
+    reference_file = config['default']['trainref']
     logger.debug(f'Final model will be saved in {outmodel_file}')
-    # logger.debug(f'Reference file:  {reference_file}')
+    logger.debug(f'Reference file:  {reference_file}')
     nucleosome_file = monitor.training(config, training_set)
 
     logger.info('Nucleosome file computed: {}'.format(nucleosome_file))
     modelfileName = predictor.run_model(nucleosome_file, reference_file, outmodel_file)
     logger.info(f'Model trained for {group_name}: {modelfileName}')
     return modelfileName
+
 
 def test(group_name, outmodel_file, testing_set):
     logger.info(f'Testing phase {group_name}')
@@ -84,6 +85,7 @@ if __name__ == "__main__":
         group_name, training_set, testing_set = define_training_and_testing_set(group_file, data_folder)
         logger.debug(f'{group_name}, {len(testing_set)}, {testing_set[:4]}')
         logger.debug(f'{group_name}, {len(training_set)}, {training_set[:4]}')
+        exit(0)
         model = train(group_name, training_set)
         test(group_name, model, testing_set)
         logger.info(f'{group_name} terminated.')
