@@ -86,6 +86,7 @@ def prepare_and_merge(fm, bamlist, batchsize, rsb):
     logger.info('Batches prepared')
     rspfiles = rsb.prepare_samples(fm.datafolder, fm.rspfolder)
     logger.info('Samples prepared')
+    exit(0)
     mapping = get_rsp_batches_mapping(batches, rspfiles)
     merged = launch_merge(mapping)
     # merged_subs = launch_merge_subs(merged, fm.trainfolder)

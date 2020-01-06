@@ -50,7 +50,7 @@ class FileManager:
                 for my_file in files:
                     full_path = os.path.join(root, my_file)
                     batches[os.path.dirname(full_path)].append(full_path)
-            logger.debug('Batches created:')
+            logger.debug('Batches retrieved:')
             for k, v in batches.items():
                 logger.debug(f"{k}, {len([x for x in v if x.endswith('.bam')])}")
         except FileNotFoundError:
@@ -77,6 +77,11 @@ class FileManager:
                     batches[batch_dir].append(link_name)
 
         logger.info("Batches created with symlinks")
+        for batch_dir, links in batches.items():
+            logger.debug(f"Batch {batch_dir} ({len(links)}:")
+            for link in links:
+                logger.debug(link)
+            logger.debug('--')
         return batches
 
     def create_fake_batch_for_testing(self, bamlist):
