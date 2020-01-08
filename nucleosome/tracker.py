@@ -35,6 +35,7 @@ class Tracker:
 
     def create_nucleosome_files(self, folder, outfilestub, training=True):
         runs = self.build_runs(folder, outfilestub, training)
+        logger.debug(f'Preparing {len(runs)} runs for nucleosome tracks creation...')
         self.nucleosome_tracks[folder] = lp(runs, nd.create_nucleosome_file)
 
     def create_tracks(self, training=True):
