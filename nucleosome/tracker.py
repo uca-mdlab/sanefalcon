@@ -16,6 +16,7 @@ class Tracker:
         self.nucleosome_tracks = defaultdict(list)
 
     def build_runs(self, folder, outfilestub, training):
+        logger.debug(f'Building runs for {folder}: training = {training}')
         runs = []
         if training:
             files = [os.path.join(folder, f) for f in os.listdir(folder) if re.match('^anti', f)]
@@ -25,7 +26,11 @@ class Tracker:
             pattern = re.compile(r'\d{1,2}$')
             chrom = re.search(pattern, f).group()
             outfile = outfilestub + '.{}'.format(chrom)
-            runs.append((chrom, f, os.path.join(folder, outfile)))
+            nucl_track_file = os.path.join(folder, outfile)
+            if not os.path.isfile(nucl_track_file):
+                runs.append((chrom, f, nucl_track_file))
+            else:
+                logger.warning(f'{nucl_track_file} already there.. skipping.')
         return runs
 
     def create_nucleosome_files(self, folder, outfilestub, training=True):
