@@ -224,7 +224,7 @@ def process(chrom, fwdrevdic, outdir):
             rev_files_left = len(rev_files)
             rev_files_iter = iter(rev_files)
             logger.debug('Starting multithread on {} with {}'.format(subdir, nucl_ex_file))
-            with concurrent.futures.ThreadPoolExecutor(max_workers=5, thread_name_prefix='fwd') as executor:
+            with concurrent.futures.ThreadPoolExecutor(max_workers=10, thread_name_prefix='fwd') as executor:
                 jobs = {}
                 while fwd_files_left:
                     for this_fwd_file in fwd_files_iter:
@@ -243,7 +243,7 @@ def process(chrom, fwdrevdic, outdir):
                         d[subdir].append(l_tup[0])
             logger.info('End of forward concurrent phase for chrom {}'.format(chrom))
 
-            with concurrent.futures.ThreadPoolExecutor(max_workers=5, thread_name_prefix='rev') as executor:
+            with concurrent.futures.ThreadPoolExecutor(max_workers=10, thread_name_prefix='rev') as executor:
                 jobs = {}
                 while rev_files_left:
                     for this_rev_file in rev_files_iter:
