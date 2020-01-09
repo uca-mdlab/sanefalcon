@@ -57,6 +57,7 @@ class Tracker:
         for subdir, dic in mapping.items():
             logger.debug('working on {}'.format(subdir))
             for name, files in dic.items():
+                logger.debug(f'tracker.get_data: {name}, {len(files)}, {files[:3]}')
                 fwd = [f for f in files if f.endswith('.fwd')]
                 rev = [f for f in files if f.endswith('.rev')]
                 for chrom in range(1, 23):

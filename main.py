@@ -75,20 +75,21 @@ if __name__ == "__main__":
 
     list_testing_dir = config['folders']['listtestingdir']
 
-    group_files = [os.path.join(list_testing_dir, f) for f in os.listdir(list_testing_dir)
-                   if re.match('list_testing', f)]
+    # group_files = [os.path.join(list_testing_dir, f) for f in os.listdir(list_testing_dir)
+    #                if re.match('list_testing', f)]
 
-    logger.info(f'Found {len(group_files)} testing groups')
+    # logger.info(f'Found {len(group_files)} testing groups')
     data_folder = config['folders']['data']
 
-    for group_file in group_files:
-        group_name, training_set, testing_set = define_training_and_testing_set(group_file, data_folder)
-        logger.debug(f'TESTING {group_name}, {len(testing_set)}, {testing_set[:4]}')
-        logger.debug(f'TRAINING {group_name}, {len(training_set)}, {training_set[:4]}')
-        model = train(group_name, training_set)
-        test(group_name, model, testing_set)
-        logger.info(f'{group_name} terminated.')
-        exit(0)
+    group_file = os.path.join(list_testing_dir, 'list_testing3.txt')
+    # for group_file in group_files:
+    group_name, training_set, testing_set = define_training_and_testing_set(group_file, data_folder)
+    logger.debug(f'TESTING {group_name}, {len(testing_set)}, {testing_set[:4]}')
+    logger.debug(f'TRAINING {group_name}, {len(training_set)}, {training_set[:4]}')
+    model = train(group_name, training_set)
+    test(group_name, model, testing_set)
+    logger.info(f'{group_name} terminated.')
+    exit(0)
 
 
     # if is_training:
