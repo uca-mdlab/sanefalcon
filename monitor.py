@@ -18,12 +18,12 @@ logger = setup_logger(__name__, 'logs/sanefalcon.log')
 def get_rsp_batches_mapping(batches, rspfiles):
     mapping = defaultdict(dict)
     for subdir, list_of_fnames in batches.items():
-        logger.debug(f'mapping for: {subdir}, {len(list_of_fnames)}, {list_of_fnames[:2]}')
+        # logger.debug(f'mapping for: {subdir}, {len(list_of_fnames)}, {list_of_fnames[:2]}')
         bam_names = [os.path.basename(f) for f in list_of_fnames if f.endswith('.bam')]
-        logger.debug(f'bam names: {bam_names[:2]}')
+        # logger.debug(f'bam names: {bam_names[:2]}')
         for bam in bam_names:
             rsp = list(filter(lambda x: re.search(bam, x), rspfiles))
-            logger.debug(f'{len(rsp)} rsp files for {bam}')
+            # logger.debug(f'{len(rsp)} rsp files for {bam}')
             mapping[subdir][bam] = rsp
 
     logger.info('Mapping complete.')

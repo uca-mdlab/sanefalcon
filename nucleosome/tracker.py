@@ -63,6 +63,7 @@ class Tracker:
                 for chrom in range(1, 23):
                     pattern = re.compile(r'\.{}\.'.format(chrom))
                     nucl_pattern = re.compile(r'\.{}$'.format(chrom))
+                    logger.debug(f'REGEXP RESULT: {self.nucleosome_tracks[subdir]}')
                     nucl_track = [f for f in self.nucleosome_tracks[subdir] if re.search(nucl_pattern, f)][0]
                     fwd_c = list(filter(lambda x: re.search(pattern, x), fwd))
                     rev_c = list(filter(lambda x: re.search(pattern, x), rev))
