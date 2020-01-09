@@ -52,22 +52,26 @@ class RspBuilder:
                     logger.debug("prep_samples for {}".format(fname))
 
         tot = len(fwd_jobs) + len(rev_jobs)
-        logger.info('Spawning {} threads'.format(tot))
-        with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
-            jobs = {}
-            for job in fwd_jobs:
-                sub = executor.submit(self.prepare_fwd, *job)
-                jobs[sub] = job
+        if tot > 0:
+            logger.info('Spawning {} threads'.format(tot))
+            with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
+                jobs = {}
+                for job in fwd_jobs:
+                    sub = executor.submit(self.prepare_fwd, *job)
+                    jobs[sub] = job
 
-            for job in rev_jobs:
-                sub = executor.submit(self.prepare_rev, *job)
-                jobs[sub] = job
+                for job in rev_jobs:
+                    sub = executor.submit(self.prepare_rev, *job)
+                    jobs[sub] = job
 
-            for job in concurrent.futures.as_completed(jobs):
-                outfile = job.result()
-                outfiles.append(outfile)
+                for job in concurrent.futures.as_completed(jobs):
+                    outfile = job.result()
+                    outfiles.append(outfile)
 
-        logger.info('End multithreading. Samples prepared.')
+            logger.info('End multithreading. Samples prepared.')
+        else:
+            logger.info('Samples already prepared.')
+
         if len(outfiles) == 0:
             return [os.path.join(rspfolder, fname) for fname in os.listdir(rspfolder)]
         else:
