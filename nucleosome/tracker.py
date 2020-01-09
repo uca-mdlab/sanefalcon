@@ -18,6 +18,7 @@ class Tracker:
     def build_runs(self, folder, outfilestub, training):
         logger.debug(f'Building runs for {folder}: training = {training}')
         runs = []
+        nucl_files = []
         if training:
             files = [os.path.join(folder, f) for f in os.listdir(folder) if re.match('^anti', f)]
         else:
@@ -31,12 +32,19 @@ class Tracker:
                 runs.append((chrom, f, nucl_track_file))
             else:
                 logger.warning(f'{nucl_track_file} already there.. skipping.')
-        return runs
+                nucl_files.append(nucl_track_file)
+        return runs, nucl_files
 
     def create_nucleosome_files(self, folder, outfilestub, training=True):
-        runs = self.build_runs(folder, outfilestub, training)
-        logger.debug(f'Preparing {len(runs)} runs for nucleosome tracks creation...')
-        self.nucleosome_tracks[folder] = lp(runs, nd.create_nucleosome_file)
+        runs, nucl_files = self.build_runs(folder, outfilestub, training)
+        if len(runs) > 0 and len(nucl_files) == 0:
+            logger.debug(f'Preparing {len(runs)} runs for nucleosome tracks creation...')
+            self.nucleosome_tracks[folder] = lp(runs, nd.create_nucleosome_file)
+        elif len(runs) == 0 and len(nucl_files) > 0:
+            logger.debug(f'Nucleosome tracks already created')
+            self.nucleosome_tracks[folder] = nucl_files
+        else:
+            logger.error('Something bad happened. Check you nucleosome track files.')
 
     def create_tracks(self, training=True):
         if training:
