@@ -13,9 +13,7 @@ chromosomes = range(1, 23)
 
 def _merge(files, subdir, chrom):
     outfile = os.path.join(subdir, "merge.{}".format(chrom))
-    if os.path.isfile(outfile):
-        logger.debug("_merge: {} already there. Skipping...".format(outfile))
-    else:
+    if not os.path.isfile(outfile):
         logger.debug("_merge: merging chrom {} start files in {} -> {}".format(chrom, subdir, outfile))
         data = Utils.read_all_files(files)
         Utils.sort_and_write(data, outfile)
@@ -33,9 +31,7 @@ def merge(files_to_merge):
 
 
 def _merge_subs(outfile, files):
-    if os.path.isfile(outfile):
-        logger.debug("merge_subs. file {} already there. Skipping...".format(outfile))
-    else:
+    if not os.path.isfile(outfile):
         logger.debug("merge subs file {}".format(outfile))
         data = Utils.read_all_files(files)
         Utils.sort_and_write(data, outfile)
@@ -52,9 +48,7 @@ def merge_subs(merged, trainfolder):
 def _merge_anti_subs(folder, chrom, files):
     # print("{} launched on {} ".format(threading.current_thread(), chrom))
     outfile = os.path.join(folder, "anti.{}".format(chrom))
-    if os.path.isfile(outfile):
-        logger.debug("merge_anti_subs. file {} already there. Skipping...".format(outfile))
-    else:
+    if not os.path.isfile(outfile):
         logger.debug("merge anti subs chrom: {}, folder: {} -> {}".format(chrom, folder, outfile))
         data = Utils.read_all_files(files)
         Utils.sort_and_write(data, outfile)
