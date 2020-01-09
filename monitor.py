@@ -18,7 +18,9 @@ logger = setup_logger(__name__, 'logs/sanefalcon.log')
 def get_rsp_batches_mapping(batches, rspfiles):
     mapping = defaultdict(dict)
     for subdir, list_of_fnames in batches.items():
+        print(subdir, len(list_of_fnames), list_of_fnames[:2])
         bam_names = [os.path.basename(f) for f in list_of_fnames]
+        print(bam_names[:2])
         for bam in bam_names:
             rsp = list(filter(lambda x: re.search(bam, x), rspfiles))
             mapping[subdir][bam] = rsp
