@@ -84,8 +84,8 @@ def launch_merge_anti_subs(mergeddic):
     return anti_sub_files
 
 
-def prepare_and_merge(fm, bamlist, batchsize, rsb):
-    batches = fm.prepare_train_folder(bamlist, batchsize)
+def prepare_and_merge(fm, bamlist, rsb):
+    batches = fm.prepare_train_folder(bamlist)
     logger.info('Batches prepared')
     print(batches.keys())
     print(batches[list(batches.keys())[0]][:3])
@@ -110,11 +110,11 @@ def create_nucleosome_profiles(fm, mapping, training=True):
 
 def training(config, training_set):
     logger.info('Starting training...')
-    batchsize = int(config['training']['batchsize'])
+    # batchsize = int(config['training']['batchsize'])
     f = FileManager(config)
     f.check_paths()
     rs = RspBuilder(config)
-    mapping, merged, anti = prepare_and_merge(f, training_set, batchsize, rs)
+    mapping, merged, anti = prepare_and_merge(f, training_set, rs)
     nucleosome_file, img_file = create_nucleosome_profiles(f, mapping)
     logger.info('Nucleosome file created: {}'.format(nucleosome_file))
     return nucleosome_file

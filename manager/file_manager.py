@@ -1,7 +1,7 @@
 import os
 import logging
 import string
-from collections import defaultdict
+from collections import defaultdict, OrderedDict
 from .utils import Utils
 from log_setup import setup_logger
 
@@ -39,7 +39,7 @@ class FileManager:
     def get_read_start_positions_data(self, mask=''):
         return Utils.get_data(self.rspfolder, mask)
 
-    def prepare_train_folder(self, bamlist, batch_size):
+    def prepare_train_folder(self, bamlist):
         letters = list(string.ascii_lowercase)
         batches = defaultdict(list)
         logger.debug('Found {} files to link'.format(len(bamlist)))
@@ -57,32 +57,42 @@ class FileManager:
             logger.info('Training dir empty, creating from scratch')
 
         if not batches:
-            for num_batch, batch in enumerate(list(Utils.prepare_batches(bamlist, batch_size))):
-                for filename in batch:
-                    basename = os.path.basename(filename)
-                    batch_dir = os.path.join(self.trainfolder, letters[num_batch])
-                    try:
-                        os.makedirs(batch_dir)
-                        logger.debug("Created folder: {}".format(batch_dir))
-                    except FileExistsError:
-                        logger.warning("Folder {} exists, skipping...".format(batch_dir))
-                    link_name = os.path.join(batch_dir, basename)
-                    try:
-                        os.symlink(filename, link_name)
-                        os.symlink(filename + '.bai', link_name + '.bai')
-                    except FileExistsError:
-                        logger.warning("Link {} exists, skipping...".format(link_name))
-                    except FileNotFoundError:
-                        pass
-                    batches[batch_dir].append(link_name)
+            runs = defaultdict(list)
+            for bam in bamlist:
+                run = os.path.basename(bam).split('_')[0]
+                runs[run].append(bam)
+            ordered = OrderedDict(sorted(runs.items(), key=lambda x: chr(int(x[0][1:]))))
+            l_ord = list(ordered)
+            logger.info(f'Found {len(ordered)} distinct runs')
+            result = defaultdict(list)
+            i = 0
+            while l_ord:
+                step = len(l_ord) // 5 + 1  # avoid step = 0
+                subset = l_ord[::step][:4]  # pick up 4 elements. One every step items
+                logger.info(f'Batch {letters[i]}, runs: {subset}, - num samples = '
+                            f'{sum(len(ordered[k]) for k in subset)}')
+                result[letters[i]].extend(ordered[k] for k in subset)
+                l_ord = [x for x in l_ord if x not in subset]
+                i += 1
 
-        logger.info(f"{len(batches)} Batches created with symlinks")
-        for batch_dir, links in batches.items():
-            logger.debug(f"Batch {batch_dir} ({len(links)}):")
-            for link in links:
-                logger.debug(link)
-            logger.debug('--')
+            for batch_name, l in result.items():
+                batch_dir = os.path.join(self.trainfolder, batch_name)
+                os.makedirs(batch_dir)
+                flatten = [item for sublist in l for item in sublist]
+                bam_links = [os.path.join(batch_dir, os.path.basename(item)) for item in flatten]
+                bai_links = [os.path.join(batch_dir, os.path.basename(item) + '.bai') for item in flatten]
+                for orig, bam_link, bai_link in zip(flatten, bam_links, bai_links):
+                    try:
+                        os.symlink(orig, bam_link)
+                        os.symlink(orig + '.bai', bai_link)
+                    except FileExistsError:
+                        pass
+                    except FileNotFoundError:
+                        logger.error(f'{orig} not found??')
+                batches[batch_dir] = bam_links
+
         return batches
+
 
     def create_fake_batch_for_testing(self, bamlist):
         batch = [os.path.join(self.datafolder, x) for x in bamlist]
