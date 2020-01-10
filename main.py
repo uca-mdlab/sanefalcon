@@ -81,7 +81,7 @@ if __name__ == "__main__":
     # logger.info(f'Found {len(group_files)} testing groups')
     data_folder = config['folders']['data']
 
-    group_file = os.path.join(list_testing_dir, 'list_testing3.txt')
+    group_file = os.path.join(list_testing_dir, 'list_testing1.txt')
     # for group_file in group_files:
     group_name, training_set, testing_set = define_training_and_testing_set(group_file, data_folder)
     logger.debug(f'TESTING {group_name}, {len(testing_set)}, {testing_set[:4]}')
