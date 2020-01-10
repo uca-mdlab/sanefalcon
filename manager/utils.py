@@ -30,7 +30,6 @@ class Utils:
 
     @staticmethod
     def prepare_batches(lis, size):
-        print(lis)
         it = iter(lis)
         return iter(lambda: tuple(islice(it, size)), ())
 
