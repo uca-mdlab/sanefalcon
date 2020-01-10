@@ -87,6 +87,7 @@ def launch_merge_anti_subs(mergeddic):
 def prepare_and_merge(fm, bamlist, batchsize, rsb):
     batches = fm.prepare_train_folder(bamlist, batchsize)
     logger.info('Batches prepared')
+    exit(0)
     rspfiles = rsb.prepare_samples(fm.datafolder, fm.rspfolder)
     logger.info('Samples prepared')
     mapping = get_rsp_batches_mapping(batches, rspfiles)
