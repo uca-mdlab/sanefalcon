@@ -57,13 +57,15 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description='Launch everything',
                                      formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    # parser.add_argument('-t', dest='training', action='store_true', help='training phase')
-    # parser.add_argument("testing_group", help="List of samples in the testing group")
+
+    parser.add_argument("testing_group_file", help="List of samples in the testing group")
     parser.add_argument('-c', dest='conffile', nargs='?', type=str, default="./sanefalcon.conf",
                         help='path of the configuration file')
 
     args = parser.parse_args()
-    # is_training = args.training
+    group_file = args.testing_group_file
+    if not os.path.isfile(group_file):
+        exit(f'{group_file} not found.')
 
     config = configparser.ConfigParser()
     config.read(args.conffile)
@@ -73,16 +75,8 @@ if __name__ == "__main__":
         for k, v in config[section].items():
             logger.info('{}:\t{}'.format(k, v))
 
-    list_testing_dir = config['folders']['listtestingdir']
-
-    # group_files = [os.path.join(list_testing_dir, f) for f in os.listdir(list_testing_dir)
-    #                if re.match('list_testing', f)]
-
-    # logger.info(f'Found {len(group_files)} testing groups')
     data_folder = config['folders']['data']
 
-    group_file = os.path.join(list_testing_dir, 'list_testing1.txt')
-    # for group_file in group_files:
     group_name, training_set, testing_set = define_training_and_testing_set(group_file, data_folder)
     logger.debug(f'TESTING {group_name}, {len(testing_set)}, {testing_set[:4]}')
     logger.debug(f'TRAINING {group_name}, {len(training_set)}, {training_set[:4]}')
