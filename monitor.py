@@ -119,8 +119,6 @@ def training(config, training_set):
 
 # Testing phase
 def get_rsp_for_testing(fm, testing_set):
-    # train_names = [os.path.basename(f) for f in Utils.readfile(fm.config['training']['bamlist'])]
-    # logger.debug('Found {} names in training'.format(len(train_names)))
     logger.debug('Found {} names in testing set'.format(len(testing_set)))
     pattern = re.compile(r'\.\d{1,2}\.')
     testing_rsp = defaultdict(list)

@@ -90,33 +90,6 @@ if __name__ == "__main__":
     test(group_name, model, testing_set)
     logger.info(f'{group_name} terminated.')
 
-    # if is_training:
-    #     logger.info('Training phase...')
-    #     outmodel_file = os.path.join(config['folders']['train'], 'out')
-    #     reference_file = config['default']['trainref']
-    #     nucleosome_file = monitor.training(config)
-    #     logger.info('Nucleosome file computed: {}'.format(nucleosome_file))
-    #     modelfileName = predictor.run_model(nucleosome_file, reference_file, outmodel_file)
-    #     logger.info('Model trained. {}'.format(outmodel_file))
-    # else:
-    #     logger.info('Testing phase...')
-    #     outmodel_file = os.path.join(config['folders']['train'], 'out.model')
-    #     training_nucleosome_file = config['default']['trainnucl']
-    #     training_reference_file = config['default']['trainref']
-    #     logger.info(f'Model file located at {outmodel_file}')
-    #     if not os.path.isfile(training_nucleosome_file):
-    #         exit('Run training first. -t flag')
-    #     nucleosome_file = monitor.testing(config)
-    #     reference_file = config['default']['testref']
-    #     test_profile_dir = config['folders']['testprofiles']
-    #
-    #     logger.info('Testing. training _nucleosome_file = {}; _reference_file = {}'.format(training_nucleosome_file, training_reference_file))
-    #     logger.info('Testing. testing _nucleosome_file = {}, _reference_file = {}'.format(nucleosome_file, reference_file))
-    #     ffs = compute_ff(outmodel_file, test_profile_dir)
-    #     for k, v in ffs.items():
-    #         print(k, v)
-    #     # predictor.run_model(training_nucleosome_file, training_reference_file, outmodel_file, nucleosome_file, reference_file)
-
     logger.info('Done.')
 
 

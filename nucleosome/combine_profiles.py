@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 from log_setup import setup_logger
 logger = setup_logger(__name__, 'logs/nucleosome.log')
 
+
 def get_profile_file(proffile):
     l = []
     with open(proffile, 'r') as in_:
