@@ -66,9 +66,12 @@ class FileManager:
             logger.info(f'Found {len(ordered)} distinct runs')
             result = defaultdict(list)
             i = 0
+
+            batch_size = len(ordered) // len(letters) + 1  # be sure to have enough single char folder names
+
             while l_ord:
                 step = len(l_ord) // 5 + 1  # avoid step = 0
-                subset = l_ord[::step][:4]  # pick up 4 elements. One every step items
+                subset = l_ord[::step][:batch_size]  # pick up batch_size elements. One every step items
                 logger.info(f'Batch {letters[i]}, runs: {subset}, - num samples = '
                             f'{sum(len(ordered[k]) for k in subset)}')
                 result[letters[i]].extend(ordered[k] for k in subset)
