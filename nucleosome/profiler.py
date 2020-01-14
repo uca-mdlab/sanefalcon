@@ -28,22 +28,6 @@ class Profiler:
             self.profiles = pool.map(gpp.submit_process, input_list)
             logger.info("Done. Result = {}".format(len(self.profiles) == 22))
 
-            # finished = [
-            #  { '/var/tmp/testsuite/a': [
-            #      ('/var/tmp/testsuite/profiles/p18_084.bam.1.start.fwd.1.fwd',
-            #       '/var/tmp/testsuite/profiles/p18_084.bam.1.start.fwd.1.ifwd'),
-            #      ('/var/tmp/testsuite/profiles/p18_084.bam.1.start.rev.1.irev',
-            #       '/var/tmp/testsuite/profiles/p18_084.bam.1.start.rev.1.rev')
-            #     ],
-            #    '/var/tmp/testsuite/b': [
-            #      ('/var/tmp/testsuite/profiles/p18_085.bam.1.start.fwd.1.fwd',
-            #       '/var/tmp/testsuite/profiles/p18_085.bam.1.start.fwd.1.ifwd'),
-            #      ('/var/tmp/testsuite/profiles/p18_085.bam.1.start.rev.1.irev',
-            #       '/var/tmp/testsuite/profiles/p18_085.bam.1.start.rev.1.rev')
-            #     ]
-            #   }
-            # ]
-
     def combine(self, training=True):
         if training:
             outfile = self.fm.config['default']['trainnucl']
