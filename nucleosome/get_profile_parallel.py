@@ -214,6 +214,7 @@ def process(chrom, fwdrevdic, outdir):
     MAX_FILES_PROCESSED = 15  # limit parallelism not to overload memory
     d = defaultdict(list)
     for subdir, list_ in fwdrevdic.items():
+        logger.debug(f'processing {chrom} in {subdir}')
         for dic in list_:
             nucl_ex_file = dic['nucl_file']
             fwd_files = dic['fwd']
@@ -224,6 +225,7 @@ def process(chrom, fwdrevdic, outdir):
             rev_files_left = len(rev_files)
             rev_files_iter = iter(rev_files)
             logger.debug('Starting multithread on {} with {}'.format(subdir, nucl_ex_file))
+            logger.info(f'Start of forward concurrent phase for chrom {chrom} ({fwd_file_left}, {rev_files_left})')
             with concurrent.futures.ThreadPoolExecutor(max_workers=10, thread_name_prefix='fwd') as executor:
                 jobs = {}
                 while fwd_files_left:
@@ -241,8 +243,9 @@ def process(chrom, fwdrevdic, outdir):
                             l_tup = (None,)
                         del jobs[job]
                         d[subdir].append(l_tup[0])
-            logger.info('End of forward concurrent phase for chrom {}'.format(chrom))
+            logger.info(f'End of forward concurrent phase for chrom {chrom} ({fwd_file_left}, {rev_files_left})')
 
+            logger.info(f'Start of reverse concurrent phase for chrom {chrom} ({fwd_file_left}, {rev_files_left})')
             with concurrent.futures.ThreadPoolExecutor(max_workers=10, thread_name_prefix='rev') as executor:
                 jobs = {}
                 while rev_files_left:
@@ -260,7 +263,7 @@ def process(chrom, fwdrevdic, outdir):
                             l_tup = (None,)
                         del jobs[job]
                         d[subdir].append(l_tup[0])
-            logger.info('End of reverse concurrent phase for chrom {}'.format(chrom))
+            logger.info(f'End of reverse concurrent phase for chrom {chrom} ({fwd_file_left}, {rev_files_left})')
 
     logger.info('Finished processing chrom {}'.format(chrom))
     return d
