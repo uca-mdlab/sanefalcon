@@ -22,13 +22,16 @@ def get_profile_files_per_chrom(fnames, stream='up'):
     for chrom in range(1, 23):
         pattern = re.compile(r"\.{}\.".format(chrom))
         chrom_files = list(filter(lambda x: re.search(pattern, x), fnames))
+        logger.debug(f'Got {len(chrom_files)} on chrom {chrom}')
         if stream == 'up':
             fwd = [f for f in chrom_files if f.endswith('.fwd')]
             rev = [f for f in chrom_files if f.endswith('.rev')]
+            logger.debug(f'Yielding {len(fwd)} fwds and {len(rev)} revs')
             yield chrom, fwd, rev
         else:
             ifwd = [f for f in chrom_files if f.endswith('.ifwd')]
             irev = [f for f in chrom_files if f.endswith('.irev')]
+            logger.debug(f'Yielding {len(ifwd)} ifwds and {len(irev)} irevs')
             yield chrom, ifwd, irev
 
 
