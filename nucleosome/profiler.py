@@ -22,6 +22,7 @@ class Profiler:
         else:
             profilefolder = self.fm.testprofilefolder
         input_list = [(chrom, dic, profilefolder) for chrom, dic in data.items()]
+        logger.debug(f"{len(input_list)} jobs for computing profiles...")
         logger.info("Launching multiprocessing pool...")
         num_cores = mp.cpu_count()
         with mp.Pool(num_cores) as pool:

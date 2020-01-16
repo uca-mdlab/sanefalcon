@@ -84,8 +84,11 @@ class Tracker:
                         pack[chrom][subdir].append({'fwd': fwd_c, 'rev': rev_c, 'nucl_file': nucl_track})
                     else:
                         pack[chrom][subdir] = [{'fwd': fwd_c, 'rev': rev_c, 'nucl_file': nucl_track}]
-                    logger.debug('pack[{}] = {}'.format(chrom, [(subdir, len(pack[chrom][subdir]))
-                                                                for subdir in pack[chrom].keys()]))
+
+            logger.debug(f'Tracker got data for {subdir}')
+            for chrom in range(1, 23):
+                logger.debug('pack[{}] = {}'.format(chrom, [(subdir, len(pack[chrom][subdir]))
+                                                            for subdir in pack[chrom].keys()]))
 
         return pack
 
