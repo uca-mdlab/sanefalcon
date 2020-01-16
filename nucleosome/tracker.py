@@ -37,6 +37,7 @@ class Tracker:
 
     def create_nucleosome_files(self, folder, outfilestub, training=True):
         runs, nucl_files = self.build_runs(folder, outfilestub, training)
+        logger.debug(f'Built {len(runs)} runs. Got already {len(nucl_files)} nucleosome files.')
         if len(runs) > 0 and len(nucl_files) == 0:
             logger.debug(f'Preparing {len(runs)} runs for nucleosome tracks creation...')
             self.nucleosome_tracks[folder] = lp(runs, nd.create_nucleosome_file)
@@ -45,6 +46,9 @@ class Tracker:
             self.nucleosome_tracks[folder] = nucl_files
         else:
             logger.error('Something bad happened. Check you nucleosome track files.')
+        logger.debug('Nucleosome tracks created:')
+        for folder, files in self.nucleosome_tracks:
+            logger.debug(f'Folder {folder} - len = {len(files)} ({files[:3]} ...)')
 
     def create_tracks(self, training=True):
         if training:
