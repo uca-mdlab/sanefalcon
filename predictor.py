@@ -65,11 +65,11 @@ def load_reference_file(fname):
                 continue
             if samplename in ignoredSeries:
                 continue
-            if gender == 'Male':
+            if gender == 'Male' or gender == 'Female':
                 reference[samplename] = float(ffref)
                 series[samplename] = "Training"  # splitLine[-1]
-            elif gender == 'Female':
-                girls[samplename] = float(ffref)
+            #elif gender == 'Female':
+            #    girls[samplename] = float(ffref)
             elif gender == 'BAD':
                 bads[samplename] = float(ffref)
             else:
