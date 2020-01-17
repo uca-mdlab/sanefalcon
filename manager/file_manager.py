@@ -71,8 +71,10 @@ class FileManager:
             logger.info(f'Batch size = {batch_size}')
 
             while l_ord:
-                step = len(l_ord) // 5 + 1  # avoid step = 0
-                subset = l_ord[::step][:batch_size]  # pick up batch_size elements. One every step items
+                if len(l_ord) > batch_size:
+                    subset = l_ord[::batch_size][:batch_size]  # pick up batch_size elements. One every step items
+                else:
+                    subset = l_ord
                 logger.info(f'Batch {letters[i]}, runs: {subset}, - num samples = '
                             f'{sum(len(ordered[k]) for k in subset)}')
                 result[letters[i]].extend(ordered[k] for k in subset)
