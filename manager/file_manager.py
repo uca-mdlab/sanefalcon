@@ -68,6 +68,7 @@ class FileManager:
             i = 0
 
             batch_size = Utils.compute_batch_size(len(ordered))
+            logger.info(f'Batch size = {batch_size}')
 
             while l_ord:
                 step = len(l_ord) // 5 + 1  # avoid step = 0
@@ -77,7 +78,7 @@ class FileManager:
                 result[letters[i]].extend(ordered[k] for k in subset)
                 l_ord = [x for x in l_ord if x not in subset]
                 i += 1
-
+            exit()
             for batch_name, l in result.items():
                 batch_dir = os.path.join(self.trainfolder, batch_name)
                 os.makedirs(batch_dir)
