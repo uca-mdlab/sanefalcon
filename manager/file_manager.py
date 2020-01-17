@@ -67,7 +67,7 @@ class FileManager:
             result = defaultdict(list)
             i = 0
 
-            batch_size = len(ordered) // len(letters) + 1  # be sure to have enough single char folder names
+            batch_size = Utils.compute_batch_size(len(ordered))
 
             while l_ord:
                 step = len(l_ord) // 5 + 1  # avoid step = 0
