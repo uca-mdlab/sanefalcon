@@ -69,11 +69,11 @@ class FileManager:
             result = defaultdict(list)
             i = 0
 
-            batch_size = Utils.compute_batch_size(len(ordered))
-            logger.info(f'Batch size = {batch_size}')
+            num_batches = Utils.compute_num_batches(len(ordered))
+            logger.info(f'num batches = {num_batches}')
 
             rows = []
-            for b in Utils.prepare_batches(runs, batch_size):
+            for b in Utils.prepare_batches(runs, num_batches):
                 rows.append(list(b))
             res = list(np.array(rows).T)  # transpose to avoid subsequent runs in the same batch
             for i, batch in enumerate(res):
