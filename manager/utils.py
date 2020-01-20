@@ -37,5 +37,7 @@ class Utils:
     def compute_num_batches(n):
         divs = [x for x in range(1, n + 1) if n / x == int(n / x)]
         center = (divs[int(len(divs) / 2) - 1], divs[int(len(divs) / 2)])
-        return center[1]
+        low = center[0]
+        high = center[1]
+        return low, high  # trade offs merge/merge_anti_subs
 

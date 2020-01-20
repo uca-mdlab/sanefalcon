@@ -68,7 +68,8 @@ class FileManager:
             logger.info(f'Found {len(ordered)} distinct runs')
             result = defaultdict(list)
 
-            num_batches = Utils.compute_num_batches(len(ordered))
+            low_n, high_n = Utils.compute_num_batches(len(ordered))
+            num_batches = high_n
             logger.info(f'num batches = {num_batches}')
 
             rows = []
