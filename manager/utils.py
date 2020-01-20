@@ -37,5 +37,5 @@ class Utils:
     def compute_batch_size(n):
         divs = [x for x in range(1, n + 1) if n / x == int(n / x)]
         center = (divs[int(len(divs) / 2) - 1], divs[int(len(divs) / 2)])
-        return center[0]
+        return center[1]
 
