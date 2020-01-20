@@ -4,6 +4,8 @@ import string
 from collections import defaultdict, OrderedDict
 from .utils import Utils
 from log_setup import setup_logger
+import numpy as np
+
 
 logger = setup_logger(__name__, 'logs/manager.log')
 
@@ -70,16 +72,16 @@ class FileManager:
             batch_size = Utils.compute_batch_size(len(ordered))
             logger.info(f'Batch size = {batch_size}')
 
-            while l_ord:
-                if len(l_ord) > batch_size:
-                    subset = l_ord[::batch_size][:batch_size]  # pick up batch_size elements. One every step items
-                else:
-                    subset = l_ord
-                logger.info(f'Batch {letters[i]}, runs: {subset}, - num samples = '
-                            f'{sum(len(ordered[k]) for k in subset)}')
-                result[letters[i]].extend(ordered[k] for k in subset)
-                l_ord = [x for x in l_ord if x not in subset]
-                i += 1
+            rows = []
+            for b in Utils.prepare_batches(runs, batch_size):
+                rows.append(list(b))
+            res = list(np.array(rows).T)  # transpose to avoid subsequent runs in the same batch
+            for i, batch in enumerate(res):
+                logger.info(f'Batch {letters[i]}, runs: {batch}, - num samples = '
+                            f'{sum(len(ordered[k]) for k in batch)}')
+                result[letters[i]].extend(ordered[k] for k in batch)
+
+
             exit()
             for batch_name, l in result.items():
                 batch_dir = os.path.join(self.trainfolder, batch_name)
