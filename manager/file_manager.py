@@ -73,7 +73,7 @@ class FileManager:
             logger.info(f'num batches = {num_batches}')
 
             rows = []
-            for b in Utils.prepare_batches(runs, num_batches):
+            for b in Utils.prepare_batches(l_ord, num_batches):
                 rows.append(list(b))
             res = list(np.array(rows).T)  # transpose to avoid subsequent runs in the same batch
             for i, batch in enumerate(res):
