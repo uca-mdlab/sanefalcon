@@ -67,7 +67,6 @@ class FileManager:
             l_ord = list(ordered)
             logger.info(f'Found {len(ordered)} distinct runs')
             result = defaultdict(list)
-            i = 0
 
             num_batches = Utils.compute_num_batches(len(ordered))
             logger.info(f'num batches = {num_batches}')
@@ -81,8 +80,6 @@ class FileManager:
                             f'{sum(len(ordered[k]) for k in batch)}')
                 result[letters[i]].extend(ordered[k] for k in batch)
 
-
-            exit()
             for batch_name, l in result.items():
                 batch_dir = os.path.join(self.trainfolder, batch_name)
                 os.makedirs(batch_dir)
@@ -100,7 +97,6 @@ class FileManager:
                 batches[batch_dir] = bam_links
 
         return batches
-
 
     def create_fake_batch_for_testing(self, bamlist):
         batch = [os.path.join(self.datafolder, x) for x in bamlist]
