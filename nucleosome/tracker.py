@@ -47,7 +47,7 @@ class Tracker:
         else:
             logger.error('Something bad happened. Check you nucleosome track files.')
         logger.debug('Nucleosome tracks created:')
-        for folder, files in self.nucleosome_tracks:
+        for folder, files in self.nucleosome_tracks.items():
             logger.debug(f'Folder {folder} - len = {len(files)} ({files[:3]} ...)')
 
     def create_tracks(self, training=True):
