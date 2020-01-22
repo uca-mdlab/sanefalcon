@@ -1,5 +1,6 @@
 import os
 from log_setup import setup_logger
+import pickle
 
 logger = setup_logger(__name__, 'logs/merge_utils.log')
 
@@ -10,16 +11,20 @@ class Utils:
     def sort_and_write(data, outfile):
         # data = list(set(data))  # remove duplicates and sort
         data.sort()
-        to_be_written = map(lambda x: str(x) + "\n", data)
-        with open(outfile, 'w') as out:
-            out.writelines(to_be_written)
+        pickle.dump(data, open(outfile, 'wb'))
+        # to_be_written = map(lambda x: str(x) + "\n", data)
+        # with open(outfile, 'w') as out:
+        #     out.writelines(to_be_written)
 
     @staticmethod
     def read_all_files(file_list):
         logger.debug(f"Reading {len(file_list)} files: {file_list[:4]}")
         data = []
         for f in file_list:
-            data.extend([int(line.strip()) for line in open(f, 'r')])
+            try:
+                data.extend([int(line.strip()) for line in open(f, 'r')])  # rsp are in plain text
+            except UnicodeDecodeError:
+                data.extend(pickle.load(open(f, 'rb')))   # merge files are binary
         return data
 
     @staticmethod

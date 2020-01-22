@@ -1,6 +1,7 @@
 import os
 import operator
 import time
+import pickle
 
 from log_setup import setup_logger
 logger = setup_logger(__name__, 'logs/nucleosome.log')
@@ -82,9 +83,13 @@ def create_nucleosome_file(chrom, mergefile, outfile):
     lastPos = 0
     maxDist = 190  # A little over our sliding window size
     allNucl = []
-    with open(mergefile, 'r') as infile:
-        positions = list(map(int, infile.readlines()))
-        length = len(positions)
+
+    positions = pickle.load(open(mergefile, 'rb'))
+    length = len(positions)
+    # with open(mergefile, 'r') as infile:
+    #     positions = list(map(int, infile.readlines()))
+    #     length = len(positions)
+
     s = time.time()
     count = 0
     for position in positions:
