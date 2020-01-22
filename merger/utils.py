@@ -16,6 +16,7 @@ class Utils:
 
     @staticmethod
     def read_all_files(file_list):
+        logger.debug(f"Reading {len(file_list)} files: {file_list[:4]}")
         data = []
         for f in file_list:
             data.extend([int(line.strip()) for line in open(f, 'r')])
