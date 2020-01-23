@@ -2,8 +2,11 @@
 import os
 import subprocess
 from collections import Counter
+import glob
+
 
 trainingdir = '/home/mdlab/storage/sanefalcon/training'
+profiledir = os.path.join(trainingdir, 'profiles')
 logdir = './logs'
 
 genlog = os.path.join(logdir, 'sanefalcon.log')
@@ -14,6 +17,8 @@ p = subprocess.Popen("grep 'TRAINING' {}".format(genlog), stdout=subprocess.PIPE
 out, err = p.communicate()
 res = out.decode('utf-8').strip().split()[8:10]
 name, trainingsamples = res[0].strip(','), int(res[1].strip(','))
+expected_profile_count = trainingsamples * 4 * 22
+
 print('Run: ', name)
 print('Training samples : ', trainingsamples)
 
@@ -76,3 +81,6 @@ if out:
             else:
                 print('chrom', k, ' - count: ', v)
 
+
+profiles = glob.glob("{}/*.*".format(profiledir))
+print('Profile saved progression : {0:.2f}'.format(len(profiles) / expected_profile_count))
