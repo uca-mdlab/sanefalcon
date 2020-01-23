@@ -4,7 +4,7 @@ import subprocess
 from collections import Counter
 
 trainingdir = '/home/mdlab/storage/sanefalcon/training'
-logdir = '/home/mdlab/sanefalcon/logs'
+logdir = './logs'
 nucllog = os.path.join(logdir, 'nucleosome.log')
 
 trainingsamples = 0
