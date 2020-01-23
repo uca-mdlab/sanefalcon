@@ -12,28 +12,35 @@ logdir = './logs'
 genlog = os.path.join(logdir, 'sanefalcon.log')
 nucllog = os.path.join(logdir, 'nucleosome.log')
 
-trainingsamples = 0
 p = subprocess.Popen("grep 'TRAINING' {}".format(genlog), stdout=subprocess.PIPE, shell=True)
 out, err = p.communicate()
 res = out.decode('utf-8').strip().split()[8:10]
 name, trainingsamples = res[0].strip(','), int(res[1].strip(','))
-expected_profile_count = trainingsamples * 4 * 22
+
+
+p = subprocess.Popen("grep 'TESTING' {}".format(genlog), stdout=subprocess.PIPE, shell=True)
+out, err = p.communicate()
+res = out.decode('utf-8').strip().split()[9]
+testingsamples = int(res[0].strip(','))
 
 print('Run: ', name)
 print('Training samples : ', trainingsamples)
+print('Testing samples : ', testingsamples)
+
+expected_training_profiles = trainingsamples * 4 * 22
+expected_testing_profiles = testingsamples * 4 * 22
 
 # Nucleosome tracks
-p = subprocess.Popen("grep 'saved' {}".format(nucllog), stdout=subprocess.PIPE, shell=True)
+p = subprocess.Popen("grep -e 'saved\ .*\/training/' {}".format(nucllog), stdout=subprocess.PIPE, shell=True)
 out, err = p.communicate()
 
 if out:
     res = out.decode('utf-8').strip().split('\n')
-    # res = [x.split()[14] for x in gres]
-    subdirs = [row.partition('/home/mdlab/storage/sanefalcon/training')[2].split('/')[1] for row in res]
+    subdirs = [row.partition(trainingdir)[2].split('/')[1] for row in res]
     subdirs.sort()
     c = Counter(subdirs)
     if all([x == 22 for x in c.items()]):
-        print('tracks terminated')
+        print('Nucleosome Tracks terminated')
     else:
         done = 0
         for k, v in c.items():
@@ -42,8 +49,7 @@ if out:
             else:
                 print(k, v)
         print('Done: ', done)
-else:
-    print('Tracks completed')
+
 
 # Nucleosome Profiles Forward
 p = subprocess.Popen("grep 'End of forward' {}".format(nucllog), stdout=subprocess.PIPE, shell=True)
@@ -88,4 +94,6 @@ if out:
         print('Done:', done)
 
 profiles = glob.glob("{}/*.*".format(profiledir))
-print('Profiles saved: {0:.2f}%'.format((len(profiles) / expected_profile_count)*100))
+print('Profiles saved: {0:.2f}%'.format((len(profiles) / expected_training_profiles) * 100))
+
+# grep - e 'saved\ .*\/testing/'
