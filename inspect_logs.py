@@ -83,4 +83,4 @@ if out:
 
 
 profiles = glob.glob("{}/*.*".format(profiledir))
-print('Profile saved progression : {0:.2f}\%'.format((len(profiles) / expected_profile_count)) * 100)
+print('Profile saved progression : {0:.2f}%'.format((len(profiles) / expected_profile_count)) * 100)
