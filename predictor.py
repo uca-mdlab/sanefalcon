@@ -167,17 +167,17 @@ def test_polyfit(samples, reference, p, prefix):
     fitSamples=[]
     for i, val in enumerate(samples):
         fitSamples.append(p[0] * val+p[1])
-    logger.debug(prefix + " polyfit: Pearson:", pearsonr(fitSamples, reference))
-    logger.debug(prefix + " polyfit: errorRate:", get_error_rate(fitSamples, reference))
+    logger.debug("{} polyfit: Pearson: {}".format(prefix, pearsonr(fitSamples, reference)))
+    logger.debug("{} polyfit: errorRate: {}".format(prefix, get_error_rate(fitSamples, reference)))
     return fitSamples
 
 
 def test_linear_model(samples, reference, clf, prefix):
     predicted = clf.predict(samples)
-    logger.debug(prefix + " linearModel: Pearson:", pearsonr(predicted,reference))
-    logger.debug(prefix + (" linearModel: Residual sum of squares: %.2f" % np.mean((predicted - reference) ** 2)))
-    logger.debug(prefix + (' linearModel: Variance score: %.2f' % clf.score(samples, reference)))
-    logger.debug(prefix + " linearModel: errorRate:", get_error_rate(predicted, reference))
+    logger.debug(f"{prefix} linearModel: Pearson: {pearsonr(predicted,reference)}")
+    logger.debug(f"{prefix} linearModel: Residual sum of squares: {np.mean((predicted - reference) ** 2)}")
+    logger.debug(f"{prefix} linearModel: Variance score: {clf.score(samples, reference)}")
+    logger.debug(f"{prefix} linearModel: errorRate: {get_error_rate(predicted, reference)}")
     return predicted
 
 
