@@ -27,7 +27,7 @@ if out:
     if all([x == 22 for x in c.items()]):
         print('tracks terminated')
     else:
-        for k, v in c.items():
+        for k, v in sorted(c.items()):
             if v == 22:
                 print(k, 'Done')
             else:
@@ -46,7 +46,7 @@ if out:
         print('Forward complete')
     else:
         print('Forward')
-        for k,v in c.items():
+        for k, v in sorted(c.items()):
             if v == trainingsamples:
                 print('chrom', k, 'Done')
             else:
@@ -63,7 +63,7 @@ if out:
         print('Reverse complete')
     else:
         print('Reverse')
-        for k, v in c.items():
+        for k, v in sorted(c.items()):
             if v == trainingsamples:
                 print('chrom', k, 'Done')
             else:
