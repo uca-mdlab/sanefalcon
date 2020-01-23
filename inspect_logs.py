@@ -40,7 +40,7 @@ p = subprocess.Popen("grep 'End of forward' {}".format(nucllog), stdout=subproce
 out, err = p.communicate()
 if out:
     res = out.decode('utf-8').strip().split('\n')
-    chroms = [row.partition(' phase for chrom')[2].strip().split()[0] for row in res]
+    chroms = [int(row.partition(' phase for chrom')[2].strip().split()[0]) for row in res]
     c = Counter(chroms)
     if all([x == trainingsamples for x in c.items()]):
         print('Forward complete')
@@ -57,7 +57,7 @@ p = subprocess.Popen("grep 'End of reverse' {}".format(nucllog), stdout=subproce
 out, err = p.communicate()
 if out:
     res = out.decode('utf-8').strip().split('\n')
-    chroms = [row.partition(' phase for chrom')[2].strip().split()[0] for row in res]
+    chroms = [int(row.partition(' phase for chrom')[2].strip().split()[0]) for row in res]
     c = Counter(chroms)
     if all([x == trainingsamples for x in c.items()]):
         print('Reverse complete')
