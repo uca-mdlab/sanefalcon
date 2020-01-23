@@ -5,15 +5,17 @@ from collections import Counter
 
 trainingdir = '/home/mdlab/storage/sanefalcon/training'
 logdir = './logs'
+
+genlog = os.path.join(logdir, 'sanefalcon.log')
 nucllog = os.path.join(logdir, 'nucleosome.log')
 
 trainingsamples = 0
-for root, subd, files in os.walk(trainingdir):
-    for f in files:
-        if f.endswith('.bam'):
-            trainingsamples += 1
-
-print('Samples total', trainingsamples)
+p = subprocess.Popen("grep 'TRAINING' {}".format(genlog), stdout=subprocess.PIPE, shell=True)
+out, err = p.communicate()
+res = out.decode('utf-8').strip().split()[8:10]
+name, trainingsamples = res[0].strip(','), int(res[1].strip(','))
+print('Run: ', name)
+print('Training samples : ', trainingsamples)
 
 # Nucleosome tracks
 p = subprocess.Popen("grep 'saved' {}".format(nucllog), stdout=subprocess.PIPE, shell=True)
