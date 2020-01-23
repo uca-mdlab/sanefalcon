@@ -23,11 +23,12 @@ if out:
     res = out.decode('utf-8').strip().split('\n')
     # res = [x.split()[14] for x in gres]
     subdirs = [row.partition('/home/mdlab/storage/sanefalcon/training')[2].split('/')[1] for row in res]
+    subdirs.sort()
     c = Counter(subdirs)
     if all([x == 22 for x in c.items()]):
         print('tracks terminated')
     else:
-        for k, v in sorted(c.items()):
+        for k, v in c.items():
             if v == 22:
                 print(k, 'Done')
             else:
@@ -59,7 +60,9 @@ p = subprocess.Popen("grep 'End of reverse' {}".format(nucllog), stdout=subproce
 out, err = p.communicate()
 if out:
     res = out.decode('utf-8').strip().split('\n')
-    chroms = [int(row.partition(' phase for chrom')[2].strip().split()[0]) for row in res]
+    chroms = [row.partition(' phase for chrom')[2].strip().split()[0] for row in res]
+    chroms = [int(x) for x in chroms]
+    chroms.sort()
     c = Counter(chroms)
     if all([x == trainingsamples for x in c.items()]):
         print('Reverse complete')
