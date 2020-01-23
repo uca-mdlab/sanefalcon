@@ -35,11 +35,13 @@ if out:
     if all([x == 22 for x in c.items()]):
         print('tracks terminated')
     else:
+        done = 0
         for k, v in c.items():
             if v == 22:
-                print(k, 'Done')
+                done += 1
             else:
                 print(k, v)
+        print('Done: ', done)
 else:
     print('Tracks completed')
 
@@ -56,11 +58,13 @@ if out:
         print('Forward complete')
     else:
         print('Forward')
+        done = 0
         for k, v in c.items():
             if v == trainingsamples:
-                print('chrom', k, 'Done')
+                done += 1
             else:
                 print('chrom', k, ' - count: ', v)
+        print('Done:', done)
 
 # Nucleosome Profiles Reverse
 p = subprocess.Popen("grep 'End of reverse' {}".format(nucllog), stdout=subprocess.PIPE, shell=True)
@@ -75,12 +79,13 @@ if out:
         print('Reverse complete')
     else:
         print('Reverse')
+        done = 0
         for k, v in sorted(c.items()):
             if v == trainingsamples:
-                print('chrom', k, 'Done')
+                done += 1
             else:
                 print('chrom', k, ' - count: ', v)
-
+        print('Done:', done)
 
 profiles = glob.glob("{}/*.*".format(profiledir))
 print('Profiles saved: {0:.2f}%'.format((len(profiles) / expected_profile_count)*100))
