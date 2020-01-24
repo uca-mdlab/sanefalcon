@@ -152,7 +152,15 @@ def get_error_rate(prediction, reference):
 
 
 def train_polyfit(samples, reference):
-    return np.polyfit(samples, reference, 1)
+    p = np.polyfit(samples, reference, 1)
+
+    f = np.poly1d(p)  # So we can call f(x)
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    plt.plot(samples, reference, 'bo', label="Data")
+    plt.plot(samples, f(samples), 'b-', label="Polyfit")
+    plt.savefig('train_polyfit.png')
+    return p
 
 
 def train_linear_model(samples, reference):
@@ -313,6 +321,7 @@ def plotProfiles(training,testing,outFile,correlations=[]):
 
 
 def run_model(nucleosome_file, reference_file, outfile, test_nucleosome_file=None, test_reference_file=None):
+    logger.debug(f"Run model on {nucleosome_file}, {reference_file} -> {outfile}")
     samples, coverages = load_nucleosome_file(nucleosome_file)
 
     # Load known answers for our data
