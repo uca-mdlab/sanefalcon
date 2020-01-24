@@ -23,7 +23,7 @@ def merge_streams(profile_dir, samplename, ext, rev=False):
             chrom_profile = list(map(float, arr[0].strip().split(',')))
             for i, v in enumerate(chrom_profile):
                 dic[i] += v
-            logger.debug(f'len(dic) = {len(dic)}')
+            # logger.debug(f'len(dic) = {len(dic)}')
 
     merged = list(dic.values())
     if rev:
@@ -70,4 +70,5 @@ def compute_ff(modelname, profile_dir):
         result[samplename] = ff
         logger.debug(f"ff({samplename}) = {ff}")
     return result
+
 
