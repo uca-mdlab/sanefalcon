@@ -154,7 +154,7 @@ def get_error_rate(prediction, reference):
 def train_polyfit(samples, reference):
     p = np.polyfit(samples, reference, 1)
 
-    f = np.poly1d(p)
+    f = np.poly1d(p)  # So we can call f(x)
     fig = plt.figure()
     ax = fig.add_subplot(111)
     plt.plot(samples, reference, 'bo', label="Data")
@@ -354,10 +354,6 @@ def run_model(nucleosome_file, reference_file, outfile, test_nucleosome_file=Non
     # Test our fit
     tr_polyfit = test_polyfit(sample_scores, yVals, poly_fit, "Train")
     tr_linearmodel = test_linear_model(selected_regions, yVals, linear_model, "Train")
-
-    plt.scatter(selected_regions, yVals, color='black')
-    plt.plot(selected_regions, tr_linearmodel, color='blue', linewidth=3)
-    plt.savefig('fit_linear_model.png')
 
     fittedVals = [0] * len(yVals)
     for i, val in enumerate(sample_scores):
