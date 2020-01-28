@@ -37,7 +37,7 @@ p = subprocess.Popen("tail -1 {}".format(multilog), stdout=subprocess.PIPE, shel
 out, err = p.communicate()
 res = out.decode('utf-8').strip()
 if re.search('runs_left', res):
-    print('Last command: ', res.split(':')[1].strip())
+    print('Last command: ', ' '.join(res.split(':')[-2:]).strip())
 
 # Nucleosome tracks
 p = subprocess.Popen("grep -e 'saved\ .*\/training/' {}".format(nucllog), stdout=subprocess.PIPE, shell=True)
