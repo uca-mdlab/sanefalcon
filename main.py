@@ -67,7 +67,7 @@ if __name__ == "__main__":
     if not os.path.isfile(group_file):
         exit(f'{group_file} not found.')
 
-    config = configparser.ConfigParser()
+    config = configparser.ConfigParser(interpolation=configparser.ExtendedInterpolation())
     config.read(args.conffile)
     logger.info('Started sanefalcon with config:')
     for section in config.sections():
