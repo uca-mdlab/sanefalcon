@@ -8,7 +8,7 @@ MAX_PROCESS_NUMBER = 8
 MAX_JOB_NUMBER = MAX_PROCESS_NUMBER
 
 
-def launch_multiprocess(runs, fn):
+def launch_multiprocess(runs, func):
     """
     Spawn multiprocesses avoiding memory problems.
     The 'runs' parameter must be a list of 'cmd' s.t., subprocess.Popen(cmd).wait() works.
@@ -23,9 +23,9 @@ def launch_multiprocess(runs, fn):
         runs_iter = iter(runs)
 
         while runs_left:
-            logger.info('Multiprocess {}: runs_left = {}'.format(fn, runs_left))
+            logger.info('Multiprocess {}: runs_left = {}'.format(func, runs_left))
             for run in runs_iter:
-                job = executor.submit(fn, *run)
+                job = executor.submit(func, *run)
                 jobs[job] = run
                 if len(jobs) > MAX_JOB_NUMBER:
                    break
@@ -37,5 +37,7 @@ def launch_multiprocess(runs, fn):
                 del jobs[job]
                 done.append(result)
                 break
+
+    logger.info('Multiprocess {} ended'.format(func))
     return done
 
