@@ -3,6 +3,7 @@ import os
 import subprocess
 from collections import Counter
 import glob
+import re
 
 
 trainingdir = '/home/mdlab/storage/sanefalcon/training'
@@ -35,8 +36,8 @@ expected_testing_profiles = testingsamples * 4 * 22
 p = subprocess.Popen("tail -1 {}".format(multilog), stdout=subprocess.PIPE, shell=True)
 out, err = p.communicate()
 res = out.decode('utf-8').strip()
-print(res)
-
+if re.search('runs_left', res):
+    print('Last command: ', res.split(':')[1].strip())
 
 # Nucleosome tracks
 p = subprocess.Popen("grep -e 'saved\ .*\/training/' {}".format(nucllog), stdout=subprocess.PIPE, shell=True)
