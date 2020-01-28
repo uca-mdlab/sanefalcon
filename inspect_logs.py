@@ -11,6 +11,8 @@ logdir = './logs'
 
 genlog = os.path.join(logdir, 'sanefalcon.log')
 nucllog = os.path.join(logdir, 'nucleosome.log')
+multilog = os.path.join(logdir, 'multi.log')
+
 
 p = subprocess.Popen("grep 'TRAINING' {}".format(genlog), stdout=subprocess.PIPE, shell=True)
 out, err = p.communicate()
@@ -26,9 +28,15 @@ testingsamples = int(res.strip(','))
 print('Run: ', name)
 print('Training samples : ', trainingsamples)
 print('Testing samples : ', testingsamples)
+print('----')
 
 expected_training_profiles = trainingsamples * 4 * 22
 expected_testing_profiles = testingsamples * 4 * 22
+p = subprocess.Popen("tail -1 {}".format(multilog), stdout=subprocess.PIPE, shell=True)
+out, err = p.communicate()
+res = out.decode('utf-8').strip()
+print(res)
+
 
 # Nucleosome tracks
 p = subprocess.Popen("grep -e 'saved\ .*\/training/' {}".format(nucllog), stdout=subprocess.PIPE, shell=True)
