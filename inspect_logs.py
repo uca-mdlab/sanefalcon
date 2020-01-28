@@ -21,7 +21,7 @@ name, trainingsamples = res[0].strip(','), int(res[1].strip(','))
 p = subprocess.Popen("grep 'TESTING' {}".format(genlog), stdout=subprocess.PIPE, shell=True)
 out, err = p.communicate()
 res = out.decode('utf-8').strip().split()[9]
-testingsamples = int(res[0].strip(','))
+testingsamples = int(res.strip(','))
 
 print('Run: ', name)
 print('Training samples : ', trainingsamples)
