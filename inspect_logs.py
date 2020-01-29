@@ -58,7 +58,7 @@ if out:
                 done += 1
             else:
                 print(k, v)
-        print('Done: ', done)
+        print(f"Done: {done}/{len(subdirs)}")
 
 
 # Nucleosome Profiles Forward
