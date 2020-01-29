@@ -48,7 +48,7 @@ def get_app_summary():
 
 
 def get_batches():
-    hook = 'Batch \.'
+    hook = 'Batch\ .'
     res = launch_grep_on_file(hook, managerlog)
     print(res)
 
