@@ -38,7 +38,7 @@ out, err = p.communicate()
 res = out.decode('utf-8').strip()
 if re.search('runs_left', res):
     print('Multi - Last command: ', ' '.join(res.split(':')[-2:]).strip())
-
+print('----')
 # Nucleosome tracks
 p = subprocess.Popen("grep -e 'saved\ .*\/training/' {}".format(nucllog), stdout=subprocess.PIPE, shell=True)
 out, err = p.communicate()
@@ -51,6 +51,7 @@ if out:
     if all([x == 22 for x in c.items()]):
         print('Nucleosome Tracks terminated')
     else:
+        print('Nucleosome Tracks:')
         done = 0
         for k, v in c.items():
             if v == 22:
@@ -70,9 +71,9 @@ if out:
     chroms.sort()
     c = Counter(chroms)
     if all([x == trainingsamples for x in c.items()]):
-        print('Forward complete')
+        print('Nucleosome profiles: Forward complete')
     else:
-        print('Forward')
+        print('Nucleosome profiles: Forward')
         done = 0
         for k, v in c.items():
             if v == trainingsamples:
@@ -91,9 +92,9 @@ if out:
     chroms.sort()
     c = Counter(chroms)
     if all([x == trainingsamples for x in c.items()]):
-        print('Reverse complete')
+        print('Nucleosome profiles: Reverse complete')
     else:
-        print('Reverse')
+        print('Nucleosome profiles: Reverse')
         done = 0
         for k, v in sorted(c.items()):
             if v == trainingsamples:
@@ -102,6 +103,7 @@ if out:
                 print('chrom', k, ' - count: ', v)
         print('Done:', done)
 
+print('----')
 profiles = glob.glob("{}/*.*".format(profiledir))
 print('Profiles saved: {0:.2f}%'.format((len(profiles) / expected_training_profiles) * 100))
 
