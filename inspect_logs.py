@@ -13,23 +13,57 @@ logdir = './logs'
 genlog = os.path.join(logdir, 'sanefalcon.log')
 nucllog = os.path.join(logdir, 'nucleosome.log')
 multilog = os.path.join(logdir, 'multi.log')
+managerlog = os.path.join(logdir, 'manager.log')
 
 
-p = subprocess.Popen("grep 'TRAINING' {}".format(genlog), stdout=subprocess.PIPE, shell=True)
-out, err = p.communicate()
-res = out.decode('utf-8').strip().split()[8:10]
-name, trainingsamples = res[0].strip(','), int(res[1].strip(','))
+def launch_grep_on_file(hook, filename):
+    cmd = f"grep -e {hook} {filename}"
+    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
+    out, err = p.communicate()
+    if out:
+        return out.decode('utf-8').strip()
+    else:
+        return None
 
 
-p = subprocess.Popen("grep 'TESTING' {}".format(genlog), stdout=subprocess.PIPE, shell=True)
-out, err = p.communicate()
-res = out.decode('utf-8').strip().split()[9]
-testingsamples = int(res.strip(','))
+def get_app_summary():
+    name, trainingsamples, testingsamples = None, None, None
+    hook = 'TRAINING'
+    res = launch_grep_on_file(hook, genlog)
+    try:
+        tmp = res.split()[8:10]
+        name, trainingsamples = tmp[0].strip(','), int(tmp[1].strip(','))
+    except:
+        print(f'Found nothing on {hook} {genlog}')
 
+    hook = 'TESTING'
+    res = launch_grep_on_file(hook, genlog)
+    try:
+        tmp = res.split()[9]
+        testingsamples = int(tmp.strip(','))
+    except:
+        print(f'Found nothing on {hook} {genlog}')
+
+    return name, trainingsamples, testingsamples
+
+
+def get_batches():
+    hook = 'Batch \.'
+    res = launch_grep_on_file(hook, managerlog)
+    print(res)
+
+
+name, trainingsamples, testingsamples = get_app_summary()
 print('Run: ', name)
 print('Training samples : ', trainingsamples)
 print('Testing samples : ', testingsamples)
 print('----')
+
+get_batches()
+exit()
+
+
+
 
 expected_training_profiles = trainingsamples * 4 * 22
 expected_testing_profiles = testingsamples * 4 * 22
