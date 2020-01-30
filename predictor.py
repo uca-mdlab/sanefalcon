@@ -77,6 +77,7 @@ def load_reference_file(fname):
                 bads[samplename] = float(ffref)
             else:
                 print(ffref)
+    logger.debug(f'Load reference file. Found {len(reference)} samples.')
     return reference, series, girls, bads
 
 
@@ -96,9 +97,7 @@ def split_by_reference(samples, reference):
     overlap.sort()
     noOverlap = [x for x in reference if x not in samples]
     noOverlap.sort()
-
-    print(len(overlap), "samples overlap")
-    print(len(noOverlap), "samples noOverlap")
+    logger.debug(f'Split by reference: overlap/no = {len(overlap)} / {len(noOverlap)}')
     return overlap, noOverlap
 
 
