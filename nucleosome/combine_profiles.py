@@ -77,8 +77,11 @@ def create_downstream(fnames):
     return downstream
 
 
-def create_streams(fm):
-    fnames = [os.path.join(fm.profilefolder, fname) for fname in os.listdir(fm.profilefolder)]
+def create_streams(fm, training=True):
+    if training:
+        fnames = [os.path.join(fm.profilefolder, fname) for fname in os.listdir(fm.profilefolder)]
+    else:
+        fnames = [os.path.join(fm.testprofilefolder, fname) for fname in os.listdir(fm.testprofilefolder)]
     streams = {}
     upstream = create_upstream(fnames)
     downstream = create_downstream(fnames)
@@ -92,8 +95,8 @@ def create_streams(fm):
     return streams
 
 
-def save_streams_to_file(fm, outfile):
-    streams = create_streams(fm)
+def save_streams_to_file(fm, outfile, training=True):
+    streams = create_streams(fm, training)
     with open(outfile, 'w') as out:
         for sample, stream in streams.items():
             out.write('{},{}\n'.format(sample, ','.join(map(str, stream))))

@@ -34,5 +34,5 @@ class Profiler:
             outfile = self.fm.config['default']['trainnucl']
         else:
             outfile = self.fm.config['default']['testnucl']
-        combined, img_file = cp.save_streams_to_file(self.fm, outfile)
+        combined, img_file = cp.save_streams_to_file(self.fm, outfile, training)
         return combined, img_file
