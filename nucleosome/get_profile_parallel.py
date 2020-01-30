@@ -110,7 +110,7 @@ def process_reverse(peaks, reads, outfile):
     reads.reverse()
     before = len(peaks)  # just to be sure
     peaks.append([-1, 0])
-    logger.debug('process_reverse {} (rev append) id: {} (len += {}) [0] = {}; [-1] = {}'.format(thread_name, id(peaks), len(peaks) - before, peaks[0], peaks[-1]))
+    # logger.debug('process_reverse {} (rev append) id: {} (len += {}) [0] = {}; [-1] = {}'.format(thread_name, id(peaks), len(peaks) - before, peaks[0], peaks[-1]))
 
     maxDist = 147
     sumPeak = [0. for _ in range(maxDist)]
@@ -224,8 +224,7 @@ def process(chrom, fwdrevdic, outdir):
             rev_files = dic['rev']
             rev_files_left = len(rev_files)
             rev_files_iter = iter(rev_files)
-            logger.debug('Starting multithread on {} with {}'.format(subdir, nucl_ex_file))
-            logger.info(f'Start of forward concurrent phase for chrom {chrom} ({fwd_files_left}, {rev_files_left})')
+            logger.info(f'Start of forward concurrent phase for chrom {chrom} - {nucl_ex_file}')
             with concurrent.futures.ThreadPoolExecutor(max_workers=10, thread_name_prefix='fwd') as executor:
                 jobs = {}
                 while fwd_files_left:
@@ -243,9 +242,9 @@ def process(chrom, fwdrevdic, outdir):
                             l_tup = (None,)
                         del jobs[job]
                         d[subdir].append(l_tup[0])
-            logger.info(f'End of forward concurrent phase for chrom {chrom} ({fwd_files_left}, {rev_files_left})')
+            logger.info(f'End of forward concurrent phase for chrom {chrom} - {nucl_ex_file}')
 
-            logger.info(f'Start of reverse concurrent phase for chrom {chrom} ({fwd_files_left}, {rev_files_left})')
+            logger.info(f'Start of reverse concurrent phase for chrom {chrom} - {nucl_ex_file}')
             with concurrent.futures.ThreadPoolExecutor(max_workers=10, thread_name_prefix='rev') as executor:
                 jobs = {}
                 while rev_files_left:
@@ -263,7 +262,7 @@ def process(chrom, fwdrevdic, outdir):
                             l_tup = (None,)
                         del jobs[job]
                         d[subdir].append(l_tup[0])
-            logger.info(f'End of reverse concurrent phase for chrom {chrom} ({fwd_files_left}, {rev_files_left})')
+            logger.info(f'End of reverse concurrent phase for chrom {chrom} - {nucl_ex_file}')
 
     logger.info('Finished processing chrom {}'.format(chrom))
     return d
