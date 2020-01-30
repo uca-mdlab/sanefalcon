@@ -9,6 +9,7 @@ logger = setup_logger(__name__, 'logs/nucleosome.log')
 
 
 def get_profile_file(proffile):
+    logger.debug(f'Get profile file {proffile}')
     l = []
     with open(proffile, 'r') as in_:
         reader = list(csv.reader(in_, delimiter=','))

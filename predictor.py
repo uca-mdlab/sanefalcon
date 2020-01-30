@@ -40,6 +40,7 @@ ignoredSeries = []  # 'serie23_140707','serie12_140428']
 
 
 def load_nucleosome_file(fname):
+    logger.debug(f'load nucleosome file {fname}')
     samples = {}
     coverages = {}
     with open(fname) as in_:
@@ -47,7 +48,9 @@ def load_nucleosome_file(fname):
             arr = sample_line.split(',')
             values = np.array([float(x) for x in arr[1:]])
             sum_values = np.sum(values)
-            samples[arr[0]] = np.divide(values, sum_values)
+            normalized_sum = np.divide(values, sum_values)
+            samples[arr[0]] = normalized_sum
+            logger.debug(f'Found {len(values)} values (sum = {sum_values}, normalized = {normalized_sum}) for {arr[0]}')
             coverages[arr[0]] = sum_values
     return samples, coverages
 
@@ -380,7 +383,7 @@ def run_model(nucleosome_file, reference_file, outfile, test_nucleosome_file=Non
         # Filter out samples that are missing in either file
         test_set, test_set_no = split_by_reference(new_samples, new_reference)
         new_covs = [new_coverages[x] for x in test_set]
-        new_yVals =[new_reference[x] for x in test_set]
+        new_yVals = [new_reference[x] for x in test_set]
 
         # out of original
         singleRun = ["15P0008B", "15P0135A", "15P0136A", "15P0137A", "15P0138A", "15P0139A", "15P0140A", "15P0148A",
