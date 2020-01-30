@@ -59,6 +59,9 @@ def get_batches():
 
 
 name, trainingsamples, testingsamples = get_app_summary()
+expected_training_profiles = trainingsamples * 4 * 22
+expected_testing_profiles = testingsamples * 4 * 22
+
 print('Run: ', name)
 print('Training samples : ', trainingsamples)
 print('Testing samples : ', testingsamples)
@@ -68,8 +71,6 @@ print('Num batches : ', num_batches)
 print('----')
 
 
-expected_training_profiles = trainingsamples * 4 * 22
-expected_testing_profiles = testingsamples * 4 * 22
 p = subprocess.Popen("tail -1 {}".format(multilog), stdout=subprocess.PIPE, shell=True)
 out, err = p.communicate()
 res = out.decode('utf-8').strip()
