@@ -51,9 +51,11 @@ def get_batches():
     hook = 'Batch\ .'
     res = launch_grep_on_file(hook, managerlog)
     tmp = [x[x.index('Batch'):] for x in res.split('\n')]
+    num_batches = len(tmp)
     for row in tmp:
         batch, runs, num_samples = row.replace(' - ', '').split(',')
         print(batch, runs, num_samples)
+    return num_batches
 
 
 name, trainingsamples, testingsamples = get_app_summary()
@@ -62,9 +64,9 @@ print('Training samples : ', trainingsamples)
 print('Testing samples : ', testingsamples)
 print('----')
 
-get_batches()
+num_batches = get_batches()
+print('Num batches : ', num_batches)
 print('----')
-
 
 
 expected_training_profiles = trainingsamples * 4 * 22
@@ -75,6 +77,7 @@ res = out.decode('utf-8').strip()
 if re.search('runs_left', res):
     print('Multi - Last command: ', ' '.join(res.split(':')[-2:]).strip())
 print('----')
+
 # Nucleosome tracks
 p = subprocess.Popen("grep -e 'saved\ .*\/training/' {}".format(nucllog), stdout=subprocess.PIPE, shell=True)
 out, err = p.communicate()
@@ -94,7 +97,7 @@ if out:
                 done += 1
             else:
                 print(k, v)
-        print(f"Done: {done}")
+        print(f"Done: {done}/{num_batches}")
 
 
 # Nucleosome Profiles Forward
