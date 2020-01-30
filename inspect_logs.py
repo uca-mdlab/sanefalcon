@@ -95,8 +95,8 @@ if out:
             if v == 22:
                 done += 1
             else:
-                print(k, v)
-        print(f"Done: {done}/{num_batches}")
+                print(f'Batch {k}: tracks saved: {v}')
+        print(f"Batches complete: {done}/{num_batches}")
 
 
 # Nucleosome Profiles Forward
