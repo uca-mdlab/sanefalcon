@@ -50,7 +50,10 @@ def get_app_summary():
 def get_batches():
     hook = 'Batch\ .'
     res = launch_grep_on_file(hook, managerlog)
-    print(res)
+    tmp = [x[x.index('Batch'):] for x in res.split('\n')]
+    for row in tmp:
+        batch, runs, num_samples = row.replace(' - ', '').split(',')
+        print(batch, runs, num_samples)
 
 
 name, trainingsamples, testingsamples = get_app_summary()
@@ -60,8 +63,7 @@ print('Testing samples : ', testingsamples)
 print('----')
 
 get_batches()
-exit()
-
+print('----')
 
 
 
