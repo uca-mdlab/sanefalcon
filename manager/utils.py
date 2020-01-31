@@ -1,6 +1,8 @@
 import os
 import re
 from itertools import islice
+import pysam
+
 
 class Utils:
 
@@ -40,4 +42,15 @@ class Utils:
         low = center[0]
         high = center[1]
         return low, high  # trade offs merge/merge_anti_subs
+
+    @staticmethod
+    def count_number_of_reads_per_bam(filename):
+        to_avoid = ['chrX', 'chrY', 'chrM']
+        bamfile = pysam.AlignmentFile(filename)
+        stats = bamfile.get_index_statistics()
+        res = {}
+        for stat in stats:
+            if stat.contig not in to_avoid:
+                res[stat.contig] = stat.mapped
+        return res, sum(res.values())
 
