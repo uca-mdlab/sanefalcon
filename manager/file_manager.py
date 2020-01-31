@@ -45,7 +45,15 @@ class FileManager:
         letters = list(string.ascii_lowercase)
         batches = defaultdict(list)
         logger.debug('Found {} files to link'.format(len(bamlist)))
-        logger.info('Preparing train folder: symlinking bam files...')
+
+        reads_count = {}
+        for bamfile in bamlist:
+            _, num_count = Utils.count_number_of_reads_per_bam(bamfile)
+            reads_count[bamfile] = num_count
+        tot_reads = sum(reads_count.values())
+        logger.debug(f'Total number of reads to balance: {tot_reads}')
+
+        # logger.info('Preparing train folder: symlinking bam files...')
 
         try:
             for root, dirs, files in os.walk(self.trainfolder):
@@ -80,6 +88,9 @@ class FileManager:
                 logger.info(f'Batch {letters[i]}, runs: {batch}, - num samples = '
                             f'{sum(len(ordered[k]) for k in batch)}')
                 result[letters[i]].extend(ordered[k] for k in batch)
+
+            Utils.balance_batches(result, reads_count)
+            exit()
 
             for batch_name, l in result.items():
                 batch_dir = os.path.join(self.trainfolder, batch_name)
