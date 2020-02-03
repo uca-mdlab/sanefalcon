@@ -2,6 +2,9 @@ import os
 import re
 from itertools import islice
 import pysam
+from log_setup import setup_logger
+
+logger = setup_logger(__name__, 'logs/manager.log')
 
 
 class Utils:
@@ -63,55 +66,59 @@ class Utils:
         average_reads = tot_reads // num_batches
         average_reads_low = average_reads - average_reads * thr
         average_reads_high = average_reads + average_reads * thr
-        print(average_reads, average_reads_low, average_reads_high)
+        logger.debug(f"Average reads (lo-hi) = {average_reads}, ({average_reads_low}, {average_reads_high})")
         high = {}
         low = {}
         ok = {}
-        for batch_name, l in dic.items():
-            count = [sum([numreads[x] for x in sublist]) for sublist in l]
-            assert len(count) == len(l)
-            num_reads_per_batch[batch_name] = [(x, y) for x, y in zip(l, count)]
-            if sum(count) > average_reads_high:
-                high[batch_name] = num_reads_per_batch[batch_name]
-            elif sum(count) < average_reads_low:
-                low[batch_name] = num_reads_per_batch[batch_name]
+        processed = set()
+
+        while len(ok) < num_batches:
+            high = {}
+            low = {}
+            for batch_name, l in dic.items():
+                count = [sum([numreads[x] for x in sublist]) for sublist in l]
+                assert len(count) == len(l)
+                num_reads_per_batch[batch_name] = {'count': sum(count), 'groups': [(x, y) for x, y in zip(l, count)]}
+
+            for batch in num_reads_per_batch:
+                if num_reads_per_batch[batch]['count'] > average_reads_high:
+                    high[batch] = num_reads_per_batch[batch]['groups']
+                elif num_reads_per_batch[batch]['count'] < average_reads_low:
+                    low[batch] = num_reads_per_batch[batch]['groups']
+                # else:
+                #     ok[batch] = num_reads_per_batch[batch]['groups']
+
+            hi_batch_name, hi_group = sorted(high.items(), key=lambda item: item[1], reverse=True)[0]
+            lo_batch_name, lo_group = sorted(low.items(), key=lambda item: item[1])[0]
+            if (lo_batch_name, hi_batch_name) not in processed:
+                logger.debug(f"Swapping from {hi_batch_name} ({num_reads_per_batch[hi_batch_name]['count']}) "
+                             f"and {lo_batch_name} ({num_reads_per_batch[lo_batch_name]['count']})")
+
+                processed.add((hi_batch_name, lo_batch_name))
+                hi_candidate = sorted(hi_group, key=lambda tup: tup[1], reverse=True)[0]
+                lo_candidate = sorted(lo_group, key=lambda tup: tup[1])[0]
+
+                hi_group.remove(hi_candidate)
+                hi_group.append(lo_candidate)
+
+                lo_group.remove(lo_candidate)
+                lo_group.append(hi_candidate)
+
+                dic[hi_batch_name] = [x[0] for x in hi_group]
+                dic[lo_batch_name] = [x[0] for x in lo_group]
+
             else:
-                ok[batch_name] = num_reads_per_batch[batch_name]
+                break
 
-        return high, low, ok, average_reads
+        for k, v in high.items():
+            tot = sum(x[1] for x in v)
+            logger.debug(f"H, {k}, tot = {tot}, diff = {tot - average_reads}")
+        for k, v in low.items():
+            tot = sum(x[1] for x in v)
+            logger.debug(f"L, {k}, tot = {tot}, diff = {tot - average_reads}")
+        for k, v in ok.items():
+            tot = sum(x[1] for x in v)
+            logger.debug(f"O, {k}, tot = {tot}, diff = {tot - average_reads}")
 
-if __name__ == "__main__":
-    import pickle
-    import sys
-    dic = pickle.load(open(sys.argv[1], 'rb'))
-    numreads = pickle.load(open(sys.argv[2], 'rb'))
-    high, low, ok, average_reads = Utils.balance_batches(dic, numreads)
-    print('Average number of reads:', average_reads)
-    high_totals = {}
-    low_totals = {}
-    ok_totals = {}
-    for k, v in high.items():
-        print('H', k, sum(x[1] for x in v))
-        high_totals[k] = sum(x[1] for x in v)
-    for k, v in low.items():
-        print('L', k, sum(x[1] for x in v))
-        low_totals[k] = sum(x[1] for x in v)
-    for k, v in ok.items():
-        print('O', k, sum(x[1] for x in v))
-        ok_totals[k] = sum(x[1] for x in v)
-
-    high_ordered = sorted(high_totals.items(), key=lambda item: item[1], reverse=True)
-    low_ordered = sorted(low_totals.items(), key=lambda item: item[1])
-
-    hi_key = high_ordered[0][0]
-    lo_key = low_ordered[0][0]
-    print('swap groups between (H)', hi_key, 'and (L)', lo_key)
-
-    old_hi = sorted(high[hi_key], key=lambda tup: tup[1], reverse=True)[0]
-    old_lo = sorted(low[lo_key], key=lambda tup: tup[1])[0]
-
-    print('Forecast: ', hi_key, ' = ', high_totals[hi_key], high_totals[hi_key] - old_hi[1] + old_lo[1])
-    print('Forecast: ', lo_key, ' = ', low_totals[lo_key], low_totals[lo_key] - old_lo[1] + old_hi[1])
-    # for k, v in res.items():
-    #     print(k, v)
+        return dic
 
