@@ -89,7 +89,7 @@ class FileManager:
                             f'{sum(len(ordered[k]) for k in batch)}')
                 result[letters[i]].extend(ordered[k] for k in batch)
 
-            result = Utils.balance_batches(result, reads_count)
+            result, _ = Utils.balance_batches(result, reads_count)
 
             for batch_name, l in result.items():
                 batch_dir = os.path.join(self.trainfolder, batch_name)
