@@ -195,7 +195,7 @@ if __name__ == '__main__':
     while len(copy_of_items) > 5:
         number = len(items)
         weight_cost = [(t[1], 1) for t in copy_of_items]
-        best_cost, best_combination = Utils.ratio_greedy(number, knapsack_capacity, weight_cost)
+        best_cost, best_combination = Utils.knapsack_ratio_greedy(number, knapsack_capacity, weight_cost)
         indexes = [index for index, v in enumerate(best_combination) if v == 1]
         sum = 0
         tmp = []
