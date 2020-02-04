@@ -122,3 +122,106 @@ class Utils:
 
         return dic
 
+    @staticmethod
+    def knapsack_brute_force(number, capacity, weight_cost):
+        """Brute force method for solving knapsack problem
+        :param number: number of existing items
+        :param capacity: the capacity of knapsack
+        :param weight_cost: list of tuples like: [(weight, cost), (weight, cost), ...]
+        :return: tuple like: (best cost, best combination list(contains 1 and 0))
+        """
+        best_cost = None
+        best_combination = []
+        # generating combinations by all ways: C by 1 from n, C by 2 from n, ...
+        for way in range(number):
+            for comb in combinations(weight_cost, way + 1):
+                weight = sum([wc[0] for wc in comb])
+                cost = sum([wc[1] for wc in comb])
+                if (best_cost is None or best_cost < cost) and weight <= capacity:
+                    best_cost = cost
+                    best_combination = [0] * number
+                    for wc in comb:
+                        best_combination[weight_cost.index(wc)] = 1
+
+        return best_cost, best_combination
+
+    @staticmethod
+    def knapsack_ratio_greedy(number, capacity, weight_cost):
+        """Greedy ratio method
+        :param number: number of existing items
+        :param capacity: the capacity of knapsack
+        :param weight_cost: list of tuples like: [(weight, cost), (weight, cost), ...]
+        :return: tuple like: (best cost, best combination list(contains 1 and 0))
+        """
+        ratios = [(index, item[1] / float(item[0])) for index, item in enumerate(weight_cost)]
+        ratios = sorted(ratios, key=lambda x: x[1], reverse=True)
+        best_combination = [0] * number
+        best_cost = 0
+        weight = 0
+        for index, ratio in ratios:
+            if weight_cost[index][0] + weight <= capacity:
+                weight += weight_cost[index][0]
+                best_cost += weight_cost[index][1]
+                best_combination[index] = 1
+
+        return best_cost, best_combination
+
+
+if __name__ == '__main__':
+    import pickle
+    import numpy as np
+    dic = pickle.load(open('/home/mmilanes/Downloads/sanefalcon/dic.pkl', 'rb'))
+    numreads = pickle.load(open('/home/mmilanes/Downloads/sanefalcon/numreads.pkl', 'rb'))
+    num_reads_per_batch = {}
+    for batch_name, l in dic.items():
+        count = [sum([numreads[x] for x in sublist]) for sublist in l]
+        assert len(count) == len(l)
+        num_reads_per_batch[batch_name] = {'count': sum(count), 'groups': [(x, y) for x, y in zip(l, count)]}
+    total_numer_of_reads = sum(numreads.values())
+    thr = 0.05
+    average_reads = total_numer_of_reads // len(num_reads_per_batch)
+    knapsack_capacity = average_reads + average_reads * thr
+
+    print(average_reads, knapsack_capacity)
+    groups = [x['groups'] for x in num_reads_per_batch.values()]
+
+    items = []
+    for group in groups:
+        for tup in group:
+            items.append(tup)
+
+    tmp_batches = []
+    copy_of_items = items.copy()
+    while len(copy_of_items) > 5:
+        number = len(items)
+        weight_cost = [(t[1], 1) for t in copy_of_items]
+        best_cost, best_combination = Utils.ratio_greedy(number, knapsack_capacity, weight_cost)
+        indexes = [index for index, v in enumerate(best_combination) if v == 1]
+        sum = 0
+        tmp = []
+        for index in indexes:
+            tmp.append(copy_of_items[index][0])
+
+        indexes.sort(reverse=True)
+        tmp_batches.append(tmp)
+        for i in indexes:
+            del copy_of_items[i]
+
+    tmp_batches.append([x[0] for x in copy_of_items])
+
+    diffs = []
+    for newb in tmp_batches:
+        print('groups in batch', len(newb))
+        sum = 0
+        for l in newb:
+            for path in l:
+                sum += numreads[path]
+        diffs.append(abs(sum - average_reads))
+
+    print(min(diffs), max(diffs), np.median(diffs))
+
+    import matplotlib.pyplot as plt
+    x = range(len(diffs))
+    plt.plot(x, diffs)
+    plt.show()
+
