@@ -17,7 +17,7 @@ managerlog = os.path.join(logdir, 'manager.log')
 
 
 def launch_grep_on_file(hook, filename):
-    cmd = f"grep -e {hook} {filename}"
+    cmd = f"grep -e {hook} {filename}*"
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
     out, err = p.communicate()
     if out:
