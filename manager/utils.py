@@ -120,7 +120,7 @@ class Utils:
             sizes.append(s)
             logger.debug(f'Batch {k}. Num_reads = {s}')
 
-        return dic, sizes
+        return dic  # , sizes
 
     @staticmethod
     def knapsack_ratio_greedy(number, capacity, weight_cost):

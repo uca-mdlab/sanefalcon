@@ -71,13 +71,16 @@ class FileManager:
             for bam in bamlist:
                 run = os.path.basename(bam).split('_')[0]
                 runs[run].append(bam)
+
             ordered = OrderedDict(sorted(runs.items(), key=lambda x: chr(int(x[0][1:]))))
+
             l_ord = list(ordered)
             logger.info(f'Found {len(ordered)} distinct runs')
             result = defaultdict(list)
 
             low_n, high_n = Utils.compute_num_batches(len(ordered))
-            num_batches = high_n
+            # num_batches = high_n
+            num_batches = low_n   # FIXME remove
             logger.info(f'num batches = {num_batches}')
 
             rows = []
@@ -89,7 +92,7 @@ class FileManager:
                             f'{sum(len(ordered[k]) for k in batch)}')
                 result[letters[i]].extend(ordered[k] for k in batch)
 
-            result, _ = Utils.balance_batches(result, reads_count)
+            result = Utils.balance_batches(result, reads_count)
 
             for batch_name, l in result.items():
                 batch_dir = os.path.join(self.trainfolder, batch_name)
