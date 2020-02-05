@@ -53,9 +53,12 @@ def get_batches():
     tmp = [x[x.index('Batch'):] for x in res.split('\n')]
     num_batches = len(tmp)
     for row in tmp:
-        batch, runs, num_samples = row.replace(' - ', '').split(',')
-        print(batch, runs, num_samples)
-    return num_batches
+        try:
+            batch, runs, num_samples = row.replace(' - ', '').split(',')
+            print(batch, runs, num_samples)
+        except:
+            print(row)
+    return num_batches // 2  # two times (one for the batch number) # FIXME
 
 
 name, trainingsamples, testingsamples = get_app_summary()
