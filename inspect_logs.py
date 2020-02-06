@@ -58,7 +58,7 @@ def get_batches():
             print(batch, runs, num_samples)
         except:
             print(row)
-    return num_batches // 2  # two times (one for the batch number) # FIXME
+    return num_batches
 
 
 name, trainingsamples, testingsamples = get_app_summary()
