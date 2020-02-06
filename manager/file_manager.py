@@ -79,8 +79,9 @@ class FileManager:
             result = defaultdict(list)
 
             low_n, high_n = Utils.compute_num_batches(len(ordered))
-            # num_batches = high_n
-            num_batches = low_n   # FIXME remove
+
+            num_batches = high_n
+
             logger.info(f'num batches = {num_batches}')
 
             rows = []
@@ -92,7 +93,13 @@ class FileManager:
                             f'{sum(len(ordered[k]) for k in batch)}')
                 result[letters[i]].extend(ordered[k] for k in batch)
 
-            result = Utils.balance_batches(result, reads_count)
+            # result = Utils.balance_batches(result, reads_count)
+            result, sizes = Utils.balance_new(result, reads_count)
+            for k, v in result.items():
+                print(k, v)
+
+            exit()
+
 
             for batch_name, l in result.items():
                 batch_dir = os.path.join(self.trainfolder, batch_name)
