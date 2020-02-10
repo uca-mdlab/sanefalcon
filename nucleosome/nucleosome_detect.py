@@ -91,40 +91,46 @@ def find_nucleosomes(mergefile):
     global scores
     scores = extract_scores(mergefile)
     nucleosomes = defaultdict(float)
-    nucl_file = 'nucl.anti.22'
-    if os.path.isfile(nucl_file):
-        nucleosomes = pickle.load(open(nucl_file, 'rb'))
-    else:
-        s = time.time()
-        i = 0
-        sort_list = [(k, v) for k, v in sorted(scores.items(), key=operator.itemgetter(1), reverse=True) if v >= 1]
-        while sort_list:
-            bp, max_score = sort_list.pop(0)
-            nucleosomes[bp] = max_score
-            to_remove = list(filter(lambda x: bp - 147 <= x[0] <= bp + 147, sort_list))
-            indexes = sorted([sort_list.index(x) for x in to_remove], reverse=True)
-            for index in indexes:
-                del sort_list[index]
-            if i % 1000 == 0:
-                print(max_score, len(sort_list), time.time() - s)
-                s = time.time()
-            i += 1
-        """
-        max_score = 2
-        while max_score >= 1:
-            bp, max_score = max(scores.items(), key=operator.itemgetter(1))
-            # bp, max_score = sorted(scores.items(), key=lambda item: item[1])[-1]  # last element
-            nucleosomes[bp] = max_score
-            if i % 1000 == 0:
-                print(max_score, len(scores), time.time() - s)
-                s = time.time()
-            #scores = mask(bp, scores)
-            apply_mask(bp)
-            i += 1
-        """
-        pickle.dump(nucleosomes, open('nucl.anti.22', 'wb'))
-        print(len(nucleosomes))
+
+    s = time.time()
+    i = 0
+    sort_list = [(k, v) for k, v in sorted(scores.items(), key=operator.itemgetter(1), reverse=True) if v >= 1]
+    while sort_list:
+        bp, max_score = sort_list.pop(0)
+        nucleosomes[bp] = max_score
+        to_remove = list(filter(lambda x: bp - 147 <= x[0] <= bp + 147, sort_list))
+        indexes = sorted([sort_list.index(x) for x in to_remove], reverse=True)
+        for index in indexes:
+            del sort_list[index]
+        if i % 1000 == 0:
+            print(max_score, len(sort_list), time.time() - s)
+            s = time.time()
+        i += 1
+    """
+    max_score = 2
+    while max_score >= 1:
+        bp, max_score = max(scores.items(), key=operator.itemgetter(1))
+        # bp, max_score = sorted(scores.items(), key=lambda item: item[1])[-1]  # last element
+        nucleosomes[bp] = max_score
+        if i % 1000 == 0:
+            print(max_score, len(scores), time.time() - s)
+            s = time.time()
+        #scores = mask(bp, scores)
+        apply_mask(bp)
+        i += 1
+    """
+    # pickle.dump(nucleosomes, open('nucl.anti.22', 'wb'))
+    # print(len(nucleosomes))
     return nucleosomes
+
+
+def create_nucleosome_file(chrom, mergefile, outfile):
+    if not os.path.isfile(outfile):
+        nucleosomes = find_nucleosomes(mergefile)
+        pickle.dump(nucleosomes, open(outfile, 'wb'))
+    else:
+        print(f'{outfile} already there. Skipping')
+    return outfile
 
 
 if __name__ == "__main__":
