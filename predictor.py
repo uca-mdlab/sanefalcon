@@ -179,7 +179,7 @@ def train_curvefit(samples, reference):
     logger.debug(params)
 
     plt.figure(figsize=(6, 4))
-    plt.xlim(0, max(x) * 1.1)
+    plt.xlim(min(x), max(x) * 1.1)
     plt.scatter(x, y, label='Data')
     plt.plot(x, test_func(x, params[0], params[1]), label='Fitted function')
     plt.legend(loc='best')
