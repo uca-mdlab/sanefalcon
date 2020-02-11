@@ -50,14 +50,23 @@ def get_app_summary():
 def get_batches():
     hook = 'Batch\ .'
     res = launch_grep_on_file(hook, managerlog)
-    tmp = [x[x.index('Batch'):] for x in res.split('\n')]
-    num_batches = len(tmp)
-    for row in tmp:
-        try:
-            batch, runs, num_samples = row.replace(' - ', '').split(',')
-            print(batch, runs, num_samples)
-        except:
-            print(row)
+    if res:
+        tmp = [x[x.index('Batch'):] for x in res.split('\n')]
+        num_batches = len(tmp)
+        for row in tmp:
+            try:
+                batch, runs, num_samples = row.replace(' - ', '').split(',')
+                print(batch, runs, num_samples)
+            except:
+                print(row)
+    else:
+        hook = '/sanefalcon/training/'
+        res = launch_grep_on_file(hook, managerlog)
+        tmp = [x[x.index('training/'):] for x in res.split('\n')]
+        num_batches = len(tmp)
+        for row in tmp:
+            batch, num_samples = row.split(',')
+            print(batch, num_samples)
     return num_batches
 
 
