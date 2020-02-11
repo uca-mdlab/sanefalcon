@@ -18,7 +18,7 @@ def define_training_and_testing_set(test_file, data_dir):
     """
     to_remove = ['p2_096_dedup.bam', 'p42_089_dedup.bam']
     group_name = os.path.basename(test_file).split('.')[0]
-    data_files = [f for f in os.listdir(data_dir) if f.endswith('.bam') and f not in to_remove][:200] # FIXME remove limitation
+    data_files = [f for f in os.listdir(data_dir) if f.endswith('.bam') and f not in to_remove]
     logger.debug(f'Cohorte consists of {len(data_files)} samples')
     with open(test_file, 'r') as groupfile:
         testing_set = [x.strip().split(';')[0] + '.bam' for x in groupfile.readlines()]
