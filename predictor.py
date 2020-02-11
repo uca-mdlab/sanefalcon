@@ -30,6 +30,8 @@ import random
 import pickle
 import sklearn.linear_model as sklm
 # import logging
+from scipy import optimize
+
 
 from log_setup import setup_logger
 logger = setup_logger(__name__, 'logs/predictor.log')
@@ -163,6 +165,29 @@ def train_polyfit(samples, reference):
     plt.plot(samples, f(samples), 'b-', label="Polyfit")
     plt.savefig('train_polyfit.png')
     return p
+
+
+def test_func(x, a, b):
+    return a*x + b
+
+
+def train_curvefit(samples, reference):
+    x = np.array(samples)
+    y = np.array(reference)
+
+    params, params_cov = optimize.curve_fit(test_func, x, y)  # , p0 = [0,0])
+    logger.debug(params)
+
+    plt.figure(figsize=(6, 4))
+    plt.xlim(0, max(x) * 1.1)
+    plt.scatter(x, y, label='Data')
+    plt.plot(x, test_func(x, params[0], params[1]), label='Fitted function')
+    plt.legend(loc='best')
+
+    plt.savefig('train_curvefit.png')
+    logger.debug(f'Params {params}')
+    logger.debug(f'Params cov {params_cov}')
+    return params
 
 
 def train_linear_model(samples, reference):
@@ -350,18 +375,21 @@ def run_model(nucleosome_file, reference_file, outfile, test_nucleosome_file=Non
     selected_regions = get_area_scores(profiles)
 
     # Fit our models to the data
-    poly_fit = train_polyfit(sample_scores, yVals)
-    linear_model = train_linear_model(selected_regions, yVals)
+    # poly_fit = train_polyfit(sample_scores, yVals)
+    curvefit = train_curvefit(sample_scores, yVals)
+    # linear_model = train_linear_model(selected_regions, yVals)
 
     # Test our fit
-    tr_polyfit = test_polyfit(sample_scores, yVals, poly_fit, "Train")
-    tr_linearmodel = test_linear_model(selected_regions, yVals, linear_model, "Train")
+    #tr_polyfit = test_polyfit(sample_scores, yVals, poly_fit, "Train")
+    #tr_linearmodel = test_linear_model(selected_regions, yVals, linear_model, "Train")
 
     fittedVals = [0] * len(yVals)
     for i, val in enumerate(sample_scores):
+        fittedVals[i] = val * curvefit[0] + curvefit[1]
         # print i,val,yVals[i],val*poly_fit[0]+poly_fit[1]
-        fittedVals[i] = val * poly_fit[0] + poly_fit[1]
-    print(' '.join([str(x) for x in poly_fit]))
+        #fittedVals[i] = val * poly_fit[0] + poly_fit[1]
+
+    # print(' '.join([str(x) for x in poly_fit]))
 
     plt.scatter(fittedVals, yVals)
     # plt.xlim([0, 25])
@@ -371,73 +399,74 @@ def run_model(nucleosome_file, reference_file, outfile, test_nucleosome_file=Non
     with open(modelFileName, 'w') as modelFile:
         modelFile.write(' '.join([str(x) for x in correlations]))
         modelFile.write('\n')
-        modelFile.write(' '.join([str(x) for x in poly_fit]))
+        modelFile.write(' '.join([str(x) for x in curvefit]))
+        # modelFile.write(' '.join([str(x) for x in poly_fit]))
 
-    if test_nucleosome_file:
-        new_samples, new_coverages = load_nucleosome_file(test_nucleosome_file)
-
-        # Load known answers for our test data
-        new_reference, new_series, new_girls, new_bads = load_reference_file(test_reference_file)
-
-        # Filter out samples that are missing in either file
-        test_set, test_set_no = split_by_reference(new_samples, new_reference)
-        new_covs = [new_coverages[x] for x in test_set]
-        new_yVals = [new_reference[x] for x in test_set]
-
-        # out of original
-        singleRun = ["15P0008B", "15P0135A", "15P0136A", "15P0137A", "15P0138A", "15P0139A", "15P0140A", "15P0148A",
-                     "15P0149A", "15P0150A", "15P0151A", "15P0152A"]
-        recolor = []
-        for i, val in enumerate(test_set):
-            if val in singleRun:
-                recolor.append(i)
-
-        new_sample_scores, new_profiles = get_nucl_ratios(test_set, new_samples, correlations)
-        new_selected_regions = get_area_scores(new_profiles)
-
-        # Test our previously trained fits
-        te_polyfit = test_polyfit(new_sample_scores, new_yVals, poly_fit, "Test")
-        te_linearmodel = test_linear_model(new_selected_regions, new_yVals, linear_model, "Test")
-        plotScatter(tr_polyfit, yVals, te_polyfit, new_yVals, outfile + ".polyfit", 'Nucleosome based prediction',
-                    recolor)
-        plotScatter(tr_linearmodel, yVals, te_linearmodel, new_yVals, outfile + ".linearmodel", 'linearmodel', recolor)
-
-        plotScatter(sample_scores, yVals, new_sample_scores, new_yVals, outfile +".direct", 'direct', recolor)
-
-        plotScatter(sample_scores, covs, new_sample_scores, new_covs, outfile + ".cov", 'coverages', recolor)
-
-        plotProfiles(profiles, new_profiles, outfile, correlations)
-
-        errorValues = [0] * len(te_polyfit)
-        for i in range(len(te_polyfit)):
-            errorValues[i] = te_polyfit[i] - new_yVals[i]
-        print(np.mean(errorValues), np.std(errorValues))
-        print(np.mean([abs(x) for x in errorValues]), np.std([abs(x) for x in errorValues]))
-
-        errorValues=[]
-        for i in range(len(te_polyfit)):
-            if 10 < new_yVals[i] < 15:
-                errorValues.append(te_polyfit[i] - new_yVals[i])
-        print(np.mean(errorValues), np.std(errorValues))
-        print(np.mean([abs(x) for x in errorValues]), np.std([abs(x) for x in errorValues]))
-
-        test_polyfit([new_sample_scores[x] for x in recolor], [new_yVals[x] for x in recolor], poly_fit, "recolor")
-
-        plt.figure()
-        sampleScoresXX,selectedRegionsXX = get_nucl_ratios(training_set, samples, correlations)
-        newSampleScoresXX,newSelectedRegionsXX = get_nucl_ratios(test_set_no, new_samples, correlations)
-
-        sampleScoresFit	= [poly_fit[0]*val+poly_fit[1] for val in sample_scores]
-        sampleScoresXXFit = [poly_fit[0]*val+poly_fit[1] for val in sampleScoresXX]
-        newSampleScoresFit = [poly_fit[0]*val+poly_fit[1] for val in new_sample_scores]
-        newSampleScoresXXFit = [poly_fit[0]*val+poly_fit[1] for val in newSampleScoresXX]
-
-        plt.boxplot([sampleScoresFit,sampleScoresXXFit,newSampleScoresFit,newSampleScoresXXFit])#,newPredictedNoRef])
-        plt.title("Boxplots for Regressor Fetal Fraction Outputs")
-        plt.ylabel("FF score using Nucleosomes")
-        plt.xlabel("Dataset used")
-        plt.xticks([1,2,3,4], ['Training Boys', 'Training Girls', 'Test Boys','Test Girls'])
-        plt.savefig(sys.argv[3]+'.boxplots.pdf', dpi=100)
+    # if test_nucleosome_file:
+    #     new_samples, new_coverages = load_nucleosome_file(test_nucleosome_file)
+    #
+    #     # Load known answers for our test data
+    #     new_reference, new_series, new_girls, new_bads = load_reference_file(test_reference_file)
+    #
+    #     # Filter out samples that are missing in either file
+    #     test_set, test_set_no = split_by_reference(new_samples, new_reference)
+    #     new_covs = [new_coverages[x] for x in test_set]
+    #     new_yVals = [new_reference[x] for x in test_set]
+    #
+    #     # out of original
+    #     singleRun = ["15P0008B", "15P0135A", "15P0136A", "15P0137A", "15P0138A", "15P0139A", "15P0140A", "15P0148A",
+    #                  "15P0149A", "15P0150A", "15P0151A", "15P0152A"]
+    #     recolor = []
+    #     for i, val in enumerate(test_set):
+    #         if val in singleRun:
+    #             recolor.append(i)
+    #
+    #     new_sample_scores, new_profiles = get_nucl_ratios(test_set, new_samples, correlations)
+    #     new_selected_regions = get_area_scores(new_profiles)
+    #
+    #     # Test our previously trained fits
+    #     te_polyfit = test_polyfit(new_sample_scores, new_yVals, poly_fit, "Test")
+    #     te_linearmodel = test_linear_model(new_selected_regions, new_yVals, linear_model, "Test")
+    #     plotScatter(tr_polyfit, yVals, te_polyfit, new_yVals, outfile + ".polyfit", 'Nucleosome based prediction',
+    #                 recolor)
+    #     plotScatter(tr_linearmodel, yVals, te_linearmodel, new_yVals, outfile + ".linearmodel", 'linearmodel', recolor)
+    #
+    #     plotScatter(sample_scores, yVals, new_sample_scores, new_yVals, outfile +".direct", 'direct', recolor)
+    #
+    #     plotScatter(sample_scores, covs, new_sample_scores, new_covs, outfile + ".cov", 'coverages', recolor)
+    #
+    #     plotProfiles(profiles, new_profiles, outfile, correlations)
+    #
+    #     errorValues = [0] * len(te_polyfit)
+    #     for i in range(len(te_polyfit)):
+    #         errorValues[i] = te_polyfit[i] - new_yVals[i]
+    #     print(np.mean(errorValues), np.std(errorValues))
+    #     print(np.mean([abs(x) for x in errorValues]), np.std([abs(x) for x in errorValues]))
+    #
+    #     errorValues=[]
+    #     for i in range(len(te_polyfit)):
+    #         if 10 < new_yVals[i] < 15:
+    #             errorValues.append(te_polyfit[i] - new_yVals[i])
+    #     print(np.mean(errorValues), np.std(errorValues))
+    #     print(np.mean([abs(x) for x in errorValues]), np.std([abs(x) for x in errorValues]))
+    #
+    #     test_polyfit([new_sample_scores[x] for x in recolor], [new_yVals[x] for x in recolor], poly_fit, "recolor")
+    #
+    #     plt.figure()
+    #     sampleScoresXX,selectedRegionsXX = get_nucl_ratios(training_set, samples, correlations)
+    #     newSampleScoresXX,newSelectedRegionsXX = get_nucl_ratios(test_set_no, new_samples, correlations)
+    #
+    #     sampleScoresFit	= [poly_fit[0]*val+poly_fit[1] for val in sample_scores]
+    #     sampleScoresXXFit = [poly_fit[0]*val+poly_fit[1] for val in sampleScoresXX]
+    #     newSampleScoresFit = [poly_fit[0]*val+poly_fit[1] for val in new_sample_scores]
+    #     newSampleScoresXXFit = [poly_fit[0]*val+poly_fit[1] for val in newSampleScoresXX]
+    #
+    #     plt.boxplot([sampleScoresFit,sampleScoresXXFit,newSampleScoresFit,newSampleScoresXXFit])#,newPredictedNoRef])
+    #     plt.title("Boxplots for Regressor Fetal Fraction Outputs")
+    #     plt.ylabel("FF score using Nucleosomes")
+    #     plt.xlabel("Dataset used")
+    #     plt.xticks([1,2,3,4], ['Training Boys', 'Training Girls', 'Test Boys','Test Girls'])
+    #     plt.savefig(sys.argv[3]+'.boxplots.pdf', dpi=100)
 
     # Make some plots to show what we have done
     plotCorrelation(correlations, outfile +'.correlations.pdf')
