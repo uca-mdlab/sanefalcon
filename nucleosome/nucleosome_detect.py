@@ -5,6 +5,10 @@ from itertools import islice
 import os
 import time
 import operator
+from log_setup import setup_logger
+
+
+logger = setup_logger('nucl.detect', 'logs/nucldetect.log')
 
 count = None
 scores = defaultdict(list)
@@ -52,8 +56,8 @@ def extract_scores(mergefile):
         length = len(positions)
         count = Counter(positions)
         l = len(count)
-        print(f'{l} positions to check')
-        pool_size = 100
+        pool_size = 50
+        logger.debug(f'{l} positions to check: ({int(l/pool_size)}) rounds in {mergefile}')
         i = 0
         s = s0
         for chunk in prepare_chunk(list(count.keys()), pool_size):
@@ -66,15 +70,16 @@ def extract_scores(mergefile):
                     _ = job.result()
                     # rs, score = job.result()
                     # scores[rs] = score
-            if i % 1000 == 0:
-                print(i, chunk[0], time.time() - s)
+            if i % 10000 == 0:
+                elaps = time.time() - s
+                logger.debug("chunk {} (pos:{}) time: {}".format(i, chunk[0], elaps))
                 s = time.time()
             i += 1
 
         if scores:
             pickle.dump(scores, open(scorefile, 'wb'))
 
-    print('Done', time.time() - s0)
+    logger.info(f'{mergefile} scores extracted in {round(time.time() - s0)} sec. ')
     return scores
 
 
@@ -92,7 +97,8 @@ def find_nucleosomes(mergefile):
     scores = extract_scores(mergefile)
     nucleosomes = defaultdict(float)
 
-    s = time.time()
+    s0 = time.time()
+    s = s0
     i = 0
     sort_list = [(k, v) for k, v in sorted(scores.items(), key=operator.itemgetter(1), reverse=True) if v >= 1]
     while sort_list:
@@ -102,8 +108,8 @@ def find_nucleosomes(mergefile):
         indexes = sorted([sort_list.index(x) for x in to_remove], reverse=True)
         for index in indexes:
             del sort_list[index]
-        if i % 1000 == 0:
-            print(max_score, len(sort_list), time.time() - s)
+        if i % 10000 == 0:
+            logger.debug("max score: {}; len(scores): {}; time: {}".format(max_score, len(sort_list), round(time.time() - s)))
             s = time.time()
         i += 1
     """
@@ -119,8 +125,7 @@ def find_nucleosomes(mergefile):
         apply_mask(bp)
         i += 1
     """
-    # pickle.dump(nucleosomes, open('nucl.anti.22', 'wb'))
-    # print(len(nucleosomes))
+    logger.info(f'{mergefile} nucleosome computed in {round(time.time() - s0)} sec. ')
     return nucleosomes
 
 
@@ -137,4 +142,5 @@ if __name__ == "__main__":
     mergefile = '/data/tempff/anti.22'
     s = time.time()
     nucleosomes = find_nucleosomes(mergefile)
+    pickle.dump(nucleosomes, open('nucl.anti.22', 'wb'))
     print(time.time() - s)

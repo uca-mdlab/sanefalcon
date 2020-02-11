@@ -6,8 +6,8 @@ formatter = logging.Formatter('%(asctime)s - %(name)-21s - %(levelname)-8s: %(me
 
 def setup_logger(name, log_file, level=logging.DEBUG):
 
-    handler = RotatingFileHandler(log_file, maxBytes=1e7, backupCount=20)
-    # handler = logging.FileHandler(log_file)
+    # handler = RotatingFileHandler(log_file, maxBytes=1e7, backupCount=20)
+    handler = logging.FileHandler(log_file)
 
     handler.setFormatter(formatter)
 
