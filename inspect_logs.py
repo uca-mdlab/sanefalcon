@@ -70,6 +70,37 @@ def get_batches():
     return num_batches
 
 
+def check_multi_activity():
+    p = subprocess.Popen("tail -1 {}".format(multilog), stdout=subprocess.PIPE, shell=True)
+    out, err = p.communicate()
+    res = out.decode('utf-8').strip()
+    if re.search('runs_left', res):
+        print('Multi - Last command: ', ' '.join(res.split(':')[-2:]).strip())
+    else:
+        print('Multi - Last command: ', res.split(':')[-1])
+    print('----')
+
+
+def check_training_nucleosomes():
+    hook = 'saved\ .*\/training/'
+    res = launch_grep_on_file(hook, nucllog)
+    if res:
+        subdirs = [row.partition(trainingdir)[2].split('/')[1] for row in res.split('\n')]
+        subdirs.sort()
+        c = Counter(subdirs)
+        if all([x == 22 for x in c.items()]):
+            print('Nucleosome Tracks terminated')
+        else:
+            print('Nucleosome Tracks:')
+            done = 0
+            for k, v in c.items():
+                if v == 22:
+                    done += 1
+                else:
+                    print(f'Batch {k}: tracks saved: {v}')
+            print(f"Batches complete: {done}/{num_batches}")
+
+
 name, trainingsamples, testingsamples = get_app_summary()
 expected_training_profiles = trainingsamples * 4 * 22
 expected_testing_profiles = testingsamples * 4 * 22
@@ -82,34 +113,8 @@ num_batches = get_batches()
 print('Num batches : ', num_batches)
 print('----')
 
-
-p = subprocess.Popen("tail -1 {}".format(multilog), stdout=subprocess.PIPE, shell=True)
-out, err = p.communicate()
-res = out.decode('utf-8').strip()
-if re.search('runs_left', res):
-    print('Multi - Last command: ', ' '.join(res.split(':')[-2:]).strip())
-print('----')
-
-# Nucleosome tracks
-p = subprocess.Popen("grep -e 'saved\ .*\/training/' {}".format(nucllog), stdout=subprocess.PIPE, shell=True)
-out, err = p.communicate()
-
-if out:
-    res = out.decode('utf-8').strip().split('\n')
-    subdirs = [row.partition(trainingdir)[2].split('/')[1] for row in res]
-    subdirs.sort()
-    c = Counter(subdirs)
-    if all([x == 22 for x in c.items()]):
-        print('Nucleosome Tracks terminated')
-    else:
-        print('Nucleosome Tracks:')
-        done = 0
-        for k, v in c.items():
-            if v == 22:
-                done += 1
-            else:
-                print(f'Batch {k}: tracks saved: {v}')
-        print(f"Batches complete: {done}/{num_batches}")
+check_multi_activity()
+check_training_nucleosomes()
 
 
 # Nucleosome Profiles Forward
