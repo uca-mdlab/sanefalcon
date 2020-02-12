@@ -8,11 +8,13 @@
 NOW=`date +'%d-%m-%Y_%Hh%M'`
 BKPDIR="backup${NOW}"
 
-echo "mkdir -p $BKPDIR"
+mkdir -p $BKPDIR
 echo "Packing and deleting from app folder"
-echo "tar czvf ${BKPDIR}/images.tar.gz testingNucleosome.csv* train_curvefit.png trainingNucleosome.csv*"
-echo "tar czvf ${BKPDIR}/logs.tar.gz logs/*"
-echo "grep 'ff(' logs/sanefalcon.log > ${BKPDIR}/results.ff"
+tar czvf ${BKPDIR}/images.tar.gz testingNucleosome.csv* train_curvefit.png trainingNucleosome.csv*
+tar czvf ${BKPDIR}/logs.tar.gz logs/*
+grep 'ff(' logs/sanefalcon.log > ${BKPDIR}/results.ff
+
+
 
 echo "rm testingNucleosome.csv*"
 echo "rm train_curvefit.png"
