@@ -173,13 +173,13 @@ if out:
     chroms = [int(x) for x in chroms]
     chroms.sort()
     c = Counter(chroms)
-    if all([x == trainingsamples for x in c.items()]):
+    if all([x == testingsamples for x in c.items()]):
         print('Nucleosome profiles testing: Forward complete')
     else:
         print('Nucleosome profiles testing: Forward')
         done = 0
         for k, v in c.items():
-            if v == trainingsamples:
+            if v == testingsamples:
                 done += 1
             else:
                 print('chrom', k, ' - count: ', v)
@@ -194,13 +194,13 @@ if out:
     chroms = [int(x) for x in chroms]
     chroms.sort()
     c = Counter(chroms)
-    if all([x == trainingsamples for x in c.items()]):
+    if all([x == testingsamples for x in c.items()]):
         print('Nucleosome profiles testing: Reverse complete')
     else:
         print('Nucleosome profiles testing: Reverse')
         done = 0
         for k, v in sorted(c.items()):
-            if v == trainingsamples:
+            if v == testingsamples:
                 done += 1
             else:
                 print('chrom', k, ' - count: ', v)
