@@ -7,7 +7,9 @@ import re
 
 
 trainingdir = '/home/mdlab/storage/sanefalcon/training'
+testingdir = '/home/mdlab/storage/sanefalcon/testing'
 profiledir = os.path.join(trainingdir, 'profiles')
+testprofiledir = os.path.join(testingdir, 'profiles')
 logdir = './logs'
 
 genlog = os.path.join(logdir, 'sanefalcon.log')
@@ -116,9 +118,8 @@ print('----')
 check_multi_activity()
 check_training_nucleosomes()
 
-
 # Nucleosome Profiles Forward
-p = subprocess.Popen("grep 'End of forward' {}".format(nucllog), stdout=subprocess.PIPE, shell=True)
+p = subprocess.Popen("grep -e 'End of forward .*\/training/' {}".format(nucllog), stdout=subprocess.PIPE, shell=True)
 out, err = p.communicate()
 if out:
     res = out.decode('utf-8').strip().split('\n')
@@ -127,9 +128,9 @@ if out:
     chroms.sort()
     c = Counter(chroms)
     if all([x == trainingsamples for x in c.items()]):
-        print('Nucleosome profiles: Forward complete')
+        print('Nucleosome profiles training: Forward complete')
     else:
-        print('Nucleosome profiles: Forward')
+        print('Nucleosome profiles training: Forward')
         done = 0
         for k, v in c.items():
             if v == trainingsamples:
@@ -139,7 +140,7 @@ if out:
         print('Done:', done)
 
 # Nucleosome Profiles Reverse
-p = subprocess.Popen("grep 'End of reverse' {}".format(nucllog), stdout=subprocess.PIPE, shell=True)
+p = subprocess.Popen("grep -e 'End of reverse .*\/training/' {}".format(nucllog), stdout=subprocess.PIPE, shell=True)
 out, err = p.communicate()
 if out:
     res = out.decode('utf-8').strip().split('\n')
@@ -148,9 +149,9 @@ if out:
     chroms.sort()
     c = Counter(chroms)
     if all([x == trainingsamples for x in c.items()]):
-        print('Nucleosome profiles: Reverse complete')
+        print('Nucleosome profiles training: Reverse complete')
     else:
-        print('Nucleosome profiles: Reverse')
+        print('Nucleosome profiles training: Reverse')
         done = 0
         for k, v in sorted(c.items()):
             if v == trainingsamples:
@@ -161,6 +162,51 @@ if out:
 
 print('----')
 profiles = glob.glob("{}/*.*".format(profiledir))
-print('Profiles saved: {0:.2f}%'.format((len(profiles) / expected_training_profiles) * 100))
+print('Training profiles saved: {0:.2f}%'.format((len(profiles) / expected_training_profiles) * 100))
 
-# grep - e 'saved\ .*\/testing/'
+# Nucleosome Profiles Forward
+p = subprocess.Popen("grep -e 'End of forward .*\/testing/' {}".format(nucllog), stdout=subprocess.PIPE, shell=True)
+out, err = p.communicate()
+if out:
+    res = out.decode('utf-8').strip().split('\n')
+    chroms = [row.partition(' phase for chrom')[2].strip().split()[0] for row in res]
+    chroms = [int(x) for x in chroms]
+    chroms.sort()
+    c = Counter(chroms)
+    if all([x == trainingsamples for x in c.items()]):
+        print('Nucleosome profiles testing: Forward complete')
+    else:
+        print('Nucleosome profiles testing: Forward')
+        done = 0
+        for k, v in c.items():
+            if v == trainingsamples:
+                done += 1
+            else:
+                print('chrom', k, ' - count: ', v)
+        print('Done:', done)
+
+# Nucleosome Profiles Reverse
+p = subprocess.Popen("grep -e 'End of reverse .*\/testing/' {}".format(nucllog), stdout=subprocess.PIPE, shell=True)
+out, err = p.communicate()
+if out:
+    res = out.decode('utf-8').strip().split('\n')
+    chroms = [row.partition(' phase for chrom')[2].strip().split()[0] for row in res]
+    chroms = [int(x) for x in chroms]
+    chroms.sort()
+    c = Counter(chroms)
+    if all([x == trainingsamples for x in c.items()]):
+        print('Nucleosome profiles testing: Reverse complete')
+    else:
+        print('Nucleosome profiles testing: Reverse')
+        done = 0
+        for k, v in sorted(c.items()):
+            if v == trainingsamples:
+                done += 1
+            else:
+                print('chrom', k, ' - count: ', v)
+        print('Done:', done)
+
+
+print('----')
+profiles = glob.glob("{}/*.*".format(testprofiledir))
+print('Testing profiles saved: {0:.2f}%'.format((len(profiles) / expected_testing_profiles) * 100))
