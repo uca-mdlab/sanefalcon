@@ -1,6 +1,8 @@
 import os
 import sys
 from collections import defaultdict
+import re
+
 
 data_dir = '/home/mdlab/storage/data_nice/dedup'
 trainingdir = '/home/mdlab/storage/sanefalcon/training'
@@ -9,6 +11,8 @@ with open(sys.argv[1], 'r') as infile:
     lines = [x.strip() for x in infile.readlines()]
 
 for line in lines:
+    if not re.match(r'[a-z]/.*\.bam', line):
+        exit(f'Wrong file format. Got: {line}')
     name, f = line.split('/')
     batches[name].append(os.path.join(data_dir, f))
 
