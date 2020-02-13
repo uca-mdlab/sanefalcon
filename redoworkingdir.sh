@@ -1,25 +1,20 @@
 #!/bin/bash
 
-#if [ "$#" -le 1 ]; then
-#    echo "Illegal number of parameters"
-#fi
-
 
 NOW=`date +'%d-%m-%Y_%Hh%M'`
 BKPDIR="backup${NOW}"
 
 mkdir -p $BKPDIR
-echo "Packing and deleting from app folder"
-tar czvf ${BKPDIR}/images.tar.gz testingNucleosome.csv* train_curvefit.png trainingNucleosome.csv*
-tar czvf ${BKPDIR}/logs.tar.gz logs/*
+echo "Packing from app folder..."
+tar czf ${BKPDIR}/images.tar.gz testingNucleosome.csv* train_curvefit.png trainingNucleosome.csv*
+tar czf ${BKPDIR}/logs.tar.gz logs/*
 grep 'ff(' logs/sanefalcon.log > ${BKPDIR}/results.ff
 
-
-
-echo "rm testingNucleosome.csv*"
-echo "rm train_curvefit.png"
-echo "rm trainingNucleosome.csv*"
-echo "rm logs/*"
+echo "Deleting stuff..."
+rm testingNucleosome.csv*
+rm train_curvefit.png
+rm trainingNucleosome.csv*
+rm logs/*
 
 
 WORKDIR=/home/mdlab/storage/sanefalcon/training
@@ -42,15 +37,6 @@ for d in $SOURCE/training/*/ ; do
         for f in `ls $SOURCE/training/$name/*.*`; do
             echo "ln $f"
         done
-        #for f in `ls $SOURCE/training/$name/*anti*`; do
-        #    echo "ln $f"
-        #done
-        #for f in `ls $SOURCE/training/$name/merge.*`; do
-        #    echo "ln $f"
-        #done
-        #for f in `find $SOURCE/training/$name/ -type l`; do
-        #    echo "cp $f ."
-        #done
     fi
     echo "popd"
     break
