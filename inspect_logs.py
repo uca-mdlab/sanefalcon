@@ -68,6 +68,8 @@ def get_batches():
         num_batches = len(tmp)
         for row in tmp:
             batch, num_samples = row.split(',')
+            if re.search('profiles', batch):
+                continue
             print(batch, num_samples)
     return num_batches
 
