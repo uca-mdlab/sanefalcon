@@ -210,5 +210,5 @@ if out:
 
 
 print('----')
-profiles = glob.glob("{}/*.*".format(testprofiledir))
-print('Testing profiles saved: {0:.2f}%'.format((len(profiles) / expected_testing_profiles) * 100))
+tprofiles = glob.glob("{}/*.*".format(testprofiledir))
+print('Testing profiles saved: {0:.2f}%'.format((len(tprofiles) / expected_testing_profiles) * 100))
