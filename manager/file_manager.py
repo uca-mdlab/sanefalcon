@@ -48,8 +48,13 @@ class FileManager:
 
         reads_count = {}
         for bamfile in bamlist:
-            _, num_count = Utils.count_number_of_reads_per_bam(bamfile)
-            reads_count[bamfile] = num_count
+            try:
+                _, num_count = Utils.count_number_of_reads_per_bam(bamfile)
+                reads_count[bamfile] = num_count
+            except:
+                logger.error(f'Problem with {bamfile}')
+                exit("Error on count_number_of_reads")
+
         tot_reads = sum(reads_count.values())
         logger.debug(f'Total number of reads to balance: {tot_reads}')
 

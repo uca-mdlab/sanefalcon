@@ -68,6 +68,8 @@ def get_batches():
         num_batches = len(tmp)
         for row in tmp:
             batch, num_samples = row.split(',')
+            if re.search('profiles', batch):
+                continue
             print(batch, num_samples)
     return num_batches
 
@@ -127,7 +129,7 @@ if out:
     chroms = [int(x) for x in chroms]
     chroms.sort()
     c = Counter(chroms)
-    if all([x == trainingsamples for x in c.items()]):
+    if all([x == trainingsamples for x in c.values()]):
         print('Nucleosome profiles training: Forward complete')
     else:
         print('Nucleosome profiles training: Forward')
@@ -148,7 +150,7 @@ if out:
     chroms = [int(x) for x in chroms]
     chroms.sort()
     c = Counter(chroms)
-    if all([x == trainingsamples for x in c.items()]):
+    if all([x == trainingsamples for x in c.values()]):
         print('Nucleosome profiles training: Reverse complete')
     else:
         print('Nucleosome profiles training: Reverse')
@@ -173,7 +175,7 @@ if out:
     chroms = [int(x) for x in chroms]
     chroms.sort()
     c = Counter(chroms)
-    if all([x == testingsamples for x in c.items()]):
+    if all([x == testingsamples for x in c.values()]):
         print('Nucleosome profiles testing: Forward complete')
     else:
         print('Nucleosome profiles testing: Forward')
@@ -194,7 +196,7 @@ if out:
     chroms = [int(x) for x in chroms]
     chroms.sort()
     c = Counter(chroms)
-    if all([x == testingsamples for x in c.items()]):
+    if all([x == testingsamples for x in c.values()]):
         print('Nucleosome profiles testing: Reverse complete')
     else:
         print('Nucleosome profiles testing: Reverse')
@@ -208,5 +210,5 @@ if out:
 
 
 print('----')
-profiles = glob.glob("{}/*.*".format(testprofiledir))
-print('Testing profiles saved: {0:.2f}%'.format((len(profiles) / expected_testing_profiles) * 100))
+tprofiles = glob.glob("{}/*.*".format(testprofiledir))
+print('Testing profiles saved: {0:.2f}%'.format((len(tprofiles) / expected_testing_profiles) * 100))
