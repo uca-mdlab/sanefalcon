@@ -103,7 +103,8 @@ class FileManager:
 
             # result = Utils.balance_batches(result, reads_count)
             result, sizes = Utils.balance_new(result, reads_count)
-
+            print(result)
+            exit()
             for batch_name, l in result.items():
                 batch_dir = os.path.join(self.trainfolder, batch_name)
                 os.makedirs(batch_dir)
