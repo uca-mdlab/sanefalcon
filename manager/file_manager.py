@@ -97,8 +97,8 @@ class FileManager:
                 rows.append(list(b))
             res = list(np.array(rows).T)  # transpose to avoid subsequent runs in the same batch
             for i, batch in enumerate(res):
-                logger.info(f'Batch {letters[i]}, runs: {batch}, - num samples = '
-                            f'{sum(len(ordered[k]) for k in batch)}')
+                # logger.info(f'Batch {letters[i]}, runs: {batch}, - num samples = '
+                #             f'{sum(len(ordered[k]) for k in batch)}')
                 result[letters[i]].extend(ordered[k] for k in batch)
 
             # result = Utils.balance_batches(result, reads_count)
@@ -119,6 +119,9 @@ class FileManager:
                     except FileNotFoundError:
                         logger.error(f'{orig} not found??')
                 batches[batch_dir] = bam_links
+
+            for dir, links in batches.items():
+                logger.info(f'Batch {dir}: {len(links)} bam files')
 
         return batches
 
