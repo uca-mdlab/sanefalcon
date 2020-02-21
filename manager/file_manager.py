@@ -91,7 +91,7 @@ class FileManager:
                 num_batches = self.config['training']['batchsize']
 
             logger.info(f'num batches = {num_batches}')
-            exit()
+
             rows = []
             for b in Utils.prepare_batches(l_ord, num_batches):
                 rows.append(list(b))
