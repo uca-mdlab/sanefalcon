@@ -88,7 +88,7 @@ class FileManager:
                 num_batches = high_n
             else:
                 logger.info('Falling back to default batchsize')
-                num_batches = self.config['training']['batchsize']
+                num_batches = int(self.config['training']['batchsize'])
 
             logger.info(f'num batches = {num_batches}')
 
