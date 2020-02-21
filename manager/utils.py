@@ -37,15 +37,19 @@ class Utils:
 
     @staticmethod
     def prepare_batches(lis, size):
+        logger.info(f'Praparing batches of size {size}:')
+        logger.info(f'{lis}')
         it = iter(lis)
         return iter(lambda: tuple(islice(it, size)), ())
 
     @staticmethod
     def compute_num_batches(n):
+        logger.info(f'Computing batch sizes for total size {n}')
         divs = [x for x in range(1, n + 1) if n / x == int(n / x)]
         center = (divs[int(len(divs) / 2) - 1], divs[int(len(divs) / 2)])
         low = center[0]
         high = center[1]
+        logger.info(f'{divs}: {low}, {high}')
         return low, high  # trade offs merge/merge_anti_subs
 
     @staticmethod
