@@ -272,3 +272,15 @@ def process(chrom, fwdrevdic, outdir):
 def submit_process(tup):
     return process(*tup)
 
+
+if __name__ == "__main__":
+    chrom = 22
+    dic = {'nucl_file': '/data/tempff/comparison/new/nucl.22',
+           'fwd': ['/data/tempff/comparison/p0_081_dedup.bam.22.start.fwd'],
+           'rev': ['/data/tempff/comparison/p0_081_dedup.bam.22.start.rev']
+           }
+    subdir = '/data/tempff/comparison/'
+    d = {subdir: [dic]}
+    outdir = '/data/tempff/comparison/new'
+    submit_process((chrom, d, outdir))
+
