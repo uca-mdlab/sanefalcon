@@ -103,7 +103,7 @@ def create_streams(fm, training=True):
         up = upstream[sample]
         up.reverse()
         down = downstream[sample]
-        streams[sample] = up + down
+        streams[sample] = up[:-1] + down
 
     return streams
 
@@ -144,7 +144,7 @@ if __name__ == "__main__":
         up = upstream[sample]
         up.reverse()
         down = downstream[sample]
-        streams[sample] = up + down
+        streams[sample] = up[:-1] + down
 
     with open(outfile, 'w') as out:
         for sample, stream in streams.items():
