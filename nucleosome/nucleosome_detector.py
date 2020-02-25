@@ -120,8 +120,3 @@ def create_nucleosome_file(chrom, mergefile, outfile):
     return outfile
 
 
-if __name__ == "__main__":
-    chrom = 22
-    mergefile = '/data/tempff/anti.22'
-    outfile = '/data/tempff/nucl.22'
-    create_nucleosome_file(chrom, mergefile, outfile)
