@@ -8,6 +8,10 @@ from log_setup import setup_logger
 logger = setup_logger(__name__, 'logs/nucleosome.log')
 
 
+def map_to_int(arr):
+    return list(map(int, arr))
+
+
 def get_profile_file(proffile):
     logger.debug(f'Get profile file {proffile}')
     l = []
@@ -16,6 +20,7 @@ def get_profile_file(proffile):
         assert len(reader) == 1
         for row in reader:
             l = list(map(float, row))
+            l = map_to_int(l)
     return l
 
 
@@ -40,8 +45,13 @@ def combine_profile_files(arr):
     d = {}
     pattern = re.compile(r"\w*\.bam")
     for fname in arr:
-        name = re.match(pattern, os.path.basename(fname)).group()
-        d[name] = get_profile_file(fname)
+        try:
+            name = re.match(pattern, os.path.basename(fname)).group()
+            d[name] = get_profile_file(fname)
+        except:   # only if __main__
+            pattern = re.compile(f'\w*\.22')
+            name = re.match(pattern, os.path.basename(fname)).group()
+            d[name] = get_profile_file(fname)
     return d
 
 
@@ -49,6 +59,9 @@ def create_upstream(fnames):
     upstream = defaultdict(list)
     tmp = defaultdict(list)
     for chrom, fwd, rev in get_profile_files_per_chrom(fnames, stream='up'):
+        if len(fwd) == len(rev) == 0:
+            logger.error(f'No file found in {fnames} for chrom {chrom}')
+            continue
         d1 = combine_profile_files(fwd)
         d2 = combine_profile_files(rev)
         for k, v in d1.items():
@@ -113,4 +126,27 @@ def plot_streams(streams, figname):
     plt.legend(loc='upper center')
     plt.savefig(figname)
     # plt.show()
+
+
+if __name__ == "__main__":
+    logger = setup_logger('main', None)
+
+    fnames = ['/data/tempff/comparison/new/p0.22.rev', '/data/tempff/comparison/new/p0.22.fwd',
+              '/data/tempff/comparison/new/p0.22.irev', '/data/tempff/comparison/new/p0.22.ifwd']
+
+    outfile ='/data/tempff/comparison/new/p0.22.profile'
+
+    streams = {}
+    upstream = create_upstream(fnames)
+    downstream = create_downstream(fnames)
+
+    for sample in upstream.keys():
+        up = upstream[sample]
+        up.reverse()
+        down = downstream[sample]
+        streams[sample] = up + down
+
+    with open(outfile, 'w') as out:
+        for sample, stream in streams.items():
+            out.write('{},{}\n'.format(sample, ','.join(map(str, stream))))
 
