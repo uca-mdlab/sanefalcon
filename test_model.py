@@ -11,7 +11,7 @@ chromosomes = range(1, 23)
 
 def merge_streams(profile_dir, samplename, ext, rev=False):
     logger.debug(f'Merge stream on {profile_dir} for {samplename} (ext = {ext}), rev={rev}')
-    dic = defaultdict(float)
+    dic = defaultdict(int)
     files = [os.path.join(profile_dir, f) for f in os.listdir(profile_dir) if
              re.match(samplename, f) and (f.endswith(ext[0]) or f.endswith(ext[1]))]
     logger.debug(f'Merging data from {len(files)} files')
@@ -22,7 +22,7 @@ def merge_streams(profile_dir, samplename, ext, rev=False):
             assert len(arr) == 1
             chrom_profile = list(map(float, arr[0].strip().split(',')))
             for i, v in enumerate(chrom_profile):
-                dic[i] += v
+                dic[i] += int(v)
             # logger.debug(f'len(dic) = {len(dic)}')
 
     merged = list(dic.values())
