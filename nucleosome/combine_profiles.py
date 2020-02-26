@@ -119,7 +119,7 @@ def save_streams_to_file(fm, outfile, training=True):
 
 
 def plot_streams(streams, figname):
-    x = range(294)  # 147 * 2
+    x = range(293)  # 147 * 2 - 1  # we got rid of center value
     for sample, stream in streams.items():
         y = stream
         plt.plot(x, y, label=sample)
