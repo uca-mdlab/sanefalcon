@@ -10,12 +10,12 @@ chromosomes = range(1, 23)
 
 
 def merge_streams(profile_dir, samplename, ext, rev=False):
-    logger.debug(f'Merge stream on {profile_dir} for {samplename} (ext = {ext}')
+    logger.debug(f'Merge stream on {profile_dir} for {samplename} (ext = {ext}), rev={rev}')
     dic = defaultdict(float)
     files = [os.path.join(profile_dir, f) for f in os.listdir(profile_dir) if
              re.match(samplename, f) and (f.endswith(ext[0]) or f.endswith(ext[1]))]
     logger.debug(f'Merging data from {len(files)} files')
-    logger.debug(f'{files}')
+    #logger.debug(f'{files}')
     for f in files:
         with open(f, 'r') as infile:
             arr = infile.readlines()
@@ -71,4 +71,13 @@ def compute_ff(modelname, profile_dir):
         logger.debug(f"ff({samplename}) = {ff}")
     return result
 
+
+if __name__ == "__main__":
+    import sys
+    import os
+    logger = setup_logger('main', None)
+    profiledir, samplename = os.path.split(sys.argv[2])
+    modelname = sys.argv[1]
+    ff, _ = predict(modelname, samplename, profiledir)
+    print(ff)
 
