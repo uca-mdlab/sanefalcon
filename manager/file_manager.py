@@ -102,7 +102,10 @@ class FileManager:
                 result[letters[i]].extend(ordered[k] for k in batch)
 
             # result = Utils.balance_batches(result, reads_count)
-            result, sizes = Utils.balance_new(result, reads_count)
+            try:
+                result, sizes = Utils.balance_new(result, reads_count)
+            except:
+                logger.warning('Unable to balance batches')
 
             for batch_name, l in result.items():
                 batch_dir = os.path.join(self.trainfolder, batch_name)
