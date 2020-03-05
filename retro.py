@@ -24,10 +24,7 @@ def in_mem_retro(arr, outfile, flag=True):
     prev_start = 0
 
     for cur_start, cur_length in arr:
-        if flag:
-            length = cur_length - 1
-        else:
-            length = cur_length
+        length = cur_length - 1
         rev_l = cur_start + length  # (start + len sequence) for .rev files
         if minShift < cur_start - prev_start:
             flush(read_buffer)
@@ -40,6 +37,7 @@ def in_mem_retro(arr, outfile, flag=True):
 
     flush(read_buffer)
     out.close()
+    return outfile
 
 
 def retro(flag=True):
