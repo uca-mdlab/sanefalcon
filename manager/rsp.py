@@ -1,6 +1,4 @@
 import os
-import sys
-import subprocess
 import concurrent.futures
 
 from log_setup import setup_logger
@@ -51,7 +49,7 @@ def prepare_samples(datafolder, rspfolder):
         with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
             jobs = {}
             for job in todo:
-                sub = executor.submit(self.prepare_fwd_rev, *job)
+                sub = executor.submit(prepare_fwd_rev, *job)
                 jobs[sub] = job
 
             for job in concurrent.futures.as_completed(jobs):
