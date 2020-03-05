@@ -1,5 +1,4 @@
 import os
-import logging
 import string
 from collections import defaultdict, OrderedDict
 from .utils import Utils
