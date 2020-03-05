@@ -5,7 +5,7 @@ from collections import defaultdict
 
 from manager.file_manager import FileManager
 from manager.utils import Utils
-from manager.rsp import RspBuilder
+import manager.rsp as rspmod
 from merger.merge import merge, merge_subs, merge_anti_subs
 from nucleosome.tracker import Tracker
 from nucleosome.profiler import Profiler
@@ -84,10 +84,10 @@ def launch_merge_anti_subs(mergeddic):
     return anti_sub_files
 
 
-def prepare_and_merge(fm, bamlist, rsb):
+def prepare_and_merge(fm, bamlist):
     batches = fm.prepare_train_folder(bamlist)
     logger.info('Batches prepared')
-    rspfiles = rsb.prepare_samples(fm.datafolder, fm.rspfolder)
+    rspfiles = rspmod.prepare_samples(fm.datafolder, fm.rspfolder)
     logger.info('Samples prepared')
     mapping = get_rsp_batches_mapping(batches, rspfiles)
     merged = launch_merge(mapping)
@@ -110,8 +110,8 @@ def training(config, training_set):
     # batchsize = int(config['training']['batchsize'])
     f = FileManager(config)
     f.check_paths()
-    rs = RspBuilder(config)
-    mapping, merged, anti = prepare_and_merge(f, training_set, rs)
+    # rs = RspBuilder(config)
+    mapping, merged, anti = prepare_and_merge(f, training_set)
     nucleosome_file, img_file = create_nucleosome_profiles(f, mapping)
     logger.info('Nucleosome file created: {}'.format(nucleosome_file))
     return nucleosome_file
