@@ -92,10 +92,11 @@ class FileManager:
                 logger.info('Falling back to default batchsize')
                 num_batches = int(self.config['training']['batchsize'])
 
+            batch_size = int(len(ordered) / num_batches)
             logger.info(f'num batches = {num_batches}')
-
+            logger.info(f'batch size = {batch_size}')
             rows = []
-            for b in Utils.prepare_batches(l_ord, num_batches):
+            for b in Utils.prepare_batches(l_ord, batch_size):
                 rows.append(list(b))
             res = list(np.array(rows).T)  # transpose to avoid subsequent runs in the same batch
             for i, batch in enumerate(res):
