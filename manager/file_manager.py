@@ -76,7 +76,10 @@ class FileManager:
                 run = os.path.basename(bam).split('_')[0]
                 runs[run].append(bam)
 
-            ordered = OrderedDict(sorted(runs.items(), key=lambda x: chr(int(x[0][1:]))))
+            try:
+                ordered = OrderedDict(sorted(runs.items(), key=lambda x: chr(int(x[0][1:]))))  # Nice
+            except ValueError:
+                ordered = OrderedDict(sorted(runs.items()))  # Marseille
 
             l_ord = list(ordered)
             logger.info(f'Found {len(ordered)} distinct runs')
