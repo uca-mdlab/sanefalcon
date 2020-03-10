@@ -66,7 +66,7 @@ def get_batches():
         res = launch_grep_on_file(hook, managerlog)
         tmp = [x[x.index('training/'):] for x in res.split('\n')]
         num_batches = len(tmp)
-        for row in tmp:
+        for row in sorted(tmp):
             batch, num_samples = row.split(',')
             if re.search('profiles', batch):
                 continue
