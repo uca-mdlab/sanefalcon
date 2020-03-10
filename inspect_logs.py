@@ -64,7 +64,7 @@ def get_batches():
     else:
         hook = '/sanefalcon/training/'
         res = launch_grep_on_file(hook, managerlog)
-        tmp = [x[x.index('training/'):] for x in res.split('\n')]
+        tmp = list(set([x[x.index('training/'):] for x in res.split('\n')]))  # in case of relaunching
         num_batches = len(tmp)
         for row in sorted(tmp):
             batch, num_samples = row.split(',')
