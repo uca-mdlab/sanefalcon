@@ -1,6 +1,7 @@
 import os
 from log_setup import setup_logger
 import pickle
+from collections import Counter
 
 logger = setup_logger(__name__, 'logs/merge_utils.log')
 
@@ -17,14 +18,26 @@ class Utils:
         #     out.writelines(to_be_written)
 
     @staticmethod
-    def read_all_files(file_list):
-        logger.debug(f"Reading {len(file_list)} files: {file_list[:4]}")
+    def read_all_files(file_list, is_merge=False):
         data = []
-        for f in file_list:
-            try:
+        if not is_merge:
+            logger.debug(f"Reading {len(file_list)} plain text files: {file_list[:4]}")
+            for f in file_list:
                 data.extend([int(line.strip()) for line in open(f, 'r')])  # rsp are in plain text
-            except UnicodeDecodeError:
-                data.extend(pickle.load(open(f, 'rb')))   # merge files are binary
+        else:
+            logger.debug(f"Reading {len(file_list)} pickle binary files: {file_list[:4]}")
+            data = Utils.read_pickle_data(file_list)
+        return data
+
+    @staticmethod
+    def read_pickle_data(file_list):
+        data = []
+        c = Counter()
+        for f in file_list:
+            tmp = pickle.load(open(f, 'rb'))
+            c += Counter(tmp)
+        for rs in sorted(c):
+            data.extend([rs]*c[rs])
         return data
 
     @staticmethod
