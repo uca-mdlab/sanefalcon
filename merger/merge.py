@@ -51,7 +51,7 @@ def _merge_anti_subs(folder, chrom, files):
     if not os.path.isfile(outfile):
         logger.debug("merge anti subs chrom: {}, folder: {} -> {}".format(chrom, folder, outfile))
         data = Utils.read_all_files(files, is_merge=True)
-        Utils.sort_and_write(data, outfile)
+        # Utils.sort_and_write(data, outfile)
     return outfile
 
 
