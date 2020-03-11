@@ -9,10 +9,15 @@ logger = setup_logger(__name__, 'logs/merge_utils.log')
 class Utils:
 
     @staticmethod
+    def write_to_pickle(data, outfile):
+        pickle.dump(data, open(outfile, 'wb'))
+
+    @staticmethod
     def sort_and_write(data, outfile):
         # data = list(set(data))  # remove duplicates and sort
         data.sort()
-        pickle.dump(data, open(outfile, 'wb'))
+        Utils.write_to_pickle(data, outfile)
+        # pickle.dump(data, open(outfile, 'wb'))
         # to_be_written = map(lambda x: str(x) + "\n", data)
         # with open(outfile, 'w') as out:
         #     out.writelines(to_be_written)
