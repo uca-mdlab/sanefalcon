@@ -1,7 +1,7 @@
 import os
 from log_setup import setup_logger
 import pickle
-from collections import Counter
+import heapq
 
 logger = setup_logger(__name__, 'logs/merge_utils.log')
 
@@ -37,13 +37,11 @@ class Utils:
     @staticmethod
     def read_pickle_data(file_list):
         data = []
-        c = Counter()
         for f in file_list:
             tmp = pickle.load(open(f, 'rb'))
-            c += Counter(tmp)
-        for rs in sorted(c):
-            data.extend([rs]*c[rs])
-        return data
+            data.append(tmp)
+
+        return [item for item in heapq.merge(*data)]
 
     @staticmethod
     def pick_manip_pairs(manips, list_):
