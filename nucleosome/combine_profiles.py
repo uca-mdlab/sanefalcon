@@ -43,14 +43,22 @@ def get_profile_files_per_chrom(fnames, stream='up'):
 
 def combine_profile_files(arr):
     d = {}
-    pattern = re.compile(r"\w*\.bam")
+    name = ''
+    pattern = re.compile(r"\w*\.bam")      # FIXME have to move pattern outside this
+    pattern_mar = re.compile(r'P201.-[0-9]*\.bam')
     for fname in arr:
         try:
             name = re.match(pattern, os.path.basename(fname)).group()
-            d[name] = get_profile_file(fname)
         except AttributeError:
+            name = re.match(pattern_mar, os.path.basename(fname)).group()
+        except:
             logger.error(f'regexp problem for: {fname}')
             exit('AttributeError on regexp: check logs.')
+        if name:
+            d[name] = get_profile_file(fname)
+        else:
+            exit('AttributeError on regexp: check logs.')
+
     return d
 
 
