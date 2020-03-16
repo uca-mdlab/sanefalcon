@@ -45,7 +45,7 @@ def combine_profile_files(arr):
     d = {}
     name = ''
     pattern = re.compile(r"\w*\.bam")      # FIXME have to move pattern outside this
-    pattern_mar = re.compile(r'P201.-[0-9]*\.bam')
+    pattern_mar = re.compile(r'P201.-[0-9]*_dedup\.bam')
     for fname in arr:
         try:
             name = re.match(pattern, os.path.basename(fname)).group()
