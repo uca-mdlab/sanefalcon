@@ -48,10 +48,9 @@ def combine_profile_files(arr):
         try:
             name = re.match(pattern, os.path.basename(fname)).group()
             d[name] = get_profile_file(fname)
-        except:   # only if __main__
-            pattern = re.compile(f'\w*\.22')
-            name = re.match(pattern, os.path.basename(fname)).group()
-            d[name] = get_profile_file(fname)
+        except AttributeError:
+            logger.error(f'regexp problem for: {fname}')
+            exit('AttributeError on regexp: check logs.')
     return d
 
 
