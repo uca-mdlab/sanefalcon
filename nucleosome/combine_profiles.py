@@ -53,11 +53,11 @@ def combine_profile_files(arr):
             name = re.match(pattern_mar, os.path.basename(fname)).group()
         except:
             logger.error(f'regexp problem for: {fname}')
-            exit('AttributeError on regexp: check logs.')
+            exit(f'AttributeError on regexp {fname}: check logs.')
         if name:
             d[name] = get_profile_file(fname)
         else:
-            exit('AttributeError on regexp: check logs.')
+            exit(f'AttributeError on regexp {fname}: check logs.')
 
     return d
 
