@@ -10,6 +10,10 @@ MAX_JOB_NUMBER = 8
 
 def launch_multithreads(runs, func):
     logger.info('Starting multithreaded {} '.format(func))
+    if func == '_merge_anti_sub':
+        logger.warning(f'Rewriting global thread number.')
+        MAX_JOB_NUMBER = 4
+        MAX_THREAD_NUMBER = 4
 
     done = []
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_THREAD_NUMBER) as executor:
