@@ -9,6 +9,9 @@ MAX_JOB_NUMBER = 8
 
 
 def launch_multithreads(runs, func):
+    global MAX_THREAD_NUMBER
+    global MAX_JOB_NUMBER
+
     logger.info('Starting multithreaded {} '.format(func))
     if func == '_merge_anti_sub':
         logger.warning(f'Rewriting global thread number.')
