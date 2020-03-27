@@ -98,8 +98,8 @@ class FileManager:
             rows = []
             for b in Utils.prepare_batches(l_ord, batch_size):
                 rows.append(list(b))
-            # res = list(np.array(rows).T)  # transpose to avoid subsequent runs in the same batch
-            res = rows  # no need to transpose if no constraints are there (in the names)  # FIXME this is ugly
+            res = list(np.array(rows).T)  # transpose to avoid subsequent runs in the same batch
+            # res = rows  # no need to transpose if no constraints are there (in the names)  # FIXME this is ugly
             for i, batch in enumerate(res):
                 # logger.info(f'Batch {letters[i]}, runs: {batch}, - num samples = '
                 #             f'{sum(len(ordered[k]) for k in batch)}')
